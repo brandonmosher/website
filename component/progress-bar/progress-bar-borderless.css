@@ -1,0 +1,6 @@
+@import "/component/progress-bar/progress-bar.css";
+
+#bar {
+    width: calc(var(--bar-completed-percentage) - var(--label-left-width) - var(--label-right-width) - 10%);
+    background-color: var(--bar-completed-color);
+}

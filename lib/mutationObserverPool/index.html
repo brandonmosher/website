@@ -1,0 +1,73 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <script type="module">
+        import { MutationObserverPool } from "./mutationObserverPool.js"
+        import { asyncWait } from "/lib/wait/wait.js";
+
+        const callbackMessage = document.createElement("div");
+        callbackMessage.id = "callback-message";
+        document.body.appendChild(callbackMessage);
+        
+        // Options for the observer (which mutations to observe)
+        const options = { attributes: true, childList: true, subtree: true };
+
+        // mutationCallback function to execute when mutations are observed
+        const mutationCallback = function(mutationsList, observer) {
+            for(const mutation of mutationsList) {
+                callbackMessage.innerText += mutation.target.getAttribute("message");
+            }
+        };
+
+        const targetNode1 = document.createElement("div");
+        targetNode1.id = "target-node-1";
+        targetNode1.innerText = "Target Node 1";
+        document.body.appendChild(targetNode1);
+
+        const targetNode2 = document.createElement("div");
+        targetNode2.id = "target-node-2";
+        targetNode2.innerText = "Target Node 2";
+        document.body.appendChild(targetNode2);
+
+        (async () => {
+            const delayMs = 500;
+            // Observation of targetNode2 should reuse observer created on observing targetNode1
+            MutationObserverPool.observe(mutationCallback, targetNode1, options);
+            MutationObserverPool.observe(mutationCallback, targetNode2, options);
+            await asyncWait(delayMs);
+
+            callbackMessage.innerText += `MutationObserverPool has ${MutationObserverPool.numObservers} active observers after observing targetNode1 and targetNode2.\n`;
+            targetNode1.setAttribute("message", `Success: observed targetNode1, MutationObserverPool has ${MutationObserverPool.numObservers} active observer(s).\n`);
+            targetNode2.setAttribute("message", `Success: observed targetNode2, MutationObserverPool has ${MutationObserverPool.numObservers} active observer(s).\n`);
+            await asyncWait(delayMs);
+
+            // UNobservation targetNode1 should not affect observation of targetNode2
+            MutationObserverPool.unobserve(mutationCallback, targetNode1);
+            await asyncWait(delayMs);
+
+            targetNode1.setAttribute("message", "error: targetNode1 was not properly UNobserved\n");
+            targetNode2.setAttribute("message", "Success: targetNode2 Still under observation after UNobserving targetNode1\n");
+            await asyncWait(delayMs);
+
+            // REobservation of targetNode1 with the same callback should not affect the observation of targetNode1 or targetNode2
+            MutationObserverPool.observe(mutationCallback, targetNode1, options);
+            MutationObserverPool.observe(mutationCallback, targetNode1, options);
+            await asyncWait(delayMs);
+
+            targetNode1.setAttribute("message", "Success: targetNode1 still under observation after REobserving targetNode1\n");
+            targetNode2.setAttribute("message", "Success: targetNode2 still under observation after REobserving targetNode1\n");
+            await asyncWait(delayMs);
+
+            // MutationObserver should have no active observers after UNobserving targetNode1 and targetNode2
+            MutationObserverPool.unobserve(mutationCallback, targetNode1);
+            MutationObserverPool.unobserve(mutationCallback, targetNode2);
+            await asyncWait(delayMs);
+            
+            callbackMessage.innerText += `MutationObserverPool has ${MutationObserverPool.numObservers} active observers after UNobserving targetNode1 and targetNode2.\n`;
+            await asyncWait(delayMs);
+        })();
+    </script>
+    </body>
+</html>

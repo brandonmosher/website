@@ -1,0 +1,31 @@
+<!doctype html>
+
+<style>
+    tinted-background::part(content) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    tinted-background h1 {
+        display: flex;
+        width: 50%;
+        height: 25%;
+        color: gainsboro;
+        justify-content: center;
+        align-items: center;
+        background-color:darkslategray;
+    }
+</style>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="module" src="tinted-background.js"></script>
+    </head>
+    <body>
+        <tinted-background>
+            <h1>Here is some cool text!</h1>
+        </tinted-background>
+    </body>
+</html>

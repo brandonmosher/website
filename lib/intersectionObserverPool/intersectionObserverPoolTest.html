@@ -1,0 +1,43 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <script type="module">
+        import { IntersectionObserverPool } from './intersectionObserverPool.js'
+       
+
+        function callback() {
+            console.log("Callback triggered!");
+        }
+
+        const intersectionObserverPool = new IntersectionObserverPool();
+
+        let el = document.createElement('div');
+        el.innerText = "Sup muthabitches!";
+        el.style.height = "200px";
+        document.body.appendChild(el);
+        intersectionObserverPool.observe(el, callback);
+
+        let el2 = el.cloneNode(true);
+        document.body.appendChild(el2);
+        intersectionObserverPool.observe(el2, callback);
+
+        let el3 = el.cloneNode(true);
+        document.body.appendChild(el3);
+        intersectionObserverPool.observe(el3, callback, {threshold: 0.25});
+
+        let el4 = el.cloneNode(true);
+        document.body.appendChild(el4);
+        intersectionObserverPool.observe(el4, callback, {threshold: 0.25});
+
+        let el5 = el.cloneNode(true);
+        document.body.appendChild(el5);
+        intersectionObserverPool.observe(el5, callback, {threshold: 0.33});
+
+    </script>
+    <script>
+        
+    </script>
+    </body>
+</html>

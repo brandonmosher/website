@@ -1,0 +1,39 @@
+<!doctype html>
+
+<style>    
+    progress-bar-borderless, progress-bar-bordered {
+        letter-spacing: 0.05em;
+        line-height: 3em;
+        color:#BEC7D5;
+        font-size: 14px;
+        font-family: 'avenir35light', Fallback, sans-serif;
+    }
+</style>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/font/avenir35light/avenir35light.css">
+        <script type="module" src="/component/tinted-background/tinted-background.js"></script>
+        <script type="module" src="progress-bar-borderless.js"></script>
+        <script type="module" src="progress-bar-bordered.js"></script>
+    </head>
+    <body>
+        <tinted-background>
+            <progress-bar-borderless style="--bar-completed-percentage: 50%">PHOTOSHOP</progress-bar-borderless>
+            <progress-bar-borderless style="--bar-completed-percentage: 60%">HTML</progress-bar-borderless>
+            <progress-bar-borderless style="--bar-completed-percentage: 70%">CSS</progress-bar-borderless>
+            <progress-bar-borderless style="--bar-completed-percentage: 80%">JAVASCRIPT</progress-bar-borderless>
+            <progress-bar-borderless style="--bar-completed-percentage: 90%">C++</progress-bar-borderless>
+            <progress-bar-borderless style="--bar-completed-percentage: 100%">PYTHON</progress-bar-borderless>
+            
+            <progress-bar-bordered style="--bar-completed-percentage: 50%">PHOTOSHOP</progress-bar-bordered>
+            <progress-bar-bordered style="--bar-completed-percentage: 60%">HTML</progress-bar-bordered>
+            <progress-bar-bordered style="--bar-completed-percentage: 70%">CSS</progress-bar-bordered>
+            <progress-bar-bordered style="--bar-completed-percentage: 80%">JAVASCRIPT</progress-bar-bordered>
+            <progress-bar-bordered style="--bar-completed-percentage: 90%">C++</progress-bar-bordered>
+            <progress-bar-bordered style="--bar-completed-percentage: 100%">PYTHON</progress-bar-bordered>
+        </tinted-background>
+        <a href="http://www.onlinewebfonts.com">online Web Fonts</a>
+    </body>
+</html>

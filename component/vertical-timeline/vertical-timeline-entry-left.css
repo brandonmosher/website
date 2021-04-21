@@ -1,0 +1,13 @@
+@import "/component/vertical-timeline/vertical-timeline-entry.css";
+
+
+
+#box {
+    flex-direction: row-reverse;
+    float: left;
+}
+
+#arrow {
+    border-right-width: 0;
+    border-left-color: var(--border-color);
+}

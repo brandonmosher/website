@@ -1,0 +1,43 @@
+
+@property --bar-completed-percentage {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 0%;
+}
+
+:host {
+    --bar-container-width: 65%;
+    --bar-height: 20%;
+    --bar-completed-color: #00d646;
+    --bar-completed-percentage: 0%;
+    --bar-remaining-color: transparent;
+    --bar-remaining-percentage: var(--bar-completed-percentage);
+    --label-left-width: 20%;
+    --label-right-width: 10%;
+}
+
+:host {
+    display: block;
+    height: 50px;
+    width: 100%;
+}
+
+#label-left, #label-right {
+    display: inline-block;
+    padding: 1%;
+}
+
+#label-left {
+    width: var(--label-left-width);
+    text-align: right;
+}
+
+#label-right {
+    width: var(--label-right-width);
+    text-align: left;
+}
+
+#bar {
+    display: inline-block;
+    height: var(--bar-height);
+}

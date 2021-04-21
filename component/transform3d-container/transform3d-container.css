@@ -1,0 +1,5 @@
+:host {
+    display: block;
+    transform-style: preserve-3d;
+    perspective: 1px;
+}

@@ -1,0 +1,10 @@
+@import "/component/vertical-timeline/vertical-timeline-entry.css";
+
+#box {
+    float: right;
+}
+
+#arrow {
+    border-left-width: 0;
+    border-right-color: var(--border-color);
+}

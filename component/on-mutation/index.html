@@ -1,0 +1,41 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <script type="module" src="on-mutation.js"></script>
+    <script type="module">
+        import "./on-mutation.js";
+
+        const callbackMessage = document.createElement("div");
+        callbackMessage.id = "callback-message";
+        document.body.appendChild(callbackMessage);
+
+        const mutationCallback = function(mutationsList, observer) {
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    callbackMessage.innerText += `A child node has been added or removed.\n`;
+                }
+                else if (mutation.type === 'attributes') {
+                    callbackMessage.innerText += `The ${mutation.attributeName} attribute was modified.\n`;
+                }
+            }
+        };
+        
+        const options = { attributes: true, childList: true, subtree: true };
+
+        const targetNode1 = document.createElement("on-mutation");
+        targetNode1.observe(mutationCallback, options);
+        targetNode1.id = "target-node-1";
+
+        const childNode1 = document.createElement("div");
+        childNode1.id = "child-node-1";
+        childNode1.innerText = "Child Node 1";
+        targetNode1.appendChild(childNode1);
+
+        document.body.appendChild(targetNode1);
+
+    </script>
+
+    </body>
+</html>
