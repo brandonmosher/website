@@ -1,6 +1,10 @@
 <style>
     vertical-timeline {
         height: 100vh;
+        border: 1px dotted black;
+    }
+    body {
+        margin: 0;
     }
 </style>
 
@@ -9,52 +13,30 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="module" src="vertical-timeline.js"></script>
-<script type="module" src="/component/intersect-transition/intersect-transition.js"></script>
+<script type="module" src="/component/intersection-transition/intersection-transition.js"></script>
 </head>
 
 <body>
-<div style="height: 100vh"></div>
 <vertical-timeline>
-    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-        <vertical-timeline-entry-left>
-            <h2>2020</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-        </vertical-timeline-entry-left>
-    </intersect-transition>
+    <vertical-timeline-entry-left>
+        <h2>2017</h2>
+        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </vertical-timeline-entry-left>
 
-    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-        <vertical-timeline-entry-right>
-            <h2>2017</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-        </vertical-timeline-entry-right>
-    </intersect-transition>
-    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-        <vertical-timeline-entry-left>
-            <h2>2018</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-        </vertical-timeline-entry-left>
-    </intersect-transition>
+    <vertical-timeline-entry-right>
+        <h2>2018</h2>
+        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </vertical-timeline-entry-right>
 
-    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-        <vertical-timeline-entry-right>
-            <h2>2019</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-        </vertical-timeline-entry-right>
-    </intersect-transition>
+    <vertical-timeline-entry-left>
+        <h2>2019</h2>
+        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </vertical-timeline-entry-left>
 
-    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-        <vertical-timeline-entry-left>
-            <h2>2020</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-        </vertical-timeline-entry-left>
-    </intersect-transition>
-
-    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-        <vertical-timeline-entry-right>
-            <h2>2021</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-        </vertical-timeline-entry-right>
-    </intersect-transition>
+    <vertical-timeline-entry-right>
+        <h2>2020</h2>
+        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </vertical-timeline-entry-right>
 
 </vertical-timeline>
 

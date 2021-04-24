@@ -1,26 +1,44 @@
 <!doctype html>
 
 <style>
+    body {
+        margin: 0;
+    }
     /* html, body {
         overflow: hidden;
     } */
     parallax-group {
         scroll-snap-type: y mandatory;
     }
-    intersect-fade-in {
+
+    vertical-timeline {
+        padding: 3%;
+    }
+
+    vertical-timeline-entry-left, vertical-timeline-entry-right {
+        height: 60vw; 
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    section {
+        display: block;
         height: 100vh;
+        scroll-snap-align: center;
+    }
+
+    half-section {
+        display: block;
+        height: 60vh;
+        scroll-snap-align: center;
+    }
+
+    .center-child {
         display: flex;
         align-items: center;
         text-align: center;
-        scroll-snap-align: center;
-    }
-    intersection-transition {
-        height: 100vh;
-    }
-
-    p {
-        padding: 10%;
-        color: whitesmoke;
     }
 
     @property --bar-completed-percentage {
@@ -37,6 +55,28 @@
         font-family: 'avenir35light', Fallback, sans-serif;
     }
 
+    #background1 {
+        --img-url: url(/img/2.webp);
+        height: 170vh;
+    }
+
+    #background2 {
+        --img-url: url(/img/3.webp);
+        height: 100vh;
+    }
+
+    #background3 {
+        --img-url: url(/img/4.webp);
+        height: 200vh;
+    }
+
+    body {
+        letter-spacing: 0.05em;
+        line-height: 3em;
+        color:#BEC7D5;
+        font-size: 14px;
+        font-family: 'avenir35light', Fallback, sans-serif;
+    }
 </style>
 
 <html lang="en">
@@ -45,8 +85,8 @@
         <title>Brandon Mosher</title>
         <link rel="stylesheet" href="/font/avenir35light/avenir35light.css">
         <script type="module" src="/component/parallax/parallax.js"></script>
-        <script type="module" src="/component/intersect-transition/intersect-transition.js"></script>
-        <script type="module" src="/component/intersect-transition/intersect-fade-in.js"></script>
+        <script type="module" src="/component/intersection-transition/intersection-transition.js"></script>
+        <script type="module" src="/component/intersection-transition/intersection-fade-in.js"></script>
         <script type="module" src="/component/progress-bar/progress-bar-borderless.js"></script>
         <script type="module" src="/component/tinted-background/tinted-background.js"></script>
         <script type="module" src="/component/vertical-timeline/vertical-timeline.js"></script>
@@ -54,88 +94,78 @@
     <body>
         <parallax-group>
             <parallax-layer>
-                <intersect-fade-in>
-                    <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                </intersect-fade-in>
+                <section class="center-child">
+                    <intersection-fade-in>
+                            <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
+                    </intersection-fade-in>
+                </section>
 
-                <intersect-fade-in>
-                    <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                </intersect-fade-in>
+                <section class="center-child">
+                    <intersection-fade-in>
+                        <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
+                    </intersection-fade-in>
+                </section>
 
-                <intersect-fade-in>
-                    <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                </intersect-fade-in>
+                <div style="height: 55vh;"></div>
 
-                <intersect-fade-in>
-                    <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                </intersect-fade-in>
-            </parallax-layer>
-            <parallax-layer style="height: 400vh;">
-                <div style="background-image: url(/img/2.webp); background-size: cover; height: 50%;"></div>
-                <div style="background-image: url(/img/3.webp); background-size: cover; height: 50%;"></div>
-            </parallax-layer>
-        </parallax-group>
+                <section>
+                    <intersection-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 90%">
+                        <progress-bar-borderless>HTML</progress-bar-borderless>
+                    </intersection-transition>
+                    <intersection-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 70%">
+                        <progress-bar-borderless>CSS</progress-bar-borderless>
+                    </intersection-transition>
+                    <intersection-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 85%">
+                        <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
+                    </intersection-transition>
+                </section>
 
-        <parallax-group>
-            <parallax-layer>
-                <intersect-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 90%">
-                    <progress-bar-borderless>HTML</progress-bar-borderless>
-                </intersect-transition>
-                <intersect-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 70%">
-                    <progress-bar-borderless>CSS</progress-bar-borderless>
-                </intersect-transition>
-                <intersect-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 85%">
-                    <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
-                </intersect-transition>
+                <div style="height: 65vh;"></div>
 
-                <vertical-timeline>
-                    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
+                <vertical-timeline style="height: 100vh">
+                    <half-section>
+                    <intersection-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,70% 100%">
                         <vertical-timeline-entry-left>
-                            <h2>2020</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </vertical-timeline-entry-left>
-                    </intersect-transition>
+                                <h2>2016</h2>
+                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                            </vertical-timeline-entry-left>
+                    </intersection-transition>
+                    </half-section>
 
-                    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
+                    <half-section>
+                    <intersection-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,70% 100%">
                         <vertical-timeline-entry-right>
                             <h2>2017</h2>
                             <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
                         </vertical-timeline-entry-right>
-                    </intersect-transition>
-                    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
+                    </intersection-transition>
+                    </half-section>
+
+                    <half-section>
+                    <intersection-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,70% 100%">
                         <vertical-timeline-entry-left>
                             <h2>2018</h2>
                             <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
                         </vertical-timeline-entry-left>
-                    </intersect-transition>
+                    </intersection-transition>
+                    </half-section>
 
-                    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
+                    <half-section>
+                    <intersection-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,70% 100%">
                         <vertical-timeline-entry-right>
                             <h2>2019</h2>
                             <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
                         </vertical-timeline-entry-right>
-                    </intersect-transition>
-
-                    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-                        <vertical-timeline-entry-left>
-                            <h2>2020</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </vertical-timeline-entry-left>
-                    </intersect-transition>
-
-                    <intersect-transition transition="opacity 4s,width 1s" transition-property-values="0% 100%,50% 100%">
-                        <vertical-timeline-entry-right>
-                            <h2>2021</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </vertical-timeline-entry-right>
-                    </intersect-transition>
-
+                    </intersection-transition>
+                    </half-section>
                 </vertical-timeline>
+
             </parallax-layer>
-            <parallax-layer style="height: 300vh;">
-                <div><tinted-background></tinted-background></div>
-                <div><tinted-background></tinted-background></div>
-                <div><tinted-background></tinted-background></div>
+
+            <parallax-layer>
+                <tinted-background id="background1"></tinted-background>
+                <tinted-background id="background2"></tinted-background>
+                <tinted-background id="background3"></tinted-background>
             </parallax-layer>
         </parallax-group>
     </body>

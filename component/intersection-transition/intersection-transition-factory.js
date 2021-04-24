@@ -2,7 +2,7 @@ import { OnIntersectionHTMLElement } from "/component/on-intersection/on-interse
 
 export function IntersectionTransitionFactory({tagName, intersectionRatio, transition, transitionPropertyValues} = {}) {
     customElements.define(tagName,
-        class IntersectTransitionHTMLElement extends OnIntersectionHTMLElement {    
+        class IntersectionTransitionHTMLElement extends OnIntersectionHTMLElement {    
             static observedAttributeDefaults = {
                 "intersection-ratio": intersectionRatio,
                 "transition": transition,
@@ -16,12 +16,12 @@ export function IntersectionTransitionFactory({tagName, intersectionRatio, trans
             }
 
             connectedCallback() {
-                for (const [name, value] of Object.entries(IntersectTransitionHTMLElement.observedAttributeDefaults)) {
+                for (const [name, value] of Object.entries(IntersectionTransitionHTMLElement.observedAttributeDefaults)) {
                     this.setAttribute(name, this.hasAttribute(name) ? this.getAttribute(name) : value);
                 }
             }
 
-            static get observedAttributes() { return Object.keys(IntersectTransitionHTMLElement.observedAttributeDefaults); }
+            static get observedAttributes() { return Object.keys(IntersectionTransitionHTMLElement.observedAttributeDefaults); }
 
             get transitionChildren() {
                 return Array.from(this.children);
@@ -68,7 +68,7 @@ export function IntersectionTransitionFactory({tagName, intersectionRatio, trans
             attributeChangedCallback(name, oldValue, newValue) {
                 switch (name) {
                     case "intersection-ratio":
-                        this.observe(IntersectTransitionHTMLElement.callback, { "threshold": newValue });
+                        this.observe(IntersectionTransitionHTMLElement.callback, { "threshold": newValue });
                         break;
                     case "transition":
                         this.transition = newValue;

@@ -5,37 +5,48 @@
 
 :host {
     display: block;
-    margin-bottom: 5%;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-:host {
     position: relative;
-
+    max-width: 100%;
+    max-height: 100%;
+    flex: 1;
+    font-stretch: 0% 100%;
 }
 
-#rule {
+#line-container {
     position: absolute;
     height: 100%;
     width: 100%;
 }
 
+#circle-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#circle::before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+}
+
 #circle {
-    width: 5vw;
-    height: 5vw;
+    width: 5%;
     border-radius: 50%;
     background-color: black;
     margin: 0 auto;
 }
 
+#circle::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 #line {
     height: 100%;
-    width: 1vw;
-    background: linear-gradient(white 1%, black 20%, 80%, white 99%);
-    border-radius: 25%;
+    width: 1%;
+    background: black;
     margin: 0 auto;
 }
 
@@ -47,17 +58,12 @@
 }
 
 #arrow {
-    flex: 0 0 0;
-    border-style: solid;
-    border-width: 2.5vw;
-    border-color: transparent;
+    border: 2.5vw solid transparent;
 }
 
 #content {
-    padding: 5%;
-    flex: 0 0 auto;
+    padding: 1%;
     border: var(--border);
-    max-width: 95%;
 }
 
 :host::after {
