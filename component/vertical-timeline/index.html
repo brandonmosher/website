@@ -3,9 +3,43 @@
         height: 100vh;
         border: 1px dotted black;
     }
+
     body {
         margin: 0;
     }
+
+    :root {
+        --border-color: black;
+        --border: medium solid var(--border-color);
+    }
+
+    vertical-timeline-entry-left::part(content),
+    vertical-timeline-entry-right::part(content) {
+        padding: 1%;
+        border: var(--border);
+    }
+
+    vertical-timeline-entry-left::part(content-container),
+    vertical-timeline-entry-right::part(content-container) {
+        max-width: 45%;
+    }
+
+    vertical-timeline-entry-left::part(content-container)::before {
+        content: "";
+        display: block;
+        border: 2.5vw solid transparent;
+        border-right-width: 0;
+        border-left-color: var(--border-color);
+    }
+
+    vertical-timeline-entry-right::part(content-container)::before {
+        content: "";
+        display: block;
+        border: 2.5vw solid transparent;
+        border-left-width: 0;
+        border-right-color: var(--border-color);
+    }
+
 </style>
 
 <!DOCTYPE html>

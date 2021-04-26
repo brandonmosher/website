@@ -2,4 +2,5 @@
     font-family: 'avenir35light';
     src:  url(/font/avenir35light/avenir35light.woff2) format('woff2'),
     url(/font/avenir35light/avenir35light.woff2) format('woff');
+    font-display: swap;
 }

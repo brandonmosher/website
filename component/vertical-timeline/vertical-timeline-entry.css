@@ -1,9 +1,4 @@
 :host {
-    --border-color: black;
-    --border: medium solid var(--border-color);
-}
-
-:host {
     display: block;
     position: relative;
     max-width: 100%;
@@ -12,35 +7,16 @@
     font-stretch: 0% 100%;
 }
 
+:host::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 #line-container {
     position: absolute;
     height: 100%;
     width: 100%;
-}
-
-#circle-container {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-#circle::before {
-    content: "";
-    float: left;
-    padding-top: 100%;
-}
-
-#circle {
-    width: 5%;
-    border-radius: 50%;
-    background-color: black;
-    margin: 0 auto;
-}
-
-#circle::after {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 #line {
@@ -50,24 +26,34 @@
     margin: 0 auto;
 }
 
-#box {
+#circle-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#circle {
+    width: 5%;
+    border-radius: 50%;
+    background-color: black;
+    margin: 0 auto;
+}
+
+#circle::before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+}
+
+#circle::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#content-container {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    max-width: 45%;
+    max-width: 50%;
 }
-
-#arrow {
-    border: 2.5vw solid transparent;
-}
-
-#content {
-    padding: 1%;
-    border: var(--border);
-}
-
-:host::after {
-    content: "";
-    display: block;
-    clear: both;
-  }

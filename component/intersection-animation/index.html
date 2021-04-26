@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script type="module" src="intersection-animation.js"></script>
+    <style>
+        .box {
+            background-color: aqua;
+            width: 50vh;
+            height: 50vh;
+            visibility: hidden;
+        }
+
+        .anibox {
+            animation: bounce 1s;
+            animation-fill-mode: forwards;
+        }
+    
+        @keyframes bounce {
+            0% {
+                visibility: visible;
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                visibility: visible;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box anibox"></div>
+    <div style="height: 100vh"></div>
+    <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
+        <div class="box"></div>
+    </intersection-animation>
+</body>
+
+</html>
