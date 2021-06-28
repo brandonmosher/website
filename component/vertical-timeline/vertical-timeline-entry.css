@@ -4,13 +4,6 @@
     max-width: 100%;
     max-height: 100%;
     flex: 1;
-    font-stretch: 0% 100%;
-}
-
-:host::after {
-    content: "";
-    display: block;
-    clear: both;
 }
 
 #line-container {
@@ -26,34 +19,33 @@
     margin: 0 auto;
 }
 
-#circle-container {
+#line-marker-container {
     position: absolute;
     height: 100%;
     width: 100%;
 }
 
-#circle {
+#line-marker {
     width: 5%;
     border-radius: 50%;
     background-color: black;
     margin: 0 auto;
 }
 
-#circle::before {
+#line-marker::before {
     content: "";
     float: left;
     padding-top: 100%;
 }
 
-#circle::after {
+#line-marker::after {
     content: "";
     display: table;
     clear: both;
 }
 
 #content-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    max-width: 50%;
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
 }

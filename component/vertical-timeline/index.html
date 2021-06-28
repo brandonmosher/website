@@ -1,45 +1,27 @@
 <style>
-    vertical-timeline {
-        height: 100vh;
-        border: 1px dotted black;
+    :root {
+        --border-color: black;
+        --border: medium solid var(--border-color);
     }
 
     body {
         margin: 0;
     }
 
-    :root {
-        --border-color: black;
-        --border: medium solid var(--border-color);
+    vertical-timeline {
+        height: 100vh;
+        border: 1px dotted black;
     }
 
-    vertical-timeline-entry-left::part(content),
-    vertical-timeline-entry-right::part(content) {
-        padding: 1%;
+    vertical-timeline :nth-child(even) {
+        float: right;
+    }
+    
+    vertical-timeline-entry::part(content-container) {
         border: var(--border);
-    }
-
-    vertical-timeline-entry-left::part(content-container),
-    vertical-timeline-entry-right::part(content-container) {
         max-width: 45%;
+        float: inherit;
     }
-
-    vertical-timeline-entry-left::part(content-container)::before {
-        content: "";
-        display: block;
-        border: 2.5vw solid transparent;
-        border-right-width: 0;
-        border-left-color: var(--border-color);
-    }
-
-    vertical-timeline-entry-right::part(content-container)::before {
-        content: "";
-        display: block;
-        border: 2.5vw solid transparent;
-        border-left-width: 0;
-        border-right-color: var(--border-color);
-    }
-
 </style>
 
 <!DOCTYPE html>
@@ -52,25 +34,25 @@
 
 <body>
 <vertical-timeline>
-    <vertical-timeline-entry-left>
+    <vertical-timeline-entry>
         <h2>2017</h2>
         <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-    </vertical-timeline-entry-left>
+    </vertical-timeline-entry>
 
-    <vertical-timeline-entry-right>
+    <vertical-timeline-entry>
         <h2>2018</h2>
         <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-    </vertical-timeline-entry-right>
+    </vertical-timeline-entry>
 
-    <vertical-timeline-entry-left>
+    <vertical-timeline-entry>
         <h2>2019</h2>
         <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-    </vertical-timeline-entry-left>
+    </vertical-timeline-entry>
 
-    <vertical-timeline-entry-right>
+    <vertical-timeline-entry>
         <h2>2020</h2>
         <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-    </vertical-timeline-entry-right>
+    </vertical-timeline-entry>
 
 </vertical-timeline>
 

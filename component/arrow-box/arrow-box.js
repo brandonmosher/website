@@ -1,24 +1,10 @@
 import { importCSSHTML } from '/lib/importCSSHTML/importCSSHTML.js'
 
 importCSSHTML(
-    '/component/vertical-timeline/vertical-timeline.css', null)
+    '/component/arrow-box/arrow-box-left.css',
+    '/component/arrow-box/arrow-box.html')
 .then(shadowRootContent=>{
-    customElements.define('vertical-timeline',
-        class extends HTMLElement {
-            constructor() {
-                super();
-                const shadowRoot = this.attachShadow({mode: 'open'})
-                shadowRoot.innerHTML = `${shadowRootContent}<slot></slot>`;
-            }
-        }
-    );
-});
-
-importCSSHTML(
-    '/component/vertical-timeline/vertical-timeline-entry.css',
-    '/component/vertical-timeline/vertical-timeline-entry.html')
-.then(shadowRootContent=>{
-    customElements.define('vertical-timeline-entry',
+    customElements.define('arrow-box-left',
         class extends HTMLElement {
             constructor() {
                 super();
@@ -27,4 +13,19 @@ importCSSHTML(
             }
         }
     );
-});
+})
+
+importCSSHTML(
+    '/component/arrow-box/arrow-box-right.css',
+    '/component/arrow-box/arrow-box.html')
+.then(shadowRootContent=>{
+    customElements.define('arrow-box-right',
+        class extends HTMLElement {
+            constructor() {
+                super();
+                const shadowRoot = this.attachShadow({mode: 'open'})
+                shadowRoot.innerHTML = shadowRootContent;
+            }
+        }
+    );
+})

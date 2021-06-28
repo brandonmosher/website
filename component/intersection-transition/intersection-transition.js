@@ -3,6 +3,5 @@ import { IntersectionTransitionFactory } from "/component/intersection-transitio
 IntersectionTransitionFactory({
     tagName: "intersection-transition",
     intersectionRatio: 0.25,
-    transition: "",
-    transitionPropertyValues: ""
+    transitions: ""
 });

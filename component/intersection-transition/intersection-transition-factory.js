@@ -1,12 +1,35 @@
 import { OnIntersectionHTMLElement } from "/component/on-intersection/on-intersection.js"
 
-export function IntersectionTransitionFactory({tagName, intersectionRatio, transition, transitionPropertyValues} = {}) {
+function parsePropertyNameValuePairsInitial(transitions) {
+    return transitions
+    .split(",")
+    .map(transition=>{
+        const a = transition.split(" ");
+        return [a[0], a[a.length - 2]];
+    });
+}
+
+function parsePropertyNameValuePairsFinal(transitions) {
+    return transitions
+    .split(",")
+    .map(transition=>{
+        const a = transition.split(" ");
+        return [a[0], a[a.length - 1]];
+    });
+}
+
+function parseTransitionStyle(transitions) {
+    return transitions.split(",")
+    .map(transition=>transition.split(" ").slice(0, -2).join(" "))
+    .join(",");
+}
+
+export function IntersectionTransitionFactory({tagName, intersectionRatio, transitions} = {}) {
     customElements.define(tagName,
         class IntersectionTransitionHTMLElement extends OnIntersectionHTMLElement {    
             static observedAttributeDefaults = {
                 "intersection-ratio": intersectionRatio,
-                "transition": transition,
-                "transition-property-values": transitionPropertyValues,
+                "transitions": transitions
             }
 
             constructor() {
@@ -27,42 +50,27 @@ export function IntersectionTransitionFactory({tagName, intersectionRatio, trans
                 return Array.from(this.children);
             }
 
-            get transitionPropertyNames() {
-                return this.getAttribute("transition")
-                .split(",")
-                .map(transition=>transition.split(" ")[0]);
-            }
-
-            get transitionPropertyValues() {
-                return this.getAttribute("transition-property-values")
-                .split(",")
-                .map(valuePair=>valuePair.trim())
-                .map(valuePair=>valuePair.split(" "));
-            }
-
-            set transitionPropertyValues(transitionPropertyValues) {
+            set transitionPropertyNameValuePairs(transitionPropertyNameValuePairs) {
                 this.transitionChildren.forEach(transitionChild=>{
-                    this.transitionPropertyNames.forEach((propertyName, i)=>{ 
-                        transitionChild.style.setProperty(propertyName, transitionPropertyValues[i]);
-                    });
+                    transitionPropertyNameValuePairs.forEach(([name, value]) => {
+                        transitionChild.style.setProperty(name, value);
+                    })
                 });
             }
 
-            get transitionPropertyValuesInitial() {
-                return this.transitionPropertyValues.map(transitionPropertyValue=>transitionPropertyValue[0]);
-            }
-
-            get transitionPropertyValuesFinal() {
-                return this.transitionPropertyValues.map(transitionPropertyValue=>transitionPropertyValue[1]);
-            }
-
-            get transition() {
-                this.transitionChildren.map(transitionChild=>transitionChild.style.transition);
-            }
-
-            set transition(transition) {
+            set transitionStyle(transitionStyle) {
                 this.transitionChildren.forEach(transitionChild=>{
-                    transitionChild.style.transition = transition;});
+                    transitionChild.style.transition = transitionStyle;
+                });
+            }
+
+            get transitions() {
+                return this.getAttribute("transitions");
+            }
+
+            set transitions(transitions) {
+                this.transitionStyle = parseTransitionStyle(transitions);
+                this.transitionPropertyNameValuePairs = parsePropertyNameValuePairsInitial(transitions);
             }
 
             attributeChangedCallback(name, oldValue, newValue) {
@@ -70,11 +78,8 @@ export function IntersectionTransitionFactory({tagName, intersectionRatio, trans
                     case "intersection-ratio":
                         this.observe(IntersectionTransitionHTMLElement.callback, { "threshold": newValue });
                         break;
-                    case "transition":
-                        this.transition = newValue;
-                        break;
-                    case "transition-property-values":
-                        this.transitionPropertyValues = this.transitionPropertyValuesInitial;
+                    case "transitions":
+                        this.transitions = newValue;
                         break;
                     default:
                 }
@@ -84,7 +89,7 @@ export function IntersectionTransitionFactory({tagName, intersectionRatio, trans
                 entries.forEach(entry => {
                     const { target } = entry;
                     if (entry.intersectionRatio >= target.getAttribute("intersection-ratio")) {
-                        target.transitionPropertyValues = target.transitionPropertyValuesFinal;
+                        target.transitionPropertyNameValuePairs = parsePropertyNameValuePairsFinal(target.transitions);
                     } else {
                         //do nothing?
                     }

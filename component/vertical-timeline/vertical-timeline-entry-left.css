@@ -1,6 +1,0 @@
-@import "/component/vertical-timeline/vertical-timeline-entry.css";
-
-#content-container {
-    flex-direction: row-reverse;
-    float: left;
-}

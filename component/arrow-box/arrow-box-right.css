@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+}
+
+#content-container {
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+}
+
+#arrow {
+    border: 2.5vw solid transparent;
+    border-left-color: black;
+    border-right-width: 0;
+    flex-grow: 0;
+}

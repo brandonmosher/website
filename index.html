@@ -7,32 +7,28 @@
     /* html, body {
         overflow: hidden;
     } */
-    parallax-group {
-        scroll-snap-type: y mandatory;
-    }
-
-    vertical-timeline {
-        padding: 3%;
-    }
-
-    vertical-timeline-entry-left, vertical-timeline-entry-right {
-        height: 60vw; 
-    }
 
     * {
         box-sizing: border-box;
     }
 
+    parallax-group {
+        scroll-snap-type: y mandatory;
+    }
+
     section {
         display: block;
         height: 100vh;
-        scroll-snap-align: center;
     }
 
     half-section {
         display: block;
-        height: 60vh;
-        scroll-snap-align: center;
+        height: 50vh;
+    }
+
+    double-section {
+        display: block;
+        height: 200vh;
     }
 
     .center-child {
@@ -41,88 +37,118 @@
         text-align: center;
     }
 
-    @property --bar-completed-percentage {
-        syntax: '<percentage>';
-        inherits: true;
-        initial-value: 0%;
+    .scroll-snap-center {
+        scroll-snap-align: center;
     }
 
-    progress-bar-borderless {
-        letter-spacing: 0.05em;
-        line-height: 3em;
-        color:#BEC7D5;
-        font-size: 14px;
-        font-family: 'avenir35light', Fallback, sans-serif;
+    .scroll-snap-start {
+        scroll-snap-align: start;
     }
 
     #background1 {
         --img-url: url(/img/2.webp);
-        height: 170vh;
+        height: calc(250vh * 2 / 3);
     }
 
     #background2 {
         --img-url: url(/img/3.webp);
-        height: 100vh;
+        height: calc(150vh * 2 / 3);
     }
 
     #background3 {
         --img-url: url(/img/4.webp);
-        height: 200vh;
+        height: calc(250vh * 2 / 3);
     }
 
     body {
         letter-spacing: 0.05em;
-        line-height: 3em;
+        line-height: 3;
         color:#BEC7D5;
         font-size: 14px;
         font-family: 'avenir35light', Fallback, sans-serif;
     }
 
-    vertical-timeline-entry-left,
-    vertical-timeline-entry-right {
+    vertical-timeline {
+        height: 100%;
+        line-height: normal;
+    }
+
+    vertical-timeline :nth-child(even) vertical-timeline-entry {
+        float: right;
+    }
+
+    vertical-timeline intersection-animation {
+        height: 20%;
+        scroll-snap-align: start;
+    }
+
+    vertical-timeline-entry {
         visibility: hidden;
+        height: 100%;
+        width: 100%;
         transform: scale(0.5);
     }
 
-    vertical-timeline-entry-left::part(content),
-    vertical-timeline-entry-right::part(content) {
+    vertical-timeline-entry::part(content-container) {
+        float: inherit;
+        padding: 2%;
         border-top: 1px dashed rgb(0, 191, 62);
-        padding: 5%;
-        transform: translateY(1.5%);
+        max-height: 75%;
     }
 
-    vertical-timeline-entry-left::part(line),
-    vertical-timeline-entry-right::part(line) {
+    vertical-timeline-entry::part(line) {
         background-color: rgb(0, 191, 62);
-        width: 0.5%;
+        width: 0.1%;
     }
 
-    vertical-timeline-entry-left::part(circle),
-    vertical-timeline-entry-right::part(circle) {
+    vertical-timeline-entry::part(line-marker) {
         background-color: rgb(0, 191, 62);
         width: 2.5%;
+        transform: translateY(-50%);
     }
 
-    vertical-timeline-entry-left h2,
-    vertical-timeline-entry-right h2 {
+    vertical-timeline-entry autofit-font-nowrap {
+        height: 50%;
+    }
+
+    vertical-timeline-entry autofit-font-wrap {
+        height: 50%;
+    }
+
+    vertical-timeline-entry h2 {
         color: rgb(0, 191, 62);
     }
 
     @keyframes bounce {
-            0% {
-                visibility: visible;
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            60% {
-                opacity: 1;
-                transform: scale(1.1);
-            }
-            100% {
-                visibility: visible;
-                transform: scale(1);
-            }
+        0% {
+            visibility: visible;
+            opacity: 0;
+            transform: scale(0.5);
         }
+        60% {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        100% {
+            visibility: visible;
+            transform: scale(1);
+        }
+    }
+
+    @property --bar-completed-percentage {
+        syntax: '<integer>';
+        inherits: true;
+        initial-value: 0;
+    }
+
+    progress-bar-borderless {
+        letter-spacing: 0.05em;
+        line-height: 3;
+        color:#BEC7D5;
+        font-size: 14px;
+        font-family: 'avenir35light', Fallback, sans-serif;
+    }
+
 </style>
 
 <html lang="en">
@@ -137,84 +163,111 @@
         <script type="module" src="/component/progress-bar/progress-bar-borderless.js"></script>
         <script type="module" src="/component/tinted-background/tinted-background.js"></script>
         <script type="module" src="/component/vertical-timeline/vertical-timeline.js"></script>
+        <script type="module" src="/component/autofit-font/autofit-font.js"></script>
     </head>
     <body>
         <parallax-group>
+            
             <parallax-layer>
-                <section class="center-child">
+                <section class="center-child scroll-snap-center">
                     <intersection-fade-in>
                             <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
                     </intersection-fade-in>
                 </section>
 
-                <section class="center-child">
+                <section class="center-child scroll-snap-center">
                     <intersection-fade-in>
                         <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
                     </intersection-fade-in>
                 </section>
 
-                <div style="height: 55vh;"></div>
+                <half-section></half-section>
 
-                <section>
-                    <intersection-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 90%">
-                        <progress-bar-borderless>HTML</progress-bar-borderless>
-                    </intersection-transition>
-                    <intersection-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 70%">
-                        <progress-bar-borderless>CSS</progress-bar-borderless>
-                    </intersection-transition>
-                    <intersection-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 85%">
-                        <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
-                    </intersection-transition>
+                <section class="center-child scroll-snap-center">
+                    <div style="width:100%">
+                        <intersection-transition transitions="--bar-completed-percentage 2s 0 90">
+                            <progress-bar-borderless>HTML</progress-bar-borderless>
+                        </intersection-transition>
+                        <intersection-transition transitions="--bar-completed-percentage 2s 0 70">
+                            <progress-bar-borderless>CSS</progress-bar-borderless>
+                        </intersection-transition>
+                        <intersection-transition transitions="--bar-completed-percentage 2s 0 85"">
+                            <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
+                        </intersection-transition>
+                    </div>
                 </section>
 
-                <div style="height: 65vh;"></div>
+                <half-section></half-section>
 
-                <vertical-timeline style="height: 100vh">
-                    <half-section>
-                        <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
-                            <vertical-timeline-entry-left>
-                                    <h2>2016</h2>
-                                    <h1>COMPANY</h1>
-                                    <h3>Job Title</h3>
-                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                                </vertical-timeline-entry-left>
-                        </intersection-animation>
-                    </half-section>
+                <double-section class="center-child scroll-snap-start">
+                    <vertical-timeline>
+                            <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2016</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </intersection-animation>
 
-                    <half-section>
-                        <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
-                            <vertical-timeline-entry-right>
-                                <h2>2017</h2>
-                                    <h1>COMPANY</h1>
-                                    <h3>Job Title</h3>
-                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </vertical-timeline-entry-right>
-                        </intersection-animation>
-                    </half-section>
+                            <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2017</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </intersection-animation>
 
-                    <half-section>
-                        <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
-                            <vertical-timeline-entry-left>
-                                <h2>2018</h2>
-                                    <h1>COMPANY</h1>
-                                    <h3>Job Title</h3>
-                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </vertical-timeline-entry-left>
-                        </intersection-animation>
-                    </half-section>
+                            <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2018</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </intersection-animation>
 
-                    <half-section>
-                        <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
-                            <vertical-timeline-entry-right>
-                                <h2>2019</h2>
-                                    <h1>COMPANY</h1>
-                                    <h3>Job Title</h3>
-                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </vertical-timeline-entry-right>
-                        </intersection-animation>
-                    </half-section>
-                </vertical-timeline>
+                            <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2019</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </intersection-animation>
 
+                            <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2020</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </intersection-animation>
+
+                    </vertical-timeline>
+                </double-section>
             </parallax-layer>
 
             <parallax-layer>
@@ -222,6 +275,7 @@
                 <tinted-background id="background2"></tinted-background>
                 <tinted-background id="background3"></tinted-background>
             </parallax-layer>
+
         </parallax-group>
     </body>
 </html>

@@ -11,7 +11,13 @@ export function IntersectionAnimationFactory({tagName, intersectionRatio, animat
             constructor() {
                 super();
                 const shadowRoot = this.attachShadow({ mode: "open" })
-                shadowRoot.innerHTML = "<slot></slot>";    
+                shadowRoot.innerHTML = `
+                <style>
+                    :host {
+                        display: block;
+                    }
+                </style>
+                <slot></slot>`;    
             }
 
             connectedCallback() {

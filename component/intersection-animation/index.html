@@ -10,11 +10,6 @@
             height: 50vh;
             visibility: hidden;
         }
-
-        .anibox {
-            animation: bounce 1s;
-            animation-fill-mode: forwards;
-        }
     
         @keyframes bounce {
             0% {
@@ -35,7 +30,6 @@
 </head>
 
 <body>
-    <div class="box anibox"></div>
     <div style="height: 100vh"></div>
     <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
         <div class="box"></div>

@@ -3,6 +3,5 @@ import { IntersectionTransitionFactory } from "/component/intersection-transitio
 IntersectionTransitionFactory({
     tagName: "intersection-fade-in",
     intersectionRatio: 0.25,
-    transition: "opacity 2s",
-    transitionPropertyValues: "0 1",
+    transitions: "opacity 2s 0 1"
 });
