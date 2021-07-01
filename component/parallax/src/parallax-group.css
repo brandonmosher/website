@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    position: relative;
+    height: 100vh;
+    transform-style: preserve-3d;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+:host {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+:host::-webkit-scrollbar {
+    display: none;
+}

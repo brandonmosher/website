@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Intersection Animation Demo</title>
+    <meta charset="utf-8">
+    <style>
+        .filler {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .box {
+            background-color: aqua;
+            width: 50vh;
+            height: 50vh;
+            visibility: hidden;
+        }
+
+        @keyframes bounce {
+            0% {
+                visibility: visible;
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            60% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+
+            100% {
+                visibility: visible;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="filler"></div>
+    <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">
+        <div class="box"></div>
+    </intersection-animation>
+    <div class="filler"></div>
+</body>
+
+</html>

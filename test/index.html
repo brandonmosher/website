@@ -1,0 +1,57 @@
+<style>
+    .filler {
+        height: 100vh;
+        width: 100%;
+    }
+
+    h1 {
+        background-color: darkslategray;
+        text-align: center;
+        color: gainsboro;
+    }
+
+    intersection-transition {
+        display: block;
+    }
+    
+    @property --bar-completed-percentage {
+        syntax: '<percentage>';
+        inherits: true;
+        initial-value: 0%;
+    }
+
+    tinted-background {
+        overflow: auto;
+    }
+
+    progress-bar-borderless {
+        color: gainsboro;
+    }
+</style>
+
+<html lang="en">
+    <head>
+        <title>Intersection Transition Demo</title>
+        <meta charset="utf-8">
+        <script type="module" src="/component/tinted-background/tinted-background.js"></script>
+        <script type="module" src="intersection-transition.js"></script>
+        <script type="module" src="intersection-fade-in.js"></script>
+        <script type="module" src="/component/progress-bar/progress-bar-borderless.js"></script>
+    </head>
+    <body>
+        <tinted-background>
+            <div class='filler'></div>
+            <intersection-fade-in>
+                <h1>Intersect me!</h1>
+            </intersection-fade-in>
+            <div class='filler'></div>
+            <intersection-transition transition="--bar-completed-percentage 1s" transition-property-values="0% 65%">
+                <progress-bar-borderless style="--bar-completed-percentage: 0%">Progress!</progress-bar-borderless>
+            </intersection-transition>
+            <div class='filler'></div>
+            <intersection-transition transition="--bar-completed-percentage 1s,width 1s" transition-property-values="0% 65%,0% 100%">
+                <progress-bar-borderless style="--bar-completed-percentage: 0%">Progress!</progress-bar-borderless>
+            </intersection-transition>
+        </tinted-background>
+    </body>
+</html>

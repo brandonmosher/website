@@ -32,9 +32,9 @@ class ScrollNextHTMLElement extends HTMLElement {
                 ScrollNextHTMLElement.intersectionObserverPool.reobserve(
                     this,
                     ScrollNextHTMLElement.callback,
-                    { 'threshold': 0},
+                    { 'threshold': 0 },
                     ScrollNextHTMLElement.callback,
-                    { 'threshold': 0}
+                    { 'threshold': 0 }
                     //[0, 0.1, 0.2, 0.3, 0.4, .05, 0.6, 0.7, 0.8, 0.9, 1]
                 );
                 break;
@@ -57,13 +57,13 @@ class ScrollNextHTMLElement extends HTMLElement {
                     //target.parentElement.style.overflowY = 'scroll';
                 }
             }
-            else if(entry.boundingClientRect.bottom >= window.innerHeight) {
+            else if (entry.boundingClientRect.bottom >= window.innerHeight) {
                 if (entry.isIntersecting) {
                     console.log('entered viewport at the bottom edge, hence scroll direction is down');
                     //target.parentElement.scrollTop = target.parentElement.scrollHeight;
                     //target.parentElement.style.overflowY = 'hidden';
-                    target.parentElement.nextSibling.scrollIntoView({ 
-                        behavior: 'smooth' 
+                    target.parentElement.nextSibling.scrollIntoView({
+                        behavior: 'smooth'
                     });
                 } else {
                     console.log('left viewport at the bottom edge, hence scroll direction is up');

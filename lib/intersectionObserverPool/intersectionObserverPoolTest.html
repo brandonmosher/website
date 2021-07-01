@@ -1,11 +1,12 @@
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
     <script type="module">
         import { IntersectionObserverPool } from './intersectionObserverPool.js'
-       
 
         function callback() {
             console.log("Callback triggered!");
@@ -25,19 +26,20 @@
 
         let el3 = el.cloneNode(true);
         document.body.appendChild(el3);
-        intersectionObserverPool.observe(el3, callback, {threshold: 0.25});
+        intersectionObserverPool.observe(el3, callback, { threshold: 0.25 });
 
         let el4 = el.cloneNode(true);
         document.body.appendChild(el4);
-        intersectionObserverPool.observe(el4, callback, {threshold: 0.25});
+        intersectionObserverPool.observe(el4, callback, { threshold: 0.25 });
 
         let el5 = el.cloneNode(true);
         document.body.appendChild(el5);
-        intersectionObserverPool.observe(el5, callback, {threshold: 0.33});
+        intersectionObserverPool.observe(el5, callback, { threshold: 0.33 });
 
     </script>
     <script>
-        
+
     </script>
-    </body>
+</body>
+
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Transform 3D Demo</title>
+    <meta charset="utf-8">
+    <style>
+        transform3d-container {
+            height: 100vh;
+            width: 100vw;
+            perspective: 100px;
+        }
+
+        skew-rectangle {
+            display: block;
+            transform: translate3d(10vw, 0, -10vw) rotateY(45deg);
+            background-color: aquamarine;
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Transform 3D Demo</h1>
+    <transform3d-container>
+        <skew-rectangle></skew-rectangle>
+    </transform3d-container>
+
+</body>
+
+</html>

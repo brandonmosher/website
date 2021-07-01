@@ -1,0 +1,10 @@
+:host {
+    display: block;
+    overflow: hidden;
+}
+
+#text {
+    display: inline-block;
+    --fontSize: 78px;
+    font-size: var(--fontSize);
+}
