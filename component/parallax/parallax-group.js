@@ -1,4 +1,4 @@
-import { OnMutationHTMLElement } from "ComponentAbstract/on-mutation/on-mutation.js"
+import { OnMutationHTMLElement } from "Component/on-mutation/on-mutation.js"
 import css from "./parallax-group.css";
 import html from "./parallax-group.html";
 

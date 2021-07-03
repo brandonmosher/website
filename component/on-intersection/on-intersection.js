@@ -1,4 +1,4 @@
-import { IntersectionObserverPool } from "/lib/intersectionObserverPool/intersectionObserverPool.js"
+import { IntersectionObserverPool } from "Lib/intersectionObserverPool/intersectionObserverPool.js"
 
 export class OnIntersectionHTMLElement extends HTMLElement {
     callback = null;

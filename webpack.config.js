@@ -1,53 +1,73 @@
 const path = require('path');
-const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const entry = glob.sync('./component/**/src/index.js').reduce((acc, path) => {
-  acc[path.replace('/src/index.js', '')] = {import: path};
-  return acc
-}, {});
-
-entry['./'] = {
-  import: './src/index.js'
-};
-
-console.log(entry);
-const htmlWebpackPlugins = Object.entries(entry).map(([key, value]) =>
-  new HtmlWebpackPlugin({
-    filename: `${key}/dist/index.html`,
-    template: `${key}/src/index.html`,
-    chunks: [key],
-}));
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   mode: 'production',
-  entry,
+  entry: { 'index': './src/index.js' },
   output: {
-    filename: '[name]/dist/index.js',
-    path: path.resolve(__dirname),
-    publicPath: '/',
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
-        options: { url: false },
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        exclude: /component\/.*\.css$/i,
       },
       {
-        test: /\.html$/i,
-        use: 'html-loader',
-      }
+        test: /component\/.*\.css$/i,
+        loader: 'css-loader',
+      },
+      {
+        test: /component\/.*\.html$/i,
+        loader: 'html-loader',
+      },
+      {
+        test: /\.(webp)$/i,
+        type: "asset",
+        generator: {
+          filename: 'img/[hash][ext][query]'
+        }
+      },
+      {
+        test: /\.(ttf|woff|woff2)$/i,
+        type: "asset",
+        generator: {
+          filename: 'font/[hash][ext][query]'
+        }
+      },
+      {
+        test: /\.(webp)$/i,
+        use: [
+          {
+            loader: ImageMinimizerPlugin.loader,
+            options: {
+              minimizerOptions: {
+                plugins: ["webp"],
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
-    ...htmlWebpackPlugins
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './src/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'index.css',
+    }),
   ],
   resolve: {
     alias: {
-      Component: path.resolve(__dirname, 'component/'),
-      ComponentAbstract: path.resolve(__dirname, 'component-abstract/'),
-      Lib: path.resolve(__dirname, 'lib/'),
+      Component: path.resolve(__dirname, './component'),
+      Lib: path.resolve(__dirname, './lib'),
     },
   },
 };

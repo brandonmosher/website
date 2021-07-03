@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <title>Tinted Background Demo</title>
+    <meta charset="utf-8">
+    <style>
+        untinted-background {
+            display: block;
+            height: 100%;
+            background-image: linear-gradient(tomato, lightblue);
+        }
+
+        tinted-background {
+            height: 100%;
+            --tint-rgba: rgba(10, 17, 36, 0.55);
+            --background-image: linear-gradient(tomato, lightblue);
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flex-child-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            width: 50%;
+            height: 25%;
+            color: gainsboro;
+            background-color: darkslategray;
+        }
+    </style>
+</head>
+
+<body>
+    <untinted-background class="flex-container">
+        <h1 class="flex-child-center">Untinted Background</h1>
+    </untinted-background>
+    <tinted-background class="flex-container">
+        <h1 class="flex-child-center">Tinted Background</h1>
+    </tinted-background>
+</body>
+
+</html>

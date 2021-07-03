@@ -1,0 +1,152 @@
+@import "../font/avenir35light/avenir35light.css";
+
+body {
+    margin: 0;
+}
+/* html, body {
+    overflow: hidden;
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+section {
+    display: block;
+    height: 100vh;
+}
+
+half-section {
+    display: block;
+    height: 50vh;
+}
+
+double-section {
+    display: block;
+    height: 200vh;
+}
+
+.center-child {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.scroll-snap-container {
+    scroll-snap-type: y mandatory;
+}
+
+.scroll-snap-center {
+    scroll-snap-align: center;
+}
+
+.scroll-snap-start {
+    scroll-snap-align: start;
+}
+
+#background1 {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
+    --background-image: url(/img/2.webp);
+    height: calc(250vh * 2 / 3);
+}
+
+#background2 {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
+    --background-image: url(/img/3.webp);
+    height: calc(150vh * 2 / 3);
+}
+
+#background3 {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
+    --background-image: url(/img/4.webp);
+    height: calc(250vh * 2 / 3);
+}
+
+body {
+    letter-spacing: 0.05em;
+    line-height: 3;
+    color:#BEC7D5;
+    font-size: 14px;
+    font-family: 'avenir35light', Fallback, sans-serif;
+}
+
+vertical-timeline {
+    height: 100%;
+    line-height: normal;
+}
+
+vertical-timeline :nth-child(even) vertical-timeline-entry {
+    float: right;
+}
+
+vertical-timeline intersection-animation {
+    height: 20%;
+    scroll-snap-align: start;
+}
+
+vertical-timeline-entry {
+    visibility: hidden;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.5);
+}
+
+vertical-timeline-entry::part(content-container) {
+    float: inherit;
+    padding: 2%;
+    border-top: 1px dashed rgb(0, 191, 62);
+    height: 75%;
+}
+
+vertical-timeline-entry::part(line) {
+    background-color: rgb(0, 191, 62);
+    width: 0.1%;
+}
+
+vertical-timeline-entry::part(line-marker) {
+    background-color: rgb(0, 191, 62);
+    width: 2.5%;
+    transform: translateY(-50%);
+}
+
+vertical-timeline-entry autofit-font-nowrap {
+    height: 50%;
+}
+
+vertical-timeline-entry autofit-font-wrap {
+    height: 50%;
+}
+
+vertical-timeline-entry h2 {
+    color: rgb(0, 191, 62);
+}
+
+@keyframes bounce {
+    0% {
+        visibility: visible;
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        visibility: visible;
+        transform: scale(1);
+    }
+}
+
+@property --bar-completed-percentage {
+    syntax: '<integer>';
+    inherits: true;
+    initial-value: 0;
+}
+
+progress-bar-borderless {
+    letter-spacing: 0.05em;
+    line-height: 3;
+    color:#BEC7D5;
+    font-size: 14px;
+    font-family: 'avenir35light', Fallback, sans-serif;
+}

@@ -1,4 +1,4 @@
-import { OnIntersectionHTMLElement } from "ComponentAbstract/on-intersection/on-intersection.js"
+import { OnIntersectionHTMLElement } from "Component/on-intersection/on-intersection.js"
 import css from "./intersection-animation.css";
 import html from "./intersection-animation.html";
 

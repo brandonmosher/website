@@ -1,176 +1,25 @@
 <!DOCTYPE html>
 
-<style>
-    body {
-        margin: 0;
-    }
-    /* html, body {
-        overflow: hidden;
-    } */
-
-    * {
-        box-sizing: border-box;
-    }
-
-    parallax-group {
-        scroll-snap-type: y mandatory;
-    }
-
-    section {
-        display: block;
-        height: 100vh;
-    }
-
-    half-section {
-        display: block;
-        height: 50vh;
-    }
-
-    double-section {
-        display: block;
-        height: 200vh;
-    }
-
-    .center-child {
-        display: flex;
-        align-items: center;
-        text-align: center;
-    }
-
-    .scroll-snap-center {
-        scroll-snap-align: center;
-    }
-
-    .scroll-snap-start {
-        scroll-snap-align: start;
-    }
-
-    #background1 {
-        --img-url: url(/img/2.webp);
-        height: calc(250vh * 2 / 3);
-    }
-
-    #background2 {
-        --img-url: url(/img/3.webp);
-        height: calc(150vh * 2 / 3);
-    }
-
-    #background3 {
-        --img-url: url(/img/4.webp);
-        height: calc(250vh * 2 / 3);
-    }
-
-    body {
-        letter-spacing: 0.05em;
-        line-height: 3;
-        color:#BEC7D5;
-        font-size: 14px;
-        font-family: 'avenir35light', Fallback, sans-serif;
-    }
-
-    vertical-timeline {
-        height: 100%;
-        line-height: normal;
-    }
-
-    vertical-timeline :nth-child(even) vertical-timeline-entry {
-        float: right;
-    }
-
-    vertical-timeline intersection-animation {
-        height: 20%;
-        scroll-snap-align: start;
-    }
-
-    vertical-timeline-entry {
-        visibility: hidden;
-        height: 100%;
-        width: 100%;
-        transform: scale(0.5);
-    }
-
-    vertical-timeline-entry::part(content-container) {
-        float: inherit;
-        padding: 2%;
-        border-top: 1px dashed rgb(0, 191, 62);
-        height: 75%;
-    }
-
-    vertical-timeline-entry::part(line) {
-        background-color: rgb(0, 191, 62);
-        width: 0.1%;
-    }
-
-    vertical-timeline-entry::part(line-marker) {
-        background-color: rgb(0, 191, 62);
-        width: 2.5%;
-        transform: translateY(-50%);
-    }
-
-    vertical-timeline-entry autofit-font-nowrap {
-        height: 50%;
-    }
-
-    vertical-timeline-entry autofit-font-wrap {
-        height: 50%;
-    }
-
-    vertical-timeline-entry h2 {
-        color: rgb(0, 191, 62);
-    }
-
-    @keyframes bounce {
-        0% {
-            visibility: visible;
-            opacity: 0;
-            transform: scale(0.5);
-        }
-        60% {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-        100% {
-            visibility: visible;
-            transform: scale(1);
-        }
-    }
-
-    @property --bar-completed-percentage {
-        syntax: '<integer>';
-        inherits: true;
-        initial-value: 0;
-    }
-
-    progress-bar-borderless {
-        letter-spacing: 0.05em;
-        line-height: 3;
-        color:#BEC7D5;
-        font-size: 14px;
-        font-family: 'avenir35light', Fallback, sans-serif;
-    }
-
-</style>
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Brandon Mosher</title>
-        <link rel="stylesheet" href="/font/avenir35light/avenir35light.css">
     </head>
     <body>
-        <parallax-group>
+        <h1>Brandon Mosher</h1>
+        <parallax-group class="scroll-snap-container">
             
             <parallax-layer>
                 <section class="center-child scroll-snap-center">
-                    <intersection-fade-in>
+                    <intersection-transition transitions="opacity 2s 0 1">
                             <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                    </intersection-fade-in>
+                    </intersection-transition>
                 </section>
 
                 <section class="center-child scroll-snap-center">
-                    <intersection-fade-in>
+                    <intersection-transition transitions="opacity 2s 0 1">
                         <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                    </intersection-fade-in>
+                    </intersection-transition>
                 </section>
 
                 <half-section></half-section>
@@ -183,7 +32,7 @@
                         <intersection-transition transitions="--bar-completed-percentage 2s 0 70">
                             <progress-bar-borderless>CSS</progress-bar-borderless>
                         </intersection-transition>
-                        <intersection-transition transitions="--bar-completed-percentage 2s 0 85"">
+                        <intersection-transition transitions="--bar-completed-percentage 2s 0 85">
                             <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
                         </intersection-transition>
                     </div>
@@ -269,5 +118,17 @@
             </parallax-layer>
 
         </parallax-group>
+        <script>
+            document.querySelectorAll("autofit-font-wrap").forEach(node => {
+                node.addEventListener('animationend', e => {
+                    e.target.fit();
+                })
+            });
+            document.querySelectorAll("autofit-font-nowrap").forEach(node => {
+                node.addEventListener('animationend', e => {
+                    e.target.fit();
+                })
+            });
+        </script>
     </body>
 </html>

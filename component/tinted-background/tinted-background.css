@@ -1,0 +1,9 @@
+:host {
+    --tint-rgba: none;
+    --background-image: none;
+}
+
+:host {
+    display: block;
+    background: linear-gradient(var(--tint-rgba), var(--tint-rgba)), var(--background-image);
+}

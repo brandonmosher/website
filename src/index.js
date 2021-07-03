@@ -1,8 +1,9 @@
-import "Component/intersection-animation/src/index.js";
-import "Component/intersection-transition/src/index.js";
-import "Component/intersection-transition/src/index.js";
-import "Component/progress-bar/src/index.js";
-import "Component/tinted-background/src/index.js";
-import "Component/vertical-timeline/src/index.js";
-import "Component/autofit-font/src/index.js";
-import "Component/parallax/src/index.js";
+import "./index.css";
+import "Component/intersection-animation/index.js";
+import "Component/intersection-transition/index.js";
+import "Component/intersection-transition/index.js";
+import "Component/progress-bar/index.js";
+import "Component/tinted-background/index.js";
+import "Component/vertical-timeline/index.js";
+import "Component/autofit-font/index.js";
+import "Component/parallax/index.js";
