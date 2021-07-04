@@ -7,3 +7,4 @@ import "Component/tinted-background/index.js";
 import "Component/vertical-timeline/index.js";
 import "Component/autofit-font/index.js";
 import "Component/parallax/index.js";
+import "Component/nav/index.js";

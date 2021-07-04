@@ -6,16 +6,24 @@
         <title>Brandon Mosher</title>
     </head>
     <body>
-        <h1>Brandon Mosher</h1>
+        <div class="fixed">
+            <nav-bar>
+                <nav-entry href="#home">Home</nav-entry>
+                <nav-entry href="#about">About</nav-entry>
+                <nav-entry href="#proficiency">Proficiency</nav-entry>
+                <nav-entry href="#experience">Experience</nav-entry>
+            </nav-bar>
+        </div>
         <parallax-group class="scroll-snap-container">
-            
             <parallax-layer>
+                <nav-point id="home"></nav-point>
                 <section class="center-child scroll-snap-center">
                     <intersection-transition transitions="opacity 2s 0 1">
                             <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
                     </intersection-transition>
                 </section>
 
+                <nav-point id="about"></nav-point>
                 <section class="center-child scroll-snap-center">
                     <intersection-transition transitions="opacity 2s 0 1">
                         <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
@@ -24,6 +32,7 @@
 
                 <half-section></half-section>
 
+                <nav-point id="proficiency"></nav-point>
                 <section class="center-child scroll-snap-center">
                     <div style="width:100%">
                         <intersection-transition transitions="--bar-completed-percentage 2s 0 90">
@@ -40,6 +49,7 @@
 
                 <half-section></half-section>
 
+                <nav-point id="experience"></nav-point>
                 <double-section class="center-child scroll-snap-start">
                     <vertical-timeline>
                             <intersection-animation animation="bounce 1s ease 0s 1 normal forwards running">

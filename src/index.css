@@ -150,3 +150,13 @@ progress-bar-borderless {
     font-size: 14px;
     font-family: 'avenir35light', Fallback, sans-serif;
 }
+body {
+    position: relative;
+}
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}

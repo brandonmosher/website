@@ -25,26 +25,29 @@ function parseTransitionStyle(transitions) {
         .join(",");
 }
 
+function callback(entries, observer) {
+    entries.forEach(entry => {
+        const { target } = entry;
+        if (entry.intersectionRatio >= target.intersectionRatio) {
+            target.transitionPropertyNameValuePairs = parsePropertyNameValuePairsFinal(target.transitions);
+        } else {
+            //do nothing?
+        }
+    });
+};
+
 customElements.define("intersection-transition",
     class IntersectionTransitionHTMLElement extends OnIntersectionHTMLElement {
-        static observedAttributeDefaults = {
-            "intersection-ratio": 0.25,
-            "transitions": ""
-        }
-
         constructor() {
-            super();
+            super(callback, {});
             const shadowRoot = this.attachShadow({ mode: "open" })
             shadowRoot.innerHTML = `<style>${css}</style>${html}`;
-        }
-
-        connectedCallback() {
-            for (const [name, value] of Object.entries(IntersectionTransitionHTMLElement.observedAttributeDefaults)) {
-                this.setAttribute(name, this.hasAttribute(name) ? this.getAttribute(name) : value);
+            if(!this.hasAttribute("transitions")) {
+                this.setAttribute("transitions", "");
             }
         }
 
-        static get observedAttributes() { return Object.keys(IntersectionTransitionHTMLElement.observedAttributeDefaults); }
+        static get observedAttributes() { return [...super.observedAttributes, 'transitions'] }
 
         get transitionChildren() {
             return Array.from(this.children);
@@ -74,26 +77,13 @@ customElements.define("intersection-transition",
         }
 
         attributeChangedCallback(name, oldValue, newValue) {
+            super.attributeChangedCallback(name, oldValue, newValue);
             switch (name) {
-                case "intersection-ratio":
-                    this.observe(IntersectionTransitionHTMLElement.callback, { "threshold": newValue });
-                    break;
                 case "transitions":
                     this.transitions = newValue;
                     break;
                 default:
             }
         }
-
-        static callback(entries, observer) {
-            entries.forEach(entry => {
-                const { target } = entry;
-                if (entry.intersectionRatio >= target.getAttribute("intersection-ratio")) {
-                    target.transitionPropertyNameValuePairs = parsePropertyNameValuePairsFinal(target.transitions);
-                } else {
-                    //do nothing?
-                }
-            });
-        };
     }
 );
