@@ -1,4 +1,5 @@
 :host {
+    --color-inactive: black;
     --background-color-active: #4CAF50;
     --color-active: white; 
     --background-color-hover: #555;
@@ -7,7 +8,7 @@
 
 :host {
     display: inline-block;
-    color: #000;
+    color: var(--color-inactive);
     padding: 1%;
 }
 

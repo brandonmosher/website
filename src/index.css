@@ -45,7 +45,7 @@ double-section {
 }
 
 #background1 {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
+    --tint-rgba: rgba(50, 65, 88, 0.55);
     --background-image: url(/img/2.webp);
     height: calc(250vh * 2 / 3);
 }
@@ -150,13 +150,28 @@ progress-bar-borderless {
     font-size: 14px;
     font-family: 'avenir35light', Fallback, sans-serif;
 }
+
 body {
     position: relative;
 }
+
 .fixed {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1;
+}
+
+nav-entry {
+    --color-inactive: #939DAB;
+    --background-color-active: transparent;
+    --color-active: #4CAF50;
+    --background-color-hover: transparent;
+    --color-hover: white;
+}
+
+nav-bar {
+    box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
+    background-color: transparent;
 }
