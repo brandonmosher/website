@@ -62,6 +62,11 @@ double-section {
     height: calc(250vh * 2 / 3);
 }
 
+#background4 {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
+    height: calc(150vh * 2 / 3);
+}
+
 body {
     letter-spacing: 0.05em;
     line-height: 3;

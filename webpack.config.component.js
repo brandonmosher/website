@@ -7,15 +7,15 @@ const entry = glob.sync('./component/**/index.js').reduce((acc, pathname) => {
   return acc
 }, {});
 
-const htmlWebpackPlugins = Object.keys(entry).map(key => 
+const htmlWebpackPlugins = Object.keys(entry).map(key =>
   new HtmlWebpackPlugin({
     filename: key.replace('.js', '.html'),
     template: key.replace('.js', '.html'),
     chunks: [key],
-}));
+  }));
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry,
   output: {
     filename: '[name]',
@@ -42,5 +42,8 @@ module.exports = {
       Component: path.resolve(__dirname, 'component'),
       Lib: path.resolve(__dirname, 'lib'),
     },
+  },
+  optimization: {
+    minimize: false
   },
 };

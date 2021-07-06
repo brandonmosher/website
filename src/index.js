@@ -8,3 +8,4 @@ import "Component/vertical-timeline/index.js";
 import "Component/autofit-font/index.js";
 import "Component/parallax/index.js";
 import "Component/nav/index.js";
+import "Component/contact/index.js";
