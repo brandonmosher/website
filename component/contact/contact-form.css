@@ -17,9 +17,6 @@ form, form-control {
 }
 
 form {
-    /* display: flex;
-    align-items: center;
-    flex-direction: column; */
     position: relative;
     width: 100%;
     height: 100%;
@@ -27,9 +24,7 @@ form {
 
 form-control {
     width: 100%;
-    height: auto;
-    max-height: 50%;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
 }
 
 form-control::part(container) {
@@ -41,8 +36,8 @@ form-control::part(container) {
 
 /* Controls */
 
-form-control:is(:focus-within, :not([empty]))::part(control) {
-    min-height: 50%;
+form-contrl::part(control) {
+    width: 100%;
 }
 
 /* Labels */
@@ -57,8 +52,7 @@ form-control[visited]::part(label),
 form-control:is(:focus-within)::part(label) {
     position: static;
     width: 100%;
-    max-height: 50%;
-    font-size: 50%;
+    font-size: 60%;
     color: var(--label-color);
 }
 
@@ -115,9 +109,7 @@ form-control::part(validation-message) {
 
 form-control:not(:focus-within)[visited]::part(validation-message) {
     display: block;
-    padding-top: 1%;
     color: var(--invalid-color);
-    font-size: x-small;
-    font-weight: 200;
+    font-size: small;
     background-color: var(--container-color);
 }

@@ -7,11 +7,11 @@
     overflow-y: auto;
 }
 
-:host {
+/* :host {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
 :host::-webkit-scrollbar {
     display: none;
-}
+} */

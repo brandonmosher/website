@@ -54,7 +54,7 @@ export class OnIntersectionHTMLElement extends HTMLElement {
         return ['intersection-ratio'];
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue === newValue) {
             return;
         }

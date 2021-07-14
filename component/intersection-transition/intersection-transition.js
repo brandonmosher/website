@@ -76,8 +76,8 @@ customElements.define("intersection-transition",
             this.transitionPropertyNameValuePairs = parsePropertyNameValuePairsInitial(transitions);
         }
 
-        attributeChangedCallback(name, oldValue, newValue) {
-            super.attributeChangedCallback(name, oldValue, newValue);
+        attributeChangedCallback(attrName, oldValue, newValue) {
+            super.attributeChangedCallback(attrName, oldValue, newValue);
             switch (name) {
                 case "transitions":
                     this.transitions = newValue;

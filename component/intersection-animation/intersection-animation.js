@@ -4,11 +4,8 @@ import html from "./intersection-animation.html";
 
 function callback(entries, observer) {
     entries.forEach(entry => {
-        const { target } = entry;
-        if (entry.intersectionRatio >= target.intersectionRatio) {
-            target.animationChildren.forEach(animationChild => {
-                animationChild.style.animation = target.animation;
-            });
+        if (entry.intersectionRatio >= entry.target.intersectionRatio) {
+            entry.target.start();
         }
     });
 };
@@ -20,11 +17,15 @@ customElements.define("intersection-animation",
             const shadowRoot = this.attachShadow({ mode: "open" })
             shadowRoot.innerHTML = `<style>${css}</style>${html}`;
         }
-
-        connectedCallback() {
-            if(!this.hasAttribute("animation")) {
-                this.setAttribute("animation", "");
-            }
+        start() {
+            this.animationChildren.forEach(animationChild => {
+                if (this.animation) {
+                    animationChild.style.animation = this.animation;
+                }
+                if (this.animationClass) {
+                    animationChild.classList.add(this.animationClass);
+                }
+            });
         }
 
         get animationChildren() {
@@ -37,6 +38,14 @@ customElements.define("intersection-animation",
 
         set animation(animation) {
             this.setAttribute("animation", animation);
+        }
+
+        get animationClass() {
+            return this.getAttribute("animation-class");
+        }
+
+        set animationClass(animationClass) {
+            this.setAttribute("animation-class", animation);
         }
     }
 );

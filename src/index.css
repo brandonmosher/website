@@ -1,31 +1,42 @@
 @import "../font/avenir35light/avenir35light.css";
-
-body {
-    margin: 0;
-}
-/* html, body {
-    overflow: hidden;
-} */
-
 * {
     box-sizing: border-box;
 }
+:root {
+    --nav-bar-height: 10vh;
+}
+
+body {
+    margin: 0;
+    position: relative;
+    letter-spacing: 0.05em;
+    line-height: 3;
+    color: #BEC7D5;
+    font-size: 14px;
+    font-family: 'avenir35light', Fallback, sans-serif;
+}
+
+/* section definitions */
 
 section {
     display: block;
     height: 100vh;
+    padding-top: var(--nav-bar-height);
 }
-
 
 half-section {
     display: block;
     height: 50vh;
+    padding-top: var(--nav-bar-height);
 }
 
 double-section {
     display: block;
     height: 200vh;
+    padding-top: var(--nav-bar-height);
 }
+
+/* utility classes */
 
 .center-child {
     display: flex;
@@ -49,36 +60,74 @@ double-section {
     scroll-snap-align: start;
 }
 
+/* backgrounds */
+
 #background1 {
     --tint-rgba: rgba(50, 65, 88, 0.55);
     --background-image: url(/img/2.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: calc(250vh * 2 / 3);
 }
 
 #background2 {
     --tint-rgba: rgba(10, 17, 36, 0.55);
     --background-image: url(/img/3.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: calc(150vh * 2 / 3);
 }
 
 #background3 {
     --tint-rgba: rgba(10, 17, 36, 0.55);
     --background-image: url(/img/4.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: calc(250vh * 2 / 3);
 }
 
 #background4 {
     --tint-rgba: rgba(10, 17, 36, 0.55);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: calc(150vh * 2 / 3);
 }
 
-body {
-    letter-spacing: 0.05em;
-    line-height: 3;
-    color:#BEC7D5;
-    font-size: 14px;
-    font-family: 'avenir35light', Fallback, sans-serif;
+/* navigation bar */
+
+nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
+    background-color: transparent;
+    height: var(--nav-bar-height);
+    font-size: larger;
 }
+
+nav-entry {
+    --color-inactive: #939DAB;
+    --background-color-active: transparent;
+    --color-active: #4CAF50;
+    --background-color-hover: transparent;
+    --color-hover: white;
+    height: 100%;
+}
+
+/* text sections */
+
+[intersection-class=transition-fade-in]>* {
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.transition-fade-in {
+    opacity: 1;
+}
+
+/* vertical timeline */
 
 vertical-timeline {
     height: 100%;
@@ -89,13 +138,14 @@ vertical-timeline :nth-child(even) vertical-timeline-entry {
     float: right;
 }
 
-vertical-timeline intersection-animation {
+vertical-timeline on-intersection-add-class {
     height: 20%;
+    width: 100%;
     scroll-snap-align: start;
 }
 
 vertical-timeline-entry {
-    visibility: hidden;
+    opacity: 0;
     height: 100%;
     width: 100%;
     transform: scale(0.5);
@@ -133,7 +183,6 @@ vertical-timeline-entry h2 {
 
 @keyframes bounce {
     0% {
-        visibility: visible;
         opacity: 0;
         transform: scale(0.5);
     }
@@ -142,18 +191,19 @@ vertical-timeline-entry h2 {
         transform: scale(1.1);
     }
     100% {
-        visibility: visible;
+        opacity: 1;
         transform: scale(1);
     }
 }
 
-@keyframes bar1 {
-    from {
-        --bar-completed-percentage: 0;
-    }
-    to {
-        --bar-completed-percentage: 90;
-    }
+.bounce {
+    animation: bounce 1s ease 0s 1 normal forwards running;
+}
+
+/* pogress bar */
+
+#progress-bar-container {
+    width: 100%;
 }
 
 @property --bar-completed-percentage {
@@ -163,37 +213,31 @@ vertical-timeline-entry h2 {
 }
 
 progress-bar-borderless {
-    letter-spacing: 0.05em;
-    line-height: 3;
-    color:#BEC7D5;
-    font-size: 14px;
-    font-family: 'avenir35light', Fallback, sans-serif;
+    --bar-completed-percentage: 0;
+    transition: --bar-completed-percentage 1s;
 }
 
-body {
-    position: relative;
+.transition-progress-bar-html {
+    --bar-completed-percentage: 90;
 }
 
-.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
+[intersection-class=transition-progress-bar-css]>* {
+    transition-delay: 0.05s;
 }
 
-nav-entry {
-    --color-inactive: #939DAB;
-    --background-color-active: transparent;
-    --color-active: #4CAF50;
-    --background-color-hover: transparent;
-    --color-hover: white;
+.transition-progress-bar-css {
+    --bar-completed-percentage: 85;
 }
 
-nav-bar {
-    box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
-    background-color: transparent;
+[intersection-class=transition-progress-bar-javascript]>* {
+    transition-delay: 0.1s;
 }
+
+.transition-progress-bar-javascript {
+    --bar-completed-percentage: 85;
+}
+
+/* contact form */
 
 contact-form {
     width: 75%;

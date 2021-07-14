@@ -26,7 +26,7 @@ class ScrollNextHTMLElement extends HTMLElement {
 
     static get observedAttributes() { return Object.keys(ScrollNextHTMLElement.observedAttributeDefaults); }
 
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback(attrName, oldValue, newValue) {
         switch (name) {
             case 'threshold':
                 ScrollNextHTMLElement.intersectionObserverPool.reobserve(

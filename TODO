@@ -2,3 +2,4 @@
 - center child element
 - fix form validity polyfill
 - Progress bar animation in Firefox
+- Mobile scaling (nesting nav bar in particular)

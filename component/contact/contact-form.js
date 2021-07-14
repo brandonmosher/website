@@ -3,11 +3,26 @@ import html from './contact-form.html';
 
 customElements.define('contact-form',
     class extends HTMLElement {
+        static observedAttributes = [
+            'accept-charset',
+            'action',
+            'autocomplete',
+            'enctype',
+            'method',
+            'name',
+            'novalidate',
+            'target',  
+        ];
+
         constructor() {
             super();
             const shadowRoot = this.attachShadow({ mode: 'open' })
             shadowRoot.innerHTML = `<style>${css}</style>${html}`;
             this.shadowRoot.querySelector("#button").addEventListener("click", (e) => this.handleFormSubmit(e));
+        }
+
+        attributeChangedCallback(attrName, oldValue, newValue) {
+            this.shadowRoot.querySelector("form").setAttribute(attrName, newValue);
         }
 
         async postFormJSON(form) {
@@ -40,8 +55,6 @@ customElements.define('contact-form',
 
             try {
                 const responseData = await this.postFormJSON(form);
-
-                console.log({ responseData });
                 target.setAttribute('disabled', '');
                 target.removeEventListener('click', this.handleFormSubmit);
                 form.querySelectorAll('form-control:not([type=button])').forEach((node, i, arr) => {
