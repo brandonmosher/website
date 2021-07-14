@@ -16,6 +16,7 @@ section {
     height: 100vh;
 }
 
+
 half-section {
     display: block;
     height: 50vh;
@@ -29,6 +30,10 @@ double-section {
 .center-child {
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.center-text {
     text-align: center;
 }
 
@@ -142,6 +147,15 @@ vertical-timeline-entry h2 {
     }
 }
 
+@keyframes bar1 {
+    from {
+        --bar-completed-percentage: 0;
+    }
+    to {
+        --bar-completed-percentage: 90;
+    }
+}
+
 @property --bar-completed-percentage {
     syntax: '<integer>';
     inherits: true;
@@ -179,4 +193,8 @@ nav-entry {
 nav-bar {
     box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
     background-color: transparent;
+}
+
+contact-form {
+    width: 75%;
 }

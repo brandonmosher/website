@@ -1,34 +1,123 @@
 :host {
+    --valid-color: rgba(152, 251, 152, 1);
+    --valid-color-focus: rgba(152, 251, 152, 0.8);
+    --invalid-color: #dc3545;
+    --label-color: gray;
+    --placeholder-color: gray;
+    --button-color: white;
+}
+
+:host {
     display: block;
+    position: relative;
 }
 
-input, textarea {
-    width: 95%;
-    padding: 1%;
-    border: none;
-    margin: 1%;
-    letter-spacing: 0.1em;
+form, form-control {
+    box-sizing: border-box;
 }
 
-textarea {
-    resize: vertical;
+form {
+    /* display: flex;
+    align-items: center;
+    flex-direction: column; */
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
-input[type=submit] {
-    background-color: lightgreen;
-    color: white;
+form-control {
+    width: 100%;
+    height: auto;
+    max-height: 50%;
+    margin-bottom: 5%;
+}
+
+form-control::part(container) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    outline-color: transparent;
+}
+
+/* Controls */
+
+form-control:is(:focus-within, :not([empty]))::part(control) {
+    min-height: 50%;
+}
+
+/* Labels */
+form-control::part(label) {
+    position: absolute;
+    left: 1%;
+    width: 98%;
+    color: var(--placeholder-color);
+}
+
+form-control[visited]::part(label),
+form-control:is(:focus-within)::part(label) {
+    position: static;
+    width: 100%;
+    max-height: 50%;
+    font-size: 50%;
+    color: var(--label-color);
+}
+
+/* Submit */
+
+form-control[type=button]::part(container) {
+    background-color: var(--invalid-color);
+    color: var(--button-color);
+}
+
+form-control[type=button]::part(label),
+form-control[type=button]::part(control) {
+    display: none;
+}
+
+form-control[type=button]::part(container)::before {
+    content: "Submit";
+}
+
+form-control[type=button][disabled]::part(container)::before {
+    content: "Thank you!";
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=button]::part(container) {
+    background-color: var(--valid-color);
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=button]:is(:hover, :focus-within, :disabled, [disabled])::part(container) {
+    background-color: var(--valid-color-focus);
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=button]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
-    background-color: green;
+/* Validity Outlines */
+
+form-control:not([empty]):is(:invalid, [internals-invalid]):focus-within::part(container) {
+    outline-color: var(--invalid-color);
 }
 
-.container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    background-color: lightgrey;
-    padding: 1%;
+form-control:not([type=button], [empty]):is(:valid, [internals-valid]):focus-within::part(container) {
+    outline-color: var(--valid-color);
+}
+
+form-control[empty]:focus-within::part(container) {
+    outline-color: var(--invalid-color);
+}
+
+/* Validation Message */
+form-control::part(validation-message) {
+    display: none;
+}
+
+form-control:not(:focus-within)[visited]::part(validation-message) {
+    display: block;
+    padding-top: 1%;
+    color: var(--invalid-color);
+    font-size: x-small;
+    font-weight: 200;
+    background-color: var(--container-color);
 }

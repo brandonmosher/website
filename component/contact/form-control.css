@@ -1,0 +1,35 @@
+:host {
+    display: block;
+    background-color: transparent;
+    cursor: text;
+}
+
+#container {
+    position: relative;
+    padding: 1%;
+    background-color: white;
+    outline: 1.5px solid black;
+}
+
+#label {
+    font: inherit;
+    background-color: inherit;
+    cursor: inherit;
+    color: inherit;
+}
+
+#control {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    background-color: inherit;
+    cursor: inherit;
+    color: inherit;
+}
+
+form-control[type=textarea]::part(control) {
+    overflow: auto;
+}

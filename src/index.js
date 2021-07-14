@@ -1,11 +1,13 @@
 import "./index.css";
-import "Component/intersection-animation/index.js";
-import "Component/intersection-transition/index.js";
-import "Component/intersection-transition/index.js";
-import "Component/progress-bar/index.js";
-import "Component/tinted-background/index.js";
-import "Component/vertical-timeline/index.js";
-import "Component/autofit-font/index.js";
-import "Component/parallax/index.js";
-import "Component/nav/index.js";
-import "Component/contact/index.js";
+import "Component/intersection-animation";
+import "Component/intersection-transition";
+import "Component/intersection-transition";
+import "Component/progress-bar";
+import "Component/tinted-background";
+import "Component/vertical-timeline";
+import "Component/autofit-font";
+import "Component/parallax";
+import "Component/nav";
+import "Component/contact";
+
+

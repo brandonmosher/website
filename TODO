@@ -1,7 +1,4 @@
-letsencryt
-node http-server
-deploy on gcloud
-nav bar
-contact form
-scroll snap elements
-center child element
+- scroll snap elements
+- center child element
+- fix form validity polyfill
+- Progress bar animation in Firefox

@@ -1,16 +1,38 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
 
 <head>
-    <title>Contact Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Form Demo</title>
+    <meta charset="utf-8">
     <style>
+        body {
+            margin: 0;
+        }
+        
+        .container {
+            --container-color: #353535;
+            position: relative;
+            padding: 5%;
+            height: 100vh;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: var(--container-color);
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 0.1em;
+        }
+
+        contact-form {
+            width: 75%;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
 <body>
-    <h3>Contact Form</h3>
-    <contact-form></contact-form>
+    <div class="container">
+        <contact-form></contact-form>
+    </div>
 </body>
 
 </html>

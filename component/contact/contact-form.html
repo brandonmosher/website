@@ -1,13 +1,14 @@
-<div class="container">
-  <form action="/action_page.php">
-    <input type="text" id="name" name="name" required placeholder="Name">
+<form id="contact-form" name="contact-form" action="https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live">
+  <form-control type="text" id="name" name="name" required="*">Name</form-control>
 
-    <input type="email" id="email" name="email" required placeholder="Email">
+  <form-control type="email" id="email" name="email" title="john.smith@example.com" required="*">Email
+  </form-control>
 
-    <input type="tel" id="phone" name="phone" placeholder="Phone">
+  <form-control type="tel" id="phone" name="phone" title="(012) 345-6789" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
+    template="(___) ___-____" template-placeholder="_" allowed="0123456789">Phone</form-control>
 
-    <textarea id="message" name="message" required placeholder="Message"></textarea>
+  <form-control type="textarea" id="message" name="message" title="Say hello!" required="*">Message
+  </form-control>
 
-    <input id="submit" type="submit" value="Submit">
-  </form>
-</div>
+  <form-control type="button" id="button" value=""></form-control>
+</form>

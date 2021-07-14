@@ -68,6 +68,7 @@ module.exports = {
     alias: {
       Component: path.resolve(__dirname, './component'),
       Lib: path.resolve(__dirname, './lib'),
+      Polyfill: path.resolve(__dirname, 'polyfill'),
     },
   },
 };
