@@ -1,0 +1,42 @@
+diff --git a/node_modules/element-internals-polyfill/dist/index.js b/node_modules/element-internals-polyfill/dist/index.js
+index 22c581c..1446a84 100644
+--- a/node_modules/element-internals-polyfill/dist/index.js
++++ b/node_modules/element-internals-polyfill/dist/index.js
+@@ -71,6 +71,11 @@
+             ref.setAttribute('aria-labelledby', firstLabelId);
+         }
+     };
++    const setFormValidity = (form) => {
++        const valid = form.checkValidity();
++        form.toggleAttribute('internals-invalid', !valid);
++        form.toggleAttribute('internals-valid', valid);
++    }
+     const formSubmitCallback = (event) => {
+         const elements = formElementsMap.get(event.target);
+         if (elements.size) {
+@@ -96,6 +101,9 @@
+             }
+         });
+     };
++    const formInputCallback = (event) => {
++        setFormValidity(findParentForm(event.target));
++    };
+     const initForm = (ref, form, internals) => {
+         if (form) {
+             const formElements = formElementsMap.get(form);
+@@ -108,6 +116,7 @@
+                 formElementsMap.set(form, initSet);
+                 form.addEventListener('submit', formSubmitCallback);
+                 form.addEventListener('reset', formResetCallback);
++                form.addEventListener('input', formInputCallback);
+             }
+             formsMap.set(form, { ref, internals });
+             if (ref.constructor['formAssociated'] && ref.formAssociatedCallback) {
+@@ -115,6 +124,7 @@
+                     ref.formAssociatedCallback.apply(ref, [form]);
+                 }, 0);
+             }
++            setFormValidity(form);
+         }
+     };
+     const findParentForm = (elem) => {

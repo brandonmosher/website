@@ -5,7 +5,9 @@
 :root {
     --nav-bar-height: 10vh;
 }
-
+nav-point {
+    display: block;
+}
 body {
     margin: 0;
     position: relative;

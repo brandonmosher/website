@@ -29,12 +29,7 @@ customElements.define('nav-entry',
         }
 
         updateActive() {
-            if ((this.href === window.location.href) || (this.href === window.location.hash)) {
-                this.classList.add('active');
-            }
-            else {
-                this.classList.remove('active');
-            }
+            this.classList.toggle((this.href === window.location.href) || (this.href === window.location.hash));
         }
     }
 );

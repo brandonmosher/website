@@ -18,11 +18,15 @@ customElements.define('contact-form',
             super();
             const shadowRoot = this.attachShadow({ mode: 'open' })
             shadowRoot.innerHTML = `<style>${css}</style>${html}`;
-            this.shadowRoot.querySelector("#button").addEventListener("click", (e) => this.handleFormSubmit(e));
+            this.shadowRoot.querySelector("#button").addEventListener("click", (e) => this.handleFormSubmit(e));          
+        }
+
+        get form() {
+            return this.shadowRoot.querySelector("form");
         }
 
         attributeChangedCallback(attrName, oldValue, newValue) {
-            this.shadowRoot.querySelector("form").setAttribute(attrName, newValue);
+            this.form.setAttribute(attrName, newValue);
         }
 
         async postFormJSON(form) {
