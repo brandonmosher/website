@@ -24,6 +24,7 @@ section {
     display: block;
     height: 100vh;
     padding-top: var(--nav-bar-height);
+    position: relative;
 }
 
 half-section {
@@ -242,5 +243,14 @@ progress-bar-borderless {
 /* contact form */
 
 contact-form {
-    width: 75%;
+    line-height: normal;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+section[name=contact-form] autofit-font-nowrap {
+    height: 95%;
+    width: 95%;
+    position: relative;
 }

@@ -3,17 +3,58 @@ import html from "./autofit-font.html";
 
 const ro = new ResizeObserver(entries => {
     for (let entry of entries) {
-        entry.target.fit();
+        const closest = entry.target.closest('autofit-font-nowrap, autofit-font-wrap');
+        if (closest) {
+            closest.fit();
+        }
     }
 });
 
 class AutofitFontHTMLElement extends HTMLElement {
+    static observedAttributes = ['observe-parent', 'observe-children'];
+
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: "open" })
         shadowRoot.innerHTML = `<style>${css}</style>${html}`;
         this.fit();
-        ro.observe(this);
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+        if (!(this.hasAttribute('observe-parent') || this.hasAttribute('observe-children'))) {
+            this.setAttribute('observe-parent', "true");
+        }
+        this.fit();
+    }
+
+    attributeChangedCallback(attrName, oldValue, newValue) {
+        console.log(attrName);
+        switch (attrName) {
+            case "observe-parent":
+                if (newValue === null) {
+                    ro.unobserve(this);
+                }
+                else {
+                    ro.observe(this);
+                }
+                break;
+            case "observe-children":
+                Array.from(this.children).forEach(child => {
+                    if (newValue === null) {
+                        ro.unobserve(child);
+                    }
+                    else {
+                        ro.observe(child);
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+        this.fit();
     }
 
     fitHeuristic(target, text) {

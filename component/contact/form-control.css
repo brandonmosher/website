@@ -27,7 +27,6 @@
     font: inherit;
     background-color: inherit;
     cursor: inherit;
-    color: inherit;
 }
 
 form-control[type=textarea]::part(control) {

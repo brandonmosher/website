@@ -6,7 +6,6 @@ function callback(entries, observer) {
             return;
         }
         const hash = entry.target.id;
-        console.log("Replace State", hash, entry.intersectionRatio);
         history.replaceState({}, '', `#${hash}`);
         const currentActive = document.querySelector(`nav-entry.active`);
         const futureActive = document.querySelector(`nav-entry[href=\\#${hash}]`);
