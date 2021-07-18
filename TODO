@@ -1,6 +1,11 @@
 - scroll snap elements
 - center child element
-- fix form validity polyfill
-- Progress bar animation in Firefox
-- Mobile scaling (nesting nav bar in particular)
+- progress bar animation in Firefox
+- mobile scaling (nesting nav bar in particular)
 - transfer domain to route 53
+- make on-intersection-add-class more powerful
+  - intersect-{top, right, left, bottom}-scroll-{up, left, right, down}-{add, remove}-class
+- Cleanup on-scroll and add support for scroll-{start/stop}-{up,right,down-left}-{add/remove}-class
+
+Completed
+- fix form validity polyfill

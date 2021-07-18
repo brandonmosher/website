@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+    <title>On Scroll Demo</title>
+    <meta charset="utf-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+        }
+
+        on-scroll-container {
+            height: 100vh;
+        }
+
+        section {
+            height: 100vh;
+        }
+
+        section::after {
+            content: attr(name);
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            height: 10vh;
+            background-color: gray;
+            transition: transform 0.1s;
+        }
+
+        .hide-header {
+            transform: translateY(-10vh);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <on-scroll-container>
+        <on-scroll scroll-down-add-class="hide-header" scroll-up-remove-class="hide-header">
+            <div class="header"></div>
+        </on-scroll>
+        <section name="hello"></section>
+        <section name="world"></section>
+        <section name="foo"></section>
+        <section name="bar"></section>
+    </on-scroll-container>
+</body>
+
+</html>

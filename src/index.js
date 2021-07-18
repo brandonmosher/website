@@ -7,5 +7,6 @@ import "Component/autofit-font";
 import "Component/parallax";
 import "Component/nav";
 import "Component/contact";
+import "Component/on-scroll"
 
 

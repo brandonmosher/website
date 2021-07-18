@@ -1,69 +1,80 @@
-import { IntersectionObserverPool } from "Lib/intersectionObserverPool/intersectionObserverPool.js"
+import { IntersectionObserverPool } from 'Lib/intersectionObserverPool/intersectionObserverPool.js'
+
+function HTMLToCamelCase(s) {
+    return s.replace(/-([a-z])/g, g => g[1].toUpperCase());
+}
+
+function camelToHTMLCase(s) {
+    return s.replace(/([a-z][A-Z])/g, g => g[0] + '-' + g[1].toLowerCase());
+}
 
 export class OnIntersectionHTMLElement extends HTMLElement {
-    callback = null;
-    options = null;
+    _callback = null;
 
-    constructor(callback, options = {}) {
+    constructor(callback, optionDefaults = {}) {
         super();
-        this.observe(callback, options);
+        this.observe(callback, {...optionDefaults, ...this.options});
     }
 
     get isObserved() {
-        return !!this.callback && !!this.options;
+        return !!this._callback;
     }
 
-    observe(callback, options) {
-        if (this.isObserved) {
-            this.unobserve();
+    observe(callback, options = null) {
+        this.unobserve();
+        this._callback = callback;
+        if (options) {
+            Object.entries(options).forEach(([kCamelCase, v]) => {
+                const kHTMLCase = camelToHTMLCase(kCamelCase);
+                if (OnIntersectionHTMLElement.observedAttributes.includes(kHTMLCase)) {
+                    this[kCamelCase] = v;
+                }
+            });
         }
-        if (options.hasOwnProperty('threshold')) {
-            this.intersectionRatio = options['threshold'];
-        }
-        else {
-            options['threshold'] = this.intersectionRatio;
-        }
-        this.callback = callback;
-        this.options = options;
-        IntersectionObserverPool.observe(this, callback, options);
+        IntersectionObserverPool.observe(this, callback, this.options);
     }
 
     unobserve() {
-        if (!this.isObserved) {
-            IntersectionObserverPool.unobserve(this, this.callback, this.options);
-            this.callback = null;
-            this.options = null;
+        if (this.isObserved) {
+            IntersectionObserverPool.unobserve(this, this._callback, this.options);
+            this._callback = null;
         }
     }
 
-    set intersectionRatio(intersectionRatio) {
-        this.setAttribute("threshold", intersectionRatio);
-        if(this.isObserved) {
-            this.observe(this.callback, { ...this.options, 'threshold': parseFloat(intersectionRatio) });
-        }
+    set threshold(threshold) { this.setAttribute('threshold', JSON.stringify(threshold)); }
+
+    get threshold() { return JSON.parse(this.getAttribute('threshold')); }
+
+    set rootMargin(rootMargin) { this.setAttribute('root-margin', rootMargin); }
+
+    get rootMargin() { return this.getAttribute('root-margin'); }
+
+    set root(root) { this.setAttribute('root', root); }
+
+    get root() { return document.querySelector(this.getAttribute('root')); }
+
+    get callback() {
+        return this._callback;
     }
 
-    get intersectionRatio() {
-        if(this.hasAttribute("intersection-ratio")) {
-            return parseFloat(this.getAttribute("intersection-ratio"));
-        }
-        return 0.25;
+    get options() {
+        return OnIntersectionHTMLElement.observedAttributes
+            .map(HTMLToCamelCase)
+            .reduce((options, attrName) => {
+                if (this[attrName]) {
+                    options[attrName] = this[attrName];
+                }
+                return options;
+            }, {});
     }
 
-    static get observedAttributes() {
-        return ['intersection-ratio'];
-    }
+    static observedAttributes = ['threshold', 'root', 'root-margin'];
 
     attributeChangedCallback(attrName, oldValue, newValue) {
-        if (oldValue === newValue) {
-            return;
-        }
-        switch (name) {
-            case "intersection-ratio":
-                this.intersectionRatio = newValue;
-                break;
-            default:
-                break;
+        if (this.isObserved && oldValue !== newValue) {
+            const oldOptions = oldValue ? { ...this.options, [HTMLToCamelCase(attrName)]: oldValue } : this.options;
+            IntersectionObserverPool.unobserve(this, this._callback, oldOptions);
+            this.observe(this._callback);
         }
     }
 }

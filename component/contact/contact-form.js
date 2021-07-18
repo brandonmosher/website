@@ -1,5 +1,8 @@
+import { textToTemplate } from "Lib/textToTemplate";
 import css from './contact-form.css';
 import html from './contact-form.html';
+
+const template = textToTemplate(css, html);
 
 customElements.define('contact-form',
     class extends HTMLElement {
@@ -11,14 +14,14 @@ customElements.define('contact-form',
             'method',
             'name',
             'novalidate',
-            'target',  
+            'target',
         ];
 
         constructor() {
             super();
             const shadowRoot = this.attachShadow({ mode: 'open' })
-            shadowRoot.innerHTML = `<style>${css}</style>${html}`;
-            this.shadowRoot.querySelector("#button").addEventListener("click", (e) => this.handleFormSubmit(e));          
+                .appendChild(template.content.cloneNode(true));
+            this.shadowRoot.querySelector("#button").addEventListener("click", (e) => this.handleFormSubmit(e));
         }
 
         get form() {

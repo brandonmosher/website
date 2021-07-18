@@ -1,5 +1,8 @@
+import { textToTemplate } from "Lib/textToTemplate";
 import css from "./autofit-font.css";
 import html from "./autofit-font.html";
+
+const template = textToTemplate(css, html);
 
 const ro = new ResizeObserver(entries => {
     for (let entry of entries) {
@@ -15,8 +18,8 @@ class AutofitFontHTMLElement extends HTMLElement {
 
     constructor() {
         super();
-        const shadowRoot = this.attachShadow({ mode: "open" })
-        shadowRoot.innerHTML = `<style>${css}</style>${html}`;
+        const shadowRoot = this.attachShadow({ mode: 'open' })
+            .appendChild(template.content.cloneNode(true));
         this.fit();
     }
 
@@ -31,7 +34,6 @@ class AutofitFontHTMLElement extends HTMLElement {
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
-        console.log(attrName);
         switch (attrName) {
             case "observe-parent":
                 if (newValue === null) {

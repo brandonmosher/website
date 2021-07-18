@@ -2,9 +2,11 @@ import { mixin } from "Lib/mixin/mixin.js";
 import { telMixin } from "./form-control-tel-mixin.js"
 import { textareaMixin } from "./form-control-textarea-mixin.js"
 import { observedAttributes } from "./form-control-observed-attributes.js";
-
+import { textToTemplate } from "Lib/textToTemplate";
 import html from "./form-control.html";
 import css from "./form-control.css";
+
+const template = textToTemplate(css, html);
 
 class FormControlHTMLElement extends HTMLElement {
     _ownAttrs = {};
@@ -17,9 +19,9 @@ class FormControlHTMLElement extends HTMLElement {
     constructor() {
         super();
         this._internals = this.attachInternals();
-        this.attachShadow({ mode: 'open'});
-        this.shadowRoot.innerHTML = `<style>${css}</style>${html}`;
-        
+        const shadowRoot = this.attachShadow({ mode: 'open' })
+            .appendChild(template.content.cloneNode(true));
+
         const type = this.getAttribute('type');
         switch (type) {
             case "tel":
@@ -31,7 +33,7 @@ class FormControlHTMLElement extends HTMLElement {
             default:
                 break;
         }
-        
+
         if (typeof this._control === 'function') {
             this._control = this._control();
         }
@@ -39,9 +41,9 @@ class FormControlHTMLElement extends HTMLElement {
         this._control.setAttribute('part', 'control');
         this._control.addEventListener('input', () => this.oninput());
         this.shadowRoot.getElementById('container').appendChild(this._control);
-        
+
         this.addEventListener('click', (e) => this.focus());
-        this.addEventListener('invalid', (e)=>{e.preventDefault();});
+        this.addEventListener('invalid', (e) => { e.preventDefault(); });
         this.addEventListener('focus', (e) => this.focus());
         Object.entries(this._ownAttrs).forEach(([attrName, attrValue]) => {
             if (!this.hasAttribute(attrName)) {
@@ -49,7 +51,7 @@ class FormControlHTMLElement extends HTMLElement {
             }
         });
     }
-    
+
     setSelectionRange(selectionStart, SelectionEnd, selectionDirection = "none") {
         this._control.setSelectionRange(selectionStart, SelectionEnd, selectionDirection);
     }
@@ -57,7 +59,7 @@ class FormControlHTMLElement extends HTMLElement {
     get selectionStart() { return this._control.selectionStart; }
 
     get selectionEnd() { return this._control.selectionEnd; }
-    
+
     oninput() {
         this._internals.setValidity(this._control.validity, this._control.validationMessage);
         this._internals.setFormValue(this._control.value);

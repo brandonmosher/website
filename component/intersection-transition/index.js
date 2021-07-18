@@ -1,1 +1,0 @@
-import "./intersection-transition.js";

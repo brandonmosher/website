@@ -9,151 +9,180 @@
 </head>
 
 <body>
-    <nav-bar>
-        <nav-entry href="#home">Home</nav-entry>
-        <nav-entry href="#about">About</nav-entry>
-        <nav-entry href="#proficiency">Proficiency</nav-entry>
-        <nav-entry href="#experience">Experience</nav-entry>
-        <nav-entry href="#contact">Contact</nav-entry>
-    </nav-bar>
-    <parallax-group class="scroll-snap-container">
-        <parallax-layer>
-            <nav-point id="home"></nav-point>
-            <section class="center-child center-text scroll-snap-center">
-                <on-intersection-add-class intersection-class="transition-fade-in">
-                    <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT”
-                        OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND
-                        DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                </on-intersection-add-class>
-            </section>
+    <on-scroll-container class="scroll-snap-container">
+        <on-scroll scroll-start-remove-class="hide-header" scroll-stop-add-class="hide-header">
+            <nav-bar class="header">
+                <nav-entry href="#home">Home</nav-entry>
+                <nav-entry href="#about">About</nav-entry>
+                <nav-entry href="#proficiency">Proficiency</nav-entry>
+                <nav-entry href="#experience">Experience</nav-entry>
+                <nav-entry href="#contact">Contact</nav-entry>
+            </nav-bar>
+        </on-scroll>
+        <parallax-group>
+            <parallax-layer>
+                <nav-point id="home">
+                    <section class="center-child center-text scroll-snap-center">
+                        <on-intersection-add-class intersection-class="transition-fade-in">
+                            <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT
+                                TEXT”
+                                OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO
+                                DRAG
+                                AND
+                                DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
+                        </on-intersection-add-class>
+                    </section>
+                </nav-point>
 
-            <nav-point id="about"></nav-point>
-            <section class="center-child center-text scroll-snap-center">
-                <on-intersection-add-class intersection-class="transition-fade-in">
-                    <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT TEXT”
-                        OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO DRAG AND
-                        DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
-                </on-intersection-add-class>
-            </section>
+                <nav-point id="about">
+                    <section class="center-child center-text scroll-snap-center">
+                        <on-intersection-add-class intersection-class="transition-fade-in">
+                            <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT
+                                TEXT”
+                                OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO
+                                DRAG
+                                AND
+                                DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
+                        </on-intersection-add-class>
+                    </section>
+                </nav-point>
 
-            <half-section></half-section>
+                <half-section></half-section>
 
-            <nav-point id="proficiency"></nav-point>
-            <section class="center-child scroll-snap-center">
-                <div id="progress-bar-container">
-                    <on-intersection-add-class intersection-class="transition-progress-bar-html">
-                        <progress-bar-borderless>HTML</progress-bar-borderless>
-                    </on-intersection-add-class>
-                    <on-intersection-add-class intersection-class="transition-progress-bar-css">
-                        <progress-bar-borderless>CSS</progress-bar-borderless>
-                    </on-intersection-add-class>
-                    <on-intersection-add-class intersection-class="transition-progress-bar-javascript">
-                        <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
-                    </on-intersection-add-class>
-                </div>
-            </section>
+                <nav-point id="proficiency">
+                    <section class="center-child scroll-snap-center">
+                        <div id="progress-bar-container">
+                            <on-intersection-add-class intersection-class="transition-progress-bar-html">
+                                <progress-bar-borderless>HTML</progress-bar-borderless>
+                            </on-intersection-add-class>
+                            <on-intersection-add-class intersection-class="transition-progress-bar-css">
+                                <progress-bar-borderless>CSS</progress-bar-borderless>
+                            </on-intersection-add-class>
+                            <on-intersection-add-class intersection-class="transition-progress-bar-javascript">
+                                <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
+                            </on-intersection-add-class>
+                        </div>
+                    </section>
+                </nav-point>
+                <half-section></half-section>
 
-            <half-section></half-section>
+                <nav-point id="experience" threshold="0.3">
+                    <double-section class="scroll-snap-start">
+                        <vertical-timeline>
+                            <on-intersection-add-class intersection-class="bounce">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2016</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
+                                            perfecto
+                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
+                                            te
+                                            elit
+                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </on-intersection-add-class>
 
-            <nav-point id="experience"></nav-point>
-            <double-section class="scroll-snap-start">
-                <vertical-timeline>
-                    <on-intersection-add-class intersection-class="bounce">
-                        <vertical-timeline-entry>
-                            <autofit-font-nowrap>
-                                <h2>2016</h2>
-                                <h1>COMPANY</h1>
-                                <h3>Job Title</h3>
-                            </autofit-font-nowrap>
-                            <autofit-font-wrap>
-                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit
-                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </autofit-font-wrap>
-                        </vertical-timeline-entry>
-                    </on-intersection-add-class>
+                            <on-intersection-add-class intersection-class="bounce">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2017</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
+                                            perfecto
+                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
+                                            te
+                                            elit
+                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </on-intersection-add-class>
 
-                    <on-intersection-add-class intersection-class="bounce">
-                        <vertical-timeline-entry>
-                            <autofit-font-nowrap>
-                                <h2>2017</h2>
-                                <h1>COMPANY</h1>
-                                <h3>Job Title</h3>
-                            </autofit-font-nowrap>
-                            <autofit-font-wrap>
-                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit
-                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </autofit-font-wrap>
-                        </vertical-timeline-entry>
-                    </on-intersection-add-class>
+                            <on-intersection-add-class intersection-class="bounce">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2018</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
+                                            perfecto
+                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
+                                            te
+                                            elit
+                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </on-intersection-add-class>
 
-                    <on-intersection-add-class intersection-class="bounce">
-                        <vertical-timeline-entry>
-                            <autofit-font-nowrap>
-                                <h2>2018</h2>
-                                <h1>COMPANY</h1>
-                                <h3>Job Title</h3>
-                            </autofit-font-nowrap>
-                            <autofit-font-wrap>
-                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit
-                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </autofit-font-wrap>
-                        </vertical-timeline-entry>
-                    </on-intersection-add-class>
+                            <on-intersection-add-class intersection-class="bounce">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2019</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
+                                            perfecto
+                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
+                                            te
+                                            elit
+                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </on-intersection-add-class>
 
-                    <on-intersection-add-class intersection-class="bounce">
-                        <vertical-timeline-entry>
-                            <autofit-font-nowrap>
-                                <h2>2019</h2>
-                                <h1>COMPANY</h1>
-                                <h3>Job Title</h3>
-                            </autofit-font-nowrap>
-                            <autofit-font-wrap>
-                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit
-                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </autofit-font-wrap>
-                        </vertical-timeline-entry>
-                    </on-intersection-add-class>
+                            <on-intersection-add-class intersection-class="bounce">
+                                <vertical-timeline-entry>
+                                    <autofit-font-nowrap>
+                                        <h2>2020</h2>
+                                        <h1>COMPANY</h1>
+                                        <h3>Job Title</h3>
+                                    </autofit-font-nowrap>
+                                    <autofit-font-wrap>
+                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
+                                            perfecto
+                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
+                                            te
+                                            elit
+                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                    </autofit-font-wrap>
+                                </vertical-timeline-entry>
+                            </on-intersection-add-class>
 
-                    <on-intersection-add-class intersection-class="bounce">
-                        <vertical-timeline-entry>
-                            <autofit-font-nowrap>
-                                <h2>2020</h2>
-                                <h1>COMPANY</h1>
-                                <h3>Job Title</h3>
-                            </autofit-font-nowrap>
-                            <autofit-font-wrap>
-                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit
-                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </autofit-font-wrap>
-                        </vertical-timeline-entry>
-                    </on-intersection-add-class>
+                        </vertical-timeline>
+                    </double-section>
+                </nav-point>
+                <half-section></half-section>
 
-                </vertical-timeline>
-            </double-section>
+                <nav-point id="contact">
+                    <section name="contact-form" class="scroll-snap-start">
+                        <autofit-font-nowrap class="center-child" threshold="0.05" observe-children>
+                            <contact-form action="https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live">
+                            </contact-form>
+                        </autofit-font-nowrap>
+                    </section>
+                </nav-point>
+            </parallax-layer>
 
-            <half-section></half-section>
+            <parallax-layer>
+                <tinted-background id="background1"></tinted-background>
+                <tinted-background id="background2"></tinted-background>
+                <tinted-background id="background3"></tinted-background>
+                <tinted-background id="background4"></tinted-background>
+            </parallax-layer>
 
-            <nav-point id="contact"></nav-point>
-            <section name="contact-form" class="scroll-snap-start">
-                <autofit-font-nowrap class="center-child" threshold="0.05" observe-children>
-                    <contact-form action="https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live"></contact-form>
-                </autofit-font-nowrap>
-            </section>
-        </parallax-layer>
-
-        <parallax-layer>
-            <tinted-background id="background1"></tinted-background>
-            <tinted-background id="background2"></tinted-background>
-            <tinted-background id="background3"></tinted-background>
-            <tinted-background id="background4"></tinted-background>
-        </parallax-layer>
-
-    </parallax-group>
+        </parallax-group>
+    </on-scroll-container>
 </body>
 
 </html>

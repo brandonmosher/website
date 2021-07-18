@@ -2,12 +2,11 @@
 * {
     box-sizing: border-box;
 }
+
 :root {
     --nav-bar-height: 10vh;
 }
-nav-point {
-    display: block;
-}
+
 body {
     margin: 0;
     position: relative;
@@ -18,25 +17,29 @@ body {
     font-family: 'avenir35light', Fallback, sans-serif;
 }
 
+on-scroll-container {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
 /* section definitions */
 
 section {
     display: block;
     height: 100vh;
-    padding-top: var(--nav-bar-height);
     position: relative;
 }
 
 half-section {
     display: block;
     height: 50vh;
-    padding-top: var(--nav-bar-height);
 }
 
 double-section {
     display: block;
     height: 200vh;
-    padding-top: var(--nav-bar-height);
 }
 
 /* utility classes */
@@ -99,15 +102,23 @@ double-section {
 /* navigation bar */
 
 nav-bar {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 4;
     box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
     background-color: transparent;
     height: var(--nav-bar-height);
     font-size: larger;
+}
+
+.hide-header:hover {
+    top: 0;
+}
+
+.hide-header {
+    top: -9vh;
 }
 
 nav-entry {
@@ -247,6 +258,11 @@ contact-form {
     max-height: 100%;
     max-width: 100%;
     position: relative;
+}
+
+section[name=contact-form] {
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 section[name=contact-form] autofit-font-nowrap {
