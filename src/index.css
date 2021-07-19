@@ -213,12 +213,24 @@ vertical-timeline-entry h2 {
     }
 }
 
+@keyframes bounce-reverse {
+    from {
+        opacity: 1;
+        transform: scale(1);
+        
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
 .bounce {
-    animation: bounce 1s ease 0s 1 normal both running;
+    animation: bounce 1s ease 0s 1 normal forwards running;
 }
 
 .bounce-reverse {
-    animation: bounce 1s ease 0s 1 reverse both running;
+    animation: bounce-reverse 1s ease 0s 1 normal forwards running;
 }
 
 /* progress bar */

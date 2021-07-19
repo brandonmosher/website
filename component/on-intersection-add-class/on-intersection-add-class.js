@@ -37,7 +37,7 @@ function handleIntersect(entries) {
         }
         else if ((x < previousX) && isIntersecting) { }
         else if ((x > previousX) && isIntersecting) { }
-        console.log(entry.target, direction, boundary, isIntersecting, intersectionRatio, y, previousY);
+        // console.log(entry.target, direction, boundary, isIntersecting, intersectionRatio, y, previousY);
         if(direction) {
             entry.target[HTMLToCamelCase(`_${direction}-any`)]();
             if(boundary) {
@@ -63,14 +63,14 @@ function addIntersectionFunctions(targetClass) {
             targetClass[functionPrefixCamelCase] = null;
             targetClass[`_${functionPrefixCamelCase}`] = function () {
                 const children = Array.from(this.children);
-                if (this.hasAttribute(addClassAttrName)) {
-                    const className = this.getAttribute(addClassAttrName);
-                    children.forEach(child => child.classList.add(...className.split(" ")));
-                }
-
                 if (this.hasAttribute(removeClassAttrName)) {
                     const className = this.getAttribute(removeClassAttrName);
                     children.forEach(child => child.classList.remove(...className.split(" ")));
+                }
+                
+                if (this.hasAttribute(addClassAttrName)) {
+                    const className = this.getAttribute(addClassAttrName);
+                    children.forEach(child => child.classList.add(...className.split(" ")));
                 }
 
                 if (this[functionPrefixCamelCase]) {
