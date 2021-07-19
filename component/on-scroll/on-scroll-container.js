@@ -1,3 +1,4 @@
+import { HTMLToCamelCase } from "Lib/capitalization";
 import { textToTemplate } from "Lib/textToTemplate";
 import css from "./on-scroll-container.css";
 import html from "./on-scroll-container.html";
@@ -63,12 +64,12 @@ function handleIntersect(entries) {
         const onScrollElements = onScrollContainer.querySelectorAll("on-scroll");
 
         onScrollElements.forEach(node => {
-            node._scrollstart();
+            node._scrollAnyStart();
             if (xDirection) {
-                node[`_scroll${xDirection}`]();
+                node[HTMLToCamelCase(`_scroll-${xDdirection}-start`)]();
             }
             if (yDirection) {
-                node[`_scroll${yDirection}`]();
+                node[HTMLToCamelCase(`_scroll-${yDirection}-start`)]();
             }
         });
 
@@ -77,7 +78,15 @@ function handleIntersect(entries) {
             globalYDirection = yDirection;
             waitForScrollEnd(onScrollContainer, yDirection).then(deltaY => {
                 if (Math.abs(deltaY) >= scrollStopThresholdY) {
-                    onScrollElements.forEach(node => node._scrollstop());
+                    onScrollElements.forEach(node => {
+                        node._scrollAnyStop();
+                        if (xDirection) {
+                            node[HTMLToCamelCase(`_scroll-${xDdirection}-stop`)]();
+                        }
+                        if (yDirection) {
+                            node[HTMLToCamelCase(`_scroll-${yDirection}-stop`)]();
+                        }
+                    });
                 }
                 globalYDirection = null;
                 // console.log("scroll stop", yDirection, deltaY);
@@ -109,6 +118,7 @@ customElements.define("on-scroll-container",
                 el.style.right = '0';
                 // el.style.border = '1px solid red';
                 // el.style.zIndex = 5;
+                el.style.visibility = 'hidden';
                 this.shadowRoot.appendChild(el);
                 observer.observe(el);
             }

@@ -108,11 +108,14 @@ nav-bar {
     right: 0;
     z-index: 4;
     box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
-    background-color: transparent;
+    background-color: grey;
     height: var(--nav-bar-height);
     font-size: larger;
+    transition: background-color 1s;
 }
-
+.trans-header {
+    background-color: transparent;
+}
 .hide-header:hover {
     top: 0;
 }
@@ -132,7 +135,7 @@ nav-entry {
 
 /* text sections */
 
-[intersection-class=transition-fade-in]>* {
+[enter-any-add-class=transition-fade-in]>* {
     opacity: 0;
     transition: opacity 2s;
 }
@@ -169,7 +172,7 @@ vertical-timeline-entry::part(content-container) {
     float: inherit;
     padding: 2%;
     border-top: 1px dashed rgb(0, 191, 62);
-    height: 75%;
+    height: 100%;
 }
 
 vertical-timeline-entry::part(line) {
@@ -211,10 +214,14 @@ vertical-timeline-entry h2 {
 }
 
 .bounce {
-    animation: bounce 1s ease 0s 1 normal forwards running;
+    animation: bounce 1s ease 0s 1 normal both running;
 }
 
-/* pogress bar */
+.bounce-reverse {
+    animation: bounce 1s ease 0s 1 reverse both running;
+}
+
+/* progress bar */
 
 #progress-bar-container {
     width: 100%;

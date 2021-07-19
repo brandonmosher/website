@@ -1,19 +1,12 @@
-import { IntersectionObserverPool } from 'Lib/intersectionObserverPool/intersectionObserverPool.js'
-
-function HTMLToCamelCase(s) {
-    return s.replace(/-([a-z])/g, g => g[1].toUpperCase());
-}
-
-function camelToHTMLCase(s) {
-    return s.replace(/([a-z][A-Z])/g, g => g[0] + '-' + g[1].toLowerCase());
-}
+import { IntersectionObserverPool } from 'Lib/intersectionObserverPool'
+import { HTMLToCamelCase, camelToHTMLCase } from "Lib/capitalization";
 
 export class OnIntersectionHTMLElement extends HTMLElement {
     _callback = null;
 
     constructor(callback, optionDefaults = {}) {
         super();
-        this.observe(callback, {...optionDefaults, ...this.options});
+        this.observe(callback, { ...optionDefaults, ...this.options });
     }
 
     get isObserved() {

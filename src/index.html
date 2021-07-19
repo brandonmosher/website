@@ -10,7 +10,8 @@
 
 <body>
     <on-scroll-container class="scroll-snap-container">
-        <on-scroll scroll-start-remove-class="hide-header" scroll-stop-add-class="hide-header">
+        <on-scroll scroll-up-start-remove-class="hide-header trans-header" scroll-up-stop-add-class="trans-header"
+            scroll-down-start-add-class="hide-header" scroll-down-start-remove-class="trans-header">
             <nav-bar class="header">
                 <nav-entry href="#home">Home</nav-entry>
                 <nav-entry href="#about">About</nav-entry>
@@ -23,7 +24,7 @@
             <parallax-layer>
                 <nav-point id="home">
                     <section class="center-child center-text scroll-snap-center">
-                        <on-intersection-add-class intersection-class="transition-fade-in">
+                        <on-intersection-add-class enter-any-add-class="transition-fade-in">
                             <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT
                                 TEXT”
                                 OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO
@@ -36,7 +37,7 @@
 
                 <nav-point id="about">
                     <section class="center-child center-text scroll-snap-center">
-                        <on-intersection-add-class intersection-class="transition-fade-in">
+                        <on-intersection-add-class enter-any-add-class="transition-fade-in">
                             <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST CLICK “EDIT
                                 TEXT”
                                 OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE FONT. FEEL FREE TO
@@ -52,13 +53,13 @@
                 <nav-point id="proficiency">
                     <section class="center-child scroll-snap-center">
                         <div id="progress-bar-container">
-                            <on-intersection-add-class intersection-class="transition-progress-bar-html">
+                            <on-intersection-add-class enter-any-add-class="transition-progress-bar-html">
                                 <progress-bar-borderless>HTML</progress-bar-borderless>
                             </on-intersection-add-class>
-                            <on-intersection-add-class intersection-class="transition-progress-bar-css">
+                            <on-intersection-add-class enter-any-add-class="transition-progress-bar-css">
                                 <progress-bar-borderless>CSS</progress-bar-borderless>
                             </on-intersection-add-class>
-                            <on-intersection-add-class intersection-class="transition-progress-bar-javascript">
+                            <on-intersection-add-class enter-any-add-class="transition-progress-bar-javascript">
                                 <progress-bar-borderless>JAVASCRIPT</progress-bar-borderless>
                             </on-intersection-add-class>
                         </div>
@@ -69,7 +70,7 @@
                 <nav-point id="experience" threshold="0.3">
                     <double-section class="scroll-snap-start">
                         <vertical-timeline>
-                            <on-intersection-add-class intersection-class="bounce">
+                            <on-intersection-add-class threshold="0.5" enter-any-add-class="bounce" exit-any-remove-class="bounce">
                                 <vertical-timeline-entry>
                                     <autofit-font-nowrap>
                                         <h2>2016</h2>
@@ -87,7 +88,7 @@
                                 </vertical-timeline-entry>
                             </on-intersection-add-class>
 
-                            <on-intersection-add-class intersection-class="bounce">
+                            <on-intersection-add-class threshold="0.5" enter-any-add-class="bounce" exit-any-remove-class="bounce">
                                 <vertical-timeline-entry>
                                     <autofit-font-nowrap>
                                         <h2>2017</h2>
@@ -105,7 +106,7 @@
                                 </vertical-timeline-entry>
                             </on-intersection-add-class>
 
-                            <on-intersection-add-class intersection-class="bounce">
+                            <on-intersection-add-class threshold="0.5" enter-any-add-class="bounce" exit-any-remove-class="bounce">
                                 <vertical-timeline-entry>
                                     <autofit-font-nowrap>
                                         <h2>2018</h2>
@@ -123,7 +124,7 @@
                                 </vertical-timeline-entry>
                             </on-intersection-add-class>
 
-                            <on-intersection-add-class intersection-class="bounce">
+                            <on-intersection-add-class threshold="0.5" enter-any-add-class="bounce" exit-any-remove-class="bounce">
                                 <vertical-timeline-entry>
                                     <autofit-font-nowrap>
                                         <h2>2019</h2>
@@ -141,7 +142,7 @@
                                 </vertical-timeline-entry>
                             </on-intersection-add-class>
 
-                            <on-intersection-add-class intersection-class="bounce">
+                            <on-intersection-add-class threshold="0.5" enter-any-add-class="bounce" exit-any-remove-class="bounce">
                                 <vertical-timeline-entry>
                                     <autofit-font-nowrap>
                                         <h2>2020</h2>

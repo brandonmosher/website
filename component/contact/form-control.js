@@ -1,4 +1,4 @@
-import { mixin } from "Lib/mixin/mixin.js";
+import { mixin } from "Lib/mixin";
 import { telMixin } from "./form-control-tel-mixin.js"
 import { textareaMixin } from "./form-control-textarea-mixin.js"
 import { observedAttributes } from "./form-control-observed-attributes.js";

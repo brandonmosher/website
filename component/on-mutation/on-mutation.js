@@ -1,4 +1,4 @@
-import { MutationObserverPool } from "Lib/mutationObserverPool/mutationObserverPool.js"
+import { MutationObserverPool } from "Lib/mutationObserverPool"
 
 export class OnMutationHTMLElement extends HTMLElement {
     mutationCallback = null;
