@@ -66,9 +66,10 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      Component: path.resolve(__dirname, './component'),
-      Lib: path.resolve(__dirname, './lib'),
+      Component: path.resolve(__dirname, 'component'),
+      Lib: path.resolve(__dirname, 'lib'),
       Polyfill: path.resolve(__dirname, 'polyfill'),
+      Font: path.resolve(__dirname, 'font'),
     },
   },
 };

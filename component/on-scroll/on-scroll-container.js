@@ -81,7 +81,7 @@ function handleIntersect(entries) {
                     onScrollElements.forEach(node => {
                         node._scrollAnyStop();
                         if (xDirection) {
-                            node[HTMLToCamelCase(`_scroll-${xDdirection}-stop`)]();
+                            node[HTMLToCamelCase(`_scroll-${xDirection}-stop`)]();
                         }
                         if (yDirection) {
                             node[HTMLToCamelCase(`_scroll-${yDirection}-stop`)]();

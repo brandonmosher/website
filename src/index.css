@@ -1,10 +1,10 @@
-@import "../font/avenir35light/avenir35light.css";
 * {
     box-sizing: border-box;
 }
 
 :root {
     --nav-bar-height: 10vh;
+    --green-color: #4CAF50;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
     line-height: 3;
     color: #BEC7D5;
     font-size: 14px;
-    font-family: 'avenir35light', Fallback, sans-serif;
+    font-family: 'avenir-35-light', Fallback, sans-serif;
 }
 
 on-scroll-container {
@@ -29,6 +29,7 @@ on-scroll-container {
 section {
     display: block;
     height: 100vh;
+    width: 100%;
     position: relative;
 }
 
@@ -56,14 +57,17 @@ double-section {
 
 .scroll-snap-container {
     scroll-snap-type: y mandatory;
+    scroll-snap-stop: always;
 }
 
 .scroll-snap-center {
     scroll-snap-align: center;
+    scroll-snap-stop: always;
 }
 
 .scroll-snap-start {
     scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 /* backgrounds */
@@ -113,9 +117,11 @@ nav-bar {
     font-size: larger;
     transition: background-color 1s;
 }
+
 .trans-header {
     background-color: transparent;
 }
+
 .hide-header:hover {
     top: 0;
 }
@@ -131,6 +137,76 @@ nav-entry {
     --background-color-hover: transparent;
     --color-hover: white;
     height: 100%;
+}
+
+on-intersection-add-class {
+    display: block;
+}
+
+#intro {
+    position: relative;
+    width: fit-content;
+    height: 100%;
+    padding: 10%;
+    color: white;
+    font-family: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
+    letter-spacing: normal;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: left;
+    white-space: nowrap;
+}
+
+:is(#my-name, #my-profession) :is(h1, h5) {
+    margin-bottom: 0;
+}
+
+#my-name {
+    max-height: 85%;
+}
+
+#my-name span {
+    color: green;
+}
+
+#my-profession {
+    max-height: 15%;
+}
+
+section[name=resume] .section-header {
+    position: absolute;
+    inset: 0 0 20% 0;
+    background-color: rgba(51, 59, 80, 1);
+}
+
+#resume-container {
+    position: relative;
+    width: 75%;
+    padding: 10%;
+    border: 0px solid rgba(255, 255, 255, 1);
+    background-color: rgba(51, 59, 80, 1);
+    border-radius: 0;
+    box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
+    color: white;
+}
+
+#resume-container a {
+    width: 25%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    border: solid rgba(0, 214, 70, 1) 1px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+#resume-container a:hover {
+    background-color: rgba(0, 214, 70, 1);
 }
 
 /* text sections */
@@ -157,7 +233,6 @@ vertical-timeline :nth-child(even) vertical-timeline-entry {
 
 vertical-timeline on-intersection-add-class {
     height: 20%;
-    width: 100%;
     scroll-snap-align: start;
 }
 
@@ -217,7 +292,6 @@ vertical-timeline-entry h2 {
     from {
         opacity: 1;
         transform: scale(1);
-        
     }
     to {
         opacity: 0;
