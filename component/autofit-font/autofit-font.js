@@ -18,7 +18,6 @@ const ro = new ResizeObserver(entries => {
 });
 
 class AutofitFontHTMLElement extends HTMLElement {
-    fitPending = false;
     static observedAttributes = ['observe-self', 'observe-children'];
 
     constructor() {
@@ -76,8 +75,10 @@ class AutofitFontHTMLElement extends HTMLElement {
     }
 
     fit() {
-        this.fitPending = true;
         const fontSize = this.fontSize;
+        console.log(this.fitHeuristic(this, this.text),
+        1 / fontSize,
+        this.clientHeight / fontSize);
         const scaleFactor = bound(
             this.fitHeuristic(this, this.text),
             1 / fontSize,
@@ -85,11 +86,9 @@ class AutofitFontHTMLElement extends HTMLElement {
         );
         const threshold = this.threshold;
         if ((scaleFactor < (1 - threshold)) || (scaleFactor > (1 + threshold))) {
-            const newFontSize = Math.floor(scaleFactor * fontSize);
+            const newFontSize = Math.max(1, Math.floor(scaleFactor * fontSize));
             this.fontSize = newFontSize;
         }
-        requestAnimationFrame(() => this.fitPending = false);
-        // console.log(scaleFactor);
     }
 
     get threshold() {
