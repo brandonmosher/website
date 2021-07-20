@@ -76,9 +76,6 @@ class AutofitFontHTMLElement extends HTMLElement {
 
     fit() {
         const fontSize = this.fontSize;
-        console.log(this.fitHeuristic(this, this.text),
-        1 / fontSize,
-        this.clientHeight / fontSize);
         const scaleFactor = bound(
             this.fitHeuristic(this, this.text),
             1 / fontSize,
