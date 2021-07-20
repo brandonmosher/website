@@ -2,6 +2,10 @@ import { textToTemplate } from "Lib/textToTemplate";
 import css from "./autofit-font.css";
 import html from "./autofit-font.html";
 
+const bound = (value, lower, upper) => {
+    return Math.min(Math.max(lower, value), upper);
+}
+
 const template = textToTemplate(css, html);
 
 const ro = new ResizeObserver(entries => {
@@ -14,12 +18,15 @@ const ro = new ResizeObserver(entries => {
 });
 
 class AutofitFontHTMLElement extends HTMLElement {
-    static observedAttributes = ['observe-parent', 'observe-children'];
+    fitPending = false;
+    static observedAttributes = ['observe-self', 'observe-children'];
 
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: 'open' })
             .appendChild(template.content.cloneNode(true));
+        this.text = this.shadowRoot.getElementById("text");
+        this.fontSize = parseInt(window.getComputedStyle(this.text).fontSize);
         this.fit();
     }
 
@@ -27,15 +34,15 @@ class AutofitFontHTMLElement extends HTMLElement {
         if (!this.isConnected) {
             return;
         }
-        if (!(this.hasAttribute('observe-parent') || this.hasAttribute('observe-children'))) {
-            this.setAttribute('observe-parent', "true");
+        if (!(this.hasAttribute('observe-self') || this.hasAttribute('observe-children'))) {
+            this.setAttribute('observe-self', "true");
         }
         this.fit();
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         switch (attrName) {
-            case "observe-parent":
+            case "observe-self":
                 if (newValue === null) {
                     ro.unobserve(this);
                 }
@@ -44,14 +51,12 @@ class AutofitFontHTMLElement extends HTMLElement {
                 }
                 break;
             case "observe-children":
-                Array.from(this.children).forEach(child => {
-                    if (newValue === null) {
-                        ro.unobserve(child);
-                    }
-                    else {
-                        ro.observe(child);
-                    }
-                });
+                if (newValue === null) {
+                    Array.from(this.children).forEach(child => ro.unobserve(child));
+                }
+                else {
+                    Array.from(this.children).forEach(child => ro.observe(child));
+                }
                 break;
             default:
                 break;
@@ -62,16 +67,29 @@ class AutofitFontHTMLElement extends HTMLElement {
     fitHeuristic(target, text) {
         return 1;
     }
+    get fontSize() {
+        return parseInt(this.text.style.getPropertyValue("--fontSize"));
+    }
+
+    set fontSize(fontSize) {
+        this.text.style.setProperty("--fontSize", `${parseInt(fontSize)}px`);
+    }
 
     fit() {
-        const text = this.shadowRoot.getElementById("text");
-        const textStyle = window.getComputedStyle(text);
-        const targetStyle = window.getComputedStyle(this);
-        const scaleFactor = this.fitHeuristic(this, text);
-        if ((scaleFactor < (1 - this.threshold)) || (scaleFactor > (1 + this.threshold))) {
-            const newFontSize = Math.round(100 * scaleFactor * parseInt(textStyle.fontSize) / parseInt(targetStyle.fontSize));
-            text.style.setProperty("--fontSize", `${newFontSize}%`);
+        this.fitPending = true;
+        const fontSize = this.fontSize;
+        const scaleFactor = bound(
+            this.fitHeuristic(this, this.text),
+            1 / fontSize,
+            this.clientHeight / fontSize
+        );
+        const threshold = this.threshold;
+        if ((scaleFactor < (1 - threshold)) || (scaleFactor > (1 + threshold))) {
+            const newFontSize = Math.floor(scaleFactor * fontSize);
+            this.fontSize = newFontSize;
         }
+        requestAnimationFrame(() => this.fitPending = false);
+        // console.log(scaleFactor);
     }
 
     get threshold() {
