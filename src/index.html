@@ -20,19 +20,15 @@
                 <nav-entry href="#contact">Contact</nav-entry>
             </nav-bar>
         </on-scroll>
-        <parallax-group>
+        <parallax-group scroll-parent="on-scroll-container">
             <parallax-layer>
                 <nav-point id="home">
                     <section name="home" class="center-children center-text scroll-snap-center">
-                        <on-intersection-add-class id="intro" enter-any-add-class="transition-fade-in">
-                            <autofit-font-nowrap threshold="0.05">
-                            <div id="my-name" observe-self observe-children>
-                                <h1>I<span>'</span>M<br>Brandon<br>Mosher<span>.</span></h1>
-                            </div>
-                            <div id="my-profession" observe-self observe-children>
+                        <on-intersection-add-class id="intro-container" enter-any-add-class="transition-fade-in">
+                            <autofit-font-nowrap threshold="0.05" observe-parent observe-children>
+                                <h1>I<span class="color-emphasis-green">'</span>M<br>Brandon<br>Mosher<span>.</span></h1>
                                 <h5>Software Engineer</h5>
-                            </div>
-                        </autofit-font-nowrap>
+                            </autofit-font-nowrap>
                         </on-intersection-add-class>
                     </section>
                 </nav-point>
@@ -40,8 +36,9 @@
                 <nav-point id="resume">
                     <section name="resume" class="center-children center-text scroll-snap-center">
                         <div class="section-header"></div>
-                        <on-intersection-add-class id="resume-container" enter-any-add-class="transition-fade-in">
-                            <autofit-font-wrap threshold="0.05" observe-self observe-children>
+                        <on-intersection-add-class id="resume-container" class="center-children"
+                            enter-any-add-class="transition-fade-in">
+                            <autofit-font-wrap>
                                 <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST
                                     CLICK
                                     “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE
@@ -49,7 +46,7 @@
                                     FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
                             </autofit-font-wrap>
                             <a id="resume-download-button" href="_blank" target="_blank" data-type="document">
-                                <autofit-font-nowrap threshold="0.05" observe-self observe-children>
+                                <autofit-font-nowrap>
                                     <p>Download Resume</p>
                                 </autofit-font-nowrap>
                             </a>
@@ -61,16 +58,10 @@
 
                 <nav-point id="proficiency">
                     <section name="proficiency" class="horizontal-center-children scroll-snap-center">
-                        <div class="section-header">
-                            <autofit-font-nowrap>
-                            <div class="primary">
-                                <h3><span class="text-emphasis-color">01</span> Professional</h3>
-                            </div>
-                            <div class="secondary">
-                                <h5>My Knowledge Level in Software</h5>
-                            </div>
+                        <autofit-font-nowrap class="section-header">
+                            <h3><span class="color-emphasis-gray">01</span> Professional</h3>
+                            <h5>My Knowledge Level in Software</h5>
                         </autofit-font-nowrap>
-                        </div>
                         <div id="progress-bar-container">
                             <on-intersection-add-class enter-any-add-class="transition-progress-bar-html">
                                 <progress-bar-borderless>HTML</progress-bar-borderless>

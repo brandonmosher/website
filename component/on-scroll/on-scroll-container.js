@@ -106,22 +106,23 @@ customElements.define("on-scroll-container",
                 handleIntersect, {
                 threshold: thresholdArray(10)
             })
-            const viewportHeight = Math.min(this.clientHeight, window.innerHeight);
-            let remainingHeight = this.scrollHeight;
-            for (let i = 0; remainingHeight > 0; ++i, remainingHeight -= 2 * viewportHeight) {
-                const el = document.createElement("div");
-                const sentryHeight = `${Math.max(0, Math.min(remainingHeight, viewportHeight))}px`;
-                el.style.height = sentryHeight;
-                el.style.position = 'absolute';
-                el.style.top = `${i * 2 * viewportHeight}px`;
-                el.style.left = '0';
-                el.style.right = '0';
-                // el.style.border = '1px solid red';
-                // el.style.zIndex = 5;
-                el.style.visibility = 'hidden';
-                this.shadowRoot.appendChild(el);
-                observer.observe(el);
-            }
+            requestAnimationFrame(() => {
+                const viewportHeight = window.innerHeight;
+                let remainingHeight = 100 * this.scrollHeight / viewportHeight;
+                for (let i = 0; remainingHeight > 0; ++i, remainingHeight -= 200) {
+                    const el = document.createElement("div");
+                    el.style.height = `${Math.max(0, Math.min(remainingHeight, 100))}vh`;;
+                    el.style.position = 'absolute';
+                    el.style.top = `${i * 200}vh`;
+                    el.style.left = '0';
+                    el.style.right = '0';
+                    // el.style.border = '1px solid red';
+                    // el.style.zIndex = 5;
+                    el.style.visibility = 'hidden';
+                    this.shadowRoot.appendChild(el);
+                    observer.observe(el);
+                }
+            });
         }
     }
 );

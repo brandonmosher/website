@@ -4,21 +4,27 @@
 
 :root {
     --nav-bar-height: 10vh;
-    --green-color: #4CAF50;
+    --font-family-primary: 'avenir-35-light', Fallback, sans-serif;
+    --font-family-emphasis: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
+    --color-primary: white;
+    --color-emphasis-gray: #BEC7D5;
+    --color-emphasis-green: #4CAF50;
+    --background-color-charcoal: rgba(51, 59, 80, 1);
 }
 
 body {
     margin: 0;
-    position: relative;
-    letter-spacing: 0.05em;
-    line-height: 3;
-    color: white;
-    font-size: 14px;
-    font-family: 'avenir-35-light', Fallback, sans-serif;
+    color: var(--color-primary);
+    ;
+    font-family: var(--font-family-primary);
 }
 
-.text-emphasis-color {
-    color: #BEC7D5;
+.color-emphasis-gray {
+    color: var(--color-emphasis-gray)
+}
+
+.color-emphasis-green {
+    color: var(--color-emphasis-green)
 }
 
 on-scroll-container {
@@ -30,22 +36,48 @@ on-scroll-container {
 
 /* section definitions */
 
-section {
+section, half-section, double-section {
     display: block;
-    height: 100vh;
-    width: 100%;
     position: relative;
 }
 
+section {
+    height: 100vh;
+}
+
 half-section {
-    display: block;
     height: 50vh;
 }
 
 double-section {
-    display: block;
     height: 200vh;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    text-transform: uppercase;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-family-emphasis);
+}
+
+h4, h5, h6 {
+    letter-spacing: 0.18em;
+    line-height: 1.8em;
+    font-weight: 400;
+    font-family: inherit;
+    font-size: 60%;
+}
+
+.section-header {
+    position: relative;
+    width: 80%;
+    height: 25%;
+    padding: 0 10% 0 10%;
+    text-align: center;
+}
+
 
 /* utility classes */
 
@@ -143,82 +175,61 @@ nav-bar {
 }
 
 nav-entry {
-    --color-inactive: #939DAB;
+    --color-inactive: var(--color-emphasis-gray);
     --background-color-active: transparent;
-    --color-active: #4CAF50;
+    --color-active: var(--color-emphasis-green);
     --background-color-hover: transparent;
-    --color-hover: white;
+    --color-hover: var(--color-primary);
+    width: 100%;
     height: 100%;
 }
 
 on-intersection-add-class {
     display: block;
-}
-
-#intro {
-    display: inline-block;
     position: relative;
-    width: 80%;
-    height: 100%;
-    padding: 10%;
 }
 
-#intro autofit-font-nowrap {
+autofit-font-nowrap {
+    position: relative;
     width: 100%;
     height: 100%;
-    text-align: left;
-    color: white;
-    font-family: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
-    letter-spacing: normal;
-    line-height: normal;
-    text-transform: uppercase;
     white-space: nowrap;
+    box-sizing: content-box;
 }
 
-:is(#my-name, #my-profession) :is(h1, h5) {
-    margin-bottom: 0;
+#intro-container {
+    /* min-width: 25%;
+    max-width: 100%; */
+    width: min(80vh, 80vw);
+    height: min(80vh, 80vw);
+    /* max-height: 100%; */
+    padding: 10% 10% 0 10%;
+    text-align: start;
 }
 
-#my-name {
-    width: 100%;
-    height: 50%;
-}
-
-#my-name span {
-    color: green;
-}
-
-#my-profession {
-    width: 100%;
-    height: 15%;
+:is(#intro-container, vertical-timeline) :is(autofit-font-nowrap, autofit-font-wrap)::part(text) {
+    transform-origin: top left;
 }
 
 section[name=resume] .section-header {
     position: absolute;
-    inset: 0 0 20% 0;
-    width: 100%;
-    background-color: rgba(51, 59, 80, 1);
+    top: 0;
+    background-color: var(--background-color-charcoal);
 }
 
 #resume-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     position: relative;
     width: 75%;
     height: 75%;
     padding: 10%;
-    border: 0px solid rgba(255, 255, 255, 1);
-    background-color: rgba(51, 59, 80, 1);
-    border-radius: 0;
+    background-color: var(--background-color-charcoal);
     box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
-    color: white;
 }
 
 #resume-download-button {
     display: block;
     background-color: transparent;
-    border: solid rgba(0, 214, 70, 1) 1px;
+    border: solid var(--color-emphasis-green) 1px;
     cursor: pointer;
     position: relative;
     transition: background-color 0.5s;
@@ -230,52 +241,14 @@ section[name=resume] .section-header {
     width: 50%;
 }
 
-#resume-download-button autofit-font-nowrap {
-    position: relative;
-    height: 100%;
-    width: 100%;
-}
-
 #resume-download-button:hover {
-    background-color: rgba(0, 214, 70, 1);
+    background-color: var(--color-emphasis-green);
 }
 
 #resume-container autofit-font-wrap {
     position: relative;
     height: 80%;
     height: 80%;
-}
-
-.section-header {
-    position: relative;
-    width: 80%;
-    height: 25%;
-    white-space: nowrap;
-    text-align: center;
-}
-h3{
-    font-family: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
-}
-
-h5 {
-    font-family: 'avenir-35-light', Fallback, sans-serif;
-    letter-spacing: 0.18em;
-    line-height: 1.8em;
-    font-weight: 400;
-}
-
-.section-header :is(h3,h5) {
-    margin: 0;
-}
-
-.section-header .primary {
-    max-height: 70%;
-    max-width: 100%;
-}
-
-.section-header .secondary {
-    max-height: 30%;
-    max-width: 100%;
 }
 
 /* text sections */
@@ -293,7 +266,6 @@ h5 {
 
 vertical-timeline {
     height: 100%;
-    line-height: normal;
 }
 
 vertical-timeline :nth-child(even) vertical-timeline-entry {
@@ -301,7 +273,7 @@ vertical-timeline :nth-child(even) vertical-timeline-entry {
 }
 
 vertical-timeline on-intersection-add-class {
-    height: 20%;
+    height: 25%;
     scroll-snap-align: start;
 }
 
@@ -309,23 +281,22 @@ vertical-timeline-entry {
     opacity: 0;
     height: 100%;
     width: 100%;
-    transform: scale(0.5);
 }
 
 vertical-timeline-entry::part(content-container) {
     float: inherit;
-    padding: 2%;
-    border-top: 1px dashed rgb(0, 191, 62);
+    padding: 7.5%;
+    border-top: 1px dashed var(--color-emphasis-green);
     height: 100%;
 }
 
 vertical-timeline-entry::part(line) {
-    background-color: rgb(0, 191, 62);
+    background-color: var(--color-emphasis-green);
     width: 0.1%;
 }
 
 vertical-timeline-entry::part(line-marker) {
-    background-color: rgb(0, 191, 62);
+    background-color: var(--color-emphasis-green);
     width: 2.5%;
     transform: translateY(-50%);
 }
@@ -339,13 +310,13 @@ vertical-timeline-entry autofit-font-wrap {
 }
 
 vertical-timeline-entry h2 {
-    color: rgb(0, 191, 62);
+    color: var(--color-emphasis-green);
 }
 
 @keyframes bounce {
     0% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.9);
     }
     60% {
         opacity: 1;
@@ -360,11 +331,9 @@ vertical-timeline-entry h2 {
 @keyframes bounce-reverse {
     from {
         opacity: 1;
-        transform: scale(1);
     }
     to {
         opacity: 0;
-        transform: scale(0.5);
     }
 }
 
@@ -389,6 +358,7 @@ vertical-timeline-entry h2 {
 }
 
 progress-bar-borderless {
+    --bar-completed-color: var(--color-emphasis-green);
     --bar-completed-percentage: 0;
     transition: --bar-completed-percentage 1s;
 }
@@ -397,19 +367,13 @@ progress-bar-borderless {
     --bar-completed-percentage: 90;
 }
 
-[intersection-class=transition-progress-bar-css]>* {
-    transition-delay: 0.05s;
-}
-
 .transition-progress-bar-css {
+    transition-delay: 0.1s;
     --bar-completed-percentage: 85;
 }
 
-[intersection-class=transition-progress-bar-javascript]>* {
-    transition-delay: 0.1s;
-}
-
 .transition-progress-bar-javascript {
+    transition-delay: 0.2s;
     --bar-completed-percentage: 85;
 }
 
@@ -428,8 +392,5 @@ section[name=contact-form] {
 }
 
 section[name=contact-form] autofit-font-nowrap {
-    height: 100%;
-    width: 100%;
     padding: 1%;
-    position: relative;
 }

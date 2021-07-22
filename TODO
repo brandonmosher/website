@@ -4,6 +4,7 @@
 - mobile scaling (nesting nav bar in particular)
 - transfer domain to route 53
 - add white-space: nowrap; to autofit-font-nowrap component. Perhaps add max-width: 100% and max-height 100%;
+- Use requestAnimationFrame for components making significant style changes in constructor
 Completed
 - fix form validity polyfill
 - Cleanup on-scroll and add support for scroll-{start/stop}-{up,right,down-left}-{add/remove}-class
