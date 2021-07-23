@@ -3,7 +3,7 @@
 }
 
 :root {
-    --nav-bar-height: 10vh;
+    --nav-bar-height: 7vh;
     --font-family-primary: 'avenir-35-light', Fallback, sans-serif;
     --font-family-emphasis: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
     --color-primary: white;
@@ -50,7 +50,7 @@ half-section {
 }
 
 double-section {
-    height: 200vh;
+    height: 300vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -77,7 +77,6 @@ h4, h5, h6 {
     padding: 0 10% 0 10%;
     text-align: center;
 }
-
 
 /* utility classes */
 
@@ -106,12 +105,10 @@ h4, h5, h6 {
 
 .scroll-snap-center {
     scroll-snap-align: center;
-    scroll-snap-stop: always;
 }
 
 .scroll-snap-start {
     scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 /* backgrounds */
@@ -137,7 +134,7 @@ h4, h5, h6 {
     --background-image: url(/img/4.webp);
     background-repeat: no-repeat;
     background-size: cover;
-    height: calc(250vh * 2 / 3);
+    height: calc(350vh * 2 / 3);
 }
 
 #background4 {
@@ -149,39 +146,53 @@ h4, h5, h6 {
 
 /* navigation bar */
 
-nav-bar {
+.header {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
+    height: var(--nav-bar-height);
     z-index: 4;
     box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
-    background-color: grey;
-    height: var(--nav-bar-height);
-    font-size: larger;
-    transition: background-color 1s;
+    background-color: var(--background-color-charcoal);
+    transition: top 0.5s, background-color 1s;
 }
 
-.trans-header {
+.transparent-header {
     background-color: transparent;
 }
 
 .hide-header:hover {
     top: 0;
+    background-color: var(--background-color-charcoal);
 }
 
 .hide-header {
-    top: -9vh;
+    top: calc((-1 * var(--nav-bar-height)) + 1vh);
+}
+
+autofit-font-nowrap.header::part(text) {
+    float: left;
+}
+nav-bar {
+    padding: 1%;
 }
 
 nav-entry {
-    --color-inactive: var(--color-emphasis-gray);
-    --background-color-active: transparent;
-    --color-active: var(--color-emphasis-green);
+    color: var(--color-emphasis-gray);
     --background-color-hover: transparent;
     --color-hover: var(--color-primary);
-    width: 100%;
-    height: 100%;
+    padding: 1%;
+}
+
+nav-entry.active {
+    font-family: var(--font-family-emphasis);
+    color: var(--color-emphasis-green);
+    background-color: transparent;
+}
+
+nav-entry:not(.active):hover {
+    color: white;
 }
 
 on-intersection-add-class {
@@ -189,26 +200,23 @@ on-intersection-add-class {
     position: relative;
 }
 
-autofit-font-nowrap {
+autofit-font-nowrap, autofit-font-wrap {
     position: relative;
     width: 100%;
     height: 100%;
-    white-space: nowrap;
     box-sizing: content-box;
 }
 
-#intro-container {
-    /* min-width: 25%;
-    max-width: 100%; */
-    width: min(80vh, 80vw);
-    height: min(80vh, 80vw);
-    /* max-height: 100%; */
-    padding: 10% 10% 0 10%;
-    text-align: start;
+autofit-font-nowrap {
+    white-space: nowrap;
 }
 
-:is(#intro-container, vertical-timeline) :is(autofit-font-nowrap, autofit-font-wrap)::part(text) {
-    transform-origin: top left;
+#intro-container {
+    width: min(80vh, 80vw);
+    height: min(80vh, 80vw);
+    padding: min(10vw, 10vh);
+    padding-bottom: 0;
+    text-align: start;
 }
 
 section[name=resume] .section-header {
@@ -274,11 +282,10 @@ vertical-timeline :nth-child(even) vertical-timeline-entry {
 
 vertical-timeline on-intersection-add-class {
     height: 25%;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
 }
 
 vertical-timeline-entry {
-    opacity: 0;
     height: 100%;
     width: 100%;
 }
@@ -301,16 +308,23 @@ vertical-timeline-entry::part(line-marker) {
     transform: translateY(-50%);
 }
 
-vertical-timeline-entry autofit-font-nowrap {
-    height: 50%;
+vertical-timeline-entry, vertical-timeline-entry div {
+    opacity: 0;
+    transform: scale(0.9);
 }
 
 vertical-timeline-entry autofit-font-wrap {
-    height: 50%;
+    height: auto;
+    max-height: 50%;
 }
 
 vertical-timeline-entry h2 {
     color: var(--color-emphasis-green);
+}
+
+vertical-timeline-entry autofit-font-nowrap {
+    height: auto;
+    max-height: 50%;
 }
 
 @keyframes bounce {
@@ -337,8 +351,18 @@ vertical-timeline-entry h2 {
     }
 }
 
-.bounce {
-    animation: bounce 1s ease 0s 1 normal forwards running;
+vertical-timeline-entry.bounce {
+    transition: transform 0.2s, opacity 0.2s;
+    transform: scale(1);
+    opacity: 1;
+}
+
+div.bounce {
+    animation: bounce 0.8s ease 0.2s 1 normal forwards running;
+}
+
+.pause {
+    animation-play-state: paused;
 }
 
 .bounce-reverse {
@@ -393,4 +417,5 @@ section[name=contact-form] {
 
 section[name=contact-form] autofit-font-nowrap {
     padding: 1%;
+    width: 98%;
 }

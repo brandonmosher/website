@@ -1,11 +1,15 @@
 :host {
     display: block;
     overflow: hidden;
-    max-height: 100%;
-    max-width: 100%;
 }
 
 #text {
     display: inline-block;
-    transform-origin: top center;
+    /* float: left; */
 }
+
+/* :host::after {
+    content: "";
+    clear: both;
+    display: block;
+} */

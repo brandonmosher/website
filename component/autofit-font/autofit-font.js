@@ -2,6 +2,17 @@ import { textToTemplate } from 'Lib/textToTemplate';
 import css from './autofit-font.css';
 import html from './autofit-font.html';
 
+function waitNTicks(n, callback) {
+    function tick(frames) {
+        if (frames >= n) {
+            callback();
+        } else {
+            requestAnimationFrame(tick.bind(null, frames + 1));
+        }
+    }
+    tick(0);
+}
+
 const template = textToTemplate(css, html);
 
 const ro = new ResizeObserver(entries => {
@@ -9,15 +20,31 @@ const ro = new ResizeObserver(entries => {
         const { target } = entry;
         const closest = (target.tagName.includes("AUTOFIT-FONT")) ? target : target.getRootNode().host;
         if (closest.fitDisabled) {
-            return;
+            continue;
         }
-        closest.fitDisabled = true;
-        requestAnimationFrame(() => {
+        // closest.fitDisabled = true;
+        ro.unobserve(closest);
+        // requestAnimationFrame(() => {
+        //     //closest.fit();
+        //     requestAnimationFrame(()=>{
+        //         //closest.fit();
+        //         requestAnimationFrame(()=>closest.fit());
+        //     });
+        //     // requestAnimationFrame(() => closest.fitDisabled = false);
+        // });
+        waitNTicks(10, () => {
             closest.fit();
-            requestAnimationFrame(() => closest.fitDisabled = false);
+            // closest.fitDisabled = false;
+            ro.observe(closest);
         });
     }
 });
+
+window.addEventListener('resize', (e) => {
+    requestAnimationFrame(() => {
+        document.querySelectorAll('autofit-font-nowrap, autofit-font-wrap').forEach(node => node.fit());
+    });
+})
 
 class AutofitFontHTMLElement extends HTMLElement {
     static observedAttributes = ['observe-self', 'observe-children'];
@@ -33,9 +60,12 @@ class AutofitFontHTMLElement extends HTMLElement {
         if (!this.isConnected) {
             return;
         }
-        if (!(this.hasAttribute('observe-self') || this.hasAttribute('observe-children'))) {
-            this.setAttribute('observe-self', '');
-        }
+        waitNTicks(5, () => this.fit());
+        waitNTicks(10, () => this.fit());
+        // requestAnimationFrame(() => this.fit());
+        // if (!(this.hasAttribute('observe-self') || this.hasAttribute('observe-children'))) {
+        //     this.setAttribute('observe-self', '');
+        // }
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -65,7 +95,7 @@ class AutofitFontHTMLElement extends HTMLElement {
         return 1;
     }
 
-    fit() {
+    fit(init) {
         const [style, textStyle] = [this, this.text].map(getComputedStyle);
         const scaleFactor = this.fitHeuristic(style, textStyle);
         const threshold = this.threshold;
@@ -89,7 +119,7 @@ class AutofitFontHTMLElement extends HTMLElement {
 customElements.define('autofit-font-nowrap',
     class extends AutofitFontHTMLElement {
         fitHeuristic(style, textStyle) {
-            return Math.min(parseInt(style.width) / parseInt(textStyle.width), parseInt(style.height) / parseInt(textStyle.height));
+            return Math.min(parseInt(style.width) / this.text.scrollWidth, parseInt(style.height) / this.text.scrollHeight);
         }
     }
 );

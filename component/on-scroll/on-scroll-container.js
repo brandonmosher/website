@@ -18,7 +18,7 @@ function waitForScrollEnd(scrollContainer, yDirection) {
         function tick(frames) {
             // We requestAnimationFrame either for 500 frames or until 20 frames with
             // no change have been observed.
-            if ((frames >= 500) || (frames - lastChangedFrame > 20)) {
+            if ((frames >= 500) || (frames - lastChangedFrame > 5)) {
                 resolve(scrollContainer.scrollTop - yInitial);
             } else if (yDirection !== globalYDirection) {
                 reject(new Error(`scroll ${yDirection} canceled`));
@@ -63,6 +63,14 @@ function handleIntersect(entries) {
         const onScrollContainer = entry.target.getRootNode().host;
         const onScrollElements = onScrollContainer.querySelectorAll("on-scroll");
 
+        if ((entry.target.id === 'scroll-top') && (Math.round(entry.boundingClientRect.top) === 0)) {
+            console.log("TOP");
+            onScrollElements.forEach(node => node._scrollUpMax());
+        }
+        else if ((entry.target.id === 'scroll-bottom') && (entry.intersectionRatio >= 1)) {
+            onScrollElements.forEach(node => node._scrollDownMax());
+        }
+
         onScrollElements.forEach(node => {
             node._scrollAnyStart();
             if (xDirection) {
@@ -90,7 +98,7 @@ function handleIntersect(entries) {
                 }
                 globalYDirection = null;
                 // console.log("scroll stop", yDirection, deltaY);
-            }).catch(e => console.log(e.message));
+            }).catch(e => { /*console.log(e.message)*/ });
         }
         Object.assign(entry.target, { previousX: x, previousY: y })
     })
@@ -107,21 +115,28 @@ customElements.define("on-scroll-container",
                 threshold: thresholdArray(10)
             })
             requestAnimationFrame(() => {
-                const viewportHeight = window.innerHeight;
-                let remainingHeight = 100 * this.scrollHeight / viewportHeight;
-                for (let i = 0; remainingHeight > 0; ++i, remainingHeight -= 200) {
-                    const el = document.createElement("div");
-                    el.style.height = `${Math.max(0, Math.min(remainingHeight, 100))}vh`;;
-                    el.style.position = 'absolute';
-                    el.style.top = `${i * 200}vh`;
-                    el.style.left = '0';
-                    el.style.right = '0';
-                    // el.style.border = '1px solid red';
-                    // el.style.zIndex = 5;
-                    el.style.visibility = 'hidden';
-                    this.shadowRoot.appendChild(el);
-                    observer.observe(el);
+                const scrollHeight = 100 * this.scrollHeight / window.innerHeight;
+                const els = [];
+                const el = document.createElement("div");
+                Object.assign(el.style, {
+                    position: 'absolute',
+                    height: '1vh',
+                    top: `${scrollHeight - 1}vh`,
+                    left: '0',
+                    right: '0',
+                    visibility: 'hidden'
+                });
+                for (let i = 0, h = scrollHeight; h > 0; ++i, h -= 200) {
+                    els.push(el.cloneNode(true));
+                    els[i].style.height = `${Math.min(h, 100)}vh`;
+                    els[i].style.top = `${i * 200}vh`;
+                    this.shadowRoot.appendChild(els[i]);
+                    observer.observe(els[i]);
                 }
+                els[0].id = "scroll-top";
+                el.id = "scroll-bottom";
+                this.shadowRoot.appendChild(el);
+                observer.observe(el);
             });
         }
     }

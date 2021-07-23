@@ -10,23 +10,26 @@
 
 <body>
     <on-scroll-container class="scroll-snap-container">
-        <on-scroll scroll-up-start-remove-class="hide-header trans-header" scroll-up-stop-add-class="trans-header"
-            scroll-down-start-add-class="hide-header" scroll-down-start-remove-class="trans-header">
-            <nav-bar class="header">
-                <nav-entry href="#home">Home</nav-entry>
-                <nav-entry href="#resume">Resume</nav-entry>
-                <nav-entry href="#proficiency">Proficiency</nav-entry>
-                <nav-entry href="#experience">Experience</nav-entry>
-                <nav-entry href="#contact">Contact</nav-entry>
-            </nav-bar>
+        <on-scroll scroll-up-start-remove-class="hide-header" scroll-down-start-add-class="hide-header"
+            scroll-up-max-add-class="transparent-header" scroll-down-start-remove-class="transparent-header">
+            <autofit-font-nowrap class="header" observe-self>
+                <nav-bar>
+                    <nav-entry href="#home">Home</nav-entry>
+                    <nav-entry href="#resume">Resume</nav-entry>
+                    <nav-entry href="#proficiency">Proficiency</nav-entry>
+                    <nav-entry href="#experience">Experience</nav-entry>
+                    <nav-entry href="#contact">Contact</nav-entry>
+                </nav-bar>
+            </autofit-font-nowrap>
         </on-scroll>
         <parallax-group scroll-parent="on-scroll-container">
             <parallax-layer>
                 <nav-point id="home">
                     <section name="home" class="center-children center-text scroll-snap-center">
                         <on-intersection-add-class id="intro-container" enter-any-add-class="transition-fade-in">
-                            <autofit-font-nowrap threshold="0.05" observe-parent observe-children>
-                                <h1>I<span class="color-emphasis-green">'</span>M<br>Brandon<br>Mosher<span>.</span></h1>
+                            <autofit-font-nowrap>
+                                <h1>I<span class="color-emphasis-green">'</span>M<br>Brandon<br>Mosher<span>.</span>
+                                </h1>
                                 <h5>Software Engineer</h5>
                             </autofit-font-nowrap>
                         </on-intersection-add-class>
@@ -75,119 +78,114 @@
                         </div>
                     </section>
                 </nav-point>
+
                 <half-section></half-section>
 
                 <nav-point id="experience" threshold="0.3">
-                    <double-section class="scroll-snap-start">
-                        <vertical-timeline>
-                            <on-intersection-add-class threshold="0.75" enter-any-add-class="bounce"
-                                enter-any-remove-class="bounce-reverse" exit-any-remove-class="bounce"
-                                exit-any-add-class="bounce-reverse">
-                                <vertical-timeline-entry>
-                                    <autofit-font-nowrap>
-                                        <h2>2016</h2>
-                                        <h1>COMPANY</h1>
-                                        <h3>Job Title</h3>
-                                    </autofit-font-nowrap>
-                                    <autofit-font-wrap>
-                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
-                                            perfecto
-                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
-                                            te
-                                            elit
-                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
-                                    </autofit-font-wrap>
-                                </vertical-timeline-entry>
-                            </on-intersection-add-class>
+                    <double-section>
+                        <on-scroll query-selector="vertical-timeline-entry.ready:not(.bounce), vertical-timeline-entry.ready:not(.bounce) div"
+                            scroll-any-stop-add-class="bounce">
+                            <vertical-timeline>
+                                <on-intersection-add-class threshold="0.50" enter-bottom-add-class="ready">
+                                    <vertical-timeline-entry>
+                                        <div>
+                                            <autofit-font-nowrap>
+                                                <h2>2016</h2>
+                                                <h1>COMPANY</h1>
+                                                <h3>Job Title</h3>
+                                            </autofit-font-nowrap>
+                                            <autofit-font-wrap>
+                                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
+                                                    admodum
+                                                    perfecto
+                                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret
+                                                    expetendis
+                                                    his,
+                                                    te
+                                                    elit
+                                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                            </autofit-font-wrap>
+                                        </div>
+                                    </vertical-timeline-entry>
+                                </on-intersection-add-class>
 
-                            <on-intersection-add-class threshold="0.75" enter-any-add-class="bounce"
-                                enter-any-remove-class="bounce-reverse" exit-any-remove-class="bounce"
-                                exit-any-add-class="bounce-reverse">
-                                <vertical-timeline-entry>
-                                    <autofit-font-nowrap>
-                                        <h2>2017</h2>
-                                        <h1>COMPANY</h1>
-                                        <h3>Job Title</h3>
-                                    </autofit-font-nowrap>
-                                    <autofit-font-wrap>
-                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
-                                            perfecto
-                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
-                                            te
-                                            elit
-                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
-                                    </autofit-font-wrap>
-                                </vertical-timeline-entry>
-                            </on-intersection-add-class>
+                                <on-intersection-add-class threshold="0.50" enter-bottom-add-class="ready">
+                                    <vertical-timeline-entry>
+                                        <div>
+                                            <autofit-font-nowrap>
+                                                <h2>2017</h2>
+                                                <h1>COMPANY</h1>
+                                                <h3>Job Title</h3>
+                                            </autofit-font-nowrap>
+                                            <autofit-font-wrap>
+                                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
+                                                    admodum
+                                                    perfecto
+                                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret
+                                                    expetendis
+                                                    his,
+                                                    te
+                                                    elit
+                                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                            </autofit-font-wrap>
+                                        </div>
+                                    </vertical-timeline-entry>
+                                </on-intersection-add-class>
 
-                            <on-intersection-add-class threshold="0.75" enter-any-add-class="bounce"
-                                enter-any-remove-class="bounce-reverse" exit-any-remove-class="bounce"
-                                exit-any-add-class="bounce-reverse">
-                                <vertical-timeline-entry>
-                                    <autofit-font-nowrap>
-                                        <h2>2018</h2>
-                                        <h1>COMPANY</h1>
-                                        <h3>Job Title</h3>
-                                    </autofit-font-nowrap>
-                                    <autofit-font-wrap>
-                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
-                                            perfecto
-                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
-                                            te
-                                            elit
-                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
-                                    </autofit-font-wrap>
-                                </vertical-timeline-entry>
-                            </on-intersection-add-class>
+                                <on-intersection-add-class threshold="0.50" enter-bottom-add-class="ready">
+                                    <vertical-timeline-entry>
+                                        <div>
+                                            <autofit-font-nowrap>
+                                                <h2>2018</h2>
+                                                <h1>COMPANY</h1>
+                                                <h3>Job Title</h3>
+                                            </autofit-font-nowrap>
+                                            <autofit-font-wrap>
+                                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
+                                                    admodum
+                                                    perfecto
+                                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret
+                                                    expetendis
+                                                    his,
+                                                    te
+                                                    elit
+                                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                            </autofit-font-wrap>
+                                        </div>
+                                    </vertical-timeline-entry>
+                                </on-intersection-add-class>
 
-                            <on-intersection-add-class threshold="0.75" enter-any-add-class="bounce"
-                                enter-any-remove-class="bounce-reverse" exit-any-remove-class="bounce"
-                                exit-any-add-class="bounce-reverse">
-                                <vertical-timeline-entry>
-                                    <autofit-font-nowrap>
-                                        <h2>2019</h2>
-                                        <h1>COMPANY</h1>
-                                        <h3>Job Title</h3>
-                                    </autofit-font-nowrap>
-                                    <autofit-font-wrap>
-                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
-                                            perfecto
-                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
-                                            te
-                                            elit
-                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
-                                    </autofit-font-wrap>
-                                </vertical-timeline-entry>
-                            </on-intersection-add-class>
-
-                            <on-intersection-add-class threshold="0.75" enter-any-add-class="bounce"
-                                enter-any-remove-class="bounce-reverse" exit-any-remove-class="bounce"
-                                exit-any-add-class="bounce-reverse">
-                                <vertical-timeline-entry>
-                                    <autofit-font-nowrap>
-                                        <h2>2020</h2>
-                                        <h1>COMPANY</h1>
-                                        <h3>Job Title</h3>
-                                    </autofit-font-nowrap>
-                                    <autofit-font-wrap>
-                                        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum
-                                            perfecto
-                                            mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his,
-                                            te
-                                            elit
-                                            voluptua dignissim per, habeo iusto primis ea eam.</p>
-                                    </autofit-font-wrap>
-                                </vertical-timeline-entry>
-                            </on-intersection-add-class>
-
-                        </vertical-timeline>
+                                <on-intersection-add-class threshold="0.50" enter-bottom-add-class="ready">
+                                    <vertical-timeline-entry>
+                                        <div>
+                                            <autofit-font-nowrap>
+                                                <h2>2019</h2>
+                                                <h1>COMPANY</h1>
+                                                <h3>Job Title</h3>
+                                            </autofit-font-nowrap>
+                                            <autofit-font-wrap>
+                                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
+                                                    admodum
+                                                    perfecto
+                                                    mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret
+                                                    expetendis
+                                                    his,
+                                                    te
+                                                    elit
+                                                    voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                            </autofit-font-wrap>
+                                        </div>
+                                    </vertical-timeline-entry>
+                                </on-intersection-add-class>
+                            </vertical-timeline>
+                        </on-scroll>
                     </double-section>
                 </nav-point>
                 <half-section></half-section>
 
                 <nav-point id="contact">
                     <section name="contact-form" class="scroll-snap-start">
-                        <autofit-font-nowrap class="center-children" threshold="0.05" observe-children>
+                        <autofit-font-nowrap class="center-children" threshold="0.05" observe-self>
                             <contact-form action="https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live">
                             </contact-form>
                         </autofit-font-nowrap>

@@ -32,7 +32,7 @@ customElements.define('nav-entry',
         }
 
         updateActive() {
-            this.classList.toggle((this.href === window.location.href) || (this.href === window.location.hash));
+            this.classList.toggle('active', (this.href === window.location.href) || (this.href === window.location.hash));
         }
     }
 );

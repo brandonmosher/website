@@ -12,7 +12,7 @@ function handleIntersect(entries) {
         const { x, y } = entry.boundingClientRect;
         const { previousX = x + 1, previousY = y + 1, previousIntersectionRatio = 0 } = entry.target;
         let [direction, boundary] = [null, null];
-        if(!intersectionRatio && !isIntersecting) {
+        if (!intersectionRatio && !isIntersecting) {
             return;
         }
         if ((y < previousY)) { //scroll down / element moving up
@@ -38,9 +38,9 @@ function handleIntersect(entries) {
         else if ((x < previousX) && isIntersecting) { }
         else if ((x > previousX) && isIntersecting) { }
         // console.log(entry.target, direction, boundary, isIntersecting, intersectionRatio, y, previousY);
-        if(direction) {
+        if (direction) {
             entry.target[HTMLToCamelCase(`_${direction}-any`)]();
-            if(boundary) {
+            if (boundary) {
                 entry.target[HTMLToCamelCase(`_${direction}-${boundary}`)]();
             }
         }
@@ -62,12 +62,13 @@ function addIntersectionFunctions(targetClass) {
             ];
             targetClass[functionPrefixCamelCase] = null;
             targetClass[`_${functionPrefixCamelCase}`] = function () {
-                const children = Array.from(this.children);
+                const children = this.hasAttribute('query-selector') ?
+                    document.querySelectorAll(this.getAttribute('query-selector')) : Array.from(this.children);
                 if (this.hasAttribute(removeClassAttrName)) {
                     const className = this.getAttribute(removeClassAttrName);
                     children.forEach(child => child.classList.remove(...className.split(" ")));
                 }
-                
+
                 if (this.hasAttribute(addClassAttrName)) {
                     const className = this.getAttribute(addClassAttrName);
                     children.forEach(child => child.classList.add(...className.split(" ")));

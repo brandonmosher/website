@@ -15,7 +15,7 @@ function callback(entries, observer) {
 
 function addScrollFunctions(targetClass) {
     const directions = ['any', 'up', 'down', 'left', 'right'];
-    const actions = ['stop', 'start'];
+    const actions = ['stop', 'start', 'max'];
     directions.forEach(direction => {
         actions.forEach(action => {
             const functionPrefixHTMLCase = `scroll-${direction}-${action}`;
@@ -24,9 +24,10 @@ function addScrollFunctions(targetClass) {
                 `${functionPrefixHTMLCase}-add-class`,
                 `${functionPrefixHTMLCase}-remove-class`
             ];
-            targetClass[functionPrefixCamelCase] = null;
+            // targetClass[functionPrefixCamelCase] = null;
             targetClass[`_${functionPrefixCamelCase}`] = function () {
-                const children = Array.from(this.children);
+                const children = this.hasAttribute('query-selector') ?
+                    document.querySelectorAll(this.getAttribute('query-selector')) : Array.from(this.children);
                 if (this.hasAttribute(addClassAttrName)) {
                     const className = this.getAttribute(addClassAttrName);
                     children.forEach(child => child.classList.add(...className.split(" ")));

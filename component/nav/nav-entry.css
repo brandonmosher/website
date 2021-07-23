@@ -1,28 +1,8 @@
 :host {
-    --color-inactive: black;
-    --background-color-active: #4CAF50;
-    --color-active: white; 
-    --background-color-hover: #555;
-    --color-hover: white;
-}
-
-:host {
     display: inline-block;
-    color: var(--color-inactive);
-    padding: 1%;
 }
 
 a {
     text-decoration: none;
     color: inherit;
-}
-
-:host(.active) {
-    background-color: var(--background-color-active);
-    color: var(--color-active);
-}
-
-:host(:not(.active):hover) {
-    background-color: var(--background-color-hover);
-    color: var(--color-hover);
 }
