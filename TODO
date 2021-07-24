@@ -9,6 +9,8 @@
 - use window resize event to adjust font sizes i.e. give autofit-font window-resize or resize-observer mode.
 - show header only on section change
 - rename on-intersect-add-class
+- separate rather than inherited class for autofit-font-queryselector
+- use autofit-font-query-selector for vertical-timeline and other elements that should have guaranteed consistent font size across all children
 Completed
 - fix form validity polyfill
 - Cleanup on-scroll and add support for scroll-{start/stop}-{up,right,down-left}-{add/remove}-class

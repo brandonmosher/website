@@ -38,7 +38,7 @@
                 </nav-point>
 
                 <nav-point id="resume">
-                    <section name="resume" class="center-children center-text scroll-snap-center">
+                    <section name="resume" class="horizontal-center-children center-text scroll-snap-center">
                         <autofit-font-nowrap class="section-header">
                             <h3><span class="color-emphasis-gray">01</span> Resume</h3>
                         </autofit-font-nowrap>
@@ -70,21 +70,36 @@
 
                         <on-intersection-add-class id="progress-bar-container" query-selector="progress-bar-borderless"
                             enter-any-add-class="ready">
-                            <progress-bar-borderless id="progress-bar-html">HTML</progress-bar-borderless>
-                            <progress-bar-borderless id="progress-bar-css">CSS</progress-bar-borderless>
-                            <progress-bar-borderless id="progress-bar-javascript">Javascript</progress-bar-borderless>
+                            <autofit-font-queryselector query-selector="p">
+                                <progress-bar-borderless id="progress-bar-html-css">
+                                    <p>HTML, CSS</p>
+                                </progress-bar-borderless>
+                                <progress-bar-borderless id="progress-bar-javascript">
+                                    <p>Javascript</p>
+                                </progress-bar-borderless>
+                                <progress-bar-borderless id="progress-bar-c">
+                                    <p>C, C++</p>
+                                </progress-bar-borderless>
+                                <progress-bar-borderless id="progress-bar-python">
+                                    <p>Python</p>
+                                </progress-bar-borderless>
+                                <progress-bar-borderless id="progress-bar-linux">
+                                    <p>Linux, Unix</p>
+                                </progress-bar-borderless>
+                            </autofit-font-queryselector>
                         </on-intersection-add-class>
+
                     </section>
                 </nav-point>
-                <half-section style="height: 62.5vh"></half-section>
+                <half-section></half-section>
                 <nav-point id="experience" threshold="0.3">
 
-                    <double-section>
+                    <double-section name="experience" class="horizontal-center-children scroll-snap-start">
                         <autofit-font-nowrap class="section-header">
                             <h3><span class="color-emphasis-gray">03</span> Experience</h3>
                         </autofit-font-nowrap>
                         <vertical-timeline>
-                            <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
+                            <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce" class="scroll-snap-none">
                                 <vertical-timeline-entry>
                                     <div>
                                         <autofit-font-nowrap>
@@ -181,7 +196,7 @@
                 <half-section></half-section>
 
                 <nav-point id="contact">
-                    <section name="contact" class="center-children scroll-snap-start">
+                    <section name="contact" class="horizontal-center-children scroll-snap-start">
                         <autofit-font-nowrap class="section-header">
                             <h3><span class="color-emphasis-gray">04</span> Contact</h3>
                         </autofit-font-nowrap>

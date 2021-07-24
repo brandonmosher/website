@@ -42,7 +42,7 @@ const ro = new ResizeObserver(entries => {
 
 window.addEventListener('resize', (e) => {
     requestAnimationFrame(() => {
-        document.querySelectorAll('autofit-font-nowrap, autofit-font-wrap').forEach(node => node.fit());
+        document.querySelectorAll('autofit-font-nowrap, autofit-font-wrap, autofit-font-queryselector').forEach(node => node.fit());
     });
 })
 
@@ -95,7 +95,7 @@ class AutofitFontHTMLElement extends HTMLElement {
         return 1;
     }
 
-    fit(init) {
+    fit() {
         const [style, textStyle] = [this, this.text].map(getComputedStyle);
         const scaleFactor = this.fitHeuristic(style, textStyle);
         const threshold = this.threshold;
@@ -115,6 +115,27 @@ class AutofitFontHTMLElement extends HTMLElement {
         this.setAttribute('threshold', threshold);
     }
 }
+
+customElements.define('autofit-font-queryselector',
+    class extends AutofitFontHTMLElement {
+        constructor() {
+            super();
+            this.text.style.width = '100%';
+        }
+        fitHeuristic(style, textStyle) {
+            let minScaleFactor = Infinity;
+            this.querySelectorAll(this.getAttribute('query-selector')).forEach(node=>{
+                if((node.clientWidth === node.scrollWidth) && (node.clientHeight === node.scrollHeight)) {
+                    minScaleFactor = Math.min(minScaleFactor, node.clientHeight / parseInt(getComputedStyle(node).fontSize));
+                }
+                else {
+                    minScaleFactor = Math.min(minScaleFactor, node.clientWidth / node.scrollWidth, node.clientHeight / node.scrollHeight);
+                }
+            })
+            return minScaleFactor;
+        }
+    }
+);
 
 customElements.define('autofit-font-nowrap',
     class extends AutofitFontHTMLElement {

@@ -115,6 +115,10 @@ h4, h5, h6 {
     scroll-snap-align: start;
 }
 
+.scroll-snap-none {
+    scroll-snap-align: none;
+}
+
 /* backgrounds */
 
 #background1 {
@@ -279,6 +283,12 @@ section[name=resume] .divider {
 
 /* vertical timeline */
 
+/* double-section[name=experience] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+} */
+
 vertical-timeline {
     display: flex;
     flex-direction: column;
@@ -404,24 +414,44 @@ vertical-timeline-entry.bounce div {
     initial-value: 0;
 }
 
+progress-bar-borderless p {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 progress-bar-borderless {
+    /* --label-left-width: 30%; */
     --bar-completed-color: var(--color-emphasis-green);
     --bar-completed-percentage: 0;
     transition: --bar-completed-percentage 1s;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-#progress-bar-html.ready {
+#progress-bar-html-css.ready {
     --bar-completed-percentage: 90;
-}
-
-#progress-bar-css.ready {
-    transition-delay: 0.1s;
-    --bar-completed-percentage: 85;
 }
 
 #progress-bar-javascript.ready {
     transition-delay: 0.2s;
     --bar-completed-percentage: 85;
+}
+
+#progress-bar-c.ready {
+    transition-delay: 0.2s;
+    --bar-completed-percentage: 70;
+}
+
+#progress-bar-python.ready {
+    transition-delay: 0.2s;
+    --bar-completed-percentage: 85;
+}
+
+#progress-bar-linux.ready {
+    transition-delay: 0.2s;
+    --bar-completed-percentage: 65;
 }
 
 /* contact form */
@@ -435,7 +465,7 @@ contact-form {
 
 #footer {
     position: absolute;
-    bottom: 0;
+    bottom: var(--nav-bar-height);
     width: 100%;
     height: var(--nav-bar-height);
     background-color: var(--background-color-charcoal);

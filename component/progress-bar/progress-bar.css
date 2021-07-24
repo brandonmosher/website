@@ -21,6 +21,7 @@
 
 #label-left, #label-right {
     display: inline-block;
+    height: var(--bar-height);
     padding: 1%;
 }
 
