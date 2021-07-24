@@ -77,8 +77,8 @@ h4, h5, h6 {
 .section-header {
     position: relative;
     width: 80%;
-    height: 25%;
-    padding: 0 10% 0 10%;
+    height: var(--nav-bar-height);
+    padding: 1vh;
     text-align: center;
 }
 
@@ -145,7 +145,7 @@ h4, h5, h6 {
     --tint-rgba: rgba(10, 17, 36, 0.55);
     background-repeat: no-repeat;
     background-size: cover;
-    height: calc(150vh * 2 / 3);
+    height: calc(175vh * 2 / 3);
 }
 
 /* navigation bar */
@@ -178,6 +178,7 @@ h4, h5, h6 {
 autofit-font-nowrap.header::part(text) {
     float: left;
 }
+
 nav-bar {
     padding: 1%;
 }
@@ -223,10 +224,11 @@ autofit-font-nowrap {
     text-align: start;
 }
 
-section[name=resume] .section-header {
+section[name=resume] .divider {
     position: absolute;
     top: 0;
     width: 100%;
+    height: 25%;
     background-color: var(--background-color-charcoal);
 }
 
@@ -278,44 +280,74 @@ section[name=resume] .section-header {
 /* vertical timeline */
 
 vertical-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
     height: 100%;
-}
-
-vertical-timeline :nth-child(even) vertical-timeline-entry {
-    float: right;
+    width: 100%;
+    padding: 1%;
 }
 
 vertical-timeline on-intersection-add-class {
+    position: relative;
     height: 25%;
+    width: 95%;
     scroll-snap-align: center;
 }
 
 vertical-timeline-entry {
-    height: 100%;
+    display: block;
+    position: relative;
     width: 100%;
-}
-
-vertical-timeline-entry::part(content-container) {
-    float: inherit;
-    padding: 7.5%;
-    border-top: 1px dashed var(--color-emphasis-green);
     height: 100%;
+    border-top: 1px dashed var(--color-emphasis-green);
+    box-sizing: border-box;
+    padding: 0 10% 0 10%;
+    box-shadow: -2px 0 0 var(--color-emphasis-green);
 }
 
-vertical-timeline-entry::part(line) {
+vertical-timeline-entry::after {
+    --diameter: 25px;
+    content: "";
+    display: block;
+    position: absolute;
+    top: calc(var(--diameter) / -2);
+    left: calc(var(--diameter) / -2);
+    width: var(--diameter);
+    height: var(--diameter);
     background-color: var(--color-emphasis-green);
-    width: 0.1%;
+    ;
+    border-radius: 50%;
 }
 
-vertical-timeline-entry::part(line-marker) {
-    background-color: var(--color-emphasis-green);
-    width: 2.5%;
-    transform: translateY(-50%);
+@media (min-aspect-ratio: 3/4) {
+    vertical-timeline {
+        align-items: flex-start;
+    }
+    vertical-timeline on-intersection-add-class {
+        width: 50%;
+    }
+    vertical-timeline> :nth-child(odd) vertical-timeline-entry {
+        box-shadow: inset -2px 0 0 var(--color-emphasis-green);
+    }
+    vertical-timeline> :nth-child(even) vertical-timeline-entry {
+        box-shadow: -2px 0 0 var(--color-emphasis-green);
+    }
+    vertical-timeline> :nth-child(even) {
+        align-self: flex-end;
+    }
+    vertical-timeline> :nth-child(odd) vertical-timeline-entry::after {
+        left: unset;
+        right: calc(var(--diameter) / -2);
+    }
+    vertical-timeline> :nth-child(even) vertical-timeline-entry::after {
+        left: calc(var(--diameter) / -2);
+    }
 }
 
-vertical-timeline-entry, vertical-timeline-entry div {
-    opacity: 0;
-    transform: scale(0.9);
+vertical-timeline-entry h2 {
+    color: var(--color-emphasis-green);
 }
 
 vertical-timeline-entry autofit-font-wrap {
@@ -323,13 +355,14 @@ vertical-timeline-entry autofit-font-wrap {
     max-height: 50%;
 }
 
-vertical-timeline-entry h2 {
-    color: var(--color-emphasis-green);
-}
-
 vertical-timeline-entry autofit-font-nowrap {
     height: auto;
     max-height: 50%;
+}
+
+vertical-timeline-entry, vertical-timeline-entry div {
+    opacity: 0;
+    transform: scale(0.9);
 }
 
 @keyframes bounce {
@@ -347,37 +380,22 @@ vertical-timeline-entry autofit-font-nowrap {
     }
 }
 
-@keyframes bounce-reverse {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
 vertical-timeline-entry.bounce {
     transition: transform 0.2s, opacity 0.2s;
     transform: scale(1);
     opacity: 1;
 }
 
-div.bounce {
+vertical-timeline-entry.bounce div {
     animation: bounce 0.6s ease 0.1s 1 normal forwards running;
-}
-
-.pause {
-    animation-play-state: paused;
-}
-
-.bounce-reverse {
-    animation: bounce-reverse 1s ease 0s 1 normal forwards running;
+    will-change: transform, opacity;
 }
 
 /* progress bar */
 
 #progress-bar-container {
     width: 100%;
+    height: 100%;
 }
 
 @property --bar-completed-percentage {
@@ -392,16 +410,16 @@ progress-bar-borderless {
     transition: --bar-completed-percentage 1s;
 }
 
-.transition-progress-bar-html {
+#progress-bar-html.ready {
     --bar-completed-percentage: 90;
 }
 
-.transition-progress-bar-css {
+#progress-bar-css.ready {
     transition-delay: 0.1s;
     --bar-completed-percentage: 85;
 }
 
-.transition-progress-bar-javascript {
+#progress-bar-javascript.ready {
     transition-delay: 0.2s;
     --bar-completed-percentage: 85;
 }
@@ -415,12 +433,21 @@ contact-form {
     position: relative;
 }
 
-section[name=contact-form] {
-    padding-top: 10%;
-    padding-bottom: 10%;
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--nav-bar-height);
+    background-color: var(--background-color-charcoal);
 }
 
-section[name=contact-form] autofit-font-nowrap {
-    padding: 1%;
-    width: 98%;
+#contact-container {
+    width: min(80vh, 80vw);
+    height: 75%;
+    margin: 5%;
+    margin-bottom: 0;
+    padding: 5%;
+    background-color: var(--background-color-charcoal);
+    z-index: 1;
+    box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
 }

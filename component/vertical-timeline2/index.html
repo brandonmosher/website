@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Vertical Timeline Demo</title>
+    <meta charset="utf-8">
+    <style>
+        vertical-timeline {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            padding: 1%;
+            border: 2px dotted black;
+        }
+
+        vertical-timeline-entry {
+            display: block;
+            position: relative;
+            width: 50%;
+            height: 25%;
+            box-sizing: border-box;
+            padding: 2%;
+        }
+
+        vertical-timeline> :nth-child(odd) {
+            box-shadow: inset -2px 0 0 black;
+        }
+
+        vertical-timeline> :nth-child(even) {
+            align-self: flex-end;
+            box-shadow: -2px 0 0 black;
+        }
+
+        vertical-timeline-entry::after {
+            --diameter: 25px;
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            width: var(--diameter);
+            height: var(--diameter);
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        vertical-timeline> :nth-child(odd)::after {
+            right: calc(var(--diameter) / -2);
+        }
+
+        vertical-timeline> :nth-child(even)::after {
+            left: calc(var(--diameter) / -2);
+        }
+    </style>
+</head>
+
+<body>
+    <vertical-timeline>
+        <vertical-timeline-entry>
+            <h2>2017</h2>
+            <p>Hello World!</p>
+        </vertical-timeline-entry>
+
+        <vertical-timeline-entry>
+            <h2>2018</h2>
+            <p>Hello World!</p>
+        </vertical-timeline-entry>
+
+        <vertical-timeline-entry>
+            <h2>2019</h2>
+            <p>Hello World!</p>
+        </vertical-timeline-entry>
+
+        <vertical-timeline-entry>
+            <h2>2020</h2>
+            <p>Hello World!</p>
+        </vertical-timeline-entry>
+
+    </vertical-timeline>
+
+</body>
+
+</html>
