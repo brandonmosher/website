@@ -72,6 +72,7 @@ module.exports = {
       Lib: path.resolve(__dirname, 'lib'),
       Polyfill: path.resolve(__dirname, 'polyfill'),
       Font: path.resolve(__dirname, 'font'),
+      Img: path.resolve(__dirname, 'img'),
     },
   },
 };

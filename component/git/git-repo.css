@@ -1,0 +1,73 @@
+@import "./language-colors.css";
+:host {
+    display: block;
+    position: relative;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "html-url html-url html-url html-url" "description description description description" "language stargazers-count watchers-count forks-count";
+    grid-gap: 2.5%;
+    height: 100%;
+}
+
+#repo-html-url {
+    display: block;
+    grid-area: html-url;
+}
+
+#repo-description {
+    grid-area: description;
+}
+
+#repo-language {
+    grid-area: language;
+    display: flex;
+    align-items: center;
+}
+
+:is(#repo-language, #repo-stargazers-count, #repo-watchers-count, #repo-forks-count)::before {
+    content: "";
+    display: block;
+    height: 3vw;
+    width: 3vw;
+    margin-right: 1vw;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#repo-language::before {
+    background-image: linear-gradient(var(--language-color), var(--language-color));
+    clip-path: circle(40%);
+}
+
+#repo-stargazers-count {
+    display: flex;
+    align-items: center;
+    grid-area: stargazers-count;
+}
+
+#repo-stargazers-count::before {
+    background-image: url('Img/icons8-star-24.webp');
+}
+
+#repo-watchers-count {
+    display: flex;
+    align-items: center;
+    grid-area: watchers-count;
+}
+
+#repo-watchers-count::before {
+    background-image: url('Img/icons8-eye-24.webp');
+}
+
+#repo-forks-count {
+    display: flex;
+    align-items: center;
+    grid-area: forks-count;
+}
+
+#repo-forks-count::before {
+    background-image: url('Img/icons8-fork-24.webp');
+}

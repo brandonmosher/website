@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Git Demo</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        git-container {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        git-container::part(user) {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        git-user {
+            width: calc(50% - 2px - 4vw);
+            height: calc(100% - 2px - 4vw);
+            border: 1px solid gray;
+            margin: 1vw;
+            padding: 1vw;
+        }
+
+        git-container::part(repo) {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        git-repo {
+            width: calc(50% - 2px - 4vw);
+            height: calc(50% - 2px - 4vw);
+            border: 1px solid gray;
+            margin: 1vw;
+            padding: 1vw;
+        }
+    </style>
+</head>
+
+<body>
+    <git-container>
+        <git-user user-login="brandonmosher"></git-user>
+        <git-repo repo-owner="brandonmosher" repo-name="astarc"></git-repo>
+        <git-repo repo-owner="brandonmosher" repo-name="pyctemp"></git-repo>
+        <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
+    </git-container>
+</body>
+
+</html>

@@ -139,13 +139,20 @@ h4, h5, h6 {
 
 #background3 {
     --tint-rgba: rgba(10, 17, 36, 0.55);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(150vh * 2 / 3);
+}
+
+#background4 {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
     --background-image: url(/img/4.webp);
     background-repeat: no-repeat;
     background-size: cover;
     height: calc(350vh * 2 / 3);
 }
 
-#background4 {
+#background5 {
     --tint-rgba: rgba(10, 17, 36, 0.55);
     background-repeat: no-repeat;
     background-size: cover;
@@ -435,7 +442,7 @@ progress-bar-borderless {
 }
 
 #progress-bar-javascript.ready {
-    transition-delay: 0.2s;
+    transition-delay: 0.1s;
     --bar-completed-percentage: 85;
 }
 
@@ -445,12 +452,12 @@ progress-bar-borderless {
 }
 
 #progress-bar-python.ready {
-    transition-delay: 0.2s;
+    transition-delay: 0.3s;
     --bar-completed-percentage: 85;
 }
 
 #progress-bar-linux.ready {
-    transition-delay: 0.2s;
+    transition-delay: 0.4s;
     --bar-completed-percentage: 65;
 }
 
@@ -480,4 +487,53 @@ contact-form {
     background-color: var(--background-color-charcoal);
     z-index: 1;
     box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
+}
+section[name=projects] autofit-font-wrap {
+    height: calc(90% - var(--nav-bar-height));
+    width: 90%;
+}
+
+git {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background-color-charcoal);
+}
+
+git-user, git-repo {
+    width: calc(50% - 2vw);
+    box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
+    margin: 1vw;
+    padding: 1vw;
+}
+
+git-user::part(user-name) {
+    font-family: var(--font-family-emphasis);
+}
+
+git-user::part(user-html-url) {
+    color: var(--color-emphasis-green);
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+git-repo::part(repo-html-url) {
+    font-family: var(--font-family-emphasis);
+    color: var(--color-emphasis-green);
+    text-decoration: none;
+}
+
+@media (max-aspect-ratio: 3/4) {
+    git {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    git-user, git-repo {
+        width: calc(80% - 2vw);
+    }
 }

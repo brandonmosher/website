@@ -1,0 +1,68 @@
+:host {
+    display: block;
+    height: 100%;
+    position: relative;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-rows: auto auto auto 1fr 1fr;
+    grid-template-areas: 
+            "avatar name name name"
+            "avatar html-url html-url html-url"
+            "avatar . . ."
+            "bio bio bio bio"
+            "repos followers following .";
+    grid-gap: 2.5%;
+    height: 100%;
+}
+
+#user-avatar-url {
+    grid-area: avatar;
+    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
+}
+#user-name {
+    grid-area: name;
+}
+
+#user-html-url {
+    display: block;
+    font-weight: bold;
+    grid-area: html-url;
+}
+
+#user-bio {
+    grid-area: bio;
+}
+
+#user-public-repos {
+    grid-area: repos;
+    text-align: center;
+}
+
+#user-public-repos::after {
+    content: "Repos";
+    display: block;
+}
+
+#user-followers {
+    grid-area: followers;
+    text-align: center;
+}
+
+#user-followers::after {
+    content: "Followers";
+    display: block;
+}
+
+#user-following {
+    grid-area: following;
+    text-align: center;
+}
+
+#user-following::after {
+    content: "Following";
+    display: block;
+}

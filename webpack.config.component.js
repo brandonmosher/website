@@ -32,6 +32,10 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
       },
+      {
+        test: /\.(webp|png|jpe?g|gif)$/i,
+        loader: 'file-loader'
+      },
     ],
   },
   plugins: [
@@ -42,6 +46,7 @@ module.exports = {
       Component: path.resolve(__dirname, 'component'),
       Lib: path.resolve(__dirname, 'lib'),
       Polyfill: path.resolve(__dirname, 'polyfill'),
+      Img: path.resolve(__dirname, 'img'),
     },
   },
   optimization: {

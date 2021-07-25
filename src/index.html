@@ -18,6 +18,7 @@
                     <nav-entry href="#home">Home</nav-entry>
                     <nav-entry href="#resume">Resume</nav-entry>
                     <nav-entry href="#proficiency">Proficiency</nav-entry>
+                    <nav-entry href="#projects">Projects</nav-entry>
                     <nav-entry href="#experience">Experience</nav-entry>
                     <nav-entry href="#contact">Contact</nav-entry>
                 </nav-bar>
@@ -91,21 +92,43 @@
 
                     </section>
                 </nav-point>
+
                 <half-section></half-section>
+                
+                <nav-point id="projects">
+                    <section name="projects" class="horizontal-center-children scroll-snap-center">
+                        <autofit-font-nowrap class="section-header">
+                            <h3><span class="color-emphasis-gray">03</span> Projects</h3>
+                        </autofit-font-nowrap>
+                        <autofit-font-wrap threshold="0.05" observe-children>
+                            <git>
+                                <git-user user-login="brandonmosher"></git-user>
+                                <git-repo repo-owner="brandonmosher" repo-name="astarc"></git-repo>
+                                <git-repo repo-owner="brandonmosher" repo-name="pyctemp"></git-repo>
+                                <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
+                            </git>
+                        </autofit-font-wrap>
+
+                    </section>
+                </nav-point>
+
+                <half-section></half-section>
+
                 <nav-point id="experience" threshold="0.3">
 
                     <double-section name="experience" class="horizontal-center-children scroll-snap-start">
                         <autofit-font-nowrap class="section-header">
-                            <h3><span class="color-emphasis-gray">03</span> Experience</h3>
+                            <h3><span class="color-emphasis-gray">04</span> Experience</h3>
                         </autofit-font-nowrap>
                         <vertical-timeline>
-                            <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce" class="scroll-snap-none">
+                            <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce"
+                                class="scroll-snap-none">
                                 <vertical-timeline-entry>
                                     <div>
                                         <autofit-font-nowrap>
-                                            <h2>2016</h2>
-                                            <h1>COMPANY</h1>
-                                            <h3>Job Title</h3>
+                                            <h2>2010</h2>
+                                            <h1>National Security Agency</h1>
+                                            <h3>Language Analyst</h3>
                                         </autofit-font-nowrap>
                                         <autofit-font-wrap>
                                             <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
@@ -127,8 +150,8 @@
                                     <div>
                                         <autofit-font-nowrap>
                                             <h2>2017</h2>
-                                            <h1>COMPANY</h1>
-                                            <h3>Job Title</h3>
+                                            <h1>National Security Agency</h1>
+                                            <h3>Technical Solutions Manager</h3>
                                         </autofit-font-nowrap>
                                         <autofit-font-wrap>
                                             <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
@@ -150,8 +173,8 @@
                                     <div>
                                         <autofit-font-nowrap>
                                             <h2>2018</h2>
-                                            <h1>COMPANY</h1>
-                                            <h3>Job Title</h3>
+                                            <h1>U.S. Navy Reserves</h1>
+                                            <h3>Leading Chief Petty Officer</h3>
                                         </autofit-font-nowrap>
                                         <autofit-font-wrap>
                                             <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
@@ -173,8 +196,8 @@
                                     <div>
                                         <autofit-font-nowrap>
                                             <h2>2019</h2>
-                                            <h1>COMPANY</h1>
-                                            <h3>Job Title</h3>
+                                            <h1>National Security Agency</h1>
+                                            <h3>Field Site Non-Commisioned Officer in Charge</h3>
                                         </autofit-font-nowrap>
                                         <autofit-font-wrap>
                                             <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
@@ -193,12 +216,13 @@
                         </vertical-timeline>
                     </double-section>
                 </nav-point>
+
                 <half-section></half-section>
 
                 <nav-point id="contact">
                     <section name="contact" class="horizontal-center-children scroll-snap-start">
                         <autofit-font-nowrap class="section-header">
-                            <h3><span class="color-emphasis-gray">04</span> Contact</h3>
+                            <h3><span class="color-emphasis-gray">05</span> Contact</h3>
                         </autofit-font-nowrap>
                         <autofit-font-nowrap id="contact-container" class="center-children" threshold="0.05"
                             observe-self>
@@ -215,6 +239,7 @@
                 <tinted-background id="background2"></tinted-background>
                 <tinted-background id="background3"></tinted-background>
                 <tinted-background id="background4"></tinted-background>
+                <tinted-background id="background5"></tinted-background>
             </parallax-layer>
 
         </parallax-group>
