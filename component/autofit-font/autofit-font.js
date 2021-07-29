@@ -118,7 +118,7 @@ customElements.define('autofit-font-query-selector',
             this.assessNodes = this.parentElement.querySelectorAll(this.getAttribute('query-selector-assess'));
             this.applyNodes = this.parentElement.querySelectorAll(this.getAttribute('query-selector-apply'));
             this.observeNodes = this.parentElement.querySelectorAll(this.getAttribute('query-selector-observe'));
-            if(this.observeNodes.length) {
+            if (this.observeNodes.length) {
                 this.ro = new ResizeObserver(() => this.scheduleFit());
                 this.observeNodes.forEach(node => this.ro.observe(node));
             }
@@ -128,7 +128,8 @@ customElements.define('autofit-font-query-selector',
             this.applyNodes.forEach(node => node.style.fontSize = 'initial');
             let minScaleFactor = Infinity;
             this.assessNodes.forEach(node => {
-                minScaleFactor = Math.min(minScaleFactor, node.clientWidth / node.scrollWidth, node.clientHeight / node.scrollHeight);
+                const nodeStyle = getComputedStyle(node);
+                minScaleFactor = Math.min(minScaleFactor, parseInt(nodeStyle.width) / node.scrollWidth, parseInt(nodeStyle.height) / node.scrollHeight);
             });
             return minScaleFactor;
         }

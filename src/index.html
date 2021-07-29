@@ -10,7 +10,8 @@
 
 <body>
     <on-scroll-container class="scroll-snap-container">
-        <autofit-font-query-selector threshold="0.05" query-selector-assess="section-header" query-selector-apply="section-header">
+        <autofit-font-query-selector threshold="0.05" query-selector-assess="section-header"
+            query-selector-apply="section-header">
         </autofit-font-query-selector>
         <autofit-font-query-selector threshold="0.05" query-selector-assess="nav-bar" query-selector-apply="nav-bar">
         </autofit-font-query-selector>
@@ -45,18 +46,21 @@
                         <section-header>
                             <h3><span class="color-emphasis-gray">01</span> Resume</h3>
                         </section-header>
-                        <on-intersection-add-class id="resume-container"
-                            class="center-children center-text content-container"
+                        <on-intersection-add-class id="resume-container" class="content-container"
                             enter-any-add-class="transition-fade-in">
-                            <autofit-font-query-selector threshold="0.05" query-selector-assess="p" query-selector-apply="p"></autofit-font-query-selector>
+                            <autofit-font-query-selector threshold="0.05" query-selector-assess="p"
+                                query-selector-apply="p"></autofit-font-query-selector>
                             </autofit-font-query-selector>
-                            <autofit-font-query-selector threshold="0.05" query-selector-assess="#resume-download-button"
+                            <autofit-font-query-selector threshold="0.05"
+                                query-selector-assess="#resume-download-button"
                                 query-selector-apply="#resume-download-button"></autofit-font-query-selector>
-                            <p>I'M A PARAGRAPH. CLICK HERE TO ADD YOUR OWN TEXT AND EDIT ME. IT’S EASY. JUST
-                                CLICK
-                                “EDIT TEXT” OR DOUBLE CLICK ME TO ADD YOUR OWN CONTENT AND MAKE CHANGES TO THE
-                                FONT.
-                                FEEL FREE TO DRAG AND DROP ME ANYWHERE YOU LIKE ON YOUR PAGE.</p>
+                            <p class="center-children center-text">I'm a U.S. Navy Chief Petty Officer turned software
+                                engineer. I have deep experience solving tough problems that have real impact. My
+                                interest areas include government efficiency and transparency, defense, cyber security,
+                                transportation, infrastructure, medicine, climate change, sustainability, and
+                                environmental quality. I care deeply about writing performant, secure, maintainable, and
+                                elegant code across the entire stack. I enjoy working on everything from robust cloud
+                                infrastructure and APIs to beautiful user interfaces. </p>
                             <a id="resume-download-button" href="_blank" target="_blank" data-type="document">
                                 Download Resume
                             </a>
@@ -103,14 +107,16 @@
                         <section-header>
                             <h3><span class="color-emphasis-gray">03</span> Projects</h3>
                         </section-header>
-                        <autofit-font-wrap threshold="0.05" observe-children>
-                            <git>
-                                <git-user user-login="brandonmosher"></git-user>
-                                <git-repo repo-owner="brandonmosher" repo-name="astarc"></git-repo>
-                                <git-repo repo-owner="brandonmosher" repo-name="pyctemp"></git-repo>
-                                <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
-                            </git>
-                        </autofit-font-wrap>
+                        <autofit-font-query-selector query-selector-assess="git,git-user,git-repo"
+                            query-selector-apply="git" query-selector-observe="git-user,git-repo">
+                        </autofit-font-query-selector>
+                        </autofit-font-query-selector>
+                        <git class="content-container">
+                            <git-user user-login="brandonmosher"></git-user>
+                            <git-repo repo-owner="brandonmosher" repo-name="astarc"></git-repo>
+                            <git-repo repo-owner="brandonmosher" repo-name="pyctemp"></git-repo>
+                            <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
+                        </git>
 
                     </section>
                 </nav-point>
@@ -123,7 +129,8 @@
                         <section-header>
                             <h3><span class="color-emphasis-gray">04</span> Experience</h3>
                         </section-header>
-                        <autofit-font-query-selector threshold="0.05" query-selector-assess="vertical-timeline :is(h5,h6,div)"
+                        <autofit-font-query-selector threshold="0.05"
+                            query-selector-assess="vertical-timeline :is(h5,h6,div)"
                             query-selector-apply="vertical-timeline"></autofit-font-query-selector>
                         <vertical-timeline>
                             <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce"
@@ -213,7 +220,8 @@
                         <section-header>
                             <h3><span class="color-emphasis-gray">05</span> Contact</h3>
                         </section-header>
-                        <autofit-font-query-selector threshold="0.05" query-selector-assess="form" query-selector-apply="form">
+                        <autofit-font-query-selector threshold="0.05" query-selector-assess="form"
+                            query-selector-apply="form">
                         </autofit-font-query-selector>
                         <form id="contact-form" name="contact-form" class="center-children content-container"
                             action="https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live">

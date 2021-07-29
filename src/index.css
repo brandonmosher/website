@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 :root {
     --nav-bar-height: 7vh;
     --font-family-primary: 'avenir-35-light', Fallback, sans-serif;
@@ -11,14 +7,12 @@
     --color-emphasis-green: #4CAF50;
     --color-emphasis-red: #dc3545;
     --background-color-charcoal: rgba(51, 59, 80, 1);
-
     --form-valid-color: var(--color-emphasis-green);
     --form-valid-color-focus: var(--color-emphasis-green);
     --form-invalid-color: var(--color-emphasis-red);
     --form-label-color: gray;
     --form-placeholder-color: gray;
     --form-submit-color: var(--color-primary);
-
     --content-box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
 }
 
@@ -93,6 +87,7 @@ p {
     width: 100%;
     height: 100%;
 }
+
 /* utility classes */
 
 .center-children {
@@ -183,7 +178,7 @@ nav-bar {
     top: 0;
     left: 0;
     right: 0;
-    height: var(--nav-bar-height);
+    height: calc(var(--nav-bar-height) - 2%);
     z-index: 4;
     box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
     background-color: var(--background-color-charcoal);
@@ -234,11 +229,15 @@ autofit-font-nowrap {
 }
 
 .content-container {
-    width: min(80vh, 80vw);
-    height: calc(min(80vh, 80vw) - var(--nav-bar-height));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: calc(100vw - (4 * max(5vh, 5vw)));
+    height: calc(100vh - (4 * max(5vh, 5vw)) - var(--nav-bar-height));
     position: relative;
-    padding: min(5vh, 5vw);
-    margin: min(5vh, 5vw);
+    padding: max(5vh, 5vw);
+    margin: max(5vh, 5vw);
     background-color: var(--background-color-charcoal);
     z-index: 1;
     box-shadow: var(--content-box-shadow);
@@ -292,7 +291,8 @@ progress-bar-borderless {
     --bar-completed-color: var(--color-emphasis-green);
     --bar-completed-percentage: 0;
     transition: --bar-completed-percentage 1s;
-    height: 20%;
+    min-height: 5vh;
+    max-height: 20vh;
 }
 
 #progress-bar-html-css.ready {
@@ -319,8 +319,8 @@ progress-bar-borderless {
     --bar-completed-percentage: 65;
 }
 
-
 /* projects */
+
 section[name=projects] autofit-font-wrap {
     height: calc(90% - var(--nav-bar-height));
     width: 90%;
@@ -338,7 +338,8 @@ git {
 }
 
 git-user, git-repo {
-    width: calc(50% - 2vw);
+    width: calc(50% - 4vw);
+    height: calc(50% - 4vw);
     box-shadow: var(--content-box-shadow);
     margin: 1vw;
     padding: 1vw;
@@ -365,9 +366,15 @@ git-repo::part(repo-html-url) {
         flex-wrap: nowrap;
         flex-direction: column;
         align-items: center;
+        justify-content: stretch;
     }
     git-user, git-repo {
-        width: calc(80% - 2vw);
+        width: calc(100% - 4vw);
+        height: unset;
+        flex: 1 1 auto;
+    }
+    git-user {
+        flex: 2 1 auto;
     }
 }
 
@@ -510,6 +517,7 @@ form-control::part(container) {
 }
 
 /* Labels */
+
 form-control::part(label) {
     position: absolute;
     left: 1%;
@@ -517,8 +525,7 @@ form-control::part(label) {
     color: var(--form-placeholder-color);
 }
 
-form-control[visited]::part(label),
-form-control:is(:focus-within)::part(label) {
+form-control[visited]::part(label), form-control:is(:focus-within)::part(label) {
     position: static;
     width: 100%;
     font-size: 60%;
@@ -578,6 +585,7 @@ form-control[empty]:focus-within::part(container) {
 }
 
 /* Validation Message */
+
 form-control::part(validation-message) {
     display: none;
 }
