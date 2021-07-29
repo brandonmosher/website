@@ -4,12 +4,12 @@ import "./index.css";
 import "Component/on-intersection-add-class";
 import "Component/progress-bar";
 import "Component/tinted-background";
-// import "Component/vertical-timeline";
 import "Component/git";
 import "Component/autofit-font";
 import "Component/parallax";
 import "Component/nav";
-import "Component/contact";
+import "element-internals-polyfill";
+import "Component/form-control";
 import "Component/on-scroll"
 
 

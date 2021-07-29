@@ -9,13 +9,22 @@
     --color-primary: white;
     --color-emphasis-gray: #BEC7D5;
     --color-emphasis-green: #4CAF50;
+    --color-emphasis-red: #dc3545;
     --background-color-charcoal: rgba(51, 59, 80, 1);
+
+    --form-valid-color: var(--color-emphasis-green);
+    --form-valid-color-focus: var(--color-emphasis-green);
+    --form-invalid-color: var(--color-emphasis-red);
+    --form-label-color: gray;
+    --form-placeholder-color: gray;
+    --form-submit-color: var(--color-primary);
+
+    --content-box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
 }
 
 body {
     margin: 0;
     color: var(--color-primary);
-    ;
     font-family: var(--font-family-primary);
 }
 
@@ -36,7 +45,7 @@ on-scroll-container {
 
 /* section definitions */
 
-section, half-section, double-section, quarter-section {
+section, half-section, double-section {
     display: block;
     position: relative;
 }
@@ -45,21 +54,19 @@ section {
     height: 100vh;
 }
 
-quarter-section {
-    height: 25vh;
-}
-
 half-section {
     height: 50vh;
 }
 
 double-section {
-    height: 300vh;
+    height: 200vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     text-transform: uppercase;
+    width: 100%;
+    white-space: nowrap;
 }
 
 h1, h2, h3 {
@@ -70,11 +77,11 @@ h4, h5, h6 {
     letter-spacing: 0.18em;
     line-height: 1.8em;
     font-weight: 400;
-    font-family: inherit;
-    font-size: 60%;
+    font-family: var(--font-family-primary);
 }
 
-.section-header {
+section-header {
+    display: block;
     position: relative;
     width: 80%;
     height: var(--nav-bar-height);
@@ -82,6 +89,10 @@ h4, h5, h6 {
     text-align: center;
 }
 
+p {
+    width: 100%;
+    height: 100%;
+}
 /* utility classes */
 
 .center-children {
@@ -121,47 +132,53 @@ h4, h5, h6 {
 
 /* backgrounds */
 
+tinted-background {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #background1 {
     --tint-rgba: rgba(50, 65, 88, 0.55);
     --background-image: url(/img/2.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
     height: calc(250vh * 2 / 3);
 }
 
 #background2 {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
     --background-image: url(/img/3.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
     height: calc(150vh * 2 / 3);
 }
 
 #background3 {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
-    background-repeat: no-repeat;
-    background-size: cover;
     height: calc(150vh * 2 / 3);
 }
 
 #background4 {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
     --background-image: url(/img/4.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: calc(350vh * 2 / 3);
+    height: calc(250vh * 2 / 3);
 }
 
 #background5 {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: calc(175vh * 2 / 3);
+    height: calc(150vh * 2 / 3);
 }
 
 /* navigation bar */
 
-.header {
+.nav-bar-transparent {
+    background-color: transparent;
+}
+
+.nav-bar-hide:hover {
+    top: 0;
+    background-color: var(--background-color-charcoal);
+}
+
+.nav-bar-hide {
+    top: calc((-1 * var(--nav-bar-height)) + 1vh);
+}
+
+nav-bar {
+    padding: 1%;
     position: sticky;
     top: 0;
     left: 0;
@@ -173,27 +190,6 @@ h4, h5, h6 {
     transition: top 0.5s, background-color 1s;
 }
 
-.transparent-header {
-    background-color: transparent;
-}
-
-.hide-header:hover {
-    top: 0;
-    background-color: var(--background-color-charcoal);
-}
-
-.hide-header {
-    top: calc((-1 * var(--nav-bar-height)) + 1vh);
-}
-
-autofit-font-nowrap.header::part(text) {
-    float: left;
-}
-
-nav-bar {
-    padding: 1%;
-}
-
 nav-entry {
     color: var(--color-emphasis-gray);
     --background-color-hover: transparent;
@@ -202,7 +198,9 @@ nav-entry {
 }
 
 nav-entry.active {
-    font-family: var(--font-family-emphasis);
+    font-weight: bold;
+    transform-origin: top center;
+    transform: scale(1.2) translateY(-10%);
     color: var(--color-emphasis-green);
     background-color: transparent;
 }
@@ -235,35 +233,29 @@ autofit-font-nowrap {
     text-align: start;
 }
 
-section[name=resume] .divider {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 25%;
-    background-color: var(--background-color-charcoal);
-}
-
-#resume-container {
+.content-container {
+    width: min(80vh, 80vw);
+    height: calc(min(80vh, 80vw) - var(--nav-bar-height));
     position: relative;
-    width: 75%;
-    height: 75%;
-    padding: 10%;
+    padding: min(5vh, 5vw);
+    margin: min(5vh, 5vw);
     background-color: var(--background-color-charcoal);
-    box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
+    z-index: 1;
+    box-shadow: var(--content-box-shadow);
+    box-sizing: content-box;
 }
 
 #resume-download-button {
     display: block;
+    position: relative;
     background-color: transparent;
     border: solid var(--color-emphasis-green) 1px;
     cursor: pointer;
-    position: relative;
     transition: background-color 0.5s;
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: var(--color-primary);
     white-space: nowrap;
-    /* height: 20%; */
     width: 50%;
     padding: 2%;
 }
@@ -281,27 +273,112 @@ section[name=resume] .divider {
 
 [enter-any-add-class=transition-fade-in]>* {
     opacity: 0;
-    transition: opacity 2s;
+    transition: opacity 1s;
 }
 
 .transition-fade-in {
     opacity: 1;
 }
 
-/* vertical timeline */
+/* progress bar */
 
-/* double-section[name=experience] {
+@property --bar-completed-percentage {
+    syntax: '<integer>';
+    inherits: true;
+    initial-value: 0;
+}
+
+progress-bar-borderless {
+    --bar-completed-color: var(--color-emphasis-green);
+    --bar-completed-percentage: 0;
+    transition: --bar-completed-percentage 1s;
+    height: 20%;
+}
+
+#progress-bar-html-css.ready {
+    --bar-completed-percentage: 90;
+}
+
+#progress-bar-javascript.ready {
+    transition-delay: 0.1s;
+    --bar-completed-percentage: 85;
+}
+
+#progress-bar-c.ready {
+    transition-delay: 0.2s;
+    --bar-completed-percentage: 70;
+}
+
+#progress-bar-python.ready {
+    transition-delay: 0.3s;
+    --bar-completed-percentage: 85;
+}
+
+#progress-bar-linux.ready {
+    transition-delay: 0.4s;
+    --bar-completed-percentage: 65;
+}
+
+
+/* projects */
+section[name=projects] autofit-font-wrap {
+    height: calc(90% - var(--nav-bar-height));
+    width: 90%;
+}
+
+git {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-} */
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background-color-charcoal);
+}
+
+git-user, git-repo {
+    width: calc(50% - 2vw);
+    box-shadow: var(--content-box-shadow);
+    margin: 1vw;
+    padding: 1vw;
+}
+
+git-user::part(user-name) {
+    font-family: var(--font-family-emphasis);
+}
+
+git-user::part(user-html-url) {
+    color: var(--color-emphasis-green);
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+git-repo::part(repo-html-url) {
+    font-family: var(--font-family-emphasis);
+    color: var(--color-emphasis-green);
+    text-decoration: none;
+}
+
+@media (max-aspect-ratio: 3/4) {
+    git {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    git-user, git-repo {
+        width: calc(80% - 2vw);
+    }
+}
+
+/* vertical timeline */
 
 vertical-timeline {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     position: relative;
-    height: 100%;
+    height: calc(100% - var(--nav-bar-height));
     width: 100%;
     padding: 1%;
 }
@@ -363,23 +440,29 @@ vertical-timeline-entry::after {
     }
 }
 
-vertical-timeline-entry h2 {
-    color: var(--color-emphasis-green);
-}
-
-vertical-timeline-entry autofit-font-wrap {
-    height: auto;
-    max-height: 50%;
-}
-
-vertical-timeline-entry autofit-font-nowrap {
-    height: auto;
-    max-height: 50%;
-}
-
 vertical-timeline-entry, vertical-timeline-entry div {
     opacity: 0;
     transform: scale(0.9);
+}
+
+vertical-timeline-entry div {
+    height: 100%;
+    width: 100%;
+}
+
+vertical-timeline-entry h4 {
+    color: var(--color-emphasis-green);
+    font-family: var(--font-family-emphasis);
+    font-size: 70%;
+}
+
+vertical-timeline-entry h5 {
+    font-size: 80%;
+    font-family: var(--font-family-emphasis);
+}
+
+vertical-timeline-entry h6 {
+    font-size: 100%;
 }
 
 @keyframes bounce {
@@ -408,132 +491,108 @@ vertical-timeline-entry.bounce div {
     will-change: transform, opacity;
 }
 
-/* progress bar */
-
-#progress-bar-container {
-    width: 100%;
-    height: 100%;
-}
-
-@property --bar-completed-percentage {
-    syntax: '<integer>';
-    inherits: true;
-    initial-value: 0;
-}
-
-progress-bar-borderless p {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-progress-bar-borderless {
-    /* --label-left-width: 30%; */
-    --bar-completed-color: var(--color-emphasis-green);
-    --bar-completed-percentage: 0;
-    transition: --bar-completed-percentage 1s;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-#progress-bar-html-css.ready {
-    --bar-completed-percentage: 90;
-}
-
-#progress-bar-javascript.ready {
-    transition-delay: 0.1s;
-    --bar-completed-percentage: 85;
-}
-
-#progress-bar-c.ready {
-    transition-delay: 0.2s;
-    --bar-completed-percentage: 70;
-}
-
-#progress-bar-python.ready {
-    transition-delay: 0.3s;
-    --bar-completed-percentage: 85;
-}
-
-#progress-bar-linux.ready {
-    transition-delay: 0.4s;
-    --bar-completed-percentage: 65;
-}
-
 /* contact form */
 
-contact-form {
-    line-height: normal;
-    max-height: 100%;
-    max-width: 100%;
-    position: relative;
+form-control {
+    box-sizing: border-box;
+}
+
+form-control {
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+form-control::part(container) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    outline-color: transparent;
+}
+
+/* Labels */
+form-control::part(label) {
+    position: absolute;
+    left: 1%;
+    width: 98%;
+    color: var(--form-placeholder-color);
+}
+
+form-control[visited]::part(label),
+form-control:is(:focus-within)::part(label) {
+    position: static;
+    width: 100%;
+    font-size: 60%;
+    color: var(--form-label-color);
+}
+
+/* Submit */
+
+form-control[type=submit]::part(container) {
+    background-color: var(--form-invalid-color);
+    color: var(--form-submit-color);
+}
+
+form-control[type=submit]::part(label) {
+    display: none;
+}
+
+form-control[type=submit]::part(control) {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+
+form-control[type=submit]::part(container)::before {
+    content: "Submit";
+}
+
+form-control[type=submit][disabled]::part(container)::before {
+    content: "Thank you!";
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]::part(container) {
+    background-color: var(--form-valid-color);
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within, :disabled, [disabled])::part(container) {
+    background-color: var(--form-valid-color-focus);
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
+    cursor: pointer;
+}
+
+/* Validity Outlines */
+
+form-control:not([empty]):is(:invalid, [internals-invalid]):focus-within::part(container) {
+    outline-color: var(--form-invalid-color);
+}
+
+form-control:not([type=submit], [empty]):is(:valid, [internals-valid]):focus-within::part(container) {
+    outline-color: var(--form-valid-color);
+}
+
+form-control[empty]:focus-within::part(container) {
+    outline-color: var(--form-invalid-color);
+}
+
+/* Validation Message */
+form-control::part(validation-message) {
+    display: none;
+}
+
+form-control:not(:focus-within)[visited]::part(validation-message) {
+    display: block;
+    color: var(--form-invalid-color);
+    font-size: smaller;
+    background-color: var(--container-color);
 }
 
 #footer {
     position: absolute;
-    bottom: var(--nav-bar-height);
+    bottom: 0;
     width: 100%;
     height: var(--nav-bar-height);
     background-color: var(--background-color-charcoal);
-}
-
-#contact-container {
-    width: min(80vh, 80vw);
-    height: 75%;
-    margin: 5%;
-    margin-bottom: 0;
-    padding: 5%;
-    background-color: var(--background-color-charcoal);
-    z-index: 1;
-    box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
-}
-section[name=projects] autofit-font-wrap {
-    height: calc(90% - var(--nav-bar-height));
-    width: 90%;
-}
-
-git {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background-color: var(--background-color-charcoal);
-}
-
-git-user, git-repo {
-    width: calc(50% - 2vw);
-    box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
-    margin: 1vw;
-    padding: 1vw;
-}
-
-git-user::part(user-name) {
-    font-family: var(--font-family-emphasis);
-}
-
-git-user::part(user-html-url) {
-    color: var(--color-emphasis-green);
-    text-decoration: none;
-    text-transform: lowercase;
-}
-
-git-repo::part(repo-html-url) {
-    font-family: var(--font-family-emphasis);
-    color: var(--color-emphasis-green);
-    text-decoration: none;
-}
-
-@media (max-aspect-ratio: 3/4) {
-    git {
-        flex-wrap: nowrap;
-        flex-direction: column;
-        align-items: center;
-    }
-    git-user, git-repo {
-        width: calc(80% - 2vw);
-    }
 }

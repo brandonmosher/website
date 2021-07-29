@@ -26,16 +26,14 @@ function addScrollFunctions(targetClass) {
             ];
             // targetClass[functionPrefixCamelCase] = null;
             targetClass[`_${functionPrefixCamelCase}`] = function () {
-                const children = this.hasAttribute('query-selector') ?
-                    document.querySelectorAll(this.getAttribute('query-selector')) : Array.from(this.children);
                 if (this.hasAttribute(addClassAttrName)) {
                     const className = this.getAttribute(addClassAttrName);
-                    children.forEach(child => child.classList.add(...className.split(" ")));
+                    this.applyNodes.forEach(child => child.classList.add(...className.split(" ")));
                 }
 
                 if (this.hasAttribute(removeClassAttrName)) {
                     const className = this.getAttribute(removeClassAttrName);
-                    children.forEach(child => child.classList.remove(...className.split(" ")));
+                    this.applyNodes.forEach(child => child.classList.remove(...className.split(" ")));
                 }
 
                 if (this[`scroll${direction}`]) {
@@ -48,9 +46,9 @@ function addScrollFunctions(targetClass) {
 
 class OnScrollHTMLElement extends HTMLElement {
     constructor() {
-        super(callback, { 'threshold': 0.25 });
-        const shadowRoot = this.attachShadow({ mode: 'open' })
-            .appendChild(template.content.cloneNode(true));
+        super();
+        this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true));
+        this.applyNodes = this.closest('on-scroll-container').querySelectorAll(this.getAttribute('query-selector-apply'));
     }
 }
 

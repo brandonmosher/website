@@ -4,7 +4,7 @@
     --invalid-color: #dc3545;
     --label-color: gray;
     --placeholder-color: gray;
-    --button-color: white;
+    --submit-color: white;
 }
 
 :host {
@@ -36,7 +36,7 @@ form-control::part(container) {
 
 /* Controls */
 
-form-contrl::part(control) {
+form-control::part(control) {
     width: 100%;
 }
 
@@ -58,33 +58,33 @@ form-control:is(:focus-within)::part(label) {
 
 /* Submit */
 
-form-control[type=button]::part(container) {
+form-control[type=submit]::part(container) {
     background-color: var(--invalid-color);
-    color: var(--button-color);
+    color: var(--submit-color);
 }
 
-form-control[type=button]::part(label),
-form-control[type=button]::part(control) {
+form-control[type=submit]::part(label),
+form-control[type=submit]::part(control) {
     display: none;
 }
 
-form-control[type=button]::part(container)::before {
+form-control[type=submit]::part(container)::before {
     content: "Submit";
 }
 
-form-control[type=button][disabled]::part(container)::before {
+form-control[type=submit][disabled]::part(container)::before {
     content: "Thank you!";
 }
 
-form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=button]::part(container) {
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]::part(container) {
     background-color: var(--valid-color);
 }
 
-form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=button]:is(:hover, :focus-within, :disabled, [disabled])::part(container) {
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within, :disabled, [disabled])::part(container) {
     background-color: var(--valid-color-focus);
 }
 
-form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=button]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
     cursor: pointer;
 }
 
@@ -94,7 +94,7 @@ form-control:not([empty]):is(:invalid, [internals-invalid]):focus-within::part(c
     outline-color: var(--invalid-color);
 }
 
-form-control:not([type=button], [empty]):is(:valid, [internals-valid]):focus-within::part(container) {
+form-control:not([type=submit], [empty]):is(:valid, [internals-valid]):focus-within::part(container) {
     outline-color: var(--valid-color);
 }
 
@@ -110,6 +110,6 @@ form-control::part(validation-message) {
 form-control:not(:focus-within)[visited]::part(validation-message) {
     display: block;
     color: var(--invalid-color);
-    font-size: small;
+    font-size: smaller;
     background-color: var(--container-color);
 }

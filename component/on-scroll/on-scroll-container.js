@@ -7,113 +7,21 @@ const template = textToTemplate(css, html);
 
 let globalYDirection = null;
 
-function waitForScrollEnd(scrollContainer, yDirection) {
-    const xInitial = scrollContainer.scrollLeft;
-    const yInitial = scrollContainer.scrollTop;
-    let xPrevious = xInitial;
-    let yPrevious = yInitial;
-    let lastChangedFrame = 0;
-
-    return new Promise((resolve, reject) => {
-        function tick(frames) {
-            // We requestAnimationFrame either for 500 frames or until 20 frames with
-            // no change have been observed.
-            if ((frames >= 500) || (frames - lastChangedFrame > 5)) {
-                resolve(scrollContainer.scrollTop - yInitial);
-            } else if (yDirection !== globalYDirection) {
-                reject(new Error(`scroll ${yDirection} canceled`));
-            }
-            else {
-                if ((scrollContainer.scrollLeft != xPrevious) || (scrollContainer.scrollTop != yPrevious)) {
-                    lastChangedFrame = frames;
-                    xPrevious = scrollContainer.scrollLeft;
-                    yPrevious = scrollContainer.scrollTop;
-                }
-                requestAnimationFrame(tick.bind(null, frames + 1));
-            }
-        }
-        tick(0);
-    });
-}
-
 const thresholdArray = steps => Array(steps + 1)
     .fill(0)
     .map((_, index) => index / steps || 0);
 
-const scrollStopThresholdY = 0; //(window.innerHeight / 8);
-
-function handleIntersect(entries) {
-    entries.forEach(async entry => {
-        const { x, y } = entry.boundingClientRect;
-        const { previousX = 0, previousY = 0 } = entry.target;
-        let [xDirection, yDirection] = [null, null];
-
-        if (x < previousX) {
-            xDirection = 'right';
-        } else if (x > previousX) {
-            xDirection = 'left';
-        }
-
-        if (y < previousY) {
-            yDirection = 'down';
-        } else if (y > previousY) {
-            yDirection = 'up';
-        }
-
-        const onScrollContainer = entry.target.getRootNode().host;
-        const onScrollElements = onScrollContainer.querySelectorAll("on-scroll");
-
-        if ((entry.target.id === 'scroll-top') && (Math.round(entry.boundingClientRect.top) === 0)) {
-            console.log("TOP");
-            onScrollElements.forEach(node => node._scrollUpMax());
-        }
-        else if ((entry.target.id === 'scroll-bottom') && (entry.intersectionRatio >= 1)) {
-            onScrollElements.forEach(node => node._scrollDownMax());
-        }
-
-        onScrollElements.forEach(node => {
-            node._scrollAnyStart();
-            if (xDirection) {
-                node[HTMLToCamelCase(`_scroll-${xDirection}-start`)]();
-            }
-            if (yDirection) {
-                node[HTMLToCamelCase(`_scroll-${yDirection}-start`)]();
-            }
-        });
-
-        if (yDirection !== globalYDirection) {
-            // console.log("scroll state change from", globalYDirection, "to", yDirection);
-            globalYDirection = yDirection;
-            waitForScrollEnd(onScrollContainer, yDirection).then(deltaY => {
-                if (Math.abs(deltaY) >= scrollStopThresholdY) {
-                    onScrollElements.forEach(node => {
-                        node._scrollAnyStop();
-                        if (xDirection) {
-                            node[HTMLToCamelCase(`_scroll-${xDirection}-stop`)]();
-                        }
-                        if (yDirection) {
-                            node[HTMLToCamelCase(`_scroll-${yDirection}-stop`)]();
-                        }
-                    });
-                }
-                globalYDirection = null;
-                // console.log("scroll stop", yDirection, deltaY);
-            }).catch(e => { /*console.log(e.message)*/ });
-        }
-        Object.assign(entry.target, { previousX: x, previousY: y })
-    })
-}
-
 customElements.define("on-scroll-container",
     class extends HTMLElement {
+        scrollStopThresholdY = 0;
         constructor() {
             super();
             const shadowRoot = this.attachShadow({ mode: 'open' })
                 .appendChild(template.content.cloneNode(true));
             const observer = new IntersectionObserver(
-                handleIntersect, {
+                (entries) => this.handleIntersect(entries), {
                 threshold: thresholdArray(10)
-            })
+            });
             requestAnimationFrame(() => {
                 const scrollHeight = 100 * this.scrollHeight / window.innerHeight;
                 const els = [];
@@ -137,6 +45,93 @@ customElements.define("on-scroll-container",
                 el.id = "scroll-bottom";
                 this.shadowRoot.appendChild(el);
                 observer.observe(el);
+            });
+        }
+        handleIntersect(entries) {
+            entries.forEach(async entry => {
+                const { x, y } = entry.boundingClientRect;
+                const { previousX = 0, previousY = 0 } = entry.target;
+                let [xDirection, yDirection] = [null, null];
+                if (x < previousX) {
+                    xDirection = 'right';
+                } else if (x > previousX) {
+                    xDirection = 'left';
+                }
+
+                if (y < previousY) {
+                    yDirection = 'down';
+                } else if (y > previousY) {
+                    yDirection = 'up';
+                }
+
+                const onScrollElements = this.querySelectorAll("on-scroll");
+
+                if ((entry.target.id === 'scroll-top') && (Math.round(entry.boundingClientRect.top) === 0)) {
+                    onScrollElements.forEach(node => node._scrollUpMax());
+                }
+                else if ((entry.target.id === 'scroll-bottom') && (entry.intersectionRatio >= 1)) {
+                    onScrollElements.forEach(node => node._scrollDownMax());
+                }
+
+                onScrollElements.forEach(node => {
+                    node._scrollAnyStart();
+                    if (xDirection) {
+                        node[HTMLToCamelCase(`_scroll-${xDirection}-start`)]();
+                    }
+                    if (yDirection) {
+                        node[HTMLToCamelCase(`_scroll-${yDirection}-start`)]();
+                    }
+                });
+
+                if (yDirection !== globalYDirection) {
+                    // console.log("scroll state change from", globalYDirection, "to", yDirection);
+                    globalYDirection = yDirection;
+                    this.waitForScrollEnd(yDirection).then(deltaY => {
+                        if (Math.abs(deltaY) >= this.scrollStopThresholdY) {
+                            onScrollElements.forEach(node => {
+                                node._scrollAnyStop();
+                                if (xDirection) {
+                                    node[HTMLToCamelCase(`_scroll-${xDirection}-stop`)]();
+                                }
+                                if (yDirection) {
+                                    node[HTMLToCamelCase(`_scroll-${yDirection}-stop`)]();
+                                }
+                            });
+                        }
+                        globalYDirection = null;
+                        // console.log("scroll stop", yDirection);
+                    }).catch(e => { /*console.log(e.message)*/ });
+                }
+                Object.assign(entry.target, { previousX: x, previousY: y })
+            })
+        }
+        waitForScrollEnd(yDirection) {
+            const scrollContainer = this;
+            const xInitial = scrollContainer.scrollLeft;
+            const yInitial = scrollContainer.scrollTop;
+            let xPrevious = xInitial;
+            let yPrevious = yInitial;
+            let lastChangedFrame = 0;
+
+            return new Promise((resolve, reject) => {
+                function tick(frames) {
+                    if ((frames - lastChangedFrame) > 20) {
+                        resolve(scrollContainer.scrollTop - yInitial);
+                    } else if (frames >= 120) {
+                        reject(new Error(`wait for scroll ${yDirection} stop timed out`));
+                    } else if (yDirection !== globalYDirection) {
+                        reject(new Error(`wait for scroll ${yDirection} canceled`));
+                    }
+                    else {
+                        if ((scrollContainer.scrollLeft != xPrevious) || (scrollContainer.scrollTop != yPrevious)) {
+                            lastChangedFrame = frames;
+                            xPrevious = scrollContainer.scrollLeft;
+                            yPrevious = scrollContainer.scrollTop;
+                        }
+                        requestAnimationFrame(tick.bind(null, frames + 1));
+                    }
+                }
+                tick(0);
             });
         }
     }

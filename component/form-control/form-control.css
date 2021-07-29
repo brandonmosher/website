@@ -5,6 +5,7 @@
 }
 
 #container {
+    width: 98%;
     position: relative;
     padding: 1%;
     background-color: white;
@@ -27,6 +28,14 @@
     font: inherit;
     background-color: inherit;
     cursor: inherit;
+}
+
+#control-sizer {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
 }
 
 form-control[type=textarea]::part(control) {

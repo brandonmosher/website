@@ -10,7 +10,7 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '/dist/',
   },
   module: {
     rules: [
@@ -75,4 +75,7 @@ module.exports = {
       Img: path.resolve(__dirname, 'img'),
     },
   },
+  // optimization: {
+  //   minimize: false
+  // },
 };

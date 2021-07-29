@@ -1,5 +1,6 @@
 import { mixin } from "Lib/mixin";
 import { telMixin } from "./form-control-tel-mixin.js"
+import { submitMixin } from "./form-control-submit-mixin.js"
 import { textareaMixin } from "./form-control-textarea-mixin.js"
 import { observedAttributes } from "./form-control-observed-attributes.js";
 import { textToTemplate } from "Lib/textToTemplate";
@@ -19,7 +20,7 @@ class FormControlHTMLElement extends HTMLElement {
     constructor() {
         super();
         this._internals = this.attachInternals();
-        const shadowRoot = this.attachShadow({ mode: 'open' })
+        this.attachShadow({ mode: 'open' })
             .appendChild(template.content.cloneNode(true));
 
         const type = this.getAttribute('type');
@@ -29,6 +30,9 @@ class FormControlHTMLElement extends HTMLElement {
                 break;
             case "textarea":
                 mixin(this, textareaMixin);
+                break;
+            case "submit":
+                mixin(this, submitMixin);
                 break;
             default:
                 break;
@@ -41,6 +45,8 @@ class FormControlHTMLElement extends HTMLElement {
         this._control.setAttribute('part', 'control');
         this._control.addEventListener('input', () => this.oninput());
         this.shadowRoot.getElementById('container').appendChild(this._control);
+
+        this._controlSizer = this.shadowRoot.querySelector("#control-sizer");
 
         this.addEventListener('click', (e) => this.focus());
         this.addEventListener('invalid', (e) => { e.preventDefault(); });
@@ -61,6 +67,10 @@ class FormControlHTMLElement extends HTMLElement {
     get selectionEnd() { return this._control.selectionEnd; }
 
     oninput() {
+        this._controlSizer.textContent = this.value.replace(/\s/g, '&nbsp;');
+        if(this.hasAttribute('autosize')) {
+            this.style.width = `${this._controlSizer.offsetWidth}px`;
+        }
         this._internals.setValidity(this._control.validity, this._control.validationMessage);
         this._internals.setFormValue(this._control.value);
         if (this.value) {

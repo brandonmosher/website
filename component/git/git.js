@@ -2,7 +2,7 @@ import { underscoreToHTMLCase } from "Lib/capitalization"
 export class GitHTMLElement extends HTMLElement {
     type = null;
     hostname = 'https://api.github.com';
-    token = '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';
+    token = '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';
     get endpoint() { return ''; }
     handlers = null;
     shadowStyleInnerHTML = '';
@@ -11,19 +11,23 @@ export class GitHTMLElement extends HTMLElement {
         // if(!this.hasAttribute('slot')) {
         //     this.setAttribute('slot', this.type);
         // }
+        const fragment = document.createDocumentFragment();
 
-        this.attachShadow({ mode: 'open' });
+        
 
         this.shadowStyle = document.createElement('style');
         this.shadowStyle.innerHTML = this.shadowStyleInnerHTML;
-        this.shadowRoot.appendChild(this.shadowStyle);
+        fragment.appendChild(this.shadowStyle);
 
         this.gridContainer = document.createElement('div');
         this.gridContainer.id = 'grid-container';
         this.gridContainer.setAttribute('part', 'grid-container');
-        this.shadowRoot.appendChild(this.gridContainer);
+        fragment.appendChild(this.gridContainer);
 
-        this.getData();
+        this.getData(fragment);
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(fragment);
+        
     }
 
     async getData() {
