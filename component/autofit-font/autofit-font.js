@@ -21,8 +21,8 @@ class AutofitFontHTMLElement extends HTMLElement {
         const threshold = this.threshold;
         if ((scaleFactor < (1 - threshold)) || (scaleFactor > (1 + threshold))) {
             this.applyNodes.forEach(node => {
-                const style = getComputedStyle(node);
-                node.style.fontSize = `${Math.max(1, Math.floor(scaleFactor * parseInt(style.fontSize)))}px`;
+                const nodeStyle = getComputedStyle(node);
+                node.style.fontSize = `${Math.max(1, Math.floor(this.baseScaleFactor * scaleFactor * parseInt(nodeStyle.fontSize)))}px`;
             });
         }
     }
@@ -36,6 +36,13 @@ class AutofitFontHTMLElement extends HTMLElement {
             this.fit();
             this.fitDisabled = false;
         });
+    }
+
+    get baseScaleFactor() {
+        if (this.hasAttribute('base-scale-factor')) {
+            return parseFloat(this.getAttribute('base-scale-factor'));
+        }
+        return 1;
     }
 
     get threshold() {
@@ -113,8 +120,8 @@ customElements.define('autofit-font-wrap',
 
 customElements.define('autofit-font-query-selector',
     class extends AutofitFontHTMLElement {
-        constructor() {
-            super();
+        connectedCallback() {
+            super.connectedCallback();
             this.assessNodes = this.parentElement.querySelectorAll(this.getAttribute('query-selector-assess'));
             this.applyNodes = this.parentElement.querySelectorAll(this.getAttribute('query-selector-apply'));
             this.observeNodes = this.parentElement.querySelectorAll(this.getAttribute('query-selector-observe'));
@@ -122,15 +129,31 @@ customElements.define('autofit-font-query-selector',
                 this.ro = new ResizeObserver(() => this.scheduleFit());
                 this.observeNodes.forEach(node => this.ro.observe(node));
             }
+            if (this.hasAttribute('query-selector-event') && this.hasAttribute('event-types')) {
+                this.eventNodes = this.parentElement.querySelectorAll(this.getAttribute('query-selector-event'));
+                this.eventTypes = this.getAttribute('event-types').split(' ');
+                this.eventNodes.forEach(eventNode => {
+                    this.eventTypes.forEach(eventType => {
+                        eventNode.addEventListener(eventType, () => this.scheduleFit());
+                    })
+                })
+            }
         }
 
         fitHeuristic() {
-            this.applyNodes.forEach(node => node.style.fontSize = 'initial');
+            this.applyNodes.forEach(node => node.style.removeProperty('font-Size'));
             let minScaleFactor = Infinity;
-            this.assessNodes.forEach(node => {
-                const nodeStyle = getComputedStyle(node);
-                minScaleFactor = Math.min(minScaleFactor, parseInt(nodeStyle.width) / node.scrollWidth, parseInt(nodeStyle.height) / node.scrollHeight);
-            });
+            if(this.hasAttribute('wrap')){
+                this.assessNodes.forEach(node => {
+                    minScaleFactor = Math.min(minScaleFactor, Math.sqrt(node.clientHeight / node.scrollHeight));
+                });
+            }
+            else {
+                this.assessNodes.forEach(node => {
+                    minScaleFactor = Math.min(minScaleFactor, node.clientWidth / node.scrollWidth, node.clientHeight / node.scrollHeight);
+                });
+            }
+            
             return minScaleFactor;
         }
     }
@@ -141,3 +164,17 @@ window.addEventListener('resize', (e) => {
         document.querySelectorAll('autofit-font-nowrap, autofit-font-wrap, autofit-font-query-selector').forEach(node => node.scheduleFit());
     });
 });
+
+// const nodeStyle = getComputedStyle(node);
+// const a = Math.min(
+//     minScaleFactor,
+//     parseInt(nodeStyle.width) / node.scrollWidth,
+//     parseInt(nodeStyle.height) / node.scrollHeight
+// );
+
+// const b = minScaleFactor = Math.min(
+//     minScaleFactor,
+//     parseInt(nodeStyle.width) / (node.scrollWidth - parseInt(nodeStyle.paddingLeft) - parseInt(nodeStyle.paddingRight)),
+//     parseInt(nodeStyle.height) / (node.scrollHeight - parseInt(nodeStyle.paddingTop) - parseInt(nodeStyle.paddingBottom))
+// );
+// console.log(minScaleFactor, a, b);

@@ -15,14 +15,20 @@
 
 :host {
     display: block;
-    height: 50px;
+    height: 2em;
     width: 100%;
 }
 
+#flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 #label-left, #label-right {
-    display: inline-block;
     position: relative;
-    height: var(--bar-height);
     padding: 1%;
 }
 
@@ -42,6 +48,6 @@
 }
 
 #bar {
-    display: inline-block;
     height: var(--bar-height);
+    margin: 1%;
 }

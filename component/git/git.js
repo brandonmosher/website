@@ -11,10 +11,13 @@ export class GitHTMLElement extends HTMLElement {
         // if(!this.hasAttribute('slot')) {
         //     this.setAttribute('slot', this.type);
         // }
+        if(!this.shadowRoot) {
+            this.init();
+        }   
+    }
+
+    async init() {
         const fragment = document.createDocumentFragment();
-
-        
-
         this.shadowStyle = document.createElement('style');
         this.shadowStyle.innerHTML = this.shadowStyleInnerHTML;
         fragment.appendChild(this.shadowStyle);
@@ -24,18 +27,12 @@ export class GitHTMLElement extends HTMLElement {
         this.gridContainer.setAttribute('part', 'grid-container');
         fragment.appendChild(this.gridContainer);
 
-        this.getData(fragment);
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.appendChild(fragment);
-        
-    }
-
-    async getData() {
         const data = await fetch(`${this.hostname}/${this.endpoint}`, {
             headers: {
                 Authorization: `token ${this.token}`
             }
         }).then(r => r.json());
+
         Object.entries(this.handlers).forEach(([key, handler]) => {
             const id = `${this.type}-${underscoreToHTMLCase(key)}`;
             let node;
@@ -50,5 +47,9 @@ export class GitHTMLElement extends HTMLElement {
             node.setAttribute('part', id);
             this.gridContainer.appendChild(node);
         });
+
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(fragment);
+        this.dispatchEvent(new Event('load'));
     }
 }

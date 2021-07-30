@@ -48,6 +48,11 @@ class OnScrollHTMLElement extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true));
+    }
+    connectedCallback() {
+        if(!this.isConnected) {
+            return;
+        }
         this.applyNodes = this.closest('on-scroll-container').querySelectorAll(this.getAttribute('query-selector-apply'));
     }
 }

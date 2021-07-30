@@ -7,12 +7,7 @@
 #grid-container {
     display: grid;
     grid-template-rows: auto auto auto 1fr 1fr;
-    grid-template-areas: 
-            "avatar name name name"
-            "avatar html-url html-url html-url"
-            "avatar . . ."
-            "bio bio bio bio"
-            "repos followers following .";
+    grid-template-areas: "avatar name name name" "avatar html-url html-url html-url" "avatar . . ." "bio bio bio bio" "repos followers following .";
     grid-gap: 2.5%;
     height: 100%;
 }
@@ -22,7 +17,9 @@
     object-fit: contain;
     max-height: 100%;
     max-width: 100%;
+    overflow: hidden;
 }
+
 #user-name {
     grid-area: name;
 }

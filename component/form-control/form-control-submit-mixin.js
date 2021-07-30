@@ -1,9 +1,9 @@
 export const submitMixin = {
     _control: function() {
-        const control = document.createElement("input");
-        control.addEventListener("click", (e) => this.handleFormSubmit(e));
-        return control;
+        this.addEventListener("click", (e) => this.handleFormSubmit(e));
+        return document.createElement("input");;
     },
+
     async postFormJSON(form) {
         const url = form.action;
         const formData = new FormData(form);

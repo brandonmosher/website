@@ -1,5 +1,7 @@
 :root {
-    --nav-bar-height: 7vh;
+    --nav-bar-height: 8vh;
+    --nav-bar-padding: min(1vh, 1vw);
+    --nav-bar-content-height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-padding)));
     --font-family-primary: 'avenir-35-light', Fallback, sans-serif;
     --font-family-emphasis: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
     --color-primary: white;
@@ -20,6 +22,8 @@ body {
     margin: 0;
     color: var(--color-primary);
     font-family: var(--font-family-primary);
+    font-size: 1.25em;
+    font-size: min(100%, 2.7vh, 2.7vw);
 }
 
 .color-emphasis-gray {
@@ -75,17 +79,13 @@ h4, h5, h6 {
 }
 
 section-header {
-    display: block;
+    display: flex;
+    align-items: center;
     position: relative;
     width: 80%;
-    height: var(--nav-bar-height);
-    padding: 1vh;
+    height: var(--nav-bar-content-height);
+    padding: 1%;
     text-align: center;
-}
-
-p {
-    width: 100%;
-    height: 100%;
 }
 
 /* utility classes */
@@ -169,16 +169,15 @@ tinted-background {
 }
 
 .nav-bar-hide {
-    top: calc((-1 * var(--nav-bar-height)) + 1vh);
+    top: calc(1vh - var(--nav-bar-height));
 }
 
 nav-bar {
-    padding: 1%;
+    padding: var(--nav-bar-padding);
     position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    height: calc(var(--nav-bar-height) - 2%);
+    width: calc(100% - (2 * var(--nav-bar-padding)));
+    height: var(--nav-bar-content-height);
     z-index: 4;
     box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
     background-color: var(--background-color-charcoal);
@@ -195,7 +194,7 @@ nav-entry {
 nav-entry.active {
     font-weight: bold;
     transform-origin: top center;
-    transform: scale(1.2) translateY(-10%);
+    transform: scale(1.1) translateY(-5%);
     color: var(--color-emphasis-green);
     background-color: transparent;
 }
@@ -209,44 +208,46 @@ on-intersection-add-class {
     position: relative;
 }
 
-autofit-font-nowrap, autofit-font-wrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    box-sizing: content-box;
-}
-
-autofit-font-nowrap {
-    white-space: nowrap;
-}
-
 #intro-container {
-    width: min(80vh, 80vw);
-    height: min(80vh, 80vw);
-    padding: min(10vw, 10vh);
+    width: calc(min(60vh, 60vw) - (4 * min(5vh, 5vw)));
+    height: calc(min(60vh, 60vw) - (4 * min(5vh, 5vw)));
+    padding: min(5vh, 5vw);
+    margin: min(5vh, 5vw);
     padding-bottom: 0;
     text-align: start;
 }
 
 .content-container {
+    --content-container-spacing: max(2vh, 2vw);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: calc(100vw - (4 * max(5vh, 5vw)));
-    height: calc(100vh - (4 * max(5vh, 5vw)) - var(--nav-bar-height));
+    width: calc(100% - (4 * var(--content-container-spacing)));
+    height: calc(100% - (4 * var(--content-container-spacing)) - var(--nav-bar-height));
     position: relative;
-    padding: max(5vh, 5vw);
-    margin: max(5vh, 5vw);
+    padding: var(--content-container-spacing);
+    margin: var(--content-container-spacing);
     background-color: var(--background-color-charcoal);
     z-index: 1;
     box-shadow: var(--content-box-shadow);
     box-sizing: content-box;
 }
 
+#resume-container p {
+    width: 80%;
+    max-height: 50%;
+    padding: 5%;
+    margin: 5%;
+    box-shadow: var(--content-box-shadow);
+}
+
 #resume-download-button {
     display: block;
     position: relative;
+    width: 50%;
+    padding: 2.5%;
+    margin: 2.5%;
     background-color: transparent;
     border: solid var(--color-emphasis-green) 1px;
     cursor: pointer;
@@ -255,17 +256,10 @@ autofit-font-nowrap {
     text-decoration: none;
     color: var(--color-primary);
     white-space: nowrap;
-    width: 50%;
-    padding: 2%;
 }
 
 #resume-download-button:hover {
     background-color: var(--color-emphasis-green);
-}
-
-#resume-container autofit-font-wrap {
-    position: relative;
-    height: min(80vh, 80vw);
 }
 
 /* text sections */
@@ -288,11 +282,14 @@ autofit-font-nowrap {
 }
 
 progress-bar-borderless {
+    display: flex;
+    align-content: center;
     --bar-completed-color: var(--color-emphasis-green);
     --bar-completed-percentage: 0;
     transition: --bar-completed-percentage 1s;
     min-height: 5vh;
     max-height: 20vh;
+    will-change: var(--bar-completed-percentage);
 }
 
 #progress-bar-html-css.ready {
@@ -320,11 +317,6 @@ progress-bar-borderless {
 }
 
 /* projects */
-
-section[name=projects] autofit-font-wrap {
-    height: calc(90% - var(--nav-bar-height));
-    width: 90%;
-}
 
 git {
     display: flex;
@@ -404,22 +396,22 @@ vertical-timeline-entry {
     height: 100%;
     border-top: 1px dashed var(--color-emphasis-green);
     box-sizing: border-box;
-    padding: 0 10% 0 10%;
+    padding: 5%;
+    padding-bottom: 0;
     box-shadow: -2px 0 0 var(--color-emphasis-green);
 }
 
 vertical-timeline-entry::after {
-    --diameter: 25px;
-    content: "";
+    --diameter: 5%;
     display: block;
     position: absolute;
     top: calc(var(--diameter) / -2);
     left: calc(var(--diameter) / -2);
     width: var(--diameter);
     height: var(--diameter);
-    background-color: var(--color-emphasis-green);
-    ;
-    border-radius: 50%;
+    content: "";
+    background-image: linear-gradient(var(--color-emphasis-green), var(--color-emphasis-green));
+    clip-path: circle(25%);
 }
 
 @media (min-aspect-ratio: 3/4) {
@@ -457,19 +449,23 @@ vertical-timeline-entry div {
     width: 100%;
 }
 
+vertical-timeline-entry p {
+    width: 100%;
+    margin: 0;
+}
+
 vertical-timeline-entry h4 {
     color: var(--color-emphasis-green);
-    font-family: var(--font-family-emphasis);
-    font-size: 70%;
+    font-weight: bold;
 }
 
 vertical-timeline-entry h5 {
-    font-size: 80%;
-    font-family: var(--font-family-emphasis);
+    white-space: normal;
+    font-weight: bold;
 }
 
 vertical-timeline-entry h6 {
-    font-size: 100%;
+    white-space: normal;
 }
 
 @keyframes bounce {
@@ -479,7 +475,7 @@ vertical-timeline-entry h6 {
     }
     60% {
         opacity: 1;
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
     100% {
         opacity: 1;
@@ -498,60 +494,118 @@ vertical-timeline-entry.bounce div {
     will-change: transform, opacity;
 }
 
-/* contact form */
-
-form-control {
-    box-sizing: border-box;
+#contact-form {
+    align-items: flex-start;
 }
 
+/* form control */
+
 form-control {
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-height: 15%;
     width: 100%;
     margin-bottom: 1%;
 }
 
+/* form control container */
+
 form-control::part(container) {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    flex-grow: 1;
+    position: relative;
+    width: 98%;
+    padding: 1%;
     outline-color: transparent;
 }
 
-/* Labels */
+form-control:not([empty]):is(:invalid, [internals-invalid]):focus-within::part(container) {
+    outline-color: var(--form-invalid-color);
+}
+
+form-control:not([type=submit], [empty]):is(:valid, [internals-valid]):focus-within::part(container) {
+    outline-color: var(--form-valid-color);
+}
+
+form-control[empty]:focus-within::part(container) {
+    outline-color: var(--form-invalid-color);
+}
+
+form-control::part(control) {
+    flex-grow: 1;
+}
+
+/* form control validation message */
+
+form-control::part(validation-message) {
+    display: none;
+}
+
+form-control:not(:focus-within)[visited]::part(validation-message) {
+    display: block;
+    color: var(--form-invalid-color);
+    font-size: smaller;
+    background-color: var(--container-color);
+}
+
+/* form control label */
 
 form-control::part(label) {
-    position: absolute;
-    left: 1%;
-    width: 98%;
     color: var(--form-placeholder-color);
 }
 
-form-control[visited]::part(label), form-control:is(:focus-within)::part(label) {
-    position: static;
+form-control[visited]:is([required], :not([empty]))::part(label), form-control:is(:focus-within)::part(label) {
+    display: block;
+    position: unset;
     width: 100%;
+    height: unset;
     font-size: 60%;
     color: var(--form-label-color);
 }
 
-/* Submit */
+form-control:not([type=submit])::part(control) {
+    height: 0;
+}
+
+form-control[visited]:is([required], :not([empty]))::part(control), form-control:is(:focus-within)::part(control) {
+    height: auto;
+}
+
+form-control[type=textarea] {
+    flex-grow: 1;
+    max-height: 30%;
+}
+
+form-control[type=textarea]::part(control) {
+    resize: none;
+}
+
+/* form control submit */
 
 form-control[type=submit]::part(container) {
     background-color: var(--form-invalid-color);
     color: var(--form-submit-color);
 }
 
-form-control[type=submit]::part(label) {
+/* form-control[type=submit]::part(label) {
     display: none;
-}
+} */
 
 form-control[type=submit]::part(control) {
-    position: absolute;
-    height: 100%;
-    width: 100%;
     background-color: transparent;
 }
 
 form-control[type=submit]::part(container)::before {
     content: "Submit";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
 
 form-control[type=submit][disabled]::part(container)::before {
@@ -568,33 +622,6 @@ form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=su
 
 form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
     cursor: pointer;
-}
-
-/* Validity Outlines */
-
-form-control:not([empty]):is(:invalid, [internals-invalid]):focus-within::part(container) {
-    outline-color: var(--form-invalid-color);
-}
-
-form-control:not([type=submit], [empty]):is(:valid, [internals-valid]):focus-within::part(container) {
-    outline-color: var(--form-valid-color);
-}
-
-form-control[empty]:focus-within::part(container) {
-    outline-color: var(--form-invalid-color);
-}
-
-/* Validation Message */
-
-form-control::part(validation-message) {
-    display: none;
-}
-
-form-control:not(:focus-within)[visited]::part(validation-message) {
-    display: block;
-    color: var(--form-invalid-color);
-    font-size: smaller;
-    background-color: var(--container-color);
 }
 
 #footer {

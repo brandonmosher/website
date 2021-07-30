@@ -10,13 +10,7 @@
             margin: 0;
         }
 
-        git-container {
-            height: 100vh;
-            width: 100vw;
-            position: relative;
-        }
-
-        git-container::part(user) {
+        git {
             width: 100%;
             height: 50%;
             display: flex;
@@ -33,15 +27,6 @@
             padding: 1vw;
         }
 
-        git-container::part(repo) {
-            width: 100%;
-            height: 50%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            position: relative;
-        }
-
         git-repo {
             width: calc(50% - 2px - 4vw);
             height: calc(50% - 2px - 4vw);
@@ -53,12 +38,12 @@
 </head>
 
 <body>
-    <git-container>
+    <git>
         <git-user user-login="brandonmosher"></git-user>
         <git-repo repo-owner="brandonmosher" repo-name="astarc"></git-repo>
         <git-repo repo-owner="brandonmosher" repo-name="pyctemp"></git-repo>
         <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
-    </git-container>
+    </git>
 </body>
 
 </html>
