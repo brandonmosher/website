@@ -12,6 +12,8 @@ Pending
   - {resize,shrink,grow}-{add,remove}-class
 - Create progress-bar-container that allows centering on highest completion percentage using a resizeObserver to recalculate the width of each progress-bar relative to the container.
 - Control sizer in form-Control
+- Cleanup use of vh and vw units
+- Consistency for nav-point/section sizing method.
 
 Completed
 - fix form validity polyfill
