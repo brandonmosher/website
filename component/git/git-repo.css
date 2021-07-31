@@ -8,7 +8,7 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: "html-url html-url html-url html-url" "description description description description" "language stargazers-count watchers-count forks-count";
-    grid-gap: 2.5%;
+    grid-column-gap: 2.5%;
     height: 100%;
 }
 
@@ -30,16 +30,17 @@
 :is(#repo-language, #repo-stargazers-count, #repo-watchers-count, #repo-forks-count)::before {
     content: "";
     display: block;
-    height: 3vw;
-    width: 3vw;
-    margin-right: 1vw;
+    height: min(3vw,3vh);
+    width: min(3vw,3vh);
+    margin-right: min(1vw,1vh);
     background-repeat: no-repeat;
     background-size: contain;
+    position: relative;
 }
 
 #repo-language::before {
     background-image: linear-gradient(var(--language-color), var(--language-color));
-    clip-path: circle(40%);
+    clip-path: circle(min(1vw,1vh));
 }
 
 #repo-stargazers-count {
