@@ -16,6 +16,7 @@ Pending
 - consistency for nav-point/section sizing method.
 - allow control over one-shot behavior for form-control-submit-mixin
 - favicon
+- element-internals-polyfill patch not working up in production build
 
 Completed
 - fix form validity polyfill

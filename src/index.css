@@ -443,7 +443,7 @@ vertical-timeline-entry {
     box-sizing: border-box;
     padding: 5%;
     padding-bottom: 0;
-    box-shadow: -2px 0 0 var(--color-green);
+    box-shadow: -1px 0 0 var(--color-green);
 }
 
 vertical-timeline-entry::after {
@@ -467,10 +467,10 @@ vertical-timeline-entry::after {
         width: 50%;
     }
     vertical-timeline> :nth-child(odd) vertical-timeline-entry {
-        box-shadow: inset -2px 0 0 var(--color-green);
+        box-shadow: inset -1px 0 0 var(--color-green);
     }
     vertical-timeline> :nth-child(even) vertical-timeline-entry {
-        box-shadow: -2px 0 0 var(--color-green);
+        box-shadow: -1px 0 0 var(--color-green);
     }
     vertical-timeline> :nth-child(even) {
         align-self: flex-end;
