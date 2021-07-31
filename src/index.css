@@ -16,145 +16,34 @@
     --form-placeholder-color: gray;
     --form-submit-color: var(--color-primary);
     --content-box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
+    --content-container-spacing: max(2vh, 2vw);
+}
+
+html, body {
+    height: 100%;
+    position: relative;
 }
 
 body {
     margin: 0;
     color: var(--color-primary);
     font-family: var(--font-family-primary);
-    font-size: 1.25em;
-    font-size: min(100%, 2.7vh, 2.7vw);
-}
-
-.color-emphasis-gray {
-    color: var(--color-emphasis-gray)
-}
-
-.color-emphasis-green {
-    color: var(--color-emphasis-green)
+    font-size: min(1.25em, 2.7vh, 2.7vw);
 }
 
 on-scroll-container {
-    height: 100vh;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
 }
 
-/* section definitions */
-
-section, half-section, double-section {
-    display: block;
-    position: relative;
+nav-point {
+    height: 100%;
 }
 
-section {
-    height: 100vh;
-}
-
-half-section {
-    height: 50vh;
-}
-
-double-section {
-    height: 200vh;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    text-transform: uppercase;
-    width: 100%;
-    white-space: nowrap;
-}
-
-h1, h2, h3 {
-    font-family: var(--font-family-emphasis);
-}
-
-h4, h5, h6 {
-    letter-spacing: 0.18em;
-    line-height: 1.8em;
-    font-weight: 400;
-    font-family: var(--font-family-primary);
-}
-
-section-header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 80%;
-    height: var(--nav-bar-content-height);
-    padding: 1%;
-    text-align: center;
-}
-
-/* utility classes */
-
-.center-children {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.horizontal-center-children {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.center-text {
-    text-align: center;
-}
-
-.scroll-snap-container {
-    scroll-snap-type: y mandatory;
-    scroll-snap-stop: always;
-}
-
-.scroll-snap-center {
-    scroll-snap-align: center;
-}
-
-.scroll-snap-start {
-    scroll-snap-align: start;
-}
-
-.scroll-snap-none {
-    scroll-snap-align: none;
-}
-
-/* backgrounds */
-
-tinted-background {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-#background1 {
-    --tint-rgba: rgba(50, 65, 88, 0.55);
-    --background-image: url(/img/2.webp);
-    height: calc(250vh * 2 / 3);
-}
-
-#background2 {
-    --background-image: url(/img/3.webp);
-    height: calc(150vh * 2 / 3);
-}
-
-#background3 {
-    height: calc(150vh * 2 / 3);
-}
-
-#background4 {
-    --background-image: url(/img/4.webp);
-    height: calc(250vh * 2 / 3);
-}
-
-#background5 {
-    height: calc(150vh * 2 / 3);
+nav-point[id="experience"] {
+    height: 200%;
 }
 
 /* navigation bar */
@@ -203,22 +92,154 @@ nav-entry:not(.active):hover {
     color: white;
 }
 
+/* section definitions */
+
+section, half-section, double-section {
+    display: block;
+    position: relative;
+}
+
+section {
+    height: 100%;
+}
+
+half-section {
+    height: 50%;
+}
+
+double-section {
+    height: 200%;
+}
+
+section-header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    height: var(--nav-bar-content-height);
+    padding: 1%;
+    text-align: center;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--nav-bar-height);
+    background-color: var(--background-color-charcoal);
+}
+
+/* backgrounds */
+
+tinted-background {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#background1 {
+    --tint-rgba: rgba(50, 65, 88, 0.55);
+    --background-image: url(/img/2.webp);
+    height: calc(250vh * 2 / 3);
+}
+
+#background2 {
+    --background-image: url(/img/3.webp);
+    height: calc(150vh * 2 / 3);
+}
+
+#background3 {
+    height: calc(150vh * 2 / 3);
+}
+
+#background4 {
+    --background-image: url(/img/4.webp);
+    height: calc(250vh * 2 / 3);
+}
+
+#background5 {
+    height: calc(150vh * 2 / 3);
+}
+
 on-intersection-add-class {
     display: block;
     position: relative;
 }
 
-#intro-container {
-    width: calc(min(60vh, 60vw) - (4 * min(5vh, 5vw)));
-    height: calc(min(60vh, 60vw) - (4 * min(5vh, 5vw)));
-    padding: min(5vh, 5vw);
-    margin: min(5vh, 5vw);
-    padding-bottom: 0;
-    text-align: start;
+
+/* utility classes */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    text-transform: uppercase;
+    width: 100%;
+    white-space: nowrap;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-family-emphasis);
+}
+
+h4, h5, h6 {
+    letter-spacing: 0.18em;
+    line-height: 1.8em;
+    font-weight: 400;
+    font-family: var(--font-family-primary);
+}
+
+.color-emphasis-gray {
+    color: var(--color-emphasis-gray)
+}
+
+.color-emphasis-green {
+    color: var(--color-emphasis-green)
+}
+
+.center-children {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.horizontal-center-children {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.scroll-snap-container {
+    scroll-snap-type: y mandatory;
+    scroll-snap-stop: always;
+}
+
+.scroll-snap-center {
+    scroll-snap-align: center;
+}
+
+.scroll-snap-start {
+    scroll-snap-align: start;
+}
+
+.scroll-snap-none {
+    scroll-snap-align: none;
+}
+
+[enter-any-add-class=transition-fade-in]>* {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.transition-fade-in {
+    opacity: 1;
 }
 
 .content-container {
-    --content-container-spacing: max(2vh, 2vw);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -233,6 +254,19 @@ on-intersection-add-class {
     box-shadow: var(--content-box-shadow);
     box-sizing: content-box;
 }
+
+/* Intro */
+
+#intro-container {
+    width: calc(min(60vh, 60vw) - (4 * min(5vh, 5vw)));
+    height: calc(min(60vh, 60vw) - (4 * min(5vh, 5vw)));
+    padding: min(5vh, 5vw);
+    margin: min(5vh, 5vw);
+    padding-bottom: 0;
+    text-align: start;
+}
+
+/* Resume */
 
 #resume-container {
     justify-content: space-evenly;
@@ -278,17 +312,6 @@ on-intersection-add-class {
     background-color: var(--color-emphasis-green);
 }
 
-/* text sections */
-
-[enter-any-add-class=transition-fade-in]>* {
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-.transition-fade-in {
-    opacity: 1;
-}
-
 /* progress bar */
 
 @property --bar-completed-percentage {
@@ -302,14 +325,11 @@ progress-bar-borderless {
     align-content: center;
     --bar-completed-color: var(--color-emphasis-green);
     --bar-completed-percentage: 0;
+    --label-left-width: 30%;
     transition: --bar-completed-percentage 1s;
     min-height: 5vh;
     max-height: 20vh;
-    will-change: var(--bar-completed-percentage);
-}
-
-progress-bar-borderless::part(label-left) {
-    width: 30%;
+    will-change: --bar-completed-percentage;
 }
 
 #progress-bar-html-css.ready {
@@ -612,9 +632,7 @@ form-control[type=submit]::part(container) {
     color: var(--form-submit-color);
 }
 
-/* form-control[type=submit]::part(label) {
-    display: none;
-} */
+
 
 form-control[type=submit]::part(control) {
     background-color: transparent;
@@ -642,12 +660,4 @@ form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=su
 
 form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
     cursor: pointer;
-}
-
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: var(--nav-bar-height);
-    background-color: var(--background-color-charcoal);
 }
