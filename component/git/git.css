@@ -1,0 +1,22 @@
+#error-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(Img/icons8-github-50.webp);
+}
+
+#error-message {
+    color: red;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#error-message:hover {
+    white-space: normal;
+    overflow: auto;
+}

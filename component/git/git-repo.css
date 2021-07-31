@@ -1,3 +1,4 @@
+@import 'git.css';
 @import "./language-colors.css";
 :host {
     display: block;

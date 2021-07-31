@@ -7,17 +7,19 @@ Pending
 - Change MutationObserverHTML element to be query-selector based and support attributes like:
   - {add,remove}-child-{add,remove}-class
   - {add,remove/change}-attibute-{add,remove}-class
-- Separate component into own repo and publish as npm-package(s). Behavioral components separate fom content components.
-- Create query-selector based ResizeObseverHTMLElement
+- separate component into own repo and publish as npm-package(s). Behavioral components separate fom content components.
+- create query-selector based ResizeObseverHTMLElement
   - {resize,shrink,grow}-{add,remove}-class
-- Create progress-bar-container that allows centering on highest completion percentage using a resizeObserver to recalculate the width of each progress-bar relative to the container.
-- Control sizer in form-Control
-- Cleanup use of vh and vw units
-- Consistency for nav-point/section sizing method.
+- create progress-bar-container that allows centering on highest completion percentage using a resizeObserver to recalculate the width of each progress-bar relative to the container.
+- control sizer in form-Control
+- cleanup use of vh and vw units
+- consistency for nav-point/section sizing method.
+- allow control over one-shot behavior for form-control-submit-mixin
+- favicon
 
 Completed
 - fix form validity polyfill
-- Cleanup on-scroll and add support for scroll-{start/stop}-{up,right,down-left}-{add/remove}-class
+- cleanup on-scroll and add support for scroll-{start/stop}-{up,right,down-left}-{add/remove}-class
 - make on-intersection-add-class more powerful
   - {enter, leave}-{top, right, left, bottom}-{add, remove}-class
 - separate rather than inherited class for autofit-font-queryselector

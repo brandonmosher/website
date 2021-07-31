@@ -1,5 +1,5 @@
-import css from "./nav-point.css";
-import html from "./nav-point.html";
+import css from "./nav-section.css";
+import html from "./nav-section.html";
 import { OnIntersectionHTMLElement } from "Component/on-intersection/on-intersection.js"
 
 function callback(entries, observer) {
@@ -20,7 +20,7 @@ function callback(entries, observer) {
 }
 
 
-customElements.define('nav-point',
+customElements.define('nav-section',
     class extends OnIntersectionHTMLElement {
         constructor() {
             super(callback, {

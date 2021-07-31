@@ -2,170 +2,22 @@
     --nav-bar-height: 8vh;
     --nav-bar-padding: min(1vh, 1vw);
     --nav-bar-content-height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-padding)));
+    --content-box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
+    --content-container-spacing: max(2vh, 2vw);
     --font-family-primary: 'avenir-35-light', Fallback, sans-serif;
     --font-family-emphasis: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
     --color-primary: white;
-    --color-emphasis-gray: #BEC7D5;
-    --color-emphasis-green: #4CAF50;
-    --color-emphasis-red: #dc3545;
-    --background-color-charcoal: rgba(51, 59, 80, 1);
-    --form-valid-color: var(--color-emphasis-green);
-    --form-valid-color-focus: var(--color-emphasis-green);
-    --form-invalid-color: var(--color-emphasis-red);
+    --color-gray: #BEC7D5;
+    --color-green: #4CAF50;
+    --color-red: #dc3545;
+    --color-charcoal: #333b50;
+    --form-valid-color: var(--color-green);
+    --form-valid-focus-color: var(--color-green);
+    --form-invalid-color: var(--color-red);
     --form-label-color: gray;
     --form-placeholder-color: gray;
     --form-submit-color: var(--color-primary);
-    --content-box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
-    --content-container-spacing: max(2vh, 2vw);
 }
-
-html, body {
-    height: 100%;
-    position: relative;
-}
-
-body {
-    margin: 0;
-    color: var(--color-primary);
-    font-family: var(--font-family-primary);
-    font-size: min(1.25em, 2.7vh, 2.7vw);
-}
-
-on-scroll-container {
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
-}
-
-nav-point {
-    height: 100%;
-}
-
-nav-point[id="experience"] {
-    height: 200%;
-}
-
-/* navigation bar */
-
-.nav-bar-transparent {
-    background-color: transparent;
-}
-
-.nav-bar-hide:hover {
-    top: 0;
-    background-color: var(--background-color-charcoal);
-}
-
-.nav-bar-hide {
-    top: calc(1vh - var(--nav-bar-height));
-}
-
-nav-bar {
-    padding: var(--nav-bar-padding);
-    position: sticky;
-    top: 0;
-    width: calc(100% - (2 * var(--nav-bar-padding)));
-    height: var(--nav-bar-content-height);
-    z-index: 4;
-    box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
-    background-color: var(--background-color-charcoal);
-    transition: top 0.5s, background-color 1s;
-}
-
-nav-entry {
-    color: var(--color-emphasis-gray);
-    --background-color-hover: transparent;
-    --color-hover: var(--color-primary);
-    padding: 1%;
-}
-
-nav-entry.active {
-    font-weight: bold;
-    transform-origin: top center;
-    transform: scale(1.1) translateY(-5%);
-    color: var(--color-emphasis-green);
-    background-color: transparent;
-}
-
-nav-entry:not(.active):hover {
-    color: white;
-}
-
-/* section definitions */
-
-section, half-section, double-section {
-    display: block;
-    position: relative;
-}
-
-section {
-    height: 100%;
-}
-
-half-section {
-    height: 50%;
-}
-
-double-section {
-    height: 200%;
-}
-
-section-header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 80%;
-    height: var(--nav-bar-content-height);
-    padding: 1%;
-    text-align: center;
-}
-
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: var(--nav-bar-height);
-    background-color: var(--background-color-charcoal);
-}
-
-/* backgrounds */
-
-tinted-background {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-#background1 {
-    --tint-rgba: rgba(50, 65, 88, 0.55);
-    --background-image: url(/img/2.webp);
-    height: calc(250% * 2 / 3);
-}
-
-#background2 {
-    --background-image: url(/img/3.webp);
-    height: calc(150% * 2 / 3);
-}
-
-#background3 {
-    height: calc(150% * 2 / 3);
-}
-
-#background4 {
-    --background-image: url(/img/4.webp);
-    height: calc(250% * 2 / 3);
-}
-
-#background5 {
-    height: calc(150% * 2 / 3);
-}
-
-on-intersection-add-class {
-    display: block;
-    position: relative;
-}
-
 
 /* utility classes */
 
@@ -180,19 +32,32 @@ h1, h2, h3 {
     font-family: var(--font-family-emphasis);
 }
 
-h4, h5, h6 {
+h4, h5, h6, #intro-container h2 {
     letter-spacing: 0.18em;
     line-height: 1.8em;
-    font-weight: 400;
     font-family: var(--font-family-primary);
+    font-size: inherit;
 }
 
-.color-emphasis-gray {
-    color: var(--color-emphasis-gray)
+h4 {
+    font-weight: 650;
 }
 
-.color-emphasis-green {
-    color: var(--color-emphasis-green)
+h5 {
+    font-weight: 550;
+}
+
+h6 {
+    font-weight: 500;
+    text-transform: none;
+}
+
+.color-gray {
+    color: var(--color-gray)
+}
+
+.color-green {
+    color: var(--color-green)
 }
 
 .center-children {
@@ -230,6 +95,18 @@ h4, h5, h6 {
     scroll-snap-align: none;
 }
 
+.height-50 {
+    height: 50%;
+}
+
+.height-75 {
+    height: 75%;
+}
+
+.height-200 {
+    height: 200%;
+}
+
 [enter-any-add-class=transition-fade-in]>* {
     opacity: 0;
     transition: opacity 1s;
@@ -238,6 +115,137 @@ h4, h5, h6 {
 .transition-fade-in {
     opacity: 1;
 }
+
+html, body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    color: var(--color-primary);
+    font-family: var(--font-family-primary);
+    font-size: min(1em, 2.5vh, 2.5vw);
+}
+
+on-scroll-container {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* navigation bar */
+
+.nav-bar-transparent {
+    background-color: transparent;
+}
+
+.nav-bar-hide:hover {
+    top: 0;
+    background-color: var(--color-charcoal);
+}
+
+.nav-bar-hide {
+    top: calc(1vh - var(--nav-bar-height));
+}
+
+nav-bar {
+    padding: var(--nav-bar-padding);
+    position: sticky;
+    top: 0;
+    width: calc(100% - (2 * var(--nav-bar-padding)));
+    height: var(--nav-bar-content-height);
+    z-index: 4;
+    box-shadow: 0 0 4vh 0px rgb(45 45 45 / 15%);
+    background-color: var(--color-charcoal);
+    transition: top 0.5s, background-color 1s;
+}
+
+nav-entry {
+    color: var(--color-gray);
+    --background-color-hover: transparent;
+    --color-hover: var(--color-primary);
+    padding: 1%;
+}
+
+nav-entry.active {
+    font-weight: bold;
+    transform-origin: top center;
+    transform: scale(1.1) translateY(-5%);
+    color: var(--color-green);
+    background-color: transparent;
+}
+
+nav-entry:not(.active):hover {
+    color: white;
+}
+
+nav-section {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+nav-section-header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    height: var(--nav-bar-content-height);
+    padding: 1%;
+    text-align: center;
+}
+
+padding-section {
+    display: block;
+    position: relative;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--nav-bar-height);
+    background-color: var(--color-charcoal);
+}
+
+/* backgrounds */
+
+tinted-background {
+    --tint-rgba: rgba(10, 17, 36, 0.55);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#background1 {
+    --tint-rgba: rgba(50, 65, 88, 0.55);
+    --background-image: url(/img/2.webp);
+    height: calc(250% * 2 / 3);
+}
+
+#background2 {
+    --background-image: url(/img/3.webp);
+    height: calc(150% * 2 / 3);
+}
+
+#background3 {
+    height: calc(150% * 2 / 3);
+}
+
+#background4 {
+    --background-image: url(/img/4.webp);
+    height: calc(275% * 2 / 3);
+}
+
+#background5 {
+    height: calc(150% * 2 / 3);
+}
+
+/* Content */
 
 .content-container {
     display: flex;
@@ -249,7 +257,7 @@ h4, h5, h6 {
     position: relative;
     padding: var(--content-container-spacing);
     margin: var(--content-container-spacing);
-    background-color: var(--background-color-charcoal);
+    background-color: var(--color-charcoal);
     z-index: 1;
     box-shadow: var(--content-box-shadow);
     box-sizing: content-box;
@@ -276,18 +284,16 @@ h4, h5, h6 {
     width: 80%;
     min-height: 0;
     max-height: 80%;
-    overflow: hidden;
     box-shadow: var(--content-box-shadow);
 }
 
-#resume-container p {    
+#resume-text-container>p {
     padding: 5%;
     margin: 5%;
     text-align: center;
 }
 
 #resume-download-container {
-    overflow: hidden;
     min-height: 0;
     max-height: 20%;
     width: 50%;
@@ -299,7 +305,7 @@ h4, h5, h6 {
     padding: 2.5%;
     margin: 2.5%;
     background-color: transparent;
-    border: solid var(--color-emphasis-green) 1px;
+    border: solid var(--color-green) 1px;
     cursor: pointer;
     transition: background-color 0.5s;
     text-align: center;
@@ -309,7 +315,7 @@ h4, h5, h6 {
 }
 
 #resume-download-button:hover {
-    background-color: var(--color-emphasis-green);
+    background-color: var(--color-green);
 }
 
 /* progress bar */
@@ -323,13 +329,12 @@ h4, h5, h6 {
 progress-bar-borderless {
     display: flex;
     align-content: center;
-    --bar-completed-color: var(--color-emphasis-green);
+    --bar-completed-color: var(--color-green);
     --bar-completed-percentage: 0;
     --label-left-width: 30%;
     transition: --bar-completed-percentage 1s;
-    min-height: 5vh;
-    max-height: 20vh;
     will-change: --bar-completed-percentage;
+    text-transform: uppercase;
 }
 
 #progress-bar-html-css.ready {
@@ -366,7 +371,7 @@ git {
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: var(--background-color-charcoal);
+    background-color: var(--color-charcoal);
 }
 
 git-user, git-repo {
@@ -382,14 +387,14 @@ git-user::part(user-name) {
 }
 
 git-user::part(user-html-url) {
-    color: var(--color-emphasis-green);
+    color: var(--color-green);
     text-decoration: none;
     text-transform: lowercase;
 }
 
 git-repo::part(repo-html-url) {
     font-family: var(--font-family-emphasis);
-    color: var(--color-emphasis-green);
+    color: var(--color-green);
     text-decoration: none;
 }
 
@@ -434,11 +439,11 @@ vertical-timeline-entry {
     position: relative;
     width: 100%;
     height: 100%;
-    border-top: 1px dashed var(--color-emphasis-green);
+    border-top: 1px dashed var(--color-green);
     box-sizing: border-box;
     padding: 5%;
     padding-bottom: 0;
-    box-shadow: -2px 0 0 var(--color-emphasis-green);
+    box-shadow: -2px 0 0 var(--color-green);
 }
 
 vertical-timeline-entry::after {
@@ -450,7 +455,7 @@ vertical-timeline-entry::after {
     width: var(--diameter);
     height: var(--diameter);
     content: "";
-    background-image: linear-gradient(var(--color-emphasis-green), var(--color-emphasis-green));
+    background-image: linear-gradient(var(--color-green), var(--color-green));
     clip-path: circle(25%);
 }
 
@@ -462,10 +467,10 @@ vertical-timeline-entry::after {
         width: 50%;
     }
     vertical-timeline> :nth-child(odd) vertical-timeline-entry {
-        box-shadow: inset -2px 0 0 var(--color-emphasis-green);
+        box-shadow: inset -2px 0 0 var(--color-green);
     }
     vertical-timeline> :nth-child(even) vertical-timeline-entry {
-        box-shadow: -2px 0 0 var(--color-emphasis-green);
+        box-shadow: -2px 0 0 var(--color-green);
     }
     vertical-timeline> :nth-child(even) {
         align-self: flex-end;
@@ -495,17 +500,7 @@ vertical-timeline-entry p {
 }
 
 vertical-timeline-entry h4 {
-    color: var(--color-emphasis-green);
-    font-weight: bold;
-}
-
-vertical-timeline-entry h5 {
-    white-space: normal;
-    font-weight: bold;
-}
-
-vertical-timeline-entry h6 {
-    white-space: normal;
+    color: var(--color-green);
 }
 
 @keyframes bounce {
@@ -599,7 +594,7 @@ form-control::part(label) {
     color: var(--form-placeholder-color);
 }
 
-form-control[visited]:is([required], :not([empty]))::part(label), form-control:is(:focus-within)::part(label) {
+form-control[visited]:not([type=submit]):is([required], :not([empty]))::part(label), form-control:not([type=submit]):focus-within::part(label) {
     display: block;
     position: unset;
     width: 100%;
@@ -608,11 +603,11 @@ form-control[visited]:is([required], :not([empty]))::part(label), form-control:i
     color: var(--form-label-color);
 }
 
-form-control:not([type=submit])::part(control) {
+form-control::part(control) {
     height: 0;
 }
 
-form-control[visited]:is([required], :not([empty]))::part(control), form-control:is(:focus-within)::part(control) {
+form-control[visited]:not([type=submit]):is([required], :not([empty]))::part(control), form-control:not([type=submit]):focus-within::part(control) {
     height: auto;
 }
 
@@ -629,25 +624,11 @@ form-control[type=textarea]::part(control) {
 
 form-control[type=submit]::part(container) {
     background-color: var(--form-invalid-color);
+    align-items: center;
+}
+
+form-control[type=submit]::part(label) {
     color: var(--form-submit-color);
-}
-
-
-
-form-control[type=submit]::part(control) {
-    background-color: transparent;
-}
-
-form-control[type=submit]::part(container)::before {
-    content: "Submit";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-}
-
-form-control[type=submit][disabled]::part(container)::before {
-    content: "Thank you!";
 }
 
 form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]::part(container) {
@@ -655,9 +636,18 @@ form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=su
 }
 
 form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within, :disabled, [disabled])::part(container) {
-    background-color: var(--form-valid-color-focus);
+    background-color: var(--form-valid-focus-color);
 }
 
 form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
     cursor: pointer;
+}
+
+.squashed-form-control {
+    transition: opacity, max-height, padding, margin, overflow;
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 }
