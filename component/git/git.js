@@ -2,7 +2,7 @@ import { underscoreToHTMLCase } from "Lib/capitalization"
 export class GitHTMLElement extends HTMLElement {
     type = null;
     hostname = 'https://api.github.com';
-    token = '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';
+    token = null;
     get endpoint() { return ''; }
     handlers = null;
     shadowStyleInnerHTML = '';
@@ -27,11 +27,11 @@ export class GitHTMLElement extends HTMLElement {
         this.gridContainer.setAttribute('part', 'grid-container');
         fragment.appendChild(this.gridContainer);
 
-        const data = await fetch(`${this.hostname}/${this.endpoint}`, {
-            headers: {
-                Authorization: `token ${this.token}`
-            }
-        }).then(r => r.json());
+        const headers = {};
+        if(this.token) {
+            headers['Authorization'] = `token ${this.token}`;
+        }
+        const data = await fetch(`${this.hostname}/${this.endpoint}`, {headers}).then(r => r.json());
 
         Object.entries(this.handlers).forEach(([key, handler]) => {
             const id = `${this.type}-${underscoreToHTMLCase(key)}`;
