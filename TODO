@@ -13,12 +13,13 @@ Pending
 - create progress-bar-container that allows centering on highest completion percentage using a resizeObserver to recalculate the width of each progress-bar relative to the container.
 - control sizer in form-Control
 - cleanup use of vh and vw units
-- consistency for nav-point/section sizing method.
 - allow control over one-shot behavior for form-control-submit-mixin
 - favicon
-- element-internals-polyfill patch not working up in production build
+- element-internals-polyfill patch not working up in production build in Firefox
+- form captcah
 
 Completed
+- consistency for nav-point/section sizing method.
 - fix form validity polyfill
 - cleanup on-scroll and add support for scroll-{start/stop}-{up,right,down-left}-{add/remove}-class
 - make on-intersection-add-class more powerful

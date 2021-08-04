@@ -38,21 +38,9 @@
                     </nav-section-header>
                     <on-intersection-add-class id="resume-container" class="content-container"
                         enter-any-add-class="transition-fade-in">
-                        <div id="resume-text-container">
-                            <p>I'm a former U.S. Navy Chief Petty Officer turned
-                                software
-                                engineer. I have deep experience solving tough problems that have real impact. My
-                                interest areas include government efficiency and transparency, defense, cyber
-                                security,
-                                transportation, infrastructure, medicine, climate change, sustainability, and
-                                environmental quality. I care deeply about writing performant, secure, maintainable,
-                                and
-                                elegant code across the entire stack. I enjoy working on everything from robust
-                                cloud
-                                infrastructure and APIs to beautiful user interfaces. </p>
-                        </div>
+                        <div id="resume-summary-container"></div>
                         <div id="resume-download-container">
-                            <a id="resume-download-button" href="_blank" target="_blank" data-type="document">
+                            <a id="resume-download-button" href="https://github.com/brandonmosher/resume/raw/main/build/resume/resume.pdf" target="_blank" rel="noopener noreferrer" data-type="document">
                                 Download Resume
                             </a>
                         </div>
@@ -81,11 +69,13 @@
                     <nav-section-header>
                         <h3><span class="color-gray">03</span> Projects</h3>
                     </nav-section-header>
-                    <git class="content-container">
+                    <git id="git" class="content-container">
                         <git-user user-login="brandonmosher"></git-user>
                         <git-repo repo-owner="brandonmosher" repo-name="astarc"></git-repo>
                         <git-repo repo-owner="brandonmosher" repo-name="pyctemp"></git-repo>
                         <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
+                        <git-repo repo-owner="brandonmosher" repo-name="website"></git-repo>
+                        <git-repo repo-owner="brandonmosher" repo-name="resume"></git-repo>
                     </git>
                 </nav-section>
 
@@ -96,72 +86,7 @@
                     <nav-section-header>
                         <h3><span class="color-gray">04</span> Experience</h3>
                     </nav-section-header>
-                    <vertical-timeline>
-                        <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce"
-                            class="scroll-snap-none">
-                            <vertical-timeline-entry>
-                                <div>
-                                    <h4>2010</h4>
-                                    <h5>National Security Agency</h5>
-                                    <h6>Language Analyst</h6>
-                                    <p>Graduated from the Defense Language Institute Modern Standard Arabic program
-                                        with a 3.9 GPA. Qualified in Modern Standard, Levantine, Iraqi, and Egyptian
-                                        Arabic dialects at ACTFL advanced and superior levels. Qualified as a senior
-                                        language analyst. Awarded Junior Sailor of the Quarter and Flag Letter of
-                                        Commendation for superior performance.</p>
-                                </div>
-                            </vertical-timeline-entry>
-                        </on-intersection-add-class>
-
-                        <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
-                            <vertical-timeline-entry>
-                                <div>
-                                    <h4>2012</h4>
-                                    <h5>National Security Agency</h5>
-                                    <h6>Assistant NCOIC</h6>
-                                    <p>Developed standards for, trained, certified, and oversaw intelligence
-                                        analysts. Coordinated replacement of mission-critical software tools.
-                                        Rapidly developed and deployed software applications to meet emerging
-                                        mission needs. Audited Navy warfare qualification standard resolving over
-                                        100 errors. Organized major training events leading to a 15% increase in
-                                        qualified personnel. Awarded NSA Star award and Joint Service Commendation
-                                        medal.</p>
-                                </div>
-                            </vertical-timeline-entry>
-                        </on-intersection-add-class>
-
-                        <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
-                            <vertical-timeline-entry>
-                                <div>
-                                    <h4>2018</h4>
-                                    <h5>U.S. Navy Reserves</h5>
-                                    <h6>Leading Chief Petty Officer</h6>
-                                    <p>Oversaw operations, training budget and execution, personnel security, and
-                                        administration for Navy Reserve intelligence unit. Developed software to
-                                        coordinate regional remote distributed operations resulting in a 500%
-                                        increase in productivity. Developed secure web application to streamline
-                                        management of personnel security resulting in a 50% decrease in processing
-                                        time. Awarded Navy Achievement Medal.</p>
-                                </div>
-                            </vertical-timeline-entry>
-                        </on-intersection-add-class>
-
-                        <on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
-                            <vertical-timeline-entry>
-                                <div>
-                                    <h4>2019</h4>
-                                    <h5>National Security Agency</h5>
-                                    <h6>NCOIC</h6>
-                                    <p>Led forward deployed joint military and civilian intelligence cell providing
-                                        time-sensitive and strategic information to tactical and executive-level
-                                        decision makers. Oversaw intelligence support to U.S. operations and crisis
-                                        response. Developed highly effective standard operating procedures, tactics,
-                                        and techniques recognized and adopted by regional and national counterparts.
-                                        Developed workflow automation tools increasing processing capacity by 50%.
-                                        Awarded Joint Service Commendation Medal.</p>
-                            </vertical-timeline-entry>
-                        </on-intersection-add-class>
-                    </vertical-timeline>
+                    <vertical-timeline></vertical-timeline>
                 </nav-section>
 
                 <padding-section class="height-75"></padding-section>
@@ -199,6 +124,31 @@
                                 node.classList.add('squashed-form-control');
                             });
                             document.querySelector('form-control[type=submit]').innerText = 'Thank You!';
+                        });
+
+                        const make_vertical_timeline_entry = ({startDate, organization, jobTitle, cvitems} = {}) =>
+                            `<on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
+                                <vertical-timeline-entry>
+                                    <div>
+                                        <h4>${startDate}</h4>
+                                        <h5>${organization}</h5>
+                                        <h6>${jobTitle}</h6>
+                                        <p>${cvitems}</p>
+                                    </div>
+                                </vertical-timeline-entry>
+                            </on-intersection-add-class>`;
+
+                        fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/resume/resume.json')
+                        .then(response=>response.json())
+                        .then(json=>{
+                            const p = document.createElement('p');
+                            p.innerText = json.document.summary.cvparagraph;
+                            document.querySelector('#resume-summary-container').appendChild(p);
+                            innerHTML = json.document.experience.cventries.reduce((innerHTML, cventry) => {
+                                cventry.cvitems = cventry.cvitems.join(" ");
+                                return innerHTML + make_vertical_timeline_entry(cventry);
+                            }, '');
+                            document.querySelector('vertical-timeline').innerHTML = innerHTML;
                         });
                     </script>
                     <div id="footer"></div>

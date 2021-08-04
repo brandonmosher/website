@@ -19,13 +19,56 @@
     --form-submit-color: var(--color-primary);
 }
 
+/* Scrollbars */
+
+on-scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-charcoal) var(--color-gray);
+}
+
+:not(on-scroll-container) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray) var(--color-charcoal);
+}
+
+on-scroll-container::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+on-scroll-container::-webkit-scrollbar-track {
+    background: var(--color-gray);
+}
+
+on-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--color-charcoal);
+}
+
+on-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+:not(on-scroll-container)::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+}
+
+:not(on-scroll-container)::-webkit-scrollbar-track {
+    background: var(--color-charcoal);
+}
+
+:not(on-scroll-container)::-webkit-scrollbar-thumb {
+    background: var(--color-gray);
+}
+
+
 /* utility classes */
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     text-transform: uppercase;
     width: 100%;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 h1, h2, h3 {
@@ -280,14 +323,14 @@ tinted-background {
     justify-content: space-evenly;
 }
 
-#resume-text-container {
+#resume-summary-container {
     width: 80%;
     min-height: 0;
     max-height: 80%;
     box-shadow: var(--content-box-shadow);
 }
 
-#resume-text-container>p {
+#resume-summary-container>p {
     padding: 5%;
     margin: 5%;
     text-align: center;
@@ -364,14 +407,9 @@ progress-bar-borderless {
 /* projects */
 
 git {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     flex-wrap: wrap;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background-color: var(--color-charcoal);
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 git-user, git-repo {
@@ -399,11 +437,13 @@ git-repo::part(repo-html-url) {
 }
 
 @media (max-aspect-ratio: 3/4) {
-    git {
+    #git {
         flex-wrap: nowrap;
         flex-direction: column;
         align-items: center;
-        justify-content: stretch;
+        justify-content: flex-start;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
     git-user, git-repo {
         width: calc(100% - 4vw);
@@ -432,6 +472,10 @@ vertical-timeline on-intersection-add-class {
     height: 25%;
     width: 95%;
     scroll-snap-align: center;
+}
+
+vertical-timeline> :nth-child(1) {
+    scroll-snap-align: none;
 }
 
 vertical-timeline-entry {
