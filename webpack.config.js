@@ -28,17 +28,17 @@ module.exports = {
         loader: 'html-loader',
       },
       {
-        test: /\.(webp)$/i,
-        type: "asset",
-        generator: {
-          filename: 'img/[hash][ext][query]'
-        }
-      },
-      {
         test: /\.(ttf|woff|woff2)$/i,
         type: "asset",
         generator: {
           filename: 'font/[hash][ext][query]'
+        }
+      },
+      {
+        test: /\.(webp)$/i,
+        type: "asset",
+        generator: {
+          filename: 'img/[hash][ext][query]'
         }
       },
       {

@@ -40,7 +40,9 @@
                         enter-any-add-class="transition-fade-in">
                         <div id="resume-summary-container"></div>
                         <div id="resume-download-container">
-                            <a id="resume-download-button" href="https://github.com/brandonmosher/resume/raw/main/build/resume/resume.pdf" target="_blank" rel="noopener noreferrer" data-type="document">
+                            <a id="resume-download-button"
+                                href="https://github.com/brandonmosher/resume/raw/main/build/resume/resume.pdf"
+                                target="_blank" rel="noopener noreferrer" data-type="document">
                                 Download Resume
                             </a>
                         </div>
@@ -76,6 +78,23 @@
                         <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
                         <git-repo repo-owner="brandonmosher" repo-name="website"></git-repo>
                         <git-repo repo-owner="brandonmosher" repo-name="resume"></git-repo>
+                        <project id="project-pacman">
+                            <a href="https://drive.google.com/drive/folders/1HFxNVsQWryOYPgpBHcxYYqhqPPS5R_EB">
+                                Lifesize Pacman</a>
+                        </project>
+                        <project id="project-r10k">
+                            <a href="https://drive.google.com/drive/folders/1Zar_EmEbRwZw6HVLnNumsjWDx8cLE_pI">MIPS
+                                R10K Microprocessor</a>
+                        </project>
+                        <project id="project-slam"><a
+                                href="https://drive.google.com/drive/folders/1YjzT_7qpdkZjQ76zcOCCvEo-v1gyrCbw">Simultaneous
+                                Localization and Mapping Robot</a></project>
+                        <project id="project-tic-tac-toe"><a
+                                href="https://drive.google.com/drive/folders/102AN8otUolVnhyJ00cVi4qK0T-imfvds">Tic-Tac-Toe
+                                Robot</a></project>
+                        <project id="project-topological"><a
+                                href="https://drive.google.com/drive/folders/1HPq7hU05i7k-j3WwfQ18W5DzQ3FlkSZ9">Topological
+                                Mapping Robot</a></project>
                     </git>
                 </nav-section>
 
@@ -120,13 +139,13 @@
                             e.preventDefault();
                             form.querySelectorAll('form-control:not([type=submit])').forEach((node, i, arr) => {
                                 node.style.transitionDuration = `${i / (2 * arr.length)}s`;
-                                node.style.transitionDelay =  `${(arr.length - i) / (3 * arr.length)}s`;
+                                node.style.transitionDelay = `${(arr.length - i) / (3 * arr.length)}s`;
                                 node.classList.add('squashed-form-control');
                             });
                             document.querySelector('form-control[type=submit]').innerText = 'Thank You!';
                         });
 
-                        const make_vertical_timeline_entry = ({startDate, organization, jobTitle, cvitems} = {}) =>
+                        const make_vertical_timeline_entry = ({ startDate, organization, jobTitle, cvitems } = {}) =>
                             `<on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
                                 <vertical-timeline-entry>
                                     <div>
@@ -139,19 +158,22 @@
                             </on-intersection-add-class>`;
 
                         fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/resume/resume.json')
-                        .then(response=>response.json())
-                        .then(json=>{
-                            const p = document.createElement('p');
-                            p.innerText = json.document.summary.cvparagraph;
-                            document.querySelector('#resume-summary-container').appendChild(p);
-                            innerHTML = json.document.experience.cventries.reduce((innerHTML, cventry) => {
-                                cventry.cvitems = cventry.cvitems.join(" ");
-                                return innerHTML + make_vertical_timeline_entry(cventry);
-                            }, '');
-                            document.querySelector('vertical-timeline').innerHTML = innerHTML;
-                        });
+                            .then(response => response.json())
+                            .then(json => {
+                                const p = document.createElement('p');
+                                p.innerText = json.document.summary.cvparagraph;
+                                document.querySelector('#resume-summary-container').appendChild(p);
+                                innerHTML = json.document.experience.cventries.reduce((innerHTML, cventry) => {
+                                    cventry.cvitems = cventry.cvitems.join(" ");
+                                    return innerHTML + make_vertical_timeline_entry(cventry);
+                                }, '');
+                                document.querySelector('vertical-timeline').innerHTML = innerHTML;
+                            });
                     </script>
-                    <div id="footer"></div>
+                    <div id="footer">
+                        <a href="https://icons8.com">Icons from Icons8</a>
+                        <a href="http://www.onlinewebfonts.com">Fonts from Online Web Fonts</a>
+                    </div>
                 </nav-section>
 
             </parallax-layer>

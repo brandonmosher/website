@@ -61,7 +61,6 @@ on-scroll-container::-webkit-scrollbar-thumb:hover {
     background: var(--color-gray);
 }
 
-
 /* utility classes */
 
 h1, h2, h3, h4, h5, h6 {
@@ -249,11 +248,19 @@ padding-section {
 }
 
 #footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
     position: absolute;
     bottom: 0;
     width: 100%;
     height: var(--nav-bar-height);
     background-color: var(--color-charcoal);
+}
+
+#footer a {
+    font-size: smaller;
+    color: var(--color-primary);
 }
 
 /* backgrounds */
@@ -412,8 +419,32 @@ git {
     overflow-y: hidden;
 }
 
-git-user, git-repo {
-    width: calc(50% - 4vw);
+#git {
+    justify-content: flex-start;
+    padding-left: 0;
+}
+
+git::before {
+    position: sticky;
+    content: '';
+    width: var(--content-container-spacing);
+    height: 100%;
+    left: 0;
+    z-index: 5;
+    background: linear-gradient(to right, var(--color-charcoal), transparent);
+}
+
+git::after {
+    position: sticky;
+    content: '';
+    width: var(--content-container-spacing);
+    height: 100%;
+    right: -2vw;
+    background: linear-gradient(to right, transparent, var(--color-charcoal));
+}
+
+git-user, git-repo, project {
+    width: calc(50% - 6vw);
     height: calc(50% - 4vw);
     box-shadow: var(--content-box-shadow);
     margin: 1vw;
@@ -436,19 +467,73 @@ git-repo::part(repo-html-url) {
     text-decoration: none;
 }
 
+project {
+    display: flex;
+    flex-direction: column;
+}
+
+project::after {
+    content: "";
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex: 1 1 0;
+}
+
+#project-pacman::after {
+    background-image: url('Img/icons8-pacman-100.webp');
+}
+
+#project-slam::after, #project-topological::after {
+    background-image: url('Img/icons8-science-fiction-100.webp');
+}
+
+#project-r10k::after {
+    background-image: url('Img/icons8-microchip-96.webp');
+}
+
+#project-tic-tac-toe::after {
+    background-image: url('Img/icons8-robot-90.webp');
+}
+
+project a {
+    display: block;
+    text-decoration: none;
+    font-family: var(--font-family-emphasis);
+    color: var(--color-green);
+}
+
 @media (max-aspect-ratio: 3/4) {
     #git {
+        padding-left: var(--content-container-spacing);
         flex-wrap: nowrap;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
         overflow-x: hidden;
         overflow-y: auto;
     }
-    git-user, git-repo {
+
+    git::before {
+        position: sticky;
+        content: '';
+        width: 100%;
+        height: var(--content-container-spacing);
+        top: calc(-1 * var(--content-container-spacing));
+        background: linear-gradient(to top, transparent, var( --color-charcoal));
+        flex: 0 0 var(--content-container-spacing);
+    }
+
+    git::after {
+        position: sticky;
+        content: '';
+        width: 100%;
+        height: var(--content-container-spacing);
+        bottom: calc(-1 * var(--content-container-spacing));
+        background: linear-gradient(to bottom, transparent, var( --color-charcoal));
+        flex: 1 0 10%;
+    }
+    git-user, git-repo, project {
         width: calc(100% - 4vw);
         height: unset;
-        flex: 1 1 auto;
+        flex: 1 0 20%;
     }
     git-user {
         flex: 2 1 auto;
