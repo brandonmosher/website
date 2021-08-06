@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brandon Mosher</title>
+    <link rel="preconnect" href="https://raw.githubusercontent.com">
+    <link rel="preconnect" href="https://api.github.com">
 </head>
 
 <body>
@@ -17,7 +19,7 @@
         <nav-bar class="header">
             <nav-entry href="#home">Home</nav-entry>
             <nav-entry href="#resume">Resume</nav-entry>
-            <nav-entry href="#proficiency">Proficiency</nav-entry>
+            <nav-entry href="#skills">Skills</nav-entry>
             <nav-entry href="#projects">Projects</nav-entry>
             <nav-entry href="#experience">Experience</nav-entry>
             <nav-entry href="#contact">Contact</nav-entry>
@@ -51,17 +53,12 @@
 
                 <padding-section class="height-50"></padding-section>
 
-                <nav-section id="proficiency" class="horizontal-center-children scroll-snap-center">
+                <nav-section id="skills" class="horizontal-center-children scroll-snap-center">
                     <nav-section-header>
-                        <h3><span class="color-gray">02</span> Proficiency</h3>
+                        <h3><span class="color-gray">02</span> Skills</h3>
                     </nav-section-header>
                     <on-intersection-add-class id="progress-bar-container" class="content-container"
                         query-selector="progress-bar-borderless" enter-any-add-class="ready">
-                        <progress-bar-borderless id="progress-bar-html-css">HTML, CSS</progress-bar-borderless>
-                        <progress-bar-borderless id="progress-bar-javascript">Javascript</progress-bar-borderless>
-                        <progress-bar-borderless id="progress-bar-c">C, C++</progress-bar-borderless>
-                        <progress-bar-borderless id="progress-bar-python">Python</progress-bar-borderless>
-                        <progress-bar-borderless id="progress-bar-linux">Linux</progress-bar-borderless>
                     </on-intersection-add-class>
                 </nav-section>
 
@@ -71,37 +68,15 @@
                     <nav-section-header>
                         <h3><span class="color-gray">03</span> Projects</h3>
                     </nav-section-header>
-                    <git id="git" class="content-container">
+                    <projects id="projects-container" class="content-container">
                         <git-user user-login="brandonmosher"></git-user>
-                        <git-repo repo-owner="brandonmosher" repo-name="astarc"></git-repo>
-                        <git-repo repo-owner="brandonmosher" repo-name="pyctemp"></git-repo>
-                        <git-repo repo-owner="brandonmosher" repo-name="devcontainer-base"></git-repo>
-                        <git-repo repo-owner="brandonmosher" repo-name="website"></git-repo>
-                        <git-repo repo-owner="brandonmosher" repo-name="resume"></git-repo>
-                        <project id="project-pacman">
-                            <a href="https://drive.google.com/drive/folders/1HFxNVsQWryOYPgpBHcxYYqhqPPS5R_EB">
-                                Lifesize Pacman</a>
-                        </project>
-                        <project id="project-r10k">
-                            <a href="https://drive.google.com/drive/folders/1Zar_EmEbRwZw6HVLnNumsjWDx8cLE_pI">MIPS
-                                R10K Microprocessor</a>
-                        </project>
-                        <project id="project-slam"><a
-                                href="https://drive.google.com/drive/folders/1YjzT_7qpdkZjQ76zcOCCvEo-v1gyrCbw">Simultaneous
-                                Localization and Mapping Robot</a></project>
-                        <project id="project-tic-tac-toe"><a
-                                href="https://drive.google.com/drive/folders/102AN8otUolVnhyJ00cVi4qK0T-imfvds">Tic-Tac-Toe
-                                Robot</a></project>
-                        <project id="project-topological"><a
-                                href="https://drive.google.com/drive/folders/1HPq7hU05i7k-j3WwfQ18W5DzQ3FlkSZ9">Topological
-                                Mapping Robot</a></project>
-                    </git>
+                    </projects>
                 </nav-section>
 
                 <padding-section class="height-50"></padding-section>
 
                 <nav-section id="experience" threshold="0.3"
-                    class="height-200 horizontal-center-children scroll-snap-start">
+                    class="height-250 horizontal-center-children scroll-snap-start">
                     <nav-section-header>
                         <h3><span class="color-gray">04</span> Experience</h3>
                     </nav-section-header>
@@ -145,7 +120,25 @@
                             document.querySelector('form-control[type=submit]').innerText = 'Thank You!';
                         });
 
-                        const make_vertical_timeline_entry = ({ startDate, organization, jobTitle, cvitems } = {}) =>
+                        const makeSkillId = (name) => `progress-bar-${name.toLowerCase().replace(/\+/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')}`;
+
+                        const makeSkillHTML = ({ name, proficiencyPercentage } = {}) => {
+                            return `<progress-bar-borderless id="${makeSkillId(name)}">${name}</progress-bar-borderless>`
+                        }
+
+                        const makeSkillCSS = ({ i, name, proficiencyPercentage } = {}) => {
+                            return `#${makeSkillId(name)}.ready {--bar-completed-percentage: ${parseInt(proficiencyPercentage)}; transition-delay: ${0.2 * i}s}`;
+                        }
+
+                        const makeProjectHTML = ({ url, name, cvparagraph, gitHubRepoName } = {}) => {
+                            if (gitHubRepoName) {
+                                const [repoOwner, repoName] = gitHubRepoName.split('/');
+                                return `<git-repo repo-owner="${repoOwner}"" repo-name="${repoName}"></git-repo>`;
+                            }
+                            return `<project id="project-${name.toLowerCase().replace(/ /g, '-')}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
+                        }
+
+                        const makeExperienceHTML = ({ startDate, organization, jobTitle, cvitems } = {}) =>
                             `<on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
                                 <vertical-timeline-entry>
                                     <div>
@@ -163,11 +156,28 @@
                                 const p = document.createElement('p');
                                 p.innerText = json.document.summary.cvparagraph;
                                 document.querySelector('#resume-summary-container').appendChild(p);
-                                innerHTML = json.document.experience.cventries.reduce((innerHTML, cventry) => {
-                                    cventry.cvitems = cventry.cvitems.join(" ");
-                                    return innerHTML + make_vertical_timeline_entry(cventry);
+
+                                const skillsInnerHTML = json.document.skills.cvskills.reduce((innerHTML, cvskill) => {
+                                    return innerHTML + makeSkillHTML(cvskill);
                                 }, '');
-                                document.querySelector('vertical-timeline').innerHTML = innerHTML;
+                                document.querySelector('#progress-bar-container').innerHTML += skillsInnerHTML;
+
+                                const skillsCSS = json.document.skills.cvskills.reduce((skillsCSS, cvskill, i) => {
+                                    return skillsCSS + makeSkillCSS({i, ...cvskill});
+                                }, '');
+                                document.querySelector('style').innerHTML += skillsCSS;
+
+                                const projectsInnerHTML = json.document.projects.cvprojects.reduce((projectsInnerHTML, cvproject) => {
+                                    return projectsInnerHTML + makeProjectHTML(cvproject);
+                                }, '');
+                                document.querySelector('projects').innerHTML += projectsInnerHTML;
+
+                                const experienceInnerHTML = json.document.experience.cventries.reduce((experienceInnerHTML, cventry) => {
+                                    cventry.cvitems = cventry.cvitems.join(" ");
+                                    return experienceInnerHTML + makeExperienceHTML(cventry);
+                                }, '');
+                                document.querySelector('vertical-timeline').innerHTML = experienceInnerHTML;
+
                             });
                     </script>
                     <div id="footer">

@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   mode: 'production',
@@ -60,11 +61,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',
+      'favicon': 'img/icons8-developer-100.webp'
     }),
     new MiniCssExtractPlugin({
       filename: 'index.css',
     }),
     new HTMLInlineCSSWebpackPlugin(),
+    new CompressionPlugin(),
   ],
   resolve: {
     alias: {

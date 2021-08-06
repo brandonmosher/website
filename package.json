@@ -16,6 +16,7 @@
   "author": "code.brandon+website@mosher.xyz",
   "license": "MIT",
   "devDependencies": {
+    "compression-webpack-plugin": "^8.0.1",
     "css-loader": "^5.2.6",
     "element-internals-polyfill": "^0.1.40",
     "file-loader": "^6.2.0",

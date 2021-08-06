@@ -145,8 +145,8 @@ h6 {
     height: 75%;
 }
 
-.height-200 {
-    height: 200%;
+.height-250 {
+    height: 250%;
 }
 
 [enter-any-add-class=transition-fade-in]>* {
@@ -288,7 +288,7 @@ tinted-background {
 
 #background4 {
     --background-image: url(/img/4.webp);
-    height: calc(275% * 2 / 3);
+    height: calc(325% * 2 / 3);
 }
 
 #background5 {
@@ -387,44 +387,20 @@ progress-bar-borderless {
     text-transform: uppercase;
 }
 
-#progress-bar-html-css.ready {
-    --bar-completed-percentage: 90;
-}
-
-#progress-bar-javascript.ready {
-    transition-delay: 0.1s;
-    --bar-completed-percentage: 85;
-}
-
-#progress-bar-c.ready {
-    transition-delay: 0.2s;
-    --bar-completed-percentage: 70;
-}
-
-#progress-bar-python.ready {
-    transition-delay: 0.3s;
-    --bar-completed-percentage: 85;
-}
-
-#progress-bar-linux.ready {
-    transition-delay: 0.4s;
-    --bar-completed-percentage: 65;
-}
-
 /* projects */
 
-git {
+projects {
     flex-wrap: wrap;
     overflow-x: auto;
     overflow-y: hidden;
 }
 
-#git {
+#projects-container {
     justify-content: flex-start;
     padding-left: 0;
 }
 
-git::before {
+projects::before {
     position: sticky;
     content: '';
     width: var(--content-container-spacing);
@@ -434,7 +410,7 @@ git::before {
     background: linear-gradient(to right, var(--color-charcoal), transparent);
 }
 
-git::after {
+projects::after {
     position: sticky;
     content: '';
     width: var(--content-container-spacing);
@@ -461,58 +437,93 @@ git-user::part(user-html-url) {
     text-transform: lowercase;
 }
 
+git-repo {
+    overflow: auto
+}
+
 git-repo::part(repo-html-url) {
     font-family: var(--font-family-emphasis);
     color: var(--color-green);
     text-decoration: none;
 }
 
+git-repo::part(description) {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+git-repo::part(description):hover {
+    overflow: visible;
+}
+
+git-repo::part(grid-container) {
+    grid-template-rows: 30% 1fr 20%;
+}
+
 project {
-    display: flex;
-    flex-direction: column;
-}
-
-project::after {
-    content: "";
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex: 1 1 0;
-    margin: 10%;
-}
-
-#project-pacman::after {
-    background-image: url('Img/icons8-pacman-100.webp');
-}
-
-#project-slam::after, #project-topological::after {
-    background-image: url('Img/icons8-science-fiction-100.webp');
-}
-
-#project-r10k::after {
-    background-image: url('Img/icons8-microchip-96.webp');
-}
-
-#project-tic-tac-toe::after {
-    background-image: url('Img/icons8-robot-90.webp');
+    position: relative;
+    display: grid;
+    grid-template-rows: 30% 1fr 20%;
+    grid-template-areas: "name" "cvparagraph" "icon";
+    grid-column-gap: 2.5%;
+    align-items: center;
+    overflow: auto;
 }
 
 project a {
-    display: block;
+    grid-area: name;
+    align-self: flex-start;
     text-decoration: none;
     font-family: var(--font-family-emphasis);
     color: var(--color-green);
 }
 
+project div {
+    grid-area: cvparagraph;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+project div:hover {
+    overflow: visible;
+}
+
+project::after {
+    content: "";
+    grid-area: icon;
+    height: min(3vw,3vh);
+    width: min(3vw,3vh);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#project-lifesize-pacman::after {
+    background-image: url('Img/icons8-pacman-100.webp');
+}
+
+#project-simultaneous-localization-and-mapping-robot::after, #project-topological-mapping-robot::after {
+    background-image: url('Img/icons8-science-fiction-100.webp');
+}
+
+#project-mips-r10k-microprocessor::after {
+    background-image: url('Img/icons8-microchip-96.webp');
+}
+
+#project-tic-tac-toe-robot::after {
+    background-image: url('Img/icons8-robot-90.webp');
+}
+
 @media (max-aspect-ratio: 3/4) {
-    #git {
+    #projects-container {
         padding-left: var(--content-container-spacing);
         flex-wrap: nowrap;
         overflow-x: hidden;
         overflow-y: auto;
     }
-
-    git::before {
+    projects::before {
         position: sticky;
         content: '';
         width: 100%;
@@ -521,8 +532,7 @@ project a {
         background: linear-gradient(to top, transparent, var( --color-charcoal));
         flex: 0 0 var(--content-container-spacing);
     }
-
-    git::after {
+    projects::after {
         position: sticky;
         content: '';
         width: 100%;

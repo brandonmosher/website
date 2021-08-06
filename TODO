@@ -2,7 +2,6 @@ Pending
 - progress bar animation in Firefox
 - transfer domain to route 53
 - add white-space: nowrap; to autofit-font-nowrap component. Perhaps add max-width: 100% and max-height 100%;
-- text compression webpack plugin
 - rename on-intersect-add-class
 - Change MutationObserverHTML element to be query-selector based and support attributes like:
   - {add,remove}-child-{add,remove}-class
@@ -16,7 +15,9 @@ Pending
 - allow control over one-shot behavior for form-control-submit-mixin
 - favicon
 - element-internals-polyfill patch not working up in production build in Firefox
-- form captcah
+- form captcha
+- component for scroll edge fading
+- component for setting common attributes via query selector
 
 Completed
 - consistency for nav-point/section sizing method.
@@ -29,6 +30,7 @@ Completed
 - use window resize event to adjust font sizes i.e. give autofit-font window-resize or resize-observer mode.
 - Use requestAnimationFrame for components making significant style changes in constructor
 - mobile scaling (nesting nav bar in particular)
+- text compression webpack plugin
 
 Abandoned:
 - scroll snap components
