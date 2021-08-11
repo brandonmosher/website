@@ -43,7 +43,7 @@
                         <div id="resume-summary-container"></div>
                         <div id="resume-download-container">
                             <a id="resume-download-button"
-                                href="https://github.com/brandonmosher/resume/raw/main/build/resume/resume.pdf"
+                                href="https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume/resume.pdf"
                                 target="_blank" rel="noopener noreferrer" data-type="document">
                                 Download Resume
                             </a>
@@ -120,7 +120,9 @@
                             document.querySelector('form-control[type=submit]').innerText = 'Thank You!';
                         });
 
-                        const makeSkillId = (name) => `progress-bar-${name.toLowerCase().replace(/\+/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')}`;
+                        const makeId = name => name.toLowerCase().replace(/(\+|\(|\))/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')
+
+                        const makeSkillId = (name) => `progress-bar-${makeId(name)}`;
 
                         const makeSkillHTML = ({ name, proficiencyPercentage } = {}) => {
                             return `<progress-bar-borderless id="${makeSkillId(name)}">${name}</progress-bar-borderless>`
@@ -135,7 +137,7 @@
                                 const [repoOwner, repoName] = gitHubRepoName.split('/');
                                 return `<git-repo repo-owner="${repoOwner}"" repo-name="${repoName}"></git-repo>`;
                             }
-                            return `<project id="project-${name.toLowerCase().replace(/ /g, '-')}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
+                            return `<project id="project-${makeId(name)}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
                         }
 
                         const makeExperienceHTML = ({ startDate, organization, jobTitle, cvitems } = {}) =>
@@ -150,34 +152,34 @@
                                 </vertical-timeline-entry>
                             </on-intersection-add-class>`;
 
-                        fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/src/resume/data.json')
+                        fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/build/cv/cv.json')
                             .then(response => response.json())
                             .then(json => {
+                                console.log(json);
                                 const p = document.createElement('p');
-                                p.innerText = json.document.summary.cvparagraph;
+                                p.innerText = json.document.cv.summary.cvparagraph;
                                 document.querySelector('#resume-summary-container').appendChild(p);
 
-                                const skillsInnerHTML = json.document.skills.cvskills.reduce((innerHTML, cvskill) => {
+                                const skillsInnerHTML = json.document.cv.skills.cventries.reduce((innerHTML, cvskill) => {
                                     return innerHTML + makeSkillHTML(cvskill);
                                 }, '');
                                 document.querySelector('#progress-bar-container').innerHTML += skillsInnerHTML;
 
-                                const skillsCSS = json.document.skills.cvskills.reduce((skillsCSS, cvskill, i) => {
+                                const skillsCSS = json.document.cv.skills.cventries.reduce((skillsCSS, cvskill, i) => {
                                     return skillsCSS + makeSkillCSS({i, ...cvskill});
                                 }, '');
                                 document.querySelector('style').innerHTML += skillsCSS;
 
-                                const projectsInnerHTML = json.document.projects.cvprojects.reduce((projectsInnerHTML, cvproject) => {
+                                const projectsInnerHTML = json.document.cv.projects.cventries.reduce((projectsInnerHTML, cvproject) => {
                                     return projectsInnerHTML + makeProjectHTML(cvproject);
                                 }, '');
                                 document.querySelector('projects').innerHTML += projectsInnerHTML;
 
-                                const experienceInnerHTML = json.document.experience.cventries.reduce((experienceInnerHTML, cventry) => {
+                                const experienceInnerHTML = json.document.cv.experience.cventries.reduce((experienceInnerHTML, cventry) => {
                                     cventry.cvitems = cventry.cvitems.join(" ");
                                     return experienceInnerHTML + makeExperienceHTML(cventry);
                                 }, '');
                                 document.querySelector('vertical-timeline').innerHTML = experienceInnerHTML;
-
                             });
                     </script>
                     <div id="footer">
