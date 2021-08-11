@@ -150,7 +150,7 @@
                                 </vertical-timeline-entry>
                             </on-intersection-add-class>`;
 
-                        fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/resume/resume.json')
+                        fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/src/resume/data.json')
                             .then(response => response.json())
                             .then(json => {
                                 const p = document.createElement('p');
