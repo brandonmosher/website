@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const FontPreloadPlugin = require('webpack-font-preload-plugin');
@@ -16,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
         exclude: /component\/.*\.css$/i,
       },
       {
@@ -57,6 +59,14 @@ module.exports = {
     ],
   },
   plugins: [
+    new FontPreloadPlugin({
+      index: 'index.html',
+      extensions: ['woff2', 'ttf'],
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'index.css',
+    }),
+    new HTMLInlineCSSWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',
@@ -70,11 +80,8 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true,
         minifyJS: true,
+        minifyCSS: true
     }
-    }),
-    new FontPreloadPlugin({
-      index: 'index.html',
-      extensions: ['woff2', 'ttf'],
     }),
     new CompressionPlugin(),
   ],
@@ -87,4 +94,7 @@ module.exports = {
       Img: path.resolve(__dirname, 'img'),
     },
   },
+  // optimization: {
+  //   minimize: false
+  // },
 };
