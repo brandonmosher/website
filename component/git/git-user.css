@@ -8,38 +8,62 @@
 
 #grid-container {
     display: grid;
-    grid-template-rows: auto auto auto 1fr 1fr;
-    grid-template-areas: "avatar name name name" "avatar html-url html-url html-url" "avatar . . ." "bio bio bio bio" "repos followers following .";
-    grid-column-gap: 2.5%;
+    grid-template-areas:    "avatar-url-name-html-url"
+                            "bio"
+                            "public-repos-followers-following";
     height: 100%;
 }
 
 #user-avatar-url {
-    grid-area: avatar;
+    grid-area: avatar-url;
     object-fit: contain;
-    max-height: 100%;
-    max-width: 100%;
+    object-position: top left;
+    max-height: 80%;
+    max-width: 20%;
     overflow: hidden;
-    margin: 0 5% 5% 0;
+    margin-right: 5%;
 }
 
-#user-name {
-    grid-area: name;
+#user-avatar-url-name-html-url {
+    grid-area: avatar-url-name-html-url;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
 }
 
 #user-html-url {
     display: block;
     font-weight: bold;
-    grid-area: html-url;
 }
 
 #user-bio {
     grid-area: bio;
+    display: flex;
 }
 
-#user-public-repos {
-    grid-area: repos;
+#user-public-repos-followers-following {
+    grid-area: public-repos-followers-following;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#user-public-repos-followers-following :nth-child(odd) {
+    border-color: gray;
+    border-style: solid;
+    border-width: 0 1px 0 1px;
+}
+
+#user-public-repos, #user-followers, #user-following {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
+    flex: 1;
+    padding: 0 2.5% 0 2.5%;
 }
 
 #user-public-repos::after {
@@ -47,19 +71,9 @@
     display: block;
 }
 
-#user-followers {
-    grid-area: followers;
-    text-align: center;
-}
-
 #user-followers::after {
     content: "Followers";
     display: block;
-}
-
-#user-following {
-    grid-area: following;
-    text-align: center;
 }
 
 #user-following::after {

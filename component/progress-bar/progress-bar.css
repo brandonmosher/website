@@ -33,7 +33,7 @@
 }
 
 #label-left {
-    width: var(--label-left-width);
+    width: calc(var(--label-left-width) - 1%);
     text-align: right;
 }
 
@@ -49,5 +49,4 @@
 
 #bar {
     height: var(--bar-height);
-    margin: 1%;
 }

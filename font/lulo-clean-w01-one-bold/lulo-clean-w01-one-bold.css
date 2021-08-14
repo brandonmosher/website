@@ -1,6 +1,5 @@
 @font-face {
     font-family: 'lulo-clean-w01-one-bold';
-    src:  url(./lulo-clean-w01-one-bold.woff2) format('woff2'),
-    url(./lulo-clean-w01-one-bold.woff) format('woff');
-    font-display: swap;
+    src:  url(./lulo-clean-w01-one-bold.woff2) format('woff2');
+    font-display: optional;
 }

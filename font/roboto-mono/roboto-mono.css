@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'roboto-mono-variable';
+    src:  url(./roboto-mono-variable.ttf) format('truetype');
+    font-display: optional;
+}
+
+@font-face {
+    font-family: 'roboto-mono-bold';
+    src:  url(./roboto-mono-bold.ttf) format('truetype');
+    font-display: optional;
+}

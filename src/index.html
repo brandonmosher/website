@@ -27,16 +27,18 @@
         <parallax-group scroll-parent="on-scroll-container">
             <parallax-layer>
                 <nav-section id="home" class="center-children scroll-snap-center">
-                    <on-intersection-add-class id="intro-container" enter-any-add-class="transition-fade-in">
-                        <h1>I<span class="color-green">'</span>M<br>Brandon<br>Mosher<span>.</span>
+                    <div id="intro-container">
+                        <h1>I<span>'</span>M<br>Brandon<br>Mosher<span>.</span>
                         </h1>
                         <h2>Software Engineer</h2>
-                    </on-intersection-add-class>
+                    </div>
                 </nav-section>
+
+                <padding-section class="height-50"></padding-section>
 
                 <nav-section id="resume" class="horizontal-center-children scroll-snap-center">
                     <nav-section-header>
-                        <h3><span class="color-gray">01</span> Resume</h3>
+                        <h3><span>01</span> Resume</h3>
                     </nav-section-header>
                     <on-intersection-add-class id="resume-container" class="content-container"
                         enter-any-add-class="transition-fade-in">
@@ -55,7 +57,7 @@
 
                 <nav-section id="skills" class="horizontal-center-children scroll-snap-center">
                     <nav-section-header>
-                        <h3><span class="color-gray">02</span> Skills</h3>
+                        <h3><span>02</span> Skills</h3>
                     </nav-section-header>
                     <on-intersection-add-class id="progress-bar-container" class="content-container"
                         query-selector="progress-bar-borderless" enter-any-add-class="ready">
@@ -66,7 +68,7 @@
 
                 <nav-section id="projects" class="horizontal-center-children scroll-snap-center">
                     <nav-section-header>
-                        <h3><span class="color-gray">03</span> Projects</h3>
+                        <h3><span>03</span> Projects</h3>
                     </nav-section-header>
                     <projects id="projects-container" class="content-container">
                         <git-user user-login="brandonmosher"></git-user>
@@ -78,7 +80,7 @@
                 <nav-section id="experience" threshold="0.3"
                     class="height-250 horizontal-center-children scroll-snap-start">
                     <nav-section-header>
-                        <h3><span class="color-gray">04</span> Experience</h3>
+                        <h3><span>04</span> Experience</h3>
                     </nav-section-header>
                     <vertical-timeline></vertical-timeline>
                 </nav-section>
@@ -87,7 +89,7 @@
 
                 <nav-section id="contact" class="horizontal-center-children scroll-snap-start">
                     <nav-section-header>
-                        <h3><span class="color-gray">05</span> Contact</h3>
+                        <h3><span>05</span> Contact</h3>
                     </nav-section-header>
                     <form id="contact-form" name="contact-form" class="content-container"
                         action="https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live">
@@ -124,13 +126,10 @@
 
                         const makeSkillId = (name) => `progress-bar-${makeId(name)}`;
 
-                        const makeSkillHTML = ({ name, proficiencyPercentage } = {}) => {
-                            return `<progress-bar-borderless id="${makeSkillId(name)}">${name}</progress-bar-borderless>`
-                        }
+                        const makeSkillHTML = ({ name, proficiencyPercentage } = {}) =>
+                            `<progress-bar-borderless id="${makeSkillId(name)}">${name}</progress-bar-borderless>`
 
-                        const makeSkillCSS = ({ i, name, proficiencyPercentage } = {}) => {
-                            return `#${makeSkillId(name)}.ready {--bar-completed-percentage: ${parseInt(proficiencyPercentage)}; transition-delay: ${0.2 * i}s}`;
-                        }
+                        const makeSkillCSS = ({ i, name, proficiencyPercentage } = {}) => `#${makeSkillId(name)}.ready {--bar-completed-percentage: ${parseInt(proficiencyPercentage)}; transition-delay: ${0.2 * i}s}`;
 
                         const makeProjectHTML = ({ url, name, cvparagraph, gitHubRepoName } = {}) => {
                             if (gitHubRepoName) {
@@ -140,18 +139,20 @@
                             return `<project id="project-${makeId(name)}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
                         }
 
-                        const makeExperienceHTML = ({ startDate, organization, jobTitle, cvitems } = {}) =>
+                        const makeExperienceHTML = ({ startDate, endDate, organization, jobTitle, cvitems } = {}) =>
                             `<on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
                                 <vertical-timeline-entry>
-                                    <div>
-                                        <h4>${startDate}</h4>
-                                        <h5>${organization}</h5>
-                                        <h6>${jobTitle}</h6>
-                                        <p>${cvitems}</p>
-                                    </div>
+                                    <h4>${startDate} - ${endDate}</h4>
+                                    <div-border>
+                                        <div>
+                                            <h5>${organization}</h5>
+                                            <h6>${jobTitle}</h6>
+                                            <p>${cvitems}</p>
+                                        </div>
+                                    </div-border>
                                 </vertical-timeline-entry>
                             </on-intersection-add-class>`;
-
+                        
                         fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/build/cv/cv.json')
                             .then(response => response.json())
                             .then(json => {
@@ -165,7 +166,14 @@
                                 }, '');
                                 document.querySelector('#progress-bar-container').innerHTML += skillsInnerHTML;
 
-                                const skillsCSS = json.document.cv.skills.cventries.reduce((skillsCSS, cvskill, i) => {
+                                const maxProficiencyPercentage = json.document.cv.skills.cventries.reduce(
+                                    (maxProficiencyPercentage, cvskill) => Math.max(maxProficiencyPercentage, parseInt(cvskill.proficiencyPercentage)), 0);
+                                const maxBarWidth = 100 - 20 - 5;
+                                const paddingLeft = maxBarWidth * (1 - (maxProficiencyPercentage / 100)) / 2;
+
+                                let skillsCSS = `progress-bar-borderless {padding-left: ${paddingLeft}%;}`
+
+                                skillsCSS += json.document.cv.skills.cventries.reduce((skillsCSS, cvskill, i) => {
                                     return skillsCSS + makeSkillCSS({i, ...cvskill});
                                 }, '');
                                 document.querySelector('style').innerHTML += skillsCSS;
@@ -180,11 +188,12 @@
                                     return experienceInnerHTML + makeExperienceHTML(cventry);
                                 }, '');
                                 document.querySelector('vertical-timeline').innerHTML = experienceInnerHTML;
+                                document.querySelector('style').innerHTML += `vertical-timeline on-intersection-add-class {height: ${100 / json.document.cv.experience.cventries.length}%;}`;
                             });
                     </script>
                     <div id="footer">
                         <a href="https://icons8.com">Icons from Icons8</a>
-                        <a href="http://www.onlinewebfonts.com">Fonts from Online Web Fonts</a>
+                        <a href="https://fonts.google.com/specimen/Roboto+Mono">Fonts from Google</a>
                     </div>
                 </nav-section>
 
@@ -196,6 +205,7 @@
                 <tinted-background id="background3"></tinted-background>
                 <tinted-background id="background4"></tinted-background>
                 <tinted-background id="background5"></tinted-background>
+                <tinted-background id="background6"></tinted-background>
             </parallax-layer>
 
         </parallax-group>

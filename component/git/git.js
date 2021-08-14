@@ -41,22 +41,32 @@ export class GitHTMLElement extends HTMLElement {
                 else {
                     await response.json().then(data => {
                         this.gridContainer = document.createElement('div');
-                        this.gridContainer.id = 'grid-container';
-                        this.gridContainer.setAttribute('part', 'grid-container');
+                        this.gridContainer.id = this.gridContainer.part = 'grid-container';
                         fragment.appendChild(this.gridContainer);
 
                         Object.entries(this.handlers).forEach(([key, handler]) => {
-                            const id = `${this.type}-${underscoreToHTMLCase(key)}`;
+                            const makeId = (key) => `${this.type}-${underscoreToHTMLCase(key.replace(/,/g, '_'))}`;
                             let node;
+                            const keys = key.split(',');
                             if (handler) {
-                                node = handler(data[key]);
+                                node = handler(...keys.map(k => data[k]));
                             }
                             else {
                                 node = document.createElement('div');
-                                node.innerText = data[key];
+                                if (keys.length > 1) {
+                                    keys.forEach(k => {
+                                        const subNode = document.createElement('div');
+                                        subNode.id = subNode.part = makeId(k);
+                                        subNode.innerText = data[k];
+                                        node.appendChild(subNode)
+                                    })
+                                }
+                                else {
+                                    node.innerText = data[key];
+                                }
+
                             }
-                            node.id = id;
-                            node.setAttribute('part', id);
+                            node.id = node.part = makeId(key);
                             this.gridContainer.appendChild(node);
                         });
                     })

@@ -1,21 +1,50 @@
+@font-face {
+    font-family: 'roboto-mono-thin';
+    src: url('Font/roboto-mono/roboto-mono-variable-subset.woff2') format('woff2');
+    font-display: block;
+    font-weight: 350;
+}
+
+@font-face {
+    font-family: 'roboto-mono-medium';
+    src: url('Font/roboto-mono/roboto-mono-variable-subset.woff2') format('woff2');
+    font-display: block;
+    font-weight: 375;
+}
+
+@font-face {
+    font-family: 'roboto-mono-bold';
+    src: url('Font/roboto-mono/roboto-mono-variable-subset.woff2') format('woff2');
+    font-display: block;
+    font-weight: 800;
+}
+
 :root {
     --nav-bar-height: 8vh;
     --nav-bar-padding: min(1vh, 1vw);
     --nav-bar-content-height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-padding)));
     --content-box-shadow: 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3);
     --content-container-spacing: max(2vh, 2vw);
-    --font-family-primary: 'avenir-35-light', Fallback, sans-serif;
-    --font-family-emphasis: 'lulo-clean-w01-one-bold', Fallback, sans-serif;
+    --font-family-primary: 'roboto-mono-thin', Fallback, sans-serif;
+    --font-family-medium: 'roboto-mono-medium', Fallback, sans-serif;
+    --font-family-emphasis: 'roboto-mono-bold', Fallback, sans-serif;
+    --font-size-basis: min(1em, 2.5vh, 2.5vw);
+    --font-size-small: 85%;
+    --font-size-medium: 125%;
+    --font-size-large: 150%;
+    --font-size-xlarge: 200%;
     --color-primary: white;
     --color-gray: #BEC7D5;
-    --color-green: #4CAF50;
+    --color-charcoal-translucent50: #30374bBF;
+    --color-charcoal-translucent: #30374bd9;
+    --color-green: #51b954;
+    --color-charcoal: #30374b;
     --color-red: #dc3545;
-    --color-charcoal: #333b50;
     --form-valid-color: var(--color-green);
     --form-valid-focus-color: var(--color-green);
     --form-invalid-color: var(--color-red);
-    --form-label-color: gray;
-    --form-placeholder-color: gray;
+    --form-label-color: var(--color-primary);
+    --form-placeholder-color: var(--color-primary);
     --form-submit-color: var(--color-primary);
 }
 
@@ -62,37 +91,6 @@ on-scroll-container::-webkit-scrollbar-thumb:hover {
 }
 
 /* utility classes */
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    text-transform: uppercase;
-    width: 100%;
-    /* white-space: nowrap; */
-}
-
-h1, h2, h3 {
-    font-family: var(--font-family-emphasis);
-}
-
-h4, h5, h6, #intro-container h2 {
-    letter-spacing: 0.18em;
-    line-height: 1.8em;
-    font-family: var(--font-family-primary);
-    font-size: inherit;
-}
-
-h4 {
-    font-weight: 650;
-}
-
-h5 {
-    font-weight: 550;
-}
-
-h6 {
-    font-weight: 500;
-    text-transform: none;
-}
 
 .color-gray {
     color: var(--color-gray)
@@ -169,7 +167,22 @@ html, body {
 body {
     color: var(--color-primary);
     font-family: var(--font-family-primary);
-    font-size: min(1em, 2.5vh, 2.5vw);
+    font-size: var(--font-size-basis);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    width: 100%;
+    font-weight: unset;
+    font-size: inherit;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-family-emphasis);
+}
+
+h4, h5, h6 {
+    font-family: var(--font-family-primary);
 }
 
 on-scroll-container {
@@ -207,9 +220,8 @@ nav-bar {
 }
 
 nav-entry {
-    color: var(--color-gray);
+    color: var(--color-primary);
     --background-color-hover: transparent;
-    --color-hover: var(--color-primary);
     padding: 1%;
 }
 
@@ -222,7 +234,7 @@ nav-entry.active {
 }
 
 nav-entry:not(.active):hover {
-    color: white;
+    border-bottom: 1px outset var(--color-primary);
 }
 
 nav-section {
@@ -240,6 +252,12 @@ nav-section-header {
     height: var(--nav-bar-content-height);
     padding: 1%;
     text-align: center;
+    text-transform: uppercase;
+    font-size: var(--font-size-medium);
+}
+
+nav-section-header span {
+    color: var(--color-green);
 }
 
 padding-section {
@@ -259,39 +277,42 @@ padding-section {
 }
 
 #footer a {
-    font-size: smaller;
+    font-size: var(--font-size-small);
     color: var(--color-primary);
 }
 
 /* backgrounds */
 
 tinted-background {
-    --tint-rgba: rgba(10, 17, 36, 0.55);
+    --tint-rgba: var(--color-charcoal-translucent);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 #background1 {
-    --tint-rgba: rgba(50, 65, 88, 0.55);
-    --background-image: url(/img/2.webp);
-    height: calc(250% * 2 / 3);
+    height: calc(150% * 2 / 3);
 }
 
 #background2 {
-    --background-image: url(/img/3.webp);
-    height: calc(150% * 2 / 3);
+    --tint-rgba: var(--color-charcoal-translucent50);
+    --background-image: url(Img/2.webp);
+    height: calc(300% * 2 / 3);
 }
 
 #background3 {
-    height: calc(150% * 2 / 3);
+    display: none;
 }
 
 #background4 {
-    --background-image: url(/img/4.webp);
-    height: calc(325% * 2 / 3);
+    height: calc(150% * 2 / 3);
 }
 
 #background5 {
+    --background-image: url(Img/4.webp);
+    height: calc(325% * 2 / 3);
+}
+
+#background6 {
     height: calc(150% * 2 / 3);
 }
 
@@ -320,8 +341,20 @@ tinted-background {
     height: calc(min(60vh, 60vw) - (4 * min(5vh, 5vw)));
     padding: min(5vh, 5vw);
     margin: min(5vh, 5vw);
-    padding-bottom: 0;
     text-align: start;
+    text-transform: uppercase;
+}
+
+#intro-container span {
+    color: var(--color-green);
+}
+
+#intro-container h1 {
+    font-size: var(--font-size-xlarge);
+}
+
+#intro-container h2 {
+    letter-spacing: 0.18em;
 }
 
 /* Resume */
@@ -341,6 +374,8 @@ tinted-background {
     padding: 5%;
     margin: 5%;
     text-align: center;
+    font-size: var(--font-size-small);
+    line-height: 1.75em;
 }
 
 #resume-download-container {
@@ -360,7 +395,9 @@ tinted-background {
     transition: background-color 0.5s;
     text-align: center;
     text-decoration: none;
+    text-transform: uppercase;
     color: var(--color-primary);
+    font-family: var(--font-family-medium);
     white-space: nowrap;
 }
 
@@ -381,22 +418,27 @@ progress-bar-borderless {
     align-content: center;
     --bar-completed-color: var(--color-green);
     --bar-completed-percentage: 0;
-    --label-left-width: 30%;
+    --bar-height: 10%;
+    --label-left-width: 20%;
+    --label-right-width: 5%;
     transition: --bar-completed-percentage 1s;
     will-change: --bar-completed-percentage;
     text-transform: uppercase;
 }
 
-/* projects */
-
-projects {
-    flex-wrap: wrap;
-    overflow-x: auto;
-    overflow-y: hidden;
+progress-bar-borderless::part(label-left) {
+    font-family: var(--font-family-medium);
+    text-transform: uppercase;
 }
 
+/* projects */
+
 #projects-container {
+    flex-wrap: wrap;
     justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    font-size: var(--font-size-small);
     padding-left: 0;
 }
 
@@ -427,77 +469,92 @@ git-user, git-repo, project {
     padding: 1vw;
 }
 
-git-user::part(user-name) {
-    font-family: var(--font-family-emphasis);
+git-user::part(grid-container), git-repo::part(grid-container), project {
+    grid-template-rows: 20% 1fr 20%;
 }
 
-git-user::part(user-html-url) {
+git-user::part(user-name), git-repo::part(repo-html-url), project a {
+    font-family: var(--font-family-medium);
+    text-transform: uppercase;
+    font-size: var(--font-size-medium);
     color: var(--color-green);
-    text-decoration: none;
-    text-transform: lowercase;
 }
 
-git-repo {
+git-repo, project {
     overflow: auto
 }
 
-git-repo::part(repo-html-url) {
-    font-family: var(--font-family-emphasis);
-    color: var(--color-green);
-    text-decoration: none;
-}
-
-git-repo::part(description) {
+git-repo::part(description), project div {
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
 
-git-repo::part(description):hover {
+git-repo::part(description):hover, project div:hover {
     overflow: visible;
 }
 
-git-repo::part(grid-container) {
-    grid-template-rows: 30% 1fr 20%;
+git-user::part(user-html-url)::before {
+    content: "@";
+}
+
+git-user::part(user-html-url) {
+    display: inline;
+    color: var(--color-primary);
+    border-bottom: 1px outset var(--color-primary);
+    text-transform: lowercase;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+git-user::part(user-public-repos), git-user::part(user-following) {
+    border-color: var(--color-green);
+    border-style: solid;
+    border-width: 0 1px 0 1px;
+}
+
+git-repo::part(repo-html-url) {
+    text-decoration: none;
 }
 
 project {
     position: relative;
     display: grid;
-    grid-template-rows: 30% 1fr 20%;
     grid-template-areas: "name" "cvparagraph" "icon";
     grid-column-gap: 2.5%;
     align-items: center;
-    overflow: auto;
 }
 
 project a {
     grid-area: name;
     align-self: flex-start;
     text-decoration: none;
-    font-family: var(--font-family-emphasis);
-    color: var(--color-green);
 }
 
 project div {
     grid-area: cvparagraph;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
-project div:hover {
-    overflow: visible;
 }
 
 project::after {
     content: "";
     grid-area: icon;
-    height: min(3vw,3vh);
-    width: min(3vw,3vh);
+    height: min(3vw, 3vh);
+    width: min(3vw, 3vh);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#project-secure-multithreaded-file-server::after {
+    background-image: url('Img/icons8-cloud-backup-restore-24.webp');
+}
+
+#project-operating-system-pager::after {
+    background-image: url('Img/icons8-memory-slot-30.webp');
+}
+
+#project-thread-library::after {
+    background-image: url('Img/icons8-microchip-96.webp');
 }
 
 #project-lifesize-pacman::after {
@@ -522,8 +579,9 @@ project::after {
         flex-wrap: nowrap;
         overflow-x: hidden;
         overflow-y: auto;
+        font-size: unset;
     }
-    projects::before {
+    #projects-container::before {
         position: sticky;
         content: '';
         width: 100%;
@@ -532,7 +590,7 @@ project::after {
         background: linear-gradient(to top, transparent, var( --color-charcoal));
         flex: 0 0 var(--content-container-spacing);
     }
-    projects::after {
+    #projects-container::after {
         position: sticky;
         content: '';
         width: 100%;
@@ -544,10 +602,19 @@ project::after {
     git-user, git-repo, project {
         width: calc(100% - 4vw);
         height: unset;
-        flex: 1 0 20%;
+        flex-grow: 1;
     }
-    git-user {
-        flex: 2 1 auto;
+    git-user::part(grid-container), git-repo::part(grid-container), project {
+        grid-template-rows: auto auto auto;
+        row-gap: 1vw;
+    }
+    git-repo, project {
+        overflow: unset;
+    }
+    project div, git-repo::part(description) {
+        height: unset;
+        width: unset;
+        overflow: unset;
     }
 }
 
@@ -565,8 +632,6 @@ vertical-timeline {
 
 vertical-timeline on-intersection-add-class {
     position: relative;
-    height: 25%;
-    width: 95%;
     scroll-snap-align: center;
 }
 
@@ -577,26 +642,61 @@ vertical-timeline> :nth-child(1) {
 vertical-timeline-entry {
     display: block;
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 100%;
-    border-top: 1px dashed var(--color-green);
     box-sizing: border-box;
-    padding: 5%;
-    padding-bottom: 0;
-    box-shadow: -1px 0 0 var(--color-green);
+    margin: 0 5% 0 5%;
 }
 
-vertical-timeline-entry::after {
-    --diameter: 5%;
+vertical-timeline-entry div-border {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-top: 1px dashed var(--color-green);
+    border-left: 1px dashed var(--color-green);
+}
+
+vertical-timeline-entry div {
+    height: 100%;
+    width: 95%;
+    padding-left: 5%;
+}
+
+vertical-timeline-entry h4 {
+    position: relative;
+    width: 95%;
+    padding-left: 5%;
+    text-transform: uppercase;
+    color: var(--color-green);
+}
+
+vertical-timeline-entry h4::after {
+    --diameter: 15px;
     display: block;
     position: absolute;
-    top: calc(var(--diameter) / -2);
+    bottom: calc(var(--diameter) / -2);
     left: calc(var(--diameter) / -2);
     width: var(--diameter);
     height: var(--diameter);
     content: "";
     background-image: linear-gradient(var(--color-green), var(--color-green));
     clip-path: circle(25%);
+}
+
+vertical-timeline-entry h5 {
+    font-family: var(--font-family-medium);
+    text-transform: uppercase;
+    color: var(--color-green);
+}
+
+vertical-timeline-entry h6 {
+    margin-bottom: 1em;
+}
+
+vertical-timeline-entry p {
+    width: 100%;
+    margin: 0;
 }
 
 @media (min-aspect-ratio: 3/4) {
@@ -606,41 +706,42 @@ vertical-timeline-entry::after {
     vertical-timeline on-intersection-add-class {
         width: 50%;
     }
-    vertical-timeline> :nth-child(odd) vertical-timeline-entry {
-        box-shadow: inset -1px 0 0 var(--color-green);
-    }
-    vertical-timeline> :nth-child(even) vertical-timeline-entry {
-        box-shadow: -1px 0 0 var(--color-green);
+    vertical-timeline-entry {
+        width: 95%;
     }
     vertical-timeline> :nth-child(even) {
         align-self: flex-end;
     }
-    vertical-timeline> :nth-child(odd) vertical-timeline-entry::after {
+    vertical-timeline> :nth-child(odd) vertical-timeline-entry {
+        margin: 0;
+        margin-left: 5%;
+    }
+    vertical-timeline> :nth-child(even) vertical-timeline-entry {
+        margin: 0;
+        margin-right: 5%;
+    }
+    vertical-timeline> :nth-child(odd) h4 {
+        padding-left: 0;
+        padding-right: 5%;
+    }
+    vertical-timeline> :nth-child(odd) h4::after {
         left: unset;
         right: calc(var(--diameter) / -2);
     }
-    vertical-timeline> :nth-child(even) vertical-timeline-entry::after {
+    vertical-timeline> :nth-child(even) h4::after {
         left: calc(var(--diameter) / -2);
     }
-}
-
-vertical-timeline-entry, vertical-timeline-entry div {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-vertical-timeline-entry div {
-    height: 100%;
-    width: 100%;
-}
-
-vertical-timeline-entry p {
-    width: 100%;
-    margin: 0;
-}
-
-vertical-timeline-entry h4 {
-    color: var(--color-green);
+    vertical-timeline> :nth-child(odd) div-border {
+        border-left: none;
+        border-right: 1px dashed var(--color-green);
+    }
+    vertical-timeline> :nth-child(odd) div {
+        padding-left: 0;
+        padding-right: 5%;
+    }
+    vertical-timeline :is(h4, h6, p) {
+        font-size: var(--font-size-small);
+    }
 }
 
 @keyframes bounce {
@@ -648,9 +749,9 @@ vertical-timeline-entry h4 {
         opacity: 0;
         transform: scale(0.9);
     }
-    60% {
+    80% {
         opacity: 1;
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
     100% {
         opacity: 1;
@@ -658,14 +759,23 @@ vertical-timeline-entry h4 {
     }
 }
 
-vertical-timeline-entry.bounce {
-    transition: transform 0.2s, opacity 0.2s;
-    transform: scale(1);
+vertical-timeline-entry div {
+    opacity: 0;
+    transform: scale(0.90);
+    transform-origin: top center;
+}
+
+vertical-timeline-entry :is(h4, div-border) {
+    opacity: 0;
+}
+
+vertical-timeline-entry.bounce :is(h4, div-border) {
+    transition: opacity 0.2s;
     opacity: 1;
 }
 
 vertical-timeline-entry.bounce div {
-    animation: bounce 0.6s ease 0.1s 1 normal forwards running;
+    animation: bounce 0.2s ease 0.2s 1 normal forwards running;
     will-change: transform, opacity;
 }
 
@@ -697,6 +807,16 @@ form-control::part(container) {
     width: 98%;
     padding: 1%;
     outline-color: transparent;
+    font-size: var(--font-size-small);
+}
+
+form-control:not([type=submit])::part(container) {
+    background-color: transparent;
+    outline: 1px solid var(--color-gray);
+}
+
+form-control::part(control) {
+    color: var(--color-primary);
 }
 
 form-control:not([empty]):is(:invalid, [internals-invalid]):focus-within::part(container) {
@@ -724,7 +844,7 @@ form-control::part(validation-message) {
 form-control:not(:focus-within)[visited]::part(validation-message) {
     display: block;
     color: var(--form-invalid-color);
-    font-size: smaller;
+    font-size: var(--font-size-small);
     background-color: var(--container-color);
 }
 

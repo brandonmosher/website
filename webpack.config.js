@@ -1,9 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const FontPreloadPlugin = require('webpack-font-preload-plugin');
 
 module.exports = {
   mode: 'production',
@@ -17,7 +16,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: ['style-loader', 'css-loader'],
         exclude: /component\/.*\.css$/i,
       },
       {
@@ -30,14 +29,14 @@ module.exports = {
       },
       {
         test: /\.(ttf|woff|woff2)$/i,
-        type: "asset",
+        type: 'asset',
         generator: {
           filename: 'font/[hash][ext][query]'
         }
       },
       {
         test: /\.(webp)$/i,
-        type: "asset",
+        type: 'asset',
         generator: {
           filename: 'img/[hash][ext][query]'
         }
@@ -49,7 +48,7 @@ module.exports = {
             loader: ImageMinimizerPlugin.loader,
             options: {
               minimizerOptions: {
-                plugins: ["webp"],
+                plugins: ['webp'],
               },
             },
           },
@@ -61,12 +60,22 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',
-      'favicon': 'img/icons8-developer-100.webp'
+      favicon: 'img/icons8-developer-100.webp',
+      minify: {
+        collapseWhitespace: true,
+        keepClosingSlash: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+        minifyJS: true,
+    }
     }),
-    new MiniCssExtractPlugin({
-      filename: 'index.css',
+    new FontPreloadPlugin({
+      index: 'index.html',
+      extensions: ['woff2', 'ttf'],
     }),
-    new HTMLInlineCSSWebpackPlugin(),
     new CompressionPlugin(),
   ],
   resolve: {
@@ -78,7 +87,4 @@ module.exports = {
       Img: path.resolve(__dirname, 'img'),
     },
   },
-  // optimization: {
-  //   minimize: false
-  // },
 };

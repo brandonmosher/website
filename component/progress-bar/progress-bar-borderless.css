@@ -1,5 +1,5 @@
 @import "progress-bar.css";
 #bar {
-    width: calc((100% * (var(--bar-completed-percentage) / 100)) - var(--label-left-width) - var(--label-right-width) - 10%);
+    width: calc((100% * (var(--bar-completed-percentage) / 100)) - var(--label-left-width) - var(--label-right-width));
     background-color: var(--bar-completed-color);
 }

@@ -1,6 +1,5 @@
 @font-face {
     font-family: 'avenir-35-light';
-    src:  url(./avenir-35-light.woff2) format('woff2'),
-    url(./avenir-35-light.woff) format('woff');
-    font-display: swap;
+    src:  url(./avenir-35-light.woff2) format('woff2');
+    font-display: optional;
 }
