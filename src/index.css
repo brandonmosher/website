@@ -2,7 +2,7 @@
     font-family: 'roboto-mono-thin';
     src: url('Font/roboto-mono/roboto-mono-variable-subset.woff2') format('woff2');
     font-display: block;
-    font-weight: 350;
+    font-weight: 325;
 }
 
 @font-face {
@@ -889,6 +889,8 @@ form-control[type=submit]::part(container) {
 
 form-control[type=submit]::part(label) {
     color: var(--form-submit-color);
+    font-family: var(--font-family-medium);
+    text-transform: uppercase;
 }
 
 form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]::part(container) {

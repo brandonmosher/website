@@ -156,16 +156,10 @@
                         fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/build/cv/cv.json')
                             .then(response => response.json())
                             .then(json => {
-                                console.log(json);
-                                const p = document.createElement('p');
-                                p.innerText = json.document.cv.summary.cvparagraph;
-                                document.querySelector('#resume-summary-container').appendChild(p);
-
                                 const skillsInnerHTML = json.document.cv.skills.cventries.reduce((innerHTML, cvskill) => {
                                     return innerHTML + makeSkillHTML(cvskill);
                                 }, '');
-                                document.querySelector('#progress-bar-container').innerHTML += skillsInnerHTML;
-
+                                
                                 const maxProficiencyPercentage = json.document.cv.skills.cventries.reduce(
                                     (maxProficiencyPercentage, cvskill) => Math.max(maxProficiencyPercentage, parseInt(cvskill.proficiencyPercentage)), 0);
                                 const maxBarWidth = 100 - 20 - 5;
@@ -176,19 +170,27 @@
                                 skillsCSS += json.document.cv.skills.cventries.reduce((skillsCSS, cvskill, i) => {
                                     return skillsCSS + makeSkillCSS({i, ...cvskill});
                                 }, '');
-                                document.querySelector('style').innerHTML += skillsCSS;
-
+                                
                                 const projectsInnerHTML = json.document.cv.projects.cventries.reduce((projectsInnerHTML, cvproject) => {
                                     return projectsInnerHTML + makeProjectHTML(cvproject);
                                 }, '');
-                                document.querySelector('projects').innerHTML += projectsInnerHTML;
-
+                                
                                 const experienceInnerHTML = json.document.cv.experience.cventries.reduce((experienceInnerHTML, cventry) => {
                                     cventry.cvitems = cventry.cvitems.join(" ");
                                     return experienceInnerHTML + makeExperienceHTML(cventry);
                                 }, '');
+
+                                const style = document.createElement('style');
+                                style.innerHTML += skillsCSS;
+                                style.innerHTML += `vertical-timeline on-intersection-add-class {height: ${100 / json.document.cv.experience.cventries.length}%;}`;
+                                document.head.appendChild(style);
+
+                                const p = document.createElement('p');
+                                p.innerText = json.document.cv.summary.cvparagraph;
+                                document.querySelector('#resume-summary-container').appendChild(p);
+                                document.querySelector('#progress-bar-container').innerHTML += skillsInnerHTML;
+                                document.querySelector('projects').innerHTML += projectsInnerHTML;
                                 document.querySelector('vertical-timeline').innerHTML = experienceInnerHTML;
-                                document.querySelector('style').innerHTML += `vertical-timeline on-intersection-add-class {height: ${100 / json.document.cv.experience.cventries.length}%;}`;
                             });
                     </script>
                     <div id="footer">

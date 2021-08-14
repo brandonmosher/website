@@ -1,10 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FontPreloadPlugin = require('webpack-font-preload-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const FontPreloadPlugin = require('webpack-font-preload-plugin');
 
 module.exports = {
   mode: 'production',
@@ -59,14 +59,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new FontPreloadPlugin({
-      index: 'index.html',
-      extensions: ['woff2', 'ttf'],
-    }),
     new MiniCssExtractPlugin({
       filename: 'index.css',
     }),
-    new HTMLInlineCSSWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',
@@ -83,6 +78,10 @@ module.exports = {
         minifyCSS: true
     }
     }),
+    new FontPreloadPlugin({
+      index: 'index.html',
+      extensions: ['woff2'],
+    }),
     new CompressionPlugin(),
   ],
   resolve: {
@@ -94,7 +93,9 @@ module.exports = {
       Img: path.resolve(__dirname, 'img'),
     },
   },
-  // optimization: {
-  //   minimize: false
-  // },
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
+  },
 };
