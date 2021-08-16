@@ -17,7 +17,6 @@
       display: block;
       height: 100vh;
       position: relative;
-      border: 2px solid black;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -30,34 +29,45 @@
       transform: translate(-50%, -50%);
     }
 
-    #background1 {
-      background-size: 40px 40px;
-      background-image:
-        linear-gradient(to right, grey 1px, transparent 1px),
-        linear-gradient(to bottom, grey 1px, transparent 1px);
+    #base {
+      height: 75vh;
+    }
+
+    #middle {
+      height: 100vh;
+    }
+
+    #deep {
+      height: 125vh;
+    }
+
+    #deeper {
       height: 150vh;
     }
 
-    #background2 {
-      background-size: 40px 40px;
-      background-image:
-        linear-gradient(to right, grey 1px, transparent 1px),
-        linear-gradient(to bottom, grey 1px, transparent 1px);
-      height: 200vh;
+    #even-deeper {
+      height: 175vh;
     }
+    
   </style>
 </head>
 
 <body>
-  <parallax-group>
-    <parallax-layer>
+  <parallax-group scroll-parent="parallax-group">
+    <parallax-layer id="base">
       <h1>Base Layer</h1>
     </parallax-layer>
-    <parallax-layer>
-      <h1>Background Layer</h1>
+    <parallax-layer id="middle">
+      <h1>Middle Layer</h1>
     </parallax-layer>
-    <parallax-layer id="background1">
-      <h1>Deep Background Layer</h1>
+    <parallax-layer id="deep">
+      <h1>Deep Layer</h1>
+    </parallax-layer>
+    <parallax-layer id="deeper">
+      <h1>Deeper Layer</h1>
+    </parallax-layer>
+    <parallax-layer id="even-deeper">
+      <h1>Even Deeper Layer</h1>
     </parallax-layer>
   </parallax-group>
 </body>

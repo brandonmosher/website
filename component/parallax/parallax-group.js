@@ -12,15 +12,23 @@ customElements.define("parallax-group",
             if(!this.hasAttribute('scroll-parent')) {
                 this.setAttribute('scroll-parent', 'body');
             }
-            this.scrollParent.style.transformStyle = 'preserve-3d';
-            this.scrollParent.style.perspective = `${this.children.length}px`;
+            const perspective = this.children.length;
+            let currentElement = this;
+            const scrollParentSelector = this.getAttribute('scroll-parent');
+            do {
+                if(currentElement.matches(scrollParentSelector)) {
+                    currentElement.style.perspective = `${perspective}px`;
+                }
+                currentElement.style.transformStyle = 'preserve-3d';
+                currentElement = currentElement.parentElement;
+            } while(currentElement !== document.documentElement);
+            
             this.querySelectorAll('parallax-layer').forEach((child, i, children) => {
-                child.style.transform = `translateZ(-${i}px) scale(${1 + (i / children.length)})`;
+                const translateZ = i;
+                const scale = 1 + (translateZ / perspective);
+                child.style.transform = `translate3d(calc(-1 * (100vw - 100%) * ${i / (2 * perspective)}),0,-${translateZ}px) scale(${scale})`;
                 child.style.zIndex = children.length - i;
             });
-        }
-        get scrollParent() {
-            return document.querySelector(this.getAttribute('scroll-parent'));
         }
     }
 );

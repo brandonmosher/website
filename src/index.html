@@ -24,8 +24,8 @@
             <nav-entry href="#experience">Experience</nav-entry>
             <nav-entry href="#contact">Contact</nav-entry>
         </nav-bar>
-        <parallax-group scroll-parent="on-scroll-container">
-            <parallax-layer>
+        <parallax-group scroll-parent="body">
+            <parallax-layer id="parallax-layer-foreground">
                 <nav-section id="home" class="center-children scroll-snap-center">
                     <div id="intro-container">
                         <h1>I<span>'</span>M<br>Brandon<br>Mosher<span>.</span>
@@ -47,7 +47,7 @@
                             <a id="resume-download-button"
                                 href="https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume/resume.pdf"
                                 target="_blank" rel="noopener noreferrer" data-type="document">
-                                Download Resume
+                                <span>Download Resume</span>
                             </a>
                         </div>
                     </on-intersection-add-class>
@@ -201,15 +201,13 @@
 
             </parallax-layer>
 
-            <parallax-layer>
+            <parallax-layer id="parallax-layer-background">
                 <tinted-background id="background1"></tinted-background>
                 <tinted-background id="background2"></tinted-background>
                 <tinted-background id="background3"></tinted-background>
                 <tinted-background id="background4"></tinted-background>
                 <tinted-background id="background5"></tinted-background>
-                <tinted-background id="background6"></tinted-background>
             </parallax-layer>
-
         </parallax-group>
     </on-scroll-container>
 </body>

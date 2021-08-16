@@ -13,16 +13,16 @@ customElements.define('git-repo',
         }
 
         handlers = {
-            'html_url': value => {
+            'html_url': htmlUrl => {
                 const node = document.createElement('a');
-                node.href = value;
-                node.innerText = value.split('/').slice(-1)[0];
+                node.href = htmlUrl;
+                node.innerText = htmlUrl.split('/').slice(-1)[0];
                 return node;
             },
-            'language': value => {
+            'language': language => {
                 const node = document.createElement('div');
-                node.classList.add(value);
-                node.innerText = value;
+                node.classList.add(language);
+                node.innerText = language;
                 return node;
             },
             'description': null,

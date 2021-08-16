@@ -15,6 +15,9 @@ Pending
 - component for scroll edge fading
 - component for setting common attributes via query selector
 - eliminate non-composited animation for header using transform and opacity on ::after pseudo element background
+- make component for circle using clip path
+- change submit button to use outline vs solid background
+- non-composited animation for form submit
 
 Completed
 - consistency for nav-point/section sizing method.
@@ -30,6 +33,16 @@ Completed
 - text compression webpack plugin
 - favicon
 - element-internals-polyfill patch not working up in production build in Firefox
+
+8/17/2021
+- clean up content and header box shadow
+- suppress outline when tabbing to submit
+- border color consistency
+- label font in form a bit too small?
+- different color for vertical timeline dates
+- make small font size the default
+- fix strip of white space on left of window. The width of the vertical scrollbar caused parallax layers to be translated slightly in the +x-direction.
+- fix extra overflow at bottom of page due to parallax background layer.
 
 Abandoned:
 - scroll snap components

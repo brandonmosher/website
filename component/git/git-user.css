@@ -18,10 +18,10 @@
     grid-area: avatar-url;
     object-fit: contain;
     object-position: top left;
-    max-height: 80%;
+    max-height: 95%;
     max-width: 20%;
     overflow: hidden;
-    margin-right: 5%;
+    margin-right: 1%;
 }
 
 #user-avatar-url-name-html-url {

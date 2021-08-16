@@ -41,7 +41,7 @@
 
 #repo-language::before {
     background-image: linear-gradient(var(--language-color), var(--language-color));
-    clip-path: circle(min(1vw,1vh));
+    clip-path: circle(min(1vw,1vh) at center);
 }
 
 #repo-stargazers-count {
