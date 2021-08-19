@@ -5,12 +5,12 @@
 }
 
 :host {
-    --bar-container-width: 65%;
+    --max-bar-width: 75%;
     --bar-height: 20%;
     --bar-completed-color: #00d646;
     --bar-completed-percentage: 0;
-    --label-left-width: 20%;
-    --label-right-width: 10%;
+    --bar-completed-ratio: calc(var(--bar-completed-percentage) / 100);
+    --bar-completed-width: calc(var(--bar-completed-ratio) * var(--max-bar-width));
 }
 
 :host {
@@ -23,30 +23,26 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
     width: 100%;
     height: 100%;
 }
 
-#label-left, #label-right {
-    position: relative;
-    padding: 1%;
-}
-
 #label-left {
-    width: calc(var(--label-left-width) - 1%);
     text-align: right;
+    flex: 0 0  auto;
 }
 
 #label-right {
-    width: var(--label-right-width);
     text-align: left;
-    counter-reset: bar-completed-percentage var(--bar-completed-percentage);
 }
 
 #label-right::after {
+    counter-reset: bar-completed-percentage var(--bar-completed-percentage);
     content: counter(bar-completed-percentage) "%";
 }
 
 #bar {
     height: var(--bar-height);
+    flex: 0 0  var(--bar-completed-width);
 }

@@ -8,9 +8,9 @@ const template = textToTemplate(css, html);
 
 function handleIntersect(entries) {
     entries.forEach(async entry => {
-        const { intersectionRatio, isIntersecting } = entry;
+        const { target, intersectionRatio, isIntersecting } = entry;
         const { x, y } = entry.boundingClientRect;
-        const { previousX = x + 1, previousY = y + 1, previousIntersectionRatio = 0 } = entry.target;
+        const { previousX = x + 1, previousY = y + 1, previousIntersectionRatio = 0 } = target;
         let [direction, boundary] = [null, null];
         if (!intersectionRatio && !isIntersecting) {
             return;
@@ -39,12 +39,12 @@ function handleIntersect(entries) {
         else if ((x > previousX) && isIntersecting) { }
         // console.log(entry.target, direction, boundary, isIntersecting, intersectionRatio, y, previousY);
         if (direction) {
-            entry.target[HTMLToCamelCase(`_${direction}-any`)]();
+            target[HTMLToCamelCase(`_${direction}-any`)]();
             if (boundary) {
-                entry.target[HTMLToCamelCase(`_${direction}-${boundary}`)]();
+                target[HTMLToCamelCase(`_${direction}-${boundary}`)]();
             }
         }
-        Object.assign(entry.target, { previousX: x, previousY: y, previousIntersectionRatio: intersectionRatio });
+        Object.assign(target, { previousX: x, previousY: y, previousIntersectionRatio: intersectionRatio });
     })
 }
 
@@ -77,6 +77,7 @@ function addIntersectionFunctions(targetClass) {
                 if (this[functionPrefixCamelCase]) {
                     this[functionPrefixCamelCase]();
                 }
+                this.dispatchEvent(new Event(functionPrefixCamelCase.toLowerCase()));
             };
         });
     })
