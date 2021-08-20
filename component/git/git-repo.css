@@ -3,9 +3,9 @@
 :host {
     display: block;
     position: relative;
-    --icon-width: min(3vw,3vh);
-    --icon-margin-right: min(1vw,1vh);
-    --icon-circle-diameter: min(1vw,1vh);
+    --repo-icon-width: min(3vw,3vh);
+    --repo-icon-margin-right: min(1vw,1vh);
+    --repo-icon-circle-clip-path: circle(49% at center);
 }
 
 #grid-container {
@@ -34,17 +34,17 @@
 :is(#repo-language, #repo-stargazers-count, #repo-watchers-count, #repo-forks-count)::before {
     content: "";
     display: block;
-    height: var(--icon-width);
-    width: var(--icon-width);
-    margin-right: var(--icon-margin-right);
+    height: var(--repo-icon-width);
+    width: var(--repo-icon-width);
+    margin-right: var(--repo-icon-margin-right);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     position: relative;
 }
 
 #repo-language::before {
     background-image: linear-gradient(var(--language-color), var(--language-color));
-    clip-path: circle(var(--icon-circle-diameter) at center);
+    clip-path: var(--repo-icon-circle-clip-path);
 }
 
 #repo-stargazers-count {

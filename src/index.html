@@ -78,7 +78,7 @@
                     </nav-section-header>
                 </nav-section>
 
-                <padding-section class="height-50"></padding-section>
+                <padding-section class="height-75"></padding-section>
 
                 <nav-section id="contact" class="horizontal-center-children scroll-snap-start">
                     <nav-section-header>
@@ -117,6 +117,7 @@
                 <tinted-background id="background3"></tinted-background>
                 <tinted-background id="background4"></tinted-background>
                 <tinted-background id="background5"></tinted-background>
+                <tinted-background id="background6"></tinted-background>
             </parallax-layer>
         </parallax-group>
     </on-scroll-container>
@@ -141,7 +142,7 @@
         const skillsHTML = (cventries) => {
             const skillHTML = ({ name, proficiencyPercentage } = {}) =>
                 `<progress-bar-borderless id="${makeSkillId(name)}" proficiency-percentage="${proficiencyPercentage}">${name}</progress-bar-borderless>`;
-            return `<on-intersection-add-class id="intersection-skills" class="content-container"
+            return `<on-intersection-add-class threshold="0.75" id="intersection-skills" class="content-container"
                     query-selector="progress-bar-container" enter-any-add-class="ready">
                     <progress-bar-container>
                         ${cventries.reduce((innerHTML, cvskill) => innerHTML + skillHTML(cvskill), '')}
@@ -206,53 +207,68 @@
                 document.querySelector('#projects').innerHTML += projectsHTML(json.document.cv.projects.cventries);
                 document.querySelector('#experience').innerHTML += experiencesHTML(json.document.cv.experience.cventries);
                 
-                const pbContainer = document.querySelector('progress-bar-container')
+                const pbContainer = document.querySelector('progress-bar-container');
+
                 if(CSS.registerProperty) {
                     pbContainer.lastChild.addEventListener('transitionend', (e) => pbContainer.classList.add('done'));
-                    requestAnimationFrame(() => {
-                        pbContainer.classList.add('ready');
-                        pbContainer.centerProgressBars();
-                        pbContainer.classList.remove('ready');
-                        pbContainer.classList.add('init');
-                    });
                 }
                 else {
-                    const intersectionSkills = document.querySelector('#intersection-skills');
-                    const pbs = Array.from(pbContainer.children);
-                    pbs.forEach(pb =>
-                            pb.style.setProperty('--bar-completed-percentage', pb.getAttribute('proficiency-percentage')));
-                    
-                    pbContainer.centerProgressBars();
-                    
-                    pbs.forEach(pb =>
-                        pb.style.setProperty('--bar-completed-percentage', '0'));
-                    
+                    const intersectionSkills = document.querySelector('#intersection-skills');  
                     const pbAnimate = () => {
-                        function AnimateProgressBarFactory(bar, end, delta, delay) {
-                            let i = 0;
+                        function AnimateProgressBarFactory(bar, start, end, delta, delay) {
                             return function animate() {
-                                if(i <= (end + delay)) {
-                                    if(i > delay) {
-                                        bar.style.setProperty('--bar-completed-percentage', i - delay);
+                                if(start <= end) {
+                                    if(delay) {
+                                        --delay;
                                     }
-                                    i += delta;
+                                    else {
+                                        bar.style.setProperty('--bar-completed-percentage', start);
+                                        start += delta;
+                                    }
                                     requestAnimationFrame(animate);
                                 }
                             }
                         }
-
-                        pbs.forEach((pb, i) =>
-                            AnimateProgressBarFactory(pb, parseInt(pb.getAttribute('proficiency-percentage')), 1, 5*i + 10)());
+                        Array.from(pbContainer.children).forEach((pb, i) =>
+                            AnimateProgressBarFactory(pb, 0, parseInt(pb.getAttribute('proficiency-percentage')), 1, 5 * (i + 1))());
                         
                         intersectionSkills.removeEventListener('enterany', pbAnimate);
                     }
+
                     intersectionSkills.addEventListener('enterany', pbAnimate); 
                 }
                 
+                const resizeCallback = () => {
+                    const ready = pbContainer.classList.contains('ready');
+                    if(CSS.registerProperty) {
+                        pbContainer.classList.remove('init');
+                        pbContainer.classList.add('ready');
+                        pbContainer.centerProgressBars();
+                        pbContainer.classList.toggle('ready', ready);
+                        pbContainer.classList.add('init');
+                    }
+                    else {
+                        const pbs = Array.from(pbContainer.children);
+
+                        if(!ready) {
+                            pbs.forEach(pb =>
+                                    pb.style.setProperty('--bar-completed-percentage', pb.getAttribute('proficiency-percentage')));
+                        }
+
+                        pbContainer.centerProgressBars();
+                        
+                        if(!ready) {
+                            pbs.forEach(pb =>
+                                pb.style.setProperty('--bar-completed-percentage', '0'));
+                        }
+                    }
+                }
+
+                resizeCallback();
                 let resizeTimer;
                 window.addEventListener('resize', (e) => {
                     clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(() => pbContainer.centerProgressBars(), 50);
+                    resizeTimer = setTimeout(resizeCallback, 50);
                 });
 
             });

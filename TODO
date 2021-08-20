@@ -1,5 +1,4 @@
 Pending
-- progress bar animation in Firefox
 - add white-space: nowrap; to autofit-font-nowrap component. Perhaps add max-width: 100% and max-height 100%;
 - rename on-intersect-add-class
 - change MutationObserverHTML element to be query-selector based and support attributes like:
@@ -44,6 +43,9 @@ Completed
 - fix strip of white space on left of window. The width of the vertical scrollbar caused parallax layers to be translated slightly in the +x-direction.
 - fix extra overflow at bottom of page due to parallax background layer.
 
+8/20/2021
+- progress bar animation in Firefox
+- fixed issue where progress-bar centering failed if viewport was resized before progress bars came into view
 Abandoned:
 - scroll snap components
 - center child components

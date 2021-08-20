@@ -27,31 +27,19 @@
 }
 
 :root {
-    /* nav-bar */
-    --nav-bar-height: 8vh;
-    --nav-bar-reveal-height: 1vh;
-    --nav-bar-spacing: min(1vh, 1vw);
-    --nav-bar-content-height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-spacing)));
-    --nav-bar-box-shadow: 0px 1px 5px 1px var(--color-charcoal-dark-50);
-    --nav-entry-spacing: 1%;
-    /* intro container */
-    --intro-container-width: min(60vh, 60vw);
-    --intro-container-spacing: min(5vh, 5vw);
-    /* content-container */
-    --content-container-width: 100%;
-    --content-box-shadow: 0px 0px min(1vh, 1vw) 0 var(--color-charcoal-dark-50);
-    /* 0.00px 1.00px 25px 4px rgba(47, 46, 46, 0.3); */
-    --content-container-spacing: max(2vh, 2vw);
-    --content-container-background-color: var(--color-charcoal);
-    /* project container */
-    --project-container-spacing: min(1vh, 1vw);
-    --project-icon-width: calc(3 * var(--project-container-spacing));
+    /* spacing */
+    --spacing-thin: min(1vh, 1vw);
+    --spacing-normal: min(2vh, 2vw);
+    --spacing-thick: min(3vh, 3vw);
+    /* icon size */
+    --icon-width: calc(3 * var(--spacing-thin));
+    --icon-circle-clip-path: circle(49% at center);
     /* font-family */
     --font-family-primary: 'roboto-mono-primary', Fallback, sans-serif;
     --font-family-medium-bold: 'roboto-mono-medium-bold', Fallback, sans-serif;
-    --color-medium-bold: var(--color-green);
     --font-family-bold: 'roboto-mono-bold', Fallback, sans-serif;
-    
+    /* font color */
+    --color-medium-bold: var(--color-green);
     /* font size */
     --font-size-primary: min(0.9em, 2.3vh, 2.3vw);
     --font-size-small: 100%;
@@ -71,8 +59,52 @@
     --color-red: #dc3545;
     /* border */
     --border-color: var(--color-gray);
-    --border-solid: 1px solid var(--border-color);
+    --border-width: 1px;
+    --border-solid: var(--border-width) solid var(--border-color);
     --border-dashed: 1.5px dashed var(--border-color);
+    /* scrollbars */
+    --scrollbar-secondary-width: thin;
+    --scrollbar-secondary-width-webkit: var(--spacing-thin);
+    --scrollbar-secondary-track-color: var(--color-charcoal);
+    --scrollbar-secondary-color: var(--color-gray);
+    --scrollbar-main-width: thin;
+    --scrollbar-main-width-webkit: var(--spacing-normal);
+    --scrollbar-main-track-color: var(--color-gray);
+    --scrollbar-main-color: var(--color-charcoal);
+    --scrollbar-main-hover-color: var(--color-charcoal-dark);
+    /* transitions */
+    --transition-duration-slow: 1s;
+    --transition-duration-normal: 0.5s;
+    --transition-duration-fast: 0.2s;
+    /* nav-bar */
+    --nav-bar-height: 8vh;
+    --nav-bar-reveal-height: var(--spacing-thin);
+    --nav-bar-spacing: var(--spacing-thin);
+    --nav-bar-content-height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-spacing)));
+    --nav-bar-background-color: var(--color-charcoal);
+    --nav-bar-box-shadow: 0 var(--border-width) calc(5 * var(--border-width)) var(--border-width) var(--color-charcoal-dark-50);
+    --nav-entry-spacing: var(--spacing-thin);
+    /* nav-section-header */
+    --nav-section-header-width: 80%;
+    --nav-section-header-spacing: var(--spacing-thin);
+    /* content-container */
+    --content-container-width: 100%;
+    --content-box-shadow: 0 0 var(--spacing-thin) 0 var(--color-charcoal-dark-50);
+    --content-container-spacing: var(--spacing-normal);
+    --content-container-background-color: var(--color-charcoal);
+    /* progress bars */
+    --progress-bar-spacing: var(--spacing-thin);
+    /* projects */
+    --project-spacing: var(--spacing-thin);
+    --project-width-wrap: calc(50% - calc(6 * var(--project-spacing)));
+    --project-height-wrap: calc(50% - calc(4 * var(--project-spacing)));
+    --project-grid-template-rows-wrap: 20% 1fr 20%;
+    --project-width-nowrap: calc(100% - calc(2 * var(--project-spacing)));
+    /* vertical timeline */
+    --vertical-timeline-border: var(--border-dashed);
+    --vertical-timeline-marker-diameter: var(--icon-width);
+    --vertical-timeline-marker-radius: calc(var(--vertical-timeline-marker-diameter) / 2);
+    --vertical-timeline-spacing: var(--spacing-normal);
     /* contact form */
     --form-valid-color: var(--color-green);
     --form-valid-focus-color: var(--color-green);
@@ -80,22 +112,6 @@
     --form-label-color: var(--color-primary);
     --form-placeholder-color: var(--color-primary);
     --form-submit-color: var(--color-primary);
-    /* vertical timeline */
-    --vertical-timeline-border: var(--border-dashed);
-    --vertical-timeline-marker-radius: 6px;
-    --vertical-timeline-marker-diameter: calc(2 * var(--vertical-timeline-marker-radius));
-    --vertical-timeline-spacing: 5%;
-    --vertical-timeline-header-spacing: 0.5em;
-    /* scrollbars */
-    --scrollbar-secondary-width: thin;
-    --scrollbar-secondary-width-webkit: 1px;
-    --scrollbar-secondary-track-color: var(--color-charcoal);
-    --scrollbar-secondary-color: var(--color-gray);
-    --scrollbar-main-width: thin;
-    --scrollbar-main-width-webkit: 10px;
-    --scrollbar-main-track-color: var(--color-gray);
-    --scrollbar-main-color: var(--color-charcoal);
-    --scrollbar-main-hover-color: var(--color-charcoal-dark);
 }
 
 /* Scrollbars */
@@ -193,7 +209,7 @@ on-scroll-container::-webkit-scrollbar-thumb:hover {
 
 [enter-any-add-class=transition-fade-in]>* {
     opacity: 0;
-    transition: opacity 1s;
+    transition: opacity var(--transition-duration-slow);
 }
 
 .transition-fade-in {
@@ -225,10 +241,45 @@ h1, h2, h3, h4, h5, h6 {
 
 h1, h2, h3 {
     font-family: var(--font-family-bold);
+    text-transform: uppercase;
+}
+
+:is(h1,h2,h3) span {
+    color: var(--color-green);
+}
+
+h1 {
+    font-size: var(--font-size-xlarge);
+}
+
+h2 {
+    letter-spacing: 0.18em;
+    font-size: var(--font-size-medium);
+}
+
+h3 {
+    font-size: var(--font-size-large);
+    font-family: var(--font-family-bold);
 }
 
 h4, h5, h6 {
     font-family: var(--font-family-primary);
+}
+
+h5 {
+    font-family: var(--font-family-medium-bold);
+    font-size: var(--font-size-medium-bold);
+    color: var(--color-medium-bold);
+    text-transform: uppercase;
+}
+
+h6 {
+    font-family: var(--font-family-medium);
+    font-size: var(--font-size-medium);
+}
+
+p {
+    margin: 0;
 }
 
 on-scroll-container {
@@ -247,7 +298,7 @@ on-scroll-container {
 
 .nav-bar-hide:hover {
     top: 0;
-    background-color: var(--color-charcoal);
+    background-color: var(--nav-bar-background-color);
 }
 
 .nav-bar-hide {
@@ -262,13 +313,12 @@ nav-bar {
     height: var(--nav-bar-content-height);
     z-index: 4;
     box-shadow: var(--nav-bar-box-shadow);
-    background-color: var(--color-charcoal);
-    transition: top 0.5s, background-color 1s;
+    background-color: var(--nav-bar-background-color);
+    transition: top var(--transition-duration-normal), background-color var(--transition-duration-slow);
 }
 
 nav-entry {
     color: var(--color-primary);
-    --background-color-hover: transparent;
     padding: var(--nav-entry-spacing);
 }
 
@@ -293,25 +343,14 @@ nav-section-header {
     display: flex;
     align-items: center;
     position: relative;
-    width: 80%;
+    width: var(--nav-section-header-width);
     height: var(--nav-bar-content-height);
-    padding: 1%;
-}
-
-nav-section-header h3 {
+    padding-top: var(--nav-section-header-spacing);
     text-align: center;
-    text-transform: uppercase;
-    font-size: var(--font-size-large);
-    font-family: var(--font-family-bold);
-}
-
-nav-section-header span {
-    color: var(--color-green);
 }
 
 padding-section {
     display: block;
-    position: relative;
 }
 
 #footer {
@@ -322,7 +361,7 @@ padding-section {
     bottom: 0;
     width: 100%;
     height: var(--nav-bar-height);
-    background-color: var(--color-charcoal);
+    background-color: var(--nav-bar-background-color);
 }
 
 #footer a {
@@ -366,7 +405,7 @@ tinted-background {
 }
 
 #background6 {
-    height: calc(50% * 2 / 3);
+    height: calc(125% * 2 / 3);
 }
 
 /* Content */
@@ -389,24 +428,7 @@ tinted-background {
 /* Intro */
 
 #intro-container {
-    width: calc(var(--intro-container-width) - (4 * var(--intro-container-spacing)));
-    height: calc(var(--intro-container-width) - (4 * var(--intro-container-spacing)));
-    padding: var(--intro-container-spacing);
-    margin: var(--intro-container-spacing);
     text-align: start;
-    text-transform: uppercase;
-}
-
-#intro-container span {
-    color: var(--color-green);
-}
-
-#intro-container h1 {
-    font-size: var(--font-size-xlarge);
-}
-
-#intro-container h2 {
-    letter-spacing: 0.18em;
 }
 
 /* Resume */
@@ -415,6 +437,7 @@ tinted-background {
     justify-content: space-evenly;
 }
 
+/* TODO */
 #resume-summary-container {
     width: 80%;
     min-height: 0;
@@ -448,6 +471,7 @@ tinted-background {
     justify-content: center;
     width: 100%;
     height: 100%;
+    /* TODO */
     font-family: var(--font-family-medium-bold);
     font-size: var(--font-size-medium-bold);
     color: var(--color-medium-bold);
@@ -457,7 +481,7 @@ tinted-background {
 }
 
 /* progress bar */
-
+/* TODO */
 progress-bar-container {
     display: flex;
     flex-direction: column;
@@ -474,7 +498,7 @@ progress-bar-container {
     inherits: true;
     initial-value: 0;
 }
-
+/* TODO */
 progress-bar-borderless {
     display: flex;
     align-content: center;
@@ -488,14 +512,15 @@ progress-bar-borderless {
 }
 
 progress-bar-container.init.ready:not(.done) progress-bar-borderless {
-    transition: --bar-completed-percentage 1s;
+    transition: --bar-completed-percentage var(--transition-duration-slow);
 }
 
 progress-bar-borderless::part(flex-container) {
-    column-gap: 2.5%;
+    column-gap: var(--progress-bar-spacing);
 }
 
 progress-bar-borderless::part(label-left) {
+    /* TODO */
     font-family: var(--font-family-medium-bold);
     font-size: var(--font-size-medium-bold);
     color: var(--color-medium-bold);
@@ -504,12 +529,11 @@ progress-bar-borderless::part(label-left) {
 
 progress-bar-borderless::part(bar) {
     border-bottom: var(--border-dashed);
-    /* margin: 0 2.5%; */
 }
 
-/* progress-bar-borderless::part(label-right) {
-    flex-shrink: 1;
-} */
+progress-bar-container:not(.ready) progress-bar-borderless {
+    visibility: hidden;
+}
 
 /* projects */
 
@@ -541,16 +565,16 @@ projects::after {
 }
 
 git-user, git-repo, project {
-    width: calc(50% - calc(6 * var(--project-container-spacing)));
-    height: calc(50% - calc(4 * var(--project-container-spacing)));
+    width: var(--project-width-wrap);
+    height: var(--project-height-wrap);
     box-shadow: var(--content-box-shadow);
-    margin: var(--project-container-spacing);
-    padding: var(--project-container-spacing);
+    margin: var(--project-spacing);
+    padding: var(--project-spacing);
 }
 
 git-user::part(grid-container), git-repo::part(grid-container), project {
-    grid-template-rows: 20% 1fr 20%;
-    row-gap: var(--project-container-spacing);
+    grid-template-rows: var(--project-grid-template-rows-wrap);
+    row-gap: var(--project-spacing);
 }
 
 git-user::part(user-name), git-repo::part(repo-html-url), project a {
@@ -579,13 +603,12 @@ git-repo::part(description):hover, project div:hover {
 }
 
 git-user::part(user-avatar-url) {
-    margin-right: var(--project-container-spacing);
+    margin-right: var(--project-spacing);
 }
 
 git-user::part(user-html-url) {
     display: inline;
     color: var(--color-primary);
-    text-transform: lowercase;
     text-decoration: none;
     font-weight: normal;
 }
@@ -626,16 +649,17 @@ project div {
 }
 
 git-repo {
-    --icon-width: var(--project-icon-width);
-    --icon-margin-right: var(--project-container-spacing);
+    --repo-icon-width: var(--icon-width);
+    --repo-icon-circle-clip-path: var(--icon-circle-clip-path);
+    --repo-icon-margin-right: var(--project-spacing);
 }
 
 project::after {
     content: "";
     grid-area: icon;
-    height: var(--project-icon-width);
-    width: var(--project-icon-width);
-    background-size: contain;
+    height: var(--icon-width);
+    width: var(--icon-width);
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -682,7 +706,7 @@ project::after {
         width: 100%;
         height: var(--content-container-spacing);
         top: calc(-1 * var(--content-container-spacing));
-        background: linear-gradient(to top, transparent, var( --color-charcoal));
+        background: linear-gradient(to top, transparent, var(--content-container-background-color));
         flex: 0 0 var(--content-container-spacing);
     }
     #projects-container::after {
@@ -691,17 +715,17 @@ project::after {
         width: 100%;
         height: var(--content-container-spacing);
         bottom: calc(-1 * var(--content-container-spacing));
-        background: linear-gradient(to bottom, transparent, var( --color-charcoal));
-        flex: 1 0 10%;
+        background: linear-gradient(to bottom, transparent, var(--content-container-background-color));
+        flex: 1 0 var(--content-container-spacing);
     }
     git-user, git-repo, project {
-        width: calc(100% - 4vw);
+        width: var(--project-width-nowrap);
         height: unset;
         flex-grow: 1;
     }
     git-user::part(grid-container), git-repo::part(grid-container), project {
         grid-template-rows: auto auto auto;
-        row-gap: 1vw;
+        row-gap: calc(2 * var(--project-spacing));
     }
     git-repo, project {
         overflow: unset;
@@ -722,7 +746,6 @@ vertical-timeline {
     position: relative;
     height: calc(100% - var(--nav-bar-height));
     width: 100%;
-    padding: 1%;
 }
 
 vertical-timeline on-intersection-add-class {
@@ -737,24 +760,24 @@ vertical-timeline> :nth-child(1) {
 vertical-timeline-entry {
     display: block;
     position: relative;
-    width: 90%;
+    width: calc(100% - (2 * var(--vertical-timeline-spacing)));
     height: 100%;
-    box-sizing: border-box;
     margin: 0 var(--vertical-timeline-spacing);
 }
 
 vertical-timeline-entry h4 {
     width: calc(100% - var(--vertical-timeline-spacing));
     padding-left: var(--vertical-timeline-spacing);
+    /* TODO */
     text-transform: uppercase;
     color: var(--color-gray);
-    margin-bottom: var(--vertical-timeline-header-spacing);
+    margin-bottom: var(--vertical-timeline-spacing);
 }
 
 vertical-timeline-entry div-border {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 100%; /* Note: overflows which may cause trouble for long text*/
     position: relative;
     border-top: var(--vertical-timeline-border);
     border-left: var(--vertical-timeline-border);
@@ -769,7 +792,7 @@ vertical-timeline-entry div-border::after {
     height: var(--vertical-timeline-marker-diameter);
     content: " ";
     background-image: linear-gradient(var(--border-color), var(--border-color));
-    clip-path: circle(49% at center);
+    clip-path: var(--icon-circle-clip-path);
 }
 
 vertical-timeline-entry div {
@@ -779,22 +802,11 @@ vertical-timeline-entry div {
 }
 
 vertical-timeline-entry h5 {
-    margin-top: var(--vertical-timeline-header-spacing);
-    font-family: var(--font-family-medium-bold);
-    font-size: var(--font-size-medium-bold);
-    color: var(--color-medium-bold);
-    text-transform: uppercase;
+    margin-top: var(--vertical-timeline-spacing);
 }
 
 vertical-timeline-entry h6 {
-    margin-bottom: var(--vertical-timeline-header-spacing);
-    font-family: var(--font-family-medium);
-    font-size: var(--font-size-medium);
-}
-
-vertical-timeline-entry p {
-    width: 100%;
-    margin: 0;
+    margin-bottom: var(--vertical-timeline-spacing);
 }
 
 @media (min-aspect-ratio: 3/4) {
@@ -856,7 +868,7 @@ vertical-timeline-entry p {
 
 vertical-timeline-entry div {
     opacity: 0;
-    transform: scale(0.90);
+    transform: scale(0.9);
     transform-origin: top center;
 }
 
@@ -865,12 +877,12 @@ vertical-timeline-entry :is(h4, div-border) {
 }
 
 vertical-timeline-entry.bounce :is(h4, div-border) {
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-duration-fast);
     opacity: 1;
 }
 
 vertical-timeline-entry.bounce div {
-    animation: bounce 0.2s ease 0.2s 1 normal forwards running;
+    animation: bounce var(--transition-duration-fast) ease var(--transition-duration-fast) 1 normal forwards running;
     will-change: transform, opacity;
 }
 
@@ -879,7 +891,7 @@ vertical-timeline-entry.bounce div {
 }
 
 /* form control */
-
+/* TODO */
 form-control {
     display: flex;
     flex-direction: column;

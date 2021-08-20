@@ -23,7 +23,7 @@ customElements.define("progress-bar-container",
             const calcPbEmptyWidth = (pb) => {
                 const pbCr = pb.getBoundingClientRect();
                 const labelRightCr = pb.shadowRoot.querySelector('#label-right').getBoundingClientRect();
-                return pbCr.width - (labelRightCr.left + labelRightCr.width - pbCr.left);    
+                return pbCr.width - (labelRightCr.left + labelRightCr.width - pbCr.left);
             }
             
             const minPbEmptyWidth = pbs.reduce((minPbEmptyWidth, pb) => 
