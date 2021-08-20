@@ -30,7 +30,7 @@
     /* spacing */
     --spacing-thin: min(1vh, 1vw);
     --spacing-normal: min(2vh, 2vw);
-    --spacing-thick: min(3vh, 3vw);
+    --spacing-thick: 5%;
     /* icon size */
     --icon-width: calc(3 * var(--spacing-thin));
     --icon-circle-clip-path: circle(49% at center);
@@ -42,11 +42,15 @@
     --color-medium-bold: var(--color-green);
     /* font size */
     --font-size-primary: min(0.9em, 2.3vh, 2.3vw);
+    --font-size-xsmall: 80%;
     --font-size-small: 100%;
     --font-size-medium: 107.5%;
     --font-size-medium-bold: 115%;
     --font-size-large: 150%;
     --font-size-xlarge: 200%;
+    /* text spacing */
+    --line-height-emphasis: 1.75em;
+    --letter-spacing-emphasis: 0.18em;
     /* color */
     --color-primary: white;
     --color-gray: #BEC7D5;
@@ -84,22 +88,27 @@
     --nav-bar-background-color: var(--color-charcoal);
     --nav-bar-box-shadow: 0 var(--border-width) calc(5 * var(--border-width)) var(--border-width) var(--color-charcoal-dark-50);
     --nav-entry-spacing: var(--spacing-thin);
+    /* footer */
+    --footer-height: var(--nav-bar-height);
+    --footer-background-color: var(--nav-bar-background-color);
     /* nav-section-header */
-    --nav-section-header-width: 80%;
     --nav-section-header-spacing: var(--spacing-thin);
+    --nav-section-header-height: var(--nav-bar-content-height);
     /* content-container */
     --content-container-width: 100%;
     --content-box-shadow: 0 0 var(--spacing-thin) 0 var(--color-charcoal-dark-50);
     --content-container-spacing: var(--spacing-normal);
     --content-container-background-color: var(--color-charcoal);
+    /* resume */
+    /* TODO */
+    --resume-summary-container-spacing: var(--spacing-thick);
+    --resume-download-container-spacing: var(--spacing-thick);
     /* progress bars */
-    --progress-bar-spacing: var(--spacing-thin);
+    --progress-bar-container-spacing: var(--spacing-thick);
+    --progress-bar-spacing: var(--spacing-normal);
+    --progress-bar-max-width: 70%;
     /* projects */
     --project-spacing: var(--spacing-thin);
-    --project-width-wrap: calc(50% - calc(6 * var(--project-spacing)));
-    --project-height-wrap: calc(50% - calc(4 * var(--project-spacing)));
-    --project-grid-template-rows-wrap: 20% 1fr 20%;
-    --project-width-nowrap: calc(100% - calc(2 * var(--project-spacing)));
     /* vertical timeline */
     --vertical-timeline-border: var(--border-dashed);
     --vertical-timeline-marker-diameter: var(--icon-width);
@@ -112,6 +121,9 @@
     --form-label-color: var(--color-primary);
     --form-placeholder-color: var(--color-primary);
     --form-submit-color: var(--color-primary);
+    --form-control-max-height: 15%;
+    --form-textarea-max-height: 30%;
+    --form-spacing: var(--spacing-thin);
 }
 
 /* Scrollbars */
@@ -234,7 +246,6 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    width: 100%;
     font-weight: unset;
     font-size: inherit;
 }
@@ -253,7 +264,7 @@ h1 {
 }
 
 h2 {
-    letter-spacing: 0.18em;
+    letter-spacing: var(--letter-spacing-emphasis);
     font-size: var(--font-size-medium);
 }
 
@@ -266,7 +277,7 @@ h4, h5, h6 {
     font-family: var(--font-family-primary);
 }
 
-h5 {
+h4, h5 {
     font-family: var(--font-family-medium-bold);
     font-size: var(--font-size-medium-bold);
     color: var(--color-medium-bold);
@@ -334,7 +345,7 @@ nav-entry:not(.active):hover {
 
 nav-section {
     display: block;
-    position: relative;
+    /* position: relative; */
     width: 100%;
     height: 100%;
 }
@@ -342,10 +353,9 @@ nav-section {
 nav-section-header {
     display: flex;
     align-items: center;
-    position: relative;
-    width: var(--nav-section-header-width);
-    height: var(--nav-bar-content-height);
-    padding-top: var(--nav-section-header-spacing);
+    justify-content: center;
+    height: var(--nav-section-header-height);
+    padding: var(--nav-section-header-spacing) 0;
     text-align: center;
 }
 
@@ -357,11 +367,11 @@ padding-section {
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    bottom: var(--footer-height);
     width: 100%;
-    height: var(--nav-bar-height);
-    background-color: var(--nav-bar-background-color);
+    height: var(--footer-height);
+    background-color: var(--footer-background-color);
 }
 
 #footer a {
@@ -419,7 +429,6 @@ tinted-background {
     height: calc(var(--content-container-width) - (4 * var(--content-container-spacing)) - var(--nav-bar-height));
     position: relative;
     padding: var(--content-container-spacing);
-    margin: var(--content-container-spacing);
     z-index: 1;
     box-shadow: var(--content-box-shadow);
     background-color: var(--content-container-background-color);
@@ -437,32 +446,30 @@ tinted-background {
     justify-content: space-evenly;
 }
 
-/* TODO */
 #resume-summary-container {
-    width: 80%;
-    min-height: 0;
-    max-height: 80%;
+    width: calc(100% - (4 * var(--resume-summary-container-spacing)));
+    padding: var(--resume-summary-container-spacing);
     box-shadow: var(--content-box-shadow);
 }
 
 #resume-summary-container>p {
-    padding: 5%;
-    margin: 5%;
     text-align: center;
-    line-height: 1.75em;
+    line-height: var(--line-height-emphasis);
+    font-size: var(--font-size-medium);
 }
 
 #resume-download-container {
-    max-height: 7%;
-    min-height: 0;
-    width: 50%;
-    flex-grow: 1;
+    padding: calc(var(--resume-download-container-spacing) / 4) var(--resume-download-container-spacing);
     border: var(--border-solid);
     cursor: pointer;
 }
 
-#resume-download-button:hover span {
-    text-decoration: underline;
+#resume-download-container:hover {
+    outline: var(--border-solid);
+}
+
+#resume-download-button h4 {
+    display: inline;
 }
 
 #resume-download-button {
@@ -471,25 +478,19 @@ tinted-background {
     justify-content: center;
     width: 100%;
     height: 100%;
-    /* TODO */
-    font-family: var(--font-family-medium-bold);
-    font-size: var(--font-size-medium-bold);
-    color: var(--color-medium-bold);
     text-decoration: none;
-    text-transform: uppercase;
     white-space: nowrap;
 }
 
 /* progress bar */
-/* TODO */
 progress-bar-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     position: relative;
-    width: 90%;
-    height: 90%;
+    width: calc(100% - (2 * var(--progress-bar-container-spacing)));
+    padding: var(--progress-bar-container-spacing) 0;
     box-shadow: var(--content-box-shadow);
 }
 
@@ -502,10 +503,10 @@ progress-bar-container {
 progress-bar-borderless {
     display: flex;
     align-content: center;
-    --bar-completed-color: none;
     --bar-completed-percentage: 0;
+    --bar-completed-color: none;
     --bar-height: 10%;
-    --max-bar-width: 70%;
+    --bar-max-width: var(--progress-bar-max-width);
     will-change: --bar-completed-percentage;
     text-transform: uppercase;
     transition: none;
@@ -517,14 +518,6 @@ progress-bar-container.init.ready:not(.done) progress-bar-borderless {
 
 progress-bar-borderless::part(flex-container) {
     column-gap: var(--progress-bar-spacing);
-}
-
-progress-bar-borderless::part(label-left) {
-    /* TODO */
-    font-family: var(--font-family-medium-bold);
-    font-size: var(--font-size-medium-bold);
-    color: var(--color-medium-bold);
-    text-transform: uppercase;
 }
 
 progress-bar-borderless::part(bar) {
@@ -565,15 +558,15 @@ projects::after {
 }
 
 git-user, git-repo, project {
-    width: var(--project-width-wrap);
-    height: var(--project-height-wrap);
+    width: calc(50% - calc(6 * var(--project-spacing)));
+    height: calc(50% - calc(4 * var(--project-spacing)));
     box-shadow: var(--content-box-shadow);
     margin: var(--project-spacing);
     padding: var(--project-spacing);
 }
 
 git-user::part(grid-container), git-repo::part(grid-container), project {
-    grid-template-rows: var(--project-grid-template-rows-wrap);
+    grid-template-rows: 20% 1fr 20%;
     row-gap: var(--project-spacing);
 }
 
@@ -719,7 +712,7 @@ project::after {
         flex: 1 0 var(--content-container-spacing);
     }
     git-user, git-repo, project {
-        width: var(--project-width-nowrap);
+        width: calc(100% - calc(2 * var(--project-spacing)));
         height: unset;
         flex-grow: 1;
     }
@@ -762,16 +755,15 @@ vertical-timeline-entry {
     position: relative;
     width: calc(100% - (2 * var(--vertical-timeline-spacing)));
     height: 100%;
-    margin: 0 var(--vertical-timeline-spacing);
+    padding: 0 var(--vertical-timeline-spacing);
 }
 
 vertical-timeline-entry h4 {
     width: calc(100% - var(--vertical-timeline-spacing));
     padding-left: var(--vertical-timeline-spacing);
-    /* TODO */
-    text-transform: uppercase;
+    padding-bottom: var(--vertical-timeline-spacing);
+    font-size: var(--font-size-primary);
     color: var(--color-gray);
-    margin-bottom: var(--vertical-timeline-spacing);
 }
 
 vertical-timeline-entry div-border {
@@ -802,11 +794,11 @@ vertical-timeline-entry div {
 }
 
 vertical-timeline-entry h5 {
-    margin-top: var(--vertical-timeline-spacing);
+    padding-top: var(--vertical-timeline-spacing);
 }
 
 vertical-timeline-entry h6 {
-    margin-bottom: var(--vertical-timeline-spacing);
+    padding-bottom: var(--vertical-timeline-spacing);
 }
 
 @media (min-aspect-ratio: 3/4) {
@@ -823,12 +815,12 @@ vertical-timeline-entry h6 {
         align-self: flex-end;
     }
     vertical-timeline> :nth-child(odd) vertical-timeline-entry {
-        margin: 0;
-        margin-left: var(--vertical-timeline-spacing);
+        padding: 0;
+        padding-left: var(--vertical-timeline-spacing);
     }
     vertical-timeline> :nth-child(even) vertical-timeline-entry {
-        margin: 0;
-        margin-right: var(--vertical-timeline-spacing);
+        padding: 0;
+        padding-right: var(--vertical-timeline-spacing);
     }
     vertical-timeline> :nth-child(odd) h4 {
         padding-left: 0;
@@ -898,9 +890,9 @@ form-control {
     flex-basis: auto;
     flex-shrink: 0;
     flex-grow: 0;
-    max-height: 15%;
+    max-height: var(--form-control-max-height);
     width: 100%;
-    margin-bottom: 1%;
+    margin-bottom: var(--form-spacing);
 }
 
 /* form control container */
@@ -911,8 +903,8 @@ form-control::part(container) {
     justify-content: center;
     flex-grow: 1;
     position: relative;
-    width: 98%;
-    padding: 1%;
+    width: calc(100% - 2 * var(--form-spacing));;
+    padding: var(--form-spacing);
     outline-color: transparent;
 }
 
@@ -950,10 +942,10 @@ form-control::part(validation-message) {
 form-control:not(:focus-within)[visited]::part(validation-message) {
     display: block;
     color: var(--form-invalid-color);
-    font-size: 0.9em;
     background-color: var(--container-color);
-    margin: 0.2em 0 0.1em 0;
     font-family: var(--font-family-bold);
+    font-size: var(--font-size-xsmall);
+    margin: calc(var(--form-spacing) / 3) 0 calc(var(--form-spacing) / 2) 0;
 }
 
 /* form control label */
@@ -967,7 +959,7 @@ form-control[visited]:not([type=submit]):is([required], :not([empty]))::part(lab
     position: unset;
     width: 100%;
     height: unset;
-    font-size: 70%;
+    font-size: var(--font-size-xsmall);
     color: var(--form-label-color);
 }
 
@@ -981,7 +973,7 @@ form-control[visited]:not([type=submit]):is([required], :not([empty]))::part(con
 
 form-control[type=textarea] {
     flex-grow: 1;
-    max-height: 30%;
+    max-height: var(--form-text-area-max-height);
 }
 
 form-control[type=textarea]::part(control) {
@@ -1016,17 +1008,4 @@ form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=su
 
 form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(label) {
     text-decoration: underline;
-}
-
-/* form-control[type=submit][empty]:focus-within::part(container) {
-    outline-color: var(--form-invalid-color);
-} */
-
-.squashed-form-control {
-    transition: opacity, max-height, padding, margin, overflow;
-    opacity: 0;
-    max-height: 0;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
 }

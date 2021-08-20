@@ -47,7 +47,7 @@
                             <a id="resume-download-button"
                                 href="https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume/resume.pdf"
                                 target="_blank" rel="noopener noreferrer" data-type="document">
-                                <span>Download Resume</span>
+                                <h4>Download Resume</h4>
                             </a>
                         </div>
                     </on-intersection-add-class>
@@ -103,11 +103,11 @@
 
                         <form-control type="submit" id="submit" value="">Submit</form-control>
                     </form>
-                    <div id="footer">
-                        <a href="https://icons8.com">Icons from Icons8</a>
-                        <a href="https://fonts.google.com/specimen/Roboto+Mono">Fonts from Google</a>
-                    </div>
                 </nav-section>
+                <div id="footer">
+                    <a href="https://icons8.com">Icons from Icons8</a>
+                    <a href="https://fonts.google.com/specimen/Roboto+Mono">Fonts from Google</a>
+                </div>
 
             </parallax-layer>
 
@@ -126,9 +126,7 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             form.querySelectorAll('form-control:not([type=submit])').forEach((node, i, arr) => {
-                node.style.transitionDuration = `${i / (2 * arr.length)}s`;
-                node.style.transitionDelay = `${(arr.length - i) / (3 * arr.length)}s`;
-                node.classList.add('squashed-form-control');
+                node.style.display = 'none';
             });
             document.querySelector('form-control[type=submit]').innerText = 'Thank You!';
         });
@@ -141,7 +139,7 @@
         
         const skillsHTML = (cventries) => {
             const skillHTML = ({ name, proficiencyPercentage } = {}) =>
-                `<progress-bar-borderless id="${makeSkillId(name)}" proficiency-percentage="${proficiencyPercentage}">${name}</progress-bar-borderless>`;
+                `<progress-bar-borderless id="${makeSkillId(name)}" proficiency-percentage="${proficiencyPercentage}"><h4>${name}</h4></progress-bar-borderless>`;
             return `<on-intersection-add-class threshold="0.75" id="intersection-skills" class="content-container"
                     query-selector="progress-bar-container" enter-any-add-class="ready">
                     <progress-bar-container>
@@ -216,21 +214,25 @@
                     const intersectionSkills = document.querySelector('#intersection-skills');  
                     const pbAnimate = () => {
                         function AnimateProgressBarFactory(bar, start, end, delta, delay) {
+                            const set = (value) => bar.style.setProperty('--bar-completed-percentage', value);
                             return function animate() {
                                 if(start <= end) {
                                     if(delay) {
                                         --delay;
                                     }
                                     else {
-                                        bar.style.setProperty('--bar-completed-percentage', start);
+                                        set(start);
                                         start += delta;
                                     }
                                     requestAnimationFrame(animate);
                                 }
+                                else {
+                                    set(end);
+                                }
                             }
                         }
                         Array.from(pbContainer.children).forEach((pb, i) =>
-                            AnimateProgressBarFactory(pb, 0, parseInt(pb.getAttribute('proficiency-percentage')), 1, 5 * (i + 1))());
+                            AnimateProgressBarFactory(pb, 0, parseInt(pb.getAttribute('proficiency-percentage')), 3, 5 * (i + 1))());
                         
                         intersectionSkills.removeEventListener('enterany', pbAnimate);
                     }

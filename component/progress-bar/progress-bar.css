@@ -5,12 +5,12 @@
 }
 
 :host {
-    --max-bar-width: 75%;
+    --bar-max-width: 75%;
     --bar-height: 20%;
     --bar-completed-color: #00d646;
     --bar-completed-percentage: 0;
     --bar-completed-ratio: calc(var(--bar-completed-percentage) / 100);
-    --bar-completed-width: calc(var(--bar-completed-ratio) * var(--max-bar-width));
+    --bar-completed-width: calc(var(--bar-completed-ratio) * var(--bar-max-width));
 }
 
 :host {

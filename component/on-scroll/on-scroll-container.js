@@ -28,16 +28,16 @@ customElements.define("on-scroll-container",
                 const el = document.createElement("div");
                 Object.assign(el.style, {
                     position: 'absolute',
-                    height: '1vh',
-                    top: `${scrollHeight - 1}vh`,
+                    height: '1%',
+                    top: `${scrollHeight - 1}%`,
                     left: '0',
                     right: '0',
                     visibility: 'hidden'
                 });
                 for (let i = 0, h = scrollHeight; h > 0; ++i, h -= 200) {
                     els.push(el.cloneNode(true));
-                    els[i].style.height = `${Math.min(h, 100)}vh`;
-                    els[i].style.top = `${i * 200}vh`;
+                    els[i].style.height = `${Math.min(h, 100)}%`;
+                    els[i].style.top = `${i * 200}%`;
                     this.shadowRoot.appendChild(els[i]);
                     observer.observe(els[i]);
                 }

@@ -46,6 +46,7 @@ Completed
 8/20/2021
 - progress bar animation in Firefox
 - fixed issue where progress-bar centering failed if viewport was resized before progress bars came into view
+-fixed extra vertical scroll height in on-scroll container due to use of vh rather than % units
 Abandoned:
 - scroll snap components
 - center child components
