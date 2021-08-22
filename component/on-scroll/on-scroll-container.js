@@ -117,16 +117,17 @@ customElements.define("on-scroll-container",
                 function tick(frames) {
                     if ((frames - lastChangedFrame) > 20) {
                         resolve(scrollContainer.scrollTop - yInitial);
-                    } else if (frames >= 120) {
+                    } else if (frames >= 360) {
                         reject(new Error(`wait for scroll ${yDirection} stop timed out`));
                     } else if (yDirection !== globalYDirection) {
                         reject(new Error(`wait for scroll ${yDirection} canceled`));
                     }
                     else {
-                        if ((scrollContainer.scrollLeft != xPrevious) || (scrollContainer.scrollTop != yPrevious)) {
+                        const {scrollLeft, scrollTop} = scrollContainer;
+                        if ((scrollLeft !== xPrevious) || (scrollTop !== yPrevious)) {
                             lastChangedFrame = frames;
-                            xPrevious = scrollContainer.scrollLeft;
-                            yPrevious = scrollContainer.scrollTop;
+                            xPrevious = scrollLeft;
+                            yPrevious = scrollTop;
                         }
                         requestAnimationFrame(tick.bind(null, frames + 1));
                     }

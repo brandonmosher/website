@@ -40,17 +40,6 @@
                     <nav-section-header>
                         <h3><span>01</span> Resume</h3>
                     </nav-section-header>
-                    <on-intersection-add-class id="resume-container" class="content-container"
-                        enter-any-add-class="transition-fade-in">
-                        <div id="resume-summary-container"></div>
-                        <div id="resume-download-container">
-                            <a id="resume-download-button"
-                                href="https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume/resume.pdf"
-                                target="_blank" rel="noopener noreferrer" data-type="document">
-                                <h4>Download Resume</h4>
-                            </a>
-                        </div>
-                    </on-intersection-add-class>
                 </nav-section>
 
                 <padding-section class="height-50"></padding-section>
@@ -72,7 +61,7 @@
                 <padding-section class="height-50"></padding-section>
 
                 <nav-section id="experience" threshold="0.3"
-                    class="height-250 horizontal-center-children scroll-snap-start">
+                    class="height-200 horizontal-center-children scroll-snap-start">
                     <nav-section-header>
                         <h3><span>04</span> Experience</h3>
                     </nav-section-header>
@@ -84,8 +73,7 @@
                     <nav-section-header>
                         <h3><span>05</span> Contact</h3>
                     </nav-section-header>
-                    <form id="contact-form" name="contact-form" class="content-container"
-                        action="https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live">
+                    <form id="contact-form" name="contact-form" class="content-container">
                         <form-control type="text" id="name" name="name" title="Hi, what's your name?" required="*">
                             Name</form-control>
 
@@ -122,158 +110,185 @@
         </parallax-group>
     </on-scroll-container>
     <script>
-        const form = document.querySelector('form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            form.querySelectorAll('form-control:not([type=submit])').forEach((node, i, arr) => {
-                node.style.display = 'none';
+        const resumeUrl = 'https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume/resume.pdf';
+        const resumeJsonUrl = 'https://raw.githubusercontent.com/brandonmosher/resume/main/build/cv/cv.json';
+        const formSubmitUrl = 'https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live';
+
+        background: {
+            window.addEventListener('load', () => {
+                const b1 = document.querySelector('#background1');
+                b1.style.setProperty('--background-image', 'var(--background1-image-url)');
+                b1.style.setProperty('opacity', '1');
             });
-            document.querySelector('form-control[type=submit]').innerText = 'Thank You!';
-        });
+        }
 
-        const makeId = name => name.toLowerCase().replace(/(\+|\(|\))/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')
+        form: {
+            const form = document.querySelector('form');
+            form.action = formSubmitUrl;
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                form.querySelectorAll('form-control:not([type=submit])').forEach((node, i, arr) => {
+                    node.style.display = 'none';
+                });
+                document.querySelector('form-control[type=submit]').innerText = 'Thank You!';
+            });
+        }
 
-        const resumeSummaryHTML = (cvparagraph) => `<p>${cvparagraph}</p>`;
+        content: {
+            const makeId = name => name.toLowerCase().replace(/(\+|\(|\))/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')
 
-        const makeSkillId = (name) => `progress-bar-${makeId(name)}`;
-        
-        const skillsHTML = (cventries) => {
-            const skillHTML = ({ name, proficiencyPercentage } = {}) =>
-                `<progress-bar-borderless id="${makeSkillId(name)}" proficiency-percentage="${proficiencyPercentage}"><h4>${name}</h4></progress-bar-borderless>`;
-            return `<on-intersection-add-class threshold="0.75" id="intersection-skills" class="content-container"
-                    query-selector="progress-bar-container" enter-any-add-class="ready">
-                    <progress-bar-container>
-                        ${cventries.reduce((innerHTML, cvskill) => innerHTML + skillHTML(cvskill), '')}
-                    </progress-bar-container>
+            const resumeHTML = (cvparagraph) =>
+                `<on-intersection-add-class id="resume-container" class="content-container" enter-any-add-class="transition-fade-in">
+                    <p id="resume-summary-container">${cvparagraph}</p>
+                    <div id="resume-download-container">
+                        <a id="resume-download-button"
+                            href="${resumeUrl}"
+                            target="_blank" rel="noopener noreferrer" data-type="document">
+                            <h4>Download Resume</h4>
+                        </a>
+                    </div>
                 </on-intersection-add-class>`;
-        }
-        
-        const skillsCSS = (cventries) => {
-            const skillCSS = ({ i, name, proficiencyPercentage } = {}) =>
-                `progress-bar-container.ready #${makeSkillId(name)} {--bar-completed-percentage: ${parseInt(proficiencyPercentage)}; transition-delay: ${0.15 * i}s}`;
-            return cventries.reduce((skillsCSS, cvskill, i) => skillsCSS + skillCSS({i, ...cvskill}), '');
-        }
-        
-        const projectsHTML = (cventries) => {
-            const projectHTML = ({ url, name, cvparagraph, gitHubRepoName } = {}) => {
-                if (gitHubRepoName) {
-                    const [repoOwner, repoName] = gitHubRepoName.split('/');
-                    return `<git-repo repo-owner="${repoOwner}"" repo-name="${repoName}"></git-repo>`;
-                }
-                return `<project id="project-${makeId(name)}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
+
+            const makeSkillId = (name) => `progress-bar-${makeId(name)}`;
+
+            const skillsHTML = (cventries) => {
+                const skillHTML = ({ name, proficiencyPercentage } = {}) =>
+                    `<progress-bar-borderless id="${makeSkillId(name)}" proficiency-percentage="${proficiencyPercentage}"><h4>${name}</h4></progress-bar-borderless>`;
+                return `<on-intersection-add-class threshold="0.75" id="intersection-skills" class="content-container"
+                        query-selector="progress-bar-container" enter-any-add-class="ready">
+                        <progress-bar-container>
+                            ${cventries.reduce((innerHTML, cvskill) => innerHTML + skillHTML(cvskill), '')}
+                        </progress-bar-container>
+                    </on-intersection-add-class>`;
             }
-            return `<projects id="projects-container" class="content-container">
-                        <git-user user-login="brandonmosher"></git-user>
-                        ${cventries.reduce((projectsHTML, cvproject) => projectsHTML + projectHTML(cvproject), '')}
-                    </projects>`
-        }
-        
-        const experiencesCSS = (cventries) => `vertical-timeline on-intersection-add-class {height: ${100 / cventries.length}%;}`
 
-        const experiencesHTML = (cventries) => {
-            const experienceHTML = ({ startDate, endDate, organization, jobTitle, cvitems } = {}) =>
-                `<on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
-                    <vertical-timeline-entry>
-                        <h4>${startDate} - ${endDate}</h4>
-                        <div-border>
-                            <div>
-                                <h5>${organization}</h5>
-                                <h6>${jobTitle}</h6>
-                                <p>${cvitems}</p>
-                            </div>
-                        </div-border>
-                    </vertical-timeline-entry>
-                </on-intersection-add-class>`;
-            return `<vertical-timeline>
-                    ${cventries.reduce((experienceInnerHTML, cventry) => 
-                        experienceInnerHTML + experienceHTML({...cventry, cvitems: cventry.cvitems.join(" ")}), '')}
-                </vertical-timeline>`;
-                
-        }
-        
-        fetch('https://raw.githubusercontent.com/brandonmosher/resume/main/build/cv/cv.json')
-            .then(response => response.json())
-            .then(json => {
-                const style = document.createElement('style');
-                style.innerHTML += skillsCSS(json.document.cv.skills.cventries);
+            const skillsCSS = (cventries) => {
+                const skillCSS = ({ i, name, proficiencyPercentage } = {}) =>
+                    `progress-bar-container.ready #${makeSkillId(name)} {--bar-completed-percentage: ${parseInt(proficiencyPercentage)}; transition-delay: ${0.15 * i}s}`;
+                return cventries.reduce((skillsCSS, cvskill, i) => skillsCSS + skillCSS({ i, ...cvskill }), '');
+            }
 
-                style.innerHTML += experiencesCSS(json.document.cv.experience.cventries);
-                document.head.appendChild(style);
-
-                document.querySelector('#resume-summary-container').innerHTML += resumeSummaryHTML(json.document.cv.summary.cvparagraph);
-                document.querySelector('#skills').innerHTML += skillsHTML(json.document.cv.skills.cventries);;
-                document.querySelector('#projects').innerHTML += projectsHTML(json.document.cv.projects.cventries);
-                document.querySelector('#experience').innerHTML += experiencesHTML(json.document.cv.experience.cventries);
-                
-                const pbContainer = document.querySelector('progress-bar-container');
-
-                if(CSS.registerProperty) {
-                    pbContainer.lastChild.addEventListener('transitionend', (e) => pbContainer.classList.add('done'));
+            const projectsHTML = (cventries) => {
+                const projectHTML = ({ url, name, cvparagraph, gitHubRepoName } = {}) => {
+                    if (gitHubRepoName) {
+                        const [repoOwner, repoName] = gitHubRepoName.split('/');
+                        return `<git-repo repo-owner="${repoOwner}"" repo-name="${repoName}"></git-repo>`;
+                    }
+                    return `<project id="project-${makeId(name)}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
                 }
-                else {
-                    const intersectionSkills = document.querySelector('#intersection-skills');  
-                    const pbAnimate = () => {
-                        function AnimateProgressBarFactory(bar, start, end, delta, delay) {
-                            const set = (value) => bar.style.setProperty('--bar-completed-percentage', value);
-                            return function animate() {
-                                if(start <= end) {
-                                    if(delay) {
-                                        --delay;
+                return `<on-intersection-add-class id="projects-container" class="content-container" query-selector="git-user,git-repo,project" enter-any-add-class="ready">
+                            <git-user user-login="brandonmosher"></git-user>
+                            ${cventries.reduce((projectsHTML, cvproject) => projectsHTML + projectHTML(cvproject), '')}
+                        </on-intersection-add-class>`
+            }
+
+            const experiencesHTML = (cventries) => {
+                const experienceHTML = ({ startDate, endDate, organization, jobTitle, cvitems } = {}) =>
+                    `<on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
+                        <vertical-timeline-entry>
+                            <h4>${startDate} - ${endDate}</h4>
+                            <div-border>
+                                <div>
+                                    <h5>${organization}</h5>
+                                    <h6>${jobTitle}</h6>
+                                    <p>${cvitems}</p>
+                                </div>
+                            </div-border>
+                        </vertical-timeline-entry>
+                    </on-intersection-add-class>`;
+                return `<vertical-timeline>
+                        ${cventries.reduce((experienceInnerHTML, cventry) =>
+                    experienceInnerHTML + experienceHTML({ ...cventry, cvitems: cventry.cvitems.join(" ") }), '')}
+                    </vertical-timeline>`;
+            }
+
+            fetch(resumeJsonUrl)
+                .then(response => response.json())
+                .then(json => {
+                    css: {
+                        const style = document.createElement('style');
+                        style.innerHTML = skillsCSS(json.document.cv.skills.cventries);
+                        document.head.appendChild(style);
+                    }
+
+                    html: {
+                        document.querySelector('#resume').innerHTML += resumeHTML(json.document.cv.summary.cvparagraph);
+                        document.querySelector('#skills').innerHTML += skillsHTML(json.document.cv.skills.cventries);;
+                        document.querySelector('#projects').innerHTML += projectsHTML(json.document.cv.projects.cventries);
+                        document.querySelector('#experience').innerHTML += experiencesHTML(json.document.cv.experience.cventries);
+                    }
+
+                    progressBar: {
+                        const pbContainer = document.querySelector('progress-bar-container');
+
+                        if (CSS.registerProperty) {
+                            pbContainer.lastChild.addEventListener('transitionend', (e) => pbContainer.classList.add('done'));
+                        }
+                        else {
+                            const intersectionSkills = document.querySelector('#intersection-skills');
+                            const pbAnimate = () => {
+                                function AnimateProgressBarFactory(bar, start, end, delta, delay) {
+                                    const set = (value) => bar.style.setProperty('--bar-completed-percentage', value);
+                                    return function animate() {
+                                        if (start <= end) {
+                                            if (delay) {
+                                                --delay;
+                                            }
+                                            else {
+                                                set(start);
+                                                start += delta;
+                                            }
+                                            requestAnimationFrame(animate);
+                                        }
+                                        else {
+                                            set(end);
+                                        }
                                     }
-                                    else {
-                                        set(start);
-                                        start += delta;
-                                    }
-                                    requestAnimationFrame(animate);
                                 }
-                                else {
-                                    set(end);
+                                Array.from(pbContainer.children).forEach((pb, i) =>
+                                    AnimateProgressBarFactory(pb, 0, parseInt(pb.getAttribute('proficiency-percentage')), 3, 5 * (i + 1))());
+
+                                intersectionSkills.removeEventListener('enterany', pbAnimate);
+                            }
+
+                            intersectionSkills.addEventListener('enterany', pbAnimate);
+                        }
+
+                        const resizeCallback = () => {
+                            const ready = pbContainer.classList.contains('ready');
+                            if (CSS.registerProperty) {
+                                pbContainer.classList.remove('init');
+                                pbContainer.classList.add('ready');
+                                pbContainer.centerProgressBars();
+                                pbContainer.classList.toggle('ready', ready);
+                                pbContainer.classList.add('init');
+                            }
+                            else {
+                                const pbs = Array.from(pbContainer.children);
+
+                                if (!ready) {
+                                    pbs.forEach(pb =>
+                                        pb.style.setProperty('--bar-completed-percentage', pb.getAttribute('proficiency-percentage')));
+                                }
+
+                                pbContainer.centerProgressBars();
+
+                                if (!ready) {
+                                    pbs.forEach(pb =>
+                                        pb.style.setProperty('--bar-completed-percentage', '0'));
                                 }
                             }
                         }
-                        Array.from(pbContainer.children).forEach((pb, i) =>
-                            AnimateProgressBarFactory(pb, 0, parseInt(pb.getAttribute('proficiency-percentage')), 3, 5 * (i + 1))());
-                        
-                        intersectionSkills.removeEventListener('enterany', pbAnimate);
+
+                        resizeCallback();
+                        let resizeTimer;
+                        window.addEventListener('resize', (e) => {
+                            clearTimeout(resizeTimer);
+                            resizeTimer = setTimeout(resizeCallback, 50);
+                        });
                     }
-
-                    intersectionSkills.addEventListener('enterany', pbAnimate); 
-                }
-                
-                const resizeCallback = () => {
-                    const ready = pbContainer.classList.contains('ready');
-                    if(CSS.registerProperty) {
-                        pbContainer.classList.remove('init');
-                        pbContainer.classList.add('ready');
-                        pbContainer.centerProgressBars();
-                        pbContainer.classList.toggle('ready', ready);
-                        pbContainer.classList.add('init');
-                    }
-                    else {
-                        const pbs = Array.from(pbContainer.children);
-
-                        if(!ready) {
-                            pbs.forEach(pb =>
-                                    pb.style.setProperty('--bar-completed-percentage', pb.getAttribute('proficiency-percentage')));
-                        }
-
-                        pbContainer.centerProgressBars();
-                        
-                        if(!ready) {
-                            pbs.forEach(pb =>
-                                pb.style.setProperty('--bar-completed-percentage', '0'));
-                        }
-                    }
-                }
-
-                resizeCallback();
-                let resizeTimer;
-                window.addEventListener('resize', (e) => {
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(resizeCallback, 50);
                 });
-
-            });
+        }
     </script>
 </body>
 
