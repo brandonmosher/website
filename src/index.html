@@ -107,6 +107,7 @@
                 <tinted-background id="background5"></tinted-background>
                 <tinted-background id="background6"></tinted-background>
             </parallax-layer>
+            
         </parallax-group>
     </on-scroll-container>
     <script>
@@ -184,16 +185,16 @@
 
             const experiencesHTML = (cventries) => {
                 const experienceHTML = ({ startDate, endDate, organization, jobTitle, cvitems } = {}) =>
-                    `<on-intersection-add-class threshold="0.50" enter-bottom-add-class="bounce">
+                    `<on-intersection-add-class threshold="0.25" enter-bottom-add-class="bounce">
                         <vertical-timeline-entry>
                             <h4>${startDate} - ${endDate}</h4>
-                            <div-border>
-                                <div>
-                                    <h5>${organization}</h5>
-                                    <h6>${jobTitle}</h6>
-                                    <p>${cvitems}</p>
-                                </div>
-                            </div-border>
+                            <hr>
+                            <div>
+                                <h5>${organization}</h5>
+                                <h6>${jobTitle}</h6>
+                                <br>
+                                <p>${cvitems}</p>
+                            </div>
                         </vertical-timeline-entry>
                     </on-intersection-add-class>`;
                 return `<vertical-timeline>
