@@ -82,7 +82,9 @@ module.exports = {
       index: 'index.html',
       extensions: ['woff2'],
     }),
-    new CompressionPlugin(),
+    new CompressionPlugin({
+      deleteOriginalAssets: true,
+    }),
   ],
   resolve: {
     alias: {
