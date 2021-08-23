@@ -17,6 +17,8 @@ Pending
 - make component for circle using clip path
 - change submit button to use outline vs solid background
 - non-composited animation for form submit
+- fix nav-bar in firefox android
+- brotli compression
 
 Completed
 - consistency for nav-point/section sizing method.

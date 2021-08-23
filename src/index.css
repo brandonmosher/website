@@ -193,6 +193,7 @@ on-scroll-container::-webkit-scrollbar-thumb:hover {
 .scroll-snap-container {
     scroll-snap-type: y mandatory;
     scroll-snap-stop: always;
+    scroll-behavior: smooth;
 }
 
 .scroll-snap-center {

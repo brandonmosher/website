@@ -10,8 +10,8 @@ customElements.define('nav-bar',
             super();
             const shadowRoot = this.attachShadow({ mode: 'open' })
                 .appendChild(template.content.cloneNode(true));
-            this.updateActive();
-            window.addEventListener("hashchange", e => { this.updateActive() });
+            // this.updateActive();
+            // window.addEventListener("hashchange", e => { this.updateActive() });
         }
 
         updateActive() {
