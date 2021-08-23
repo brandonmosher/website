@@ -217,8 +217,8 @@ on-scroll-container::-webkit-scrollbar-thumb:hover {
     height: 75%;
 }
 
-.height-200 {
-    height: 200%;
+.height-250 {
+    height: 250%;
 }
 
 /* fade in */
@@ -395,7 +395,7 @@ tinted-background {
 }
 
 #background1 {
-    height: calc(875% * 2 / 3);
+    height: calc(925% * 2 / 3);
     --background1-image-url: url(Img/shutterstock_789931129.webp);
     --tint-rgba: var(--color-charcoal-85);
     --background-image: none;
@@ -826,7 +826,7 @@ vertical-timeline-entry hr::before {
         align-items: flex-start;
     }
     vertical-timeline on-intersection-add-class {
-        width: calc(50% + var(--border-width) / 2);
+        width: calc(50% + var(--border-width) / 3);
     }
     vertical-timeline> :nth-child(even) {
         align-self: flex-end;

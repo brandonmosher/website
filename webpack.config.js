@@ -4,7 +4,7 @@ const FontPreloadPlugin = require('webpack-font-preload-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-// const CompressionPlugin = require('compression-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -82,9 +82,9 @@ module.exports = {
       index: 'index.html',
       extensions: ['woff2'],
     }),
-    // new CompressionPlugin({
-    //   deleteOriginalAssets: true,
-    // }),
+    new CompressionPlugin({
+      deleteOriginalAssets: true,
+    }),
   ],
   resolve: {
     alias: {
