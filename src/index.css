@@ -825,8 +825,13 @@ vertical-timeline-entry hr::before {
     vertical-timeline {
         align-items: flex-start;
     }
-    vertical-timeline on-intersection-add-class {
-        width: calc(50% + var(--border-width) / 3);
+    vertical-timeline> :nth-child(odd) {
+        box-sizing: border-box;
+        width: calc(50% + var(--border-width) / 2);
+    }
+    vertical-timeline> :nth-child(even) {
+        box-sizing: border-box;
+        width: 50%;
     }
     vertical-timeline> :nth-child(even) {
         align-self: flex-end;

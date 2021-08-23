@@ -1,10 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FontPreloadPlugin = require('webpack-font-preload-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -30,7 +30,7 @@ module.exports = {
         loader: 'html-loader',
       },
       {
-        test: /\.(ttf|woff|woff2)$/i,
+        test: /\.woff2$/i,
         type: 'asset',
         generator: {
           filename: 'font/[hash][ext][query]'
@@ -78,10 +78,13 @@ module.exports = {
         minifyCSS: true
     }
     }),
-    new FontPreloadPlugin({
-      index: 'index.html',
-      extensions: ['woff2'],
-    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      as: 'font',
+      include: 'allAssets',
+      fileWhitelist: [/\.woff2$/i],
+
+  }),
     new CompressionPlugin({
       deleteOriginalAssets: true,
     }),
