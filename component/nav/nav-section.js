@@ -5,10 +5,12 @@ import { OnIntersectionHTMLElement } from "Component/on-intersection/on-intersec
 function callback(entries, observer) {
     entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
-            const hash = entry.target.id;
-            history.replaceState({}, '', `#${hash}`);
+            const hash = `#${entry.target.id}`;
+            if(hash !== window.location.hash) {
+                history.replaceState({}, '', hash);
+            }
             const currentActive = document.querySelector(`nav-entry.active`);
-            const futureActive = document.querySelector(`nav-entry[href=\\#${hash}]`);
+            const futureActive = document.querySelector(`nav-entry[href=\\${hash}]`);
             if (currentActive) {
                 currentActive.classList.remove('active');
             }
