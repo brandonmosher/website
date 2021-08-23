@@ -787,9 +787,16 @@ vertical-timeline-entry {
     flex-direction: column;
     position: relative;
     height: 100%;
-    border-left: var(--border-solid);
-    /* TODO */
     padding-left: var(--vertical-timeline-spacing);
+}
+
+vertical-timeline-entry::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: var(--border-width);
+    height: 100%;
+    background: var(--border-color);
 }
 
 vertical-timeline-entry h4 {
@@ -825,12 +832,7 @@ vertical-timeline-entry hr::before {
     vertical-timeline {
         align-items: flex-start;
     }
-    vertical-timeline> :nth-child(odd) {
-        box-sizing: border-box;
-        width: calc(50% + var(--border-width) / 2);
-    }
-    vertical-timeline> :nth-child(even) {
-        box-sizing: border-box;
+    vertical-timeline on-intersection-add-class {
         width: 50%;
     }
     vertical-timeline> :nth-child(even) {
@@ -844,10 +846,12 @@ vertical-timeline-entry hr::before {
         right: calc(-1 * var(--vertical-timeline-marker-radius));
     }
     vertical-timeline> :nth-child(odd) vertical-timeline-entry {
-        border-left: none;
-        border-right: var(--border-solid);
         padding-left: 0;
         padding-right: var(--vertical-timeline-spacing);
+    }
+    vertical-timeline> :nth-child(odd) vertical-timeline-entry::before {
+        left: unset;
+        right: calc(-1 * var(--border-width));
     }
 }
 
