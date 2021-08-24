@@ -6,10 +6,11 @@ function callback(entries, observer) {
     entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
             const hash = `#${entry.target.id}`;
-            if(hash !== window.location.hash) {
-                history.replaceState({}, '', hash);
-            }
             const currentActive = document.querySelector(`nav-entry.active`);
+            if (currentActive && currentActive.hash === hash) {
+                return
+            }
+            history.replaceState({}, '', hash);            
             const futureActive = document.querySelector(`nav-entry[href=\\${hash}]`);
             if (currentActive) {
                 currentActive.classList.remove('active');

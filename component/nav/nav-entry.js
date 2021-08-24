@@ -10,6 +10,7 @@ customElements.define('nav-entry',
             super();
             const shadowRoot = this.attachShadow({ mode: 'open' })
                 .appendChild(template.content.cloneNode(true));
+            this.anchor = this.shadowRoot.querySelector("a");
         }
         static get observedAttributes() {
             return ['href'];
@@ -24,11 +25,15 @@ customElements.define('nav-entry',
         }
 
         set href(href) {
-            this.shadowRoot.querySelector("a").setAttribute("href", href);
+            this.anchor.setAttribute("href", href);
         }
 
         get href() {
-            return this.shadowRoot.querySelector("a").getAttribute("href");
+            return this.anchor.getAttribute("href");
+        }
+
+        get hash() {
+            return this.anchor.getAttribute("hash");
         }
 
         updateActive() {
