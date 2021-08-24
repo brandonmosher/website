@@ -1,8 +1,8 @@
 import { OnIntersectionHTMLElement } from 'Component/on-intersection/on-intersection.js';
 import { HTMLToCamelCase } from "Lib/capitalization";
 import { textToTemplate } from "Lib/textToTemplate";
-import css from './on-intersection-add-class.css';
-import html from './on-intersection-add-class.html';
+import css from './on-intersection-set-class.css';
+import html from './on-intersection-set-class.html';
 
 const template = textToTemplate(css, html);
 
@@ -93,4 +93,4 @@ class OnIntersectionAddClassHTMLElement extends OnIntersectionHTMLElement {
 
 addIntersectionFunctions(OnIntersectionAddClassHTMLElement.prototype);
 
-customElements.define('on-intersection-add-class', OnIntersectionAddClassHTMLElement);
+customElements.define('on-intersection-set-class', OnIntersectionAddClassHTMLElement);

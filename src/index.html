@@ -139,7 +139,7 @@
             const makeId = name => name.toLowerCase().replace(/(\+|\(|\))/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')
 
             const resumeHTML = (cvparagraph) =>
-                `<on-intersection-add-class id="resume-container" class="content-container" enter-any-add-class="transition-fade-in">
+                `<on-intersection-set-class id="resume-container" class="content-container" enter-any-add-class="transition-fade-in">
                     <p id="resume-summary-container">${cvparagraph}</p>
                     <div id="resume-download-container">
                         <a id="resume-download-button"
@@ -148,19 +148,19 @@
                             <h4>Download Resume</h4>
                         </a>
                     </div>
-                </on-intersection-add-class>`;
+                </on-intersection-set-class>`;
 
             const makeSkillId = (name) => `progress-bar-${makeId(name)}`;
 
             const skillsHTML = (cventries) => {
                 const skillHTML = ({ name, proficiencyPercentage } = {}) =>
                     `<progress-bar-borderless id="${makeSkillId(name)}" proficiency-percentage="${proficiencyPercentage}"><h4>${name}</h4></progress-bar-borderless>`;
-                return `<on-intersection-add-class threshold="0.75" id="intersection-skills" class="content-container"
+                return `<on-intersection-set-class threshold="0.75" id="intersection-skills" class="content-container"
                         query-selector="progress-bar-container" enter-any-add-class="ready">
                         <progress-bar-container>
                             ${cventries.reduce((innerHTML, cvskill) => innerHTML + skillHTML(cvskill), '')}
                         </progress-bar-container>
-                    </on-intersection-add-class>`;
+                    </on-intersection-set-class>`;
             }
 
             const skillsCSS = (cventries) => {
@@ -177,15 +177,15 @@
                     }
                     return `<project id="project-${makeId(name)}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
                 }
-                return `<on-intersection-add-class id="projects-container" class="content-container" query-selector="git-user,git-repo,project" enter-any-add-class="ready">
+                return `<on-intersection-set-class id="projects-container" class="content-container" query-selector="git-user,git-repo,project" enter-any-add-class="ready">
                             <git-user user-login="brandonmosher"></git-user>
                             ${cventries.reduce((projectsHTML, cvproject) => projectsHTML + projectHTML(cvproject), '')}
-                        </on-intersection-add-class>`
+                        </on-intersection-set-class>`
             }
 
             const experiencesHTML = (cventries) => {
                 const experienceHTML = ({ startDate, endDate, organization, jobTitle, cvitems } = {}) =>
-                    `<on-intersection-add-class threshold="0.25" enter-bottom-add-class="bounce">
+                    `<on-intersection-set-class threshold="0.25" enter-bottom-add-class="bounce">
                         <vertical-timeline-entry>
                             <h4>${startDate} - ${endDate}</h4>
                             <hr>
@@ -196,7 +196,7 @@
                                 <p>${cvitems}</p>
                             </div>
                         </vertical-timeline-entry>
-                    </on-intersection-add-class>`;
+                    </on-intersection-set-class>`;
                 return `<vertical-timeline>
                         ${cventries.reduce((experienceInnerHTML, cventry) =>
                     experienceInnerHTML + experienceHTML({ ...cventry, cvitems: cventry.cvitems.join(" ") }), '')}

@@ -25,19 +25,19 @@ customElements.define('nav-entry',
         }
 
         set href(href) {
-            this.anchor.setAttribute("href", href);
+            this.anchor.href = href;
         }
 
         get href() {
-            return this.anchor.getAttribute("href");
+            return this.anchor.href;
         }
 
         get hash() {
-            return this.anchor.getAttribute("hash");
+            return this.anchor.hash;
         }
 
-        updateActive() {
-            this.classList.toggle('active', (this.href === window.location.href) || (this.href === window.location.hash));
-        }
+        // updateActive() {
+        //     this.classList.toggle('active', (this.href === window.location.href) || (this.href === window.location.hash));
+        // }
     }
 );

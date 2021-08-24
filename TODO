@@ -1,24 +1,23 @@
-Pending
+website
+- change submit button to use outline vs solid background
+- brotli compression
+- svg icons
+- non-composited animation for header using transform and opacity on ::after pseudo element background
+- non-composited animation for form submit
+
+components
+- separate components into own repo and publish as npm-package(s). Behavioral components separate fom content components.
+- update/fix broken component demos
 - add white-space: nowrap; to autofit-font-nowrap component. Perhaps add max-width: 100% and max-height 100%;
-- rename on-intersect-add-class
 - change MutationObserverHTML element to be query-selector based and support attributes like:
   - {add,remove}-child-{add,remove}-class
-  - {add,remove/change}-attibute-{add,remove}-class
-- separate components into own repo and publish as npm-package(s). Behavioral components separate fom content components.
+  - {add,remove/change}-attribute-{add,remove}-class
 - create query-selector based ResizeObseverHTMLElement
   - {resize,shrink,grow}-{add,remove}-class
-- create progress-bar-container that allows centering on highest completion percentage using a resizeObserver to recalculate the width of each progress-bar relative to the container.
-- control sizer in form-Control
-- cleanup use of vh and vw units
-- allow control over one-shot behavior for form-control-submit-mixin
+- finish control sizer implementation in form-Control
 - component for scroll edge fading
 - component for setting common attributes via query selector
-- eliminate non-composited animation for header using transform and opacity on ::after pseudo element background
 - make component for circle using clip path
-- change submit button to use outline vs solid background
-- non-composited animation for form submit
-- fix nav-bar in firefox android
-- brotli compression
 
 Completed
 - consistency for nav-point/section sizing method.
@@ -34,6 +33,12 @@ Completed
 - text compression webpack plugin
 - favicon
 - element-internals-polyfill patch not working up in production build in Firefox
+- cleanup use of vh and vw units
+- fix nav-bar in firefox android
+- create progress-bar-container that allows centering on highest completion percentage using a resizeObserver to recalculate the width of each progress-bar relative to the container.
+- allow control over one-shot behavior for form-control-submit-mixin
+ - The submit animation was removed from the component altogether. An event now fires on submit which allows for custom behavior to be defined externally.
+- rename on-intersect-add-class to on-intersection-set-class
 
 8/17/2021
 - clean up content and header box shadow

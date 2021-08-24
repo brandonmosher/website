@@ -482,7 +482,7 @@ tinted-background {
     white-space: nowrap;
 }
 
-#skills on-intersection-add-class {
+#skills on-intersection-set-class {
     height: unset;
     margin: auto 0;
     position: relative;
@@ -773,7 +773,7 @@ vertical-timeline {
     background: var(--color-charcoal);
 }
 
-vertical-timeline on-intersection-add-class {
+vertical-timeline on-intersection-set-class {
     position: relative;
     scroll-snap-align: center;
     flex-grow: 1;
@@ -833,7 +833,7 @@ vertical-timeline-entry hr::before {
     vertical-timeline {
         align-items: flex-start;
     }
-    vertical-timeline on-intersection-add-class {
+    vertical-timeline on-intersection-set-class {
         width: 50%;
     }
     vertical-timeline> :nth-child(even) {

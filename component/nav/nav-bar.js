@@ -14,10 +14,10 @@ customElements.define('nav-bar',
             // window.addEventListener("hashchange", e => { this.updateActive() });
         }
 
-        updateActive() {
-            this.querySelectorAll("nav-entry").forEach(e => {
-                e.updateActive();
-            });
-        }
+        // updateActive() {
+        //     this.querySelectorAll("nav-entry").forEach(e => {
+        //         e.updateActive();
+        //     });
+        // }
     }
 );

@@ -1,7 +1,7 @@
 import "./index.css";
 
 import "element-internals-polyfill";
-import "Component/on-intersection-add-class";
+import "Component/on-intersection-set-class";
 import "Component/progress-bar";
 import "Component/tinted-background";
 import "Component/git";
