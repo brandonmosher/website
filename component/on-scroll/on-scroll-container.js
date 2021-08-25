@@ -86,24 +86,24 @@ customElements.define("on-scroll-container",
                 if (yDirection !== globalYDirection) {
                     // console.log("scroll state change from", globalYDirection, "to", yDirection);
                     globalYDirection = yDirection;
-                    this.waitForScrollEnd(yDirection).then(deltaY => {
-                        if (Math.abs(deltaY) >= this.scrollStopThresholdY) {
-                            onScrollElements.forEach(node => {
-                                node._scrollAnyStop();
-                                if (xDirection) {
-                                    node[HTMLToCamelCase(`_scroll-${xDirection}-stop`)]();
-                                }
-                                if (yDirection) {
-                                    node[HTMLToCamelCase(`_scroll-${yDirection}-stop`)]();
-                                }
-                            });
-                        }
-                        globalYDirection = null;
-                        // console.log("scroll stop", yDirection);
-                    }).catch(e => { /*console.log(e.message)*/ });
+                    // this.waitForScrollEnd(yDirection).then(deltaY => {
+                    //     if (Math.abs(deltaY) >= this.scrollStopThresholdY) {
+                    //         onScrollElements.forEach(node => {
+                    //             node._scrollAnyStop();
+                    //             if (xDirection) {
+                    //                 node[HTMLToCamelCase(`_scroll-${xDirection}-stop`)]();
+                    //             }
+                    //             if (yDirection) {
+                    //                 node[HTMLToCamelCase(`_scroll-${yDirection}-stop`)]();
+                    //             }
+                    //         });
+                    //     }
+                    //     globalYDirection = null;
+                    //     // console.log("scroll stop", yDirection);
+                    // }).catch(e => { /*console.log(e.message)*/ });
                 }
                 Object.assign(entry.target, { previousX: x, previousY: y })
-            })
+            });
         }
         waitForScrollEnd(yDirection) {
             const scrollContainer = this;
