@@ -25,6 +25,15 @@
             left: 0;
             width: 100%;
             height: 10vh;
+            background-color: gray;
+        }
+
+        nav-entry {
+            padding: 1%;
+        }
+
+        nav-entry.active {
+            font-weight: bold;
         }
 
     </style>
@@ -39,7 +48,7 @@
         <nav-entry href="#about">About</nav-entry>
     </nav-bar>
 
-    <nav-point id="home">
+    <nav-section id="home">
         <div class="content">
             <h2>Home</h2>
             <p>This example use media queries to transform the sidenav to a top navigation bar when the screen size is
@@ -51,9 +60,9 @@
             <p>You will learn more about media queries and responsive web design later in our CSS Tutorial.</p>
             <h3>Resize the browser window to see the effect.</h3>
         </div>
-    </nav-point>
+    </nav-section>
 
-    <nav-point id="news">
+    <nav-section id="news">
         <div class="content">
             <h2>News</h2>
             <p>This example use media queries to transform the sidenav to a top navigation bar when the screen size is
@@ -65,9 +74,9 @@
             <p>You will learn more about media queries and responsive web design later in our CSS Tutorial.</p>
             <h3>Resize the browser window to see the effect.</h3>
         </div>
-    </nav-point>
+    </nav-section>
 
-    <nav-point id="contact">
+    <nav-section id="contact">
         <div class="content">
             <h2>Contact</h2>
             <p>This example use media queries to transform the sidenav to a top navigation bar when the screen size is
@@ -79,9 +88,9 @@
             <p>You will learn more about media queries and responsive web design later in our CSS Tutorial.</p>
             <h3>Resize the browser window to see the effect.</h3>
         </div>
-    </nav-point>
+    </nav-section>
 
-    <nav-point id="about">
+    <nav-section id="about">
         <div class="content">
             <h2>About</h2>
             <p>This example use media queries to transform the sidenav to a top navigation bar when the screen size is
@@ -93,7 +102,7 @@
             <p>You will learn more about media queries and responsive web design later in our CSS Tutorial.</p>
             <h3>Resize the browser window to see the effect.</h3>
         </div>
-    </nav-point>
+    </nav-section>
 </body>
 
 </html>

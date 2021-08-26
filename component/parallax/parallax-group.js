@@ -26,8 +26,10 @@ customElements.define("parallax-group",
             this.querySelectorAll('parallax-layer').forEach((child, i, children) => {
                 const translateZ = i;
                 const scale = 1 + (translateZ / perspective);
-                child.style.transform = `translate3d(calc(-1 * (100vw - 100%) * ${i / (2 * perspective)}),0,-${translateZ}px) scale(${scale})`;
-                child.style.zIndex = children.length - i;
+                if(translateZ > 0) {
+                    child.style.transform = `translate3d(calc(-1 * (100vw - 100%) * ${translateZ / (2 * perspective)}),0,-${translateZ}px) scale(${scale})`;
+                }
+                child.style.zIndex = children.length - translateZ;
             });
         }
     }

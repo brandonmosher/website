@@ -53,7 +53,7 @@ class OnScrollHTMLElement extends HTMLElement {
         if(!this.isConnected) {
             return;
         }
-        this.applyNodes = this.closest('on-scroll-container').querySelectorAll(this.getAttribute('query-selector-apply'));
+        this.applyNodes = document.querySelectorAll(this.getAttribute('query-selector-apply'));
     }
 }
 

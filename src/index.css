@@ -88,8 +88,9 @@
     --transition-duration-normal: 0.5s;
     --transition-duration-fast: 0.2s;
     /* nav-bar */
-    --nav-bar-height: 8vh;
-    --nav-bar-reveal-height: var(--spacing-thin);
+    --nav-bar-height: 8%;
+    --nav-bar-reveal-height: 1%;
+    --nav-bar-hide-translate: -90%;
     --nav-bar-spacing: var(--spacing-thin);
     --nav-bar-content-height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-spacing)));
     --nav-bar-background-color: var(--color-charcoal);
@@ -100,7 +101,7 @@
     --footer-background-color: var(--nav-bar-background-color);
     /* nav-section-header */
     --nav-section-header-spacing: var(--spacing-thin);
-    --nav-section-header-height: var(--nav-bar-content-height);
+    --nav-section-header-height: var(--nav-bar-height);
     /* content-container */
     --content-container-spacing: var(--spacing-normal);
     --content-container-background-color: var(--color-charcoal);
@@ -193,7 +194,7 @@ on-scroll-container::-webkit-scrollbar-thumb:hover {
 .scroll-snap-container {
     scroll-snap-type: y mandatory;
     scroll-snap-stop: always;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
 }
 
 .scroll-snap-center {
@@ -306,31 +307,51 @@ on-scroll-container {
     position: relative;
 }
 
+parallax-layer {
+    width: 100%;
+    height: 100%;
+}
+
 /* navigation bar */
 
-.nav-bar-transparent {
-    background-color: transparent;
+.nav-bar-top {
+    transform: none !important;
+}
+
+.nav-bar-top::before {
+    opacity: 0;
 }
 
 .nav-bar-hide:hover {
-    top: 0;
+    transform: none;
     background-color: var(--nav-bar-background-color);
 }
 
 .nav-bar-hide {
-    top: calc(var(--nav-bar-reveal-height) - var(--nav-bar-height));
+    transform: translateY(var(--nav-bar-hide-translate));
+}
+
+nav-bar::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    z-index: -1;
+    background-color: var(--nav-bar-background-color);
+    opacity: 1;
+    transition: opacity var(--transition-duration-slow);
 }
 
 nav-bar {
     padding: var(--nav-bar-spacing);
-    position: sticky;
+    position: fixed;
     top: 0;
     width: calc(100% - (2 * var(--nav-bar-spacing)));
-    height: var(--nav-bar-content-height);
+    height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-spacing)));
     z-index: 4;
     box-shadow: var(--nav-bar-box-shadow);
-    background-color: var(--nav-bar-background-color);
-    transition: top var(--transition-duration-normal), background-color var(--transition-duration-slow);
+    transition: transform var(--transition-duration-normal);
 }
 
 nav-entry {
@@ -350,16 +371,20 @@ nav-entry:not(.active):hover {
 
 nav-section {
     display: block;
-    /* position: relative; */
     width: 100%;
     height: 100%;
+}
+
+nav-section > div {
+    height: 100%;
+    position: relative;
 }
 
 nav-section-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: var(--nav-section-header-height);
+    height: calc(var(--nav-section-header-height) - (2 * var(--nav-section-header-spacing)));
     padding: var(--nav-section-header-spacing) 0;
     text-align: center;
 }
@@ -372,8 +397,8 @@ padding-section {
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
-    position: relative;
-    bottom: var(--footer-height);
+    position: absolute;
+    bottom: 0;
     width: 100%;
     height: var(--footer-height);
     background-color: var(--footer-background-color);

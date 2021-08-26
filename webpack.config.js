@@ -83,7 +83,6 @@ module.exports = {
       as: 'font',
       include: 'allAssets',
       fileWhitelist: [/\.woff2$/i],
-
   }),
     new CompressionPlugin({
       deleteOriginalAssets: true,
