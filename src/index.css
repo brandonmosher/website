@@ -634,13 +634,13 @@ git-repo, project {
     overflow: auto
 }
 
-git-repo::part(description), project div {
+git-repo::part(repo-description), project div {
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
 
-git-repo::part(description):hover, project div:hover {
+git-repo::part(repo-description):hover, project div:hover {
     overflow: visible;
 }
 
@@ -774,7 +774,7 @@ project::after {
     git-repo, project {
         overflow: unset;
     }
-    project div, git-repo::part(description) {
+    project div, git-repo::part(repo-description) {
         height: unset;
         width: unset;
         overflow: unset;

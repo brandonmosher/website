@@ -6,6 +6,24 @@ website
 - non-composited animation for form submit
 
 components
+- Single request for git-repo rather than individual requests
+{add,remove}-child-{add,remove}-class
+JS library that allows adding classes to elements to respond to various events. e.g.
+
+on-mutation-child-add-class
+on-mutation-attribute-add-class
+...
+
+on-scroll-up-start-add-class
+on-scroll-up-start-remove-class
+...
+
+on-intersect-enter-any-add-class
+on-intersect-enter-top-add-class
+...
+
+JS library to implement parallax-group and parallax-layer classes 
+
 - separate components into own repo and publish as npm-package(s). Behavioral components separate fom content components.
 - update/fix broken component demos
 - add white-space: nowrap; to autofit-font-nowrap component. Perhaps add max-width: 100% and max-height 100%;
