@@ -20,7 +20,7 @@
     "compression-webpack-plugin": "^8.0.1",
     "css-loader": "^5.2.6",
     "css-minimizer-webpack-plugin": "^3.0.2",
-    "element-internals-polyfill": "^0.1.40",
+    "element-internals-polyfill": "0.1.40",
     "file-loader": "^6.2.0",
     "glob": "^7.1.7",
     "html-loader": "^2.1.2",
