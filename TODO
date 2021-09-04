@@ -6,6 +6,7 @@ website
 - add on-scroll component code to on-scroll library
 - remove extra font files and images
 - load projects only when entering project section to save bandwidth
+- find a way to move inline js into separate file. script with defer causes layout shift.
 
 components
 - Single request for git-repo rather than individual requests
