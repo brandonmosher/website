@@ -5,6 +5,8 @@
     --spacing-normal: min(2vh, 2vw);
     --spacing-thick: 5%;
     --padding-section-height: 50%;
+    /* sum of all nav-section and padding-section heights */
+    --total-height: 1000%;
     /* icon size */
     --icon-width: calc(3 * var(--spacing-thin));
     --icon-circle-clip-path: circle(49% at center);

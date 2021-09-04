@@ -40,6 +40,8 @@ JS library to implement parallax-group and parallax-layer classes
 - make component for circle using clip path
 
 Completed
+- attribution for https://www.svgbackgrounds.com/license/
+- fix SLAM robot icon
 - break index.css into multiple files
 - non-composited animation for header using transform and opacity on ::after pseudo element background
 - consistency for nav-point/section sizing method.

@@ -157,7 +157,7 @@ project::after {
     background-image: url('Img/icons8-pacman-30.webp');
 }
 
-#project-simultaneous-localization-and-mapping-slam-robot::after, #project-topological-mapping-robot::after {
+#project-simultaneous-localization-and-mapping-robot::after, #project-topological-mapping-robot::after {
     background-image: url('Img/icons8-bot-30.webp');
 }
 
