@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://api.github.com">
 </head>
 
-<body>
+<body class="on-scroll-container scroll-snap-container parallax-group">
     <on-scroll query-selector-apply="nav-bar" scroll-up-start-remove-class="nav-bar-hide"
         scroll-up-stop-add-class="nav-bar-hide" scroll-down-start-add-class="nav-bar-hide"
         scroll-up-max-add-class="nav-bar-top" scroll-down-start-remove-class="nav-bar-top">
@@ -23,105 +23,94 @@
         <nav-entry href="#experience">Experience</nav-entry>
         <nav-entry href="#contact">Contact</nav-entry>
     </nav-bar>
-    <on-scroll-container class="scroll-snap-container">
-        <parallax-group scroll-parent="body">
-            <parallax-layer id="parallax-layer-foreground">
-                <nav-section id="home">
-                    <div class="center-children scroll-snap-center">
-                        <div id="intro-container">
-                            <h1>I<span>'</span>M<br>Brandon<br>Mosher<span>.</span>
-                            </h1>
-                            <h2>Software Engineer</h2>
-                        </div>
-                    </div>
-                </nav-section>
+    <div class="parallax-layer" id="parallax-layer-foreground">
+        <nav-section id="home">
+            <div class="center-children scroll-snap-center">
+                <div id="intro-container">
+                    <h1>I<span>'</span>M<br>Brandon<br>Mosher<span>.</span>
+                    </h1>
+                    <h2>Software Engineer</h2>
+                </div>
+            </div>
+        </nav-section>
 
-                <padding-section class="height-50"></padding-section>
+        <padding-section class="height-50"></padding-section>
 
-                <nav-section id="resume">
-                    <div class="horizontal-center-children scroll-snap-center">
-                        <nav-section-header>
-                            <h3><span>01</span> Resume</h3>
-                        </nav-section-header>
-                    </div>
-                </nav-section>
+        <nav-section id="resume">
+            <div class="horizontal-center-children scroll-snap-center">
+                <nav-section-header>
+                    <h3><span>01</span> Resume</h3>
+                </nav-section-header>
+            </div>
+        </nav-section>
 
-                <padding-section class="height-50"></padding-section>
+        <padding-section class="height-50"></padding-section>
 
-                <nav-section id="skills">
-                    <div class="horizontal-center-children scroll-snap-center">
-                        <nav-section-header>
-                            <h3><span>02</span> Skills</h3>
-                        </nav-section-header>
-                    </div>
-                </nav-section>
+        <nav-section id="skills">
+            <div class="horizontal-center-children scroll-snap-center">
+                <nav-section-header>
+                    <h3><span>02</span> Skills</h3>
+                </nav-section-header>
+            </div>
+        </nav-section>
 
-                <padding-section class="height-50"></padding-section>
+        <padding-section class="height-50"></padding-section>
 
-                <nav-section id="projects">
-                    <div class="horizontal-center-children scroll-snap-center">
-                        <nav-section-header>
-                            <h3><span>03</span> Projects</h3>
-                        </nav-section-header>
-                    </div>
-                </nav-section>
+        <nav-section id="projects">
+            <div class="horizontal-center-children scroll-snap-center">
+                <nav-section-header>
+                    <h3><span>03</span> Projects</h3>
+                </nav-section-header>
+            </div>
+        </nav-section>
 
-                <padding-section class="height-50"></padding-section>
+        <padding-section class="height-50"></padding-section>
 
-                <nav-section id="experience" threshold="0.3"
-                    class="height-250">
-                    <div class="horizontal-center-children scroll-snap-start">
-                        <nav-section-header>
-                            <h3><span>04</span> Experience</h3>
-                        </nav-section-header>
-                    </div>
-                </nav-section>
+        <nav-section id="experience" threshold="0.3" class="height-250">
+            <div class="horizontal-center-children scroll-snap-start">
+                <nav-section-header>
+                    <h3><span>04</span> Experience</h3>
+                </nav-section-header>
+            </div>
+        </nav-section>
 
-                <padding-section class="height-75"></padding-section>
+        <padding-section class="height-75"></padding-section>
 
-                <nav-section id="contact">
-                    <div class="horizontal-center-children scroll-snap-start">
-                        <nav-section-header>
-                            <h3><span>05</span> Contact</h3>
-                        </nav-section-header>
-                        <form id="contact-form" name="contact-form" class="content-container">
-                            <form-control type="text" id="name" name="name" title="Hi, what's your name?" required="*">
-                                Name</form-control>
+        <nav-section id="contact">
+            <div class="horizontal-center-children scroll-snap-start">
+                <nav-section-header>
+                    <h3><span>05</span> Contact</h3>
+                </nav-section-header>
+                <form id="contact-form" name="contact-form" class="content-container">
+                    <form-control type="text" id="name" name="name" title="Hi, what's your name?" required="*">
+                        Name</form-control>
 
-                            <form-control type="email" id="email" name="email" title="john.smith@example.com"
-                                required="*">
-                                Email
-                            </form-control>
+                    <form-control type="email" id="email" name="email" title="john.smith@example.com" required="*">
+                        Email
+                    </form-control>
 
-                            <form-control type="tel" id="phone" name="phone" title="(111) 111-1111"
-                                pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" template="(___) ___-____"
-                                template-placeholder="_" allowed="0123456789">Phone</form-control>
+                    <form-control type="tel" id="phone" name="phone" title="(111) 111-1111"
+                        pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" template="(___) ___-____" template-placeholder="_"
+                        allowed="0123456789">Phone</form-control>
 
-                            <form-control type="textarea" id="message" name="message" title="Say hello!" required="*">
-                                Message
-                            </form-control>
+                    <form-control type="textarea" id="message" name="message" title="Say hello!" required="*">
+                        Message
+                    </form-control>
 
-                            <form-control type="submit" id="submit" value="">Submit</form-control>
-                        </form>
-                        <div id="footer">
-                            <a href="https://icons8.com">Icons from Icons8</a>
-                            <a href="https://fonts.google.com/specimen/Roboto+Mono">Fonts from Google</a>
-                        </div>
-                    </div>
-                </nav-section>
-            </parallax-layer>
+                    <form-control type="submit" id="submit" value="">Submit</form-control>
+                </form>
+                <div id="footer">
+                    <a href="https://icons8.com">Icons from Icons8</a>
+                    <a href="https://fonts.google.com/specimen/Roboto+Mono">Fonts from Google</a>
+                </div>
+            </div>
+        </nav-section>
+    </div>
 
-            <parallax-layer id="parallax-layer-background">
-                <tinted-background id="background1"></tinted-background>
-                <tinted-background id="background2"></tinted-background>
-                <tinted-background id="background3"></tinted-background>
-                <tinted-background id="background4"></tinted-background>
-                <tinted-background id="background5"></tinted-background>
-                <tinted-background id="background6"></tinted-background>
-            </parallax-layer>
+    <div class="parallax-layer" id="parallax-layer-background"></div>
 
-        </parallax-group>
-    </on-scroll-container>
+    <div class="parallax-layer" id="parallax-layer-deep-background"></div>
+
     <script>
         const resumeUrl = 'https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume-website/resume-website.pdf';
         const resumeJsonUrl = 'https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume-website/resume-website.json';
@@ -129,9 +118,9 @@
 
         background: {
             window.addEventListener('load', () => {
-                const b1 = document.querySelector('#background1');
-                b1.style.setProperty('--background-image', 'var(--background1-image-url)');
-                b1.style.setProperty('opacity', '1');
+                setTimeout(
+                    ()=>document.querySelector('#parallax-layer-2').style.setProperty('opacity', '1'),
+                    100);
             });
         }
 
