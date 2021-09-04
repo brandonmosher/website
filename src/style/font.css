@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'primary';
+    src: url('Font/jet-brains-mono/jet-brains-mono-variable-subset.woff2') format('woff2');
+    font-display: block;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'medium';
+    src: url('Font/jet-brains-mono/jet-brains-mono-variable-subset.woff2') format('woff2');
+    font-display: block;
+    font-weight: 450;
+}
+
+@font-face {
+    font-family: 'medium-bold';
+    src: url('Font/jet-brains-mono/jet-brains-mono-variable-subset.woff2') format('woff2');
+    font-display: block;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'bold';
+    src: url('Font/jet-brains-mono/jet-brains-mono-variable-subset.woff2') format('woff2');
+    font-display: block;
+    font-weight: 800;
+}

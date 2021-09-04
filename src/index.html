@@ -34,7 +34,7 @@
             </div>
         </nav-section>
 
-        <padding-section class="height-50"></padding-section>
+        <padding-section></padding-section>
 
         <nav-section id="resume">
             <div class="horizontal-center-children scroll-snap-center">
@@ -44,7 +44,7 @@
             </div>
         </nav-section>
 
-        <padding-section class="height-50"></padding-section>
+        <padding-section></padding-section>
 
         <nav-section id="skills">
             <div class="horizontal-center-children scroll-snap-center">
@@ -54,7 +54,7 @@
             </div>
         </nav-section>
 
-        <padding-section class="height-50"></padding-section>
+        <padding-section></padding-section>
 
         <nav-section id="projects">
             <div class="horizontal-center-children scroll-snap-center">
@@ -64,9 +64,9 @@
             </div>
         </nav-section>
 
-        <padding-section class="height-50"></padding-section>
+        <padding-section></padding-section>
 
-        <nav-section id="experience" threshold="0.3" class="height-250">
+        <nav-section id="experience" threshold="0.3">
             <div class="horizontal-center-children scroll-snap-start">
                 <nav-section-header>
                     <h3><span>04</span> Experience</h3>
@@ -74,7 +74,7 @@
             </div>
         </nav-section>
 
-        <padding-section class="height-75"></padding-section>
+        <padding-section></padding-section>
 
         <nav-section id="contact">
             <div class="horizontal-center-children scroll-snap-start">
@@ -140,7 +140,7 @@
             const makeId = name => name.toLowerCase().replace(/(\+|\(|\))/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')
 
             const resumeHTML = (cvparagraph) =>
-                `<on-intersection-set-class id="resume-container" class="content-container" enter-any-add-class="transition-fade-in">
+                `<on-intersection-set-class id="resume-container" class="content-container" enter-any-add-class="ready">
                     <p id="resume-summary-container">${cvparagraph}</p>
                     <div id="resume-download-container">
                         <a id="resume-download-button"

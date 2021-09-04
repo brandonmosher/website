@@ -1,0 +1,201 @@
+/* basics */
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    overflow-y: auto;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-primary);
+    color: var(--color-primary);
+}
+
+/* headers and paragraphs */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: unset;
+    font-size: inherit;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-family-bold);
+    text-transform: uppercase;
+}
+
+:is(h1, h2, h3) span {
+    color: var(--color-green);
+}
+
+h1 {
+    font-size: var(--font-size-xlarge);
+}
+
+h2 {
+    letter-spacing: var(--letter-spacing-emphasis);
+    font-size: var(--font-size-medium);
+}
+
+h3 {
+    font-size: var(--font-size-large);
+    font-family: var(--font-family-bold);
+}
+
+h4, h5, h6 {
+    font-family: var(--font-family-primary);
+}
+
+h4, h5 {
+    font-family: var(--font-family-medium-bold);
+    font-size: var(--font-size-medium-bold);
+    color: var(--color-medium-bold);
+    text-transform: uppercase;
+}
+
+h6 {
+    font-family: var(--font-family-medium);
+    font-size: var(--font-size-medium);
+}
+
+p {
+    margin: 0;
+}
+
+/* centering */
+
+.center-children {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.horizontal-center-children {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* navigation bar */
+
+.nav-bar-top {
+    transform: none !important;
+}
+
+.nav-bar-top::before {
+    opacity: 0;
+}
+
+.nav-bar-hide:hover {
+    transform: none;
+    background-color: var(--nav-bar-background-color);
+}
+
+.nav-bar-hide {
+    transform: translateY(var(--nav-bar-hide-translate));
+}
+
+nav-bar::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    z-index: -1;
+    background-color: var(--nav-bar-background-color);
+    opacity: 1;
+    transition: opacity var(--transition-duration-slow);
+}
+
+nav-bar {
+    padding: var(--nav-bar-spacing);
+    position: sticky;
+    top: 0;
+    width: calc(100% - (2 * var(--nav-bar-spacing)));
+    height: calc(var(--nav-bar-height) - (2 * var(--nav-bar-spacing)));
+    z-index: 4;
+    box-shadow: var(--nav-bar-box-shadow);
+    transition: transform var(--transition-duration-normal);
+}
+
+nav-entry {
+    color: var(--color-primary);
+    padding: var(--nav-entry-spacing);
+}
+
+nav-entry.active {
+    font-family: var(--font-family-medium-bold);
+    font-size: var(--font-size-medium-bold);
+    color: var(--color-medium-bold);
+}
+
+nav-entry:not(.active):hover {
+    text-decoration: underline;
+}
+
+nav-section {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+nav-section > div {
+    height: 100%;
+    position: relative;
+}
+
+nav-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(var(--nav-section-header-height) - (2 * var(--nav-section-header-spacing)));
+    padding: var(--nav-section-header-spacing) 0;
+    text-align: center;
+}
+
+/* Content */
+
+padding-section {
+    display: block;
+    height: var(--padding-section-height);
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: calc(var(--content-max-width) - (4 * var(--content-container-spacing)));
+    width: calc(100% - (4 * var(--content-container-spacing)));
+    height: calc(100% - (2 * var(--content-container-spacing)) - (2 * var(--nav-bar-height)) - var(--nav-bar-reveal-height));
+    position: relative;
+    margin-top: var(--nav-bar-reveal-height);
+    padding: var(--content-container-spacing);
+    z-index: 1;
+    box-shadow: var(--box-shadow);
+    background-color: var(--content-container-background-color);
+    border-radius: var(--border-radius);
+}
+
+#footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--footer-height);
+    background-color: var(--footer-background-color);
+}
+
+#footer a {
+    font-size: smaller;
+    color: var(--color-primary);
+}

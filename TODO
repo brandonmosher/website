@@ -2,10 +2,10 @@ website
 - change submit button to use outline vs solid background
 - brotli compression
 - svg icons
-- break index.css into multiple files
 - non-composited animation for form submit
-- Add on-scroll component code to on-scroll library
-- Remove extra font files and images
+- add on-scroll component code to on-scroll library
+- remove extra font files and images
+- load projects only when entering project section to save bandwidth
 
 components
 - Single request for git-repo rather than individual requests
@@ -40,6 +40,7 @@ JS library to implement parallax-group and parallax-layer classes
 - make component for circle using clip path
 
 Completed
+- break index.css into multiple files
 - non-composited animation for header using transform and opacity on ::after pseudo element background
 - consistency for nav-point/section sizing method.
 - fix form validity polyfill

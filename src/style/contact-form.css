@@ -1,0 +1,133 @@
+
+#contact-form {
+    align-items: flex-start;
+    border-radius: 0;
+}
+
+/* form control */
+
+form-control {
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-height: var(--form-control-max-height);
+    width: 100%;
+    margin-bottom: var(--form-spacing);
+}
+
+/* form control container */
+
+form-control::part(container) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    position: relative;
+    width: calc(100% - 2 * var(--form-spacing));
+    padding: var(--form-spacing);
+    outline-color: transparent;
+}
+
+form-control:not([type=submit])::part(container) {
+    background-color: transparent;
+    outline: var(--border-solid);
+}
+
+form-control::part(control) {
+    color: var(--color-primary);
+}
+
+form-control:not([type=submit], [empty]):is(:invalid, [internals-invalid]):focus-within::part(container) {
+    outline-color: var(--form-invalid-color);
+}
+
+form-control:not([type=submit], [empty]):is(:valid, [internals-valid]):focus-within::part(container) {
+    outline-color: var(--form-valid-color);
+}
+
+form-control:not([type=submit])[empty]:focus-within::part(container) {
+    outline-color: var(--form-invalid-color);
+}
+
+form-control::part(control) {
+    flex-grow: 1;
+}
+
+/* form control validation message */
+
+form-control::part(validation-message) {
+    display: none;
+}
+
+form-control:not(:focus-within)[visited]::part(validation-message) {
+    display: block;
+    color: var(--form-invalid-color);
+    background-color: var(--container-color);
+    font-family: var(--font-family-bold);
+    font-size: var(--font-size-xsmall);
+    margin: calc(var(--form-spacing) / 3) 0 calc(var(--form-spacing) / 2) 0;
+}
+
+/* form control label */
+
+form-control::part(label) {
+    color: var(--form-placeholder-color);
+}
+
+form-control[visited]:not([type=submit]):is([required], :not([empty]))::part(label), form-control:not([type=submit]):focus-within::part(label) {
+    display: block;
+    position: unset;
+    width: 100%;
+    height: unset;
+    font-size: var(--font-size-xsmall);
+    color: var(--form-label-color);
+}
+
+form-control::part(control) {
+    height: 0;
+}
+
+form-control[visited]:not([type=submit]):is([required], :not([empty]))::part(control), form-control:not([type=submit]):focus-within::part(control) {
+    height: auto;
+}
+
+form-control[type=textarea] {
+    flex-grow: 1;
+    max-height: var(--form-text-area-max-height);
+}
+
+form-control[type=textarea]::part(control) {
+    resize: none;
+}
+
+/* form control submit */
+
+form-control[type=submit]::part(container) {
+    background-color: var(--form-invalid-color);
+    align-items: center;
+}
+
+form-control[type=submit]::part(label) {
+    font-family: var(--font-family-medium-bold);
+    /* font-size: var(--font-size-medium-bold); */
+    color: var(--form-submit-color);
+    text-transform: uppercase;
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]::part(container) {
+    background-color: var(--form-valid-color);
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within, :disabled, [disabled])::part(container) {
+    background-color: var(--form-valid-focus-color);
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(container) {
+    cursor: pointer;
+}
+
+form:is(:valid:not([internals-invalid]), [internals-valid]) form-control[type=submit]:is(:hover, :focus-within):not(:disabled, [disabled])::part(label) {
+    text-decoration: underline;
+}

@@ -1,0 +1,217 @@
+/* projects */
+
+#projects-container {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-left: 0;
+    max-width: unset;
+    width: calc(100% - var(--content-container-spacing)*1);
+    border-radius: 0;
+}
+
+#projects-container::before {
+    position: sticky;
+    content: '';
+    width: var(--content-container-spacing);
+    height: 100%;
+    left: 0;
+    z-index: 5;
+    background: linear-gradient(to right, var(--content-container-background-color), transparent);
+}
+
+#projects-container::after {
+    position: sticky;
+    content: '';
+    width: var(--content-container-spacing);
+    height: 100%;
+    right: calc(-1 * var(--content-container-spacing));
+    background: linear-gradient(to right, transparent, var(--content-container-background-color));
+}
+
+git-user, git-repo, project {
+    width: calc(50% - calc(6 * var(--project-spacing)));
+    height: calc(50% - calc(4 * var(--project-spacing)));
+    box-shadow: var(--box-shadow-thin);
+    margin: var(--project-spacing);
+    padding: var(--project-spacing);
+    border-radius: var(--border-radius);
+    transform: translateX(200%);
+    transition: transform var(--transition-duration-normal);
+}
+
+#projects-container> :nth-child(even) {
+    transition-delay: 0.1s;
+}
+
+:is(git-user, git-repo, project).ready {
+    transform: none;
+}
+
+git-user::part(grid-container), git-repo::part(grid-container), project {
+    grid-template-rows: 20% 1fr 20%;
+    row-gap: var(--project-spacing);
+}
+
+git-user::part(user-name), git-repo::part(repo-html-url), project a {
+    font-family: var(--font-family-medium-bold);
+    font-size: var(--font-size-medium-bold);
+    color: var(--color-medium-bold);
+    text-transform: uppercase;
+}
+
+project a:hover, git-repo::part(repo-html-url):hover {
+    text-decoration: underline;
+}
+
+git-repo, project {
+    overflow: auto
+}
+
+git-repo::part(repo-description), project div {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+git-repo::part(repo-description):hover, project div:hover {
+    overflow: visible;
+}
+
+git-user::part(user-avatar-url) {
+    margin-right: var(--project-spacing);
+}
+
+git-user::part(user-html-url) {
+    display: inline;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: normal;
+}
+
+git-user::part(user-html-url)::before {
+    content: "@";
+}
+
+git-user::part(user-html-url):hover {
+    text-decoration: underline;
+}
+
+git-user::part(user-public-repos), git-user::part(user-following) {
+    border: var(--border-solid);
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+git-repo::part(repo-html-url) {
+    text-decoration: none;
+}
+
+project {
+    position: relative;
+    display: grid;
+    grid-template-areas: "name" "cvparagraph" "icon";
+    align-items: center;
+}
+
+project a {
+    grid-area: name;
+    align-self: flex-start;
+    text-decoration: none;
+}
+
+project div {
+    grid-area: cvparagraph;
+}
+
+git-repo {
+    --repo-icon-width: var(--icon-width);
+    --repo-icon-circle-clip-path: var(--icon-circle-clip-path);
+    --repo-icon-margin-right: var(--project-spacing);
+}
+
+project::after {
+    content: "";
+    grid-area: icon;
+    height: var(--icon-width);
+    width: var(--icon-width);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#project-secure-multithreaded-file-server::after {
+    background-image: url('Img/icons8-cloud-backup-restore-24.webp');
+}
+
+#project-operating-system-pager::after {
+    background-image: url('Img/icons8-memory-slot-30.webp');
+}
+
+#project-thread-library::after {
+    background-image: url('Img/icons8-microchip-24.webp');
+}
+
+#project-lifesize-pacman::after {
+    background-image: url('Img/icons8-pacman-30.webp');
+}
+
+#project-simultaneous-localization-and-mapping-slam-robot::after, #project-topological-mapping-robot::after {
+    background-image: url('Img/icons8-bot-30.webp');
+}
+
+#project-mips-r10k-microprocessor::after {
+    background-image: url('Img/icons8-microchip-24.webp');
+}
+
+#project-tic-tac-toe-robot::after {
+    background-image: url('Img/icons8-robot-30.webp');
+}
+
+@media (max-aspect-ratio: 3/4) {
+    #projects-container {
+        padding-left: var(--content-container-spacing);
+        flex-wrap: nowrap;
+        overflow-x: hidden;
+        overflow-y: auto;
+        font-size: unset;
+        width: calc(100% - 4*var(--content-container-spacing));
+
+    }
+    #projects-container::before {
+        position: sticky;
+        content: '';
+        width: 100%;
+        height: var(--content-container-spacing);
+        top: calc(-1 * var(--content-container-spacing));
+        background: linear-gradient(to top, transparent, var(--content-container-background-color));
+        flex: 0 0 var(--content-container-spacing);
+    }
+    #projects-container::after {
+        position: sticky;
+        content: '';
+        width: 100%;
+        height: var(--content-container-spacing);
+        bottom: calc(-1 * var(--content-container-spacing));
+        background: linear-gradient(to bottom, transparent, var(--content-container-background-color));
+        flex: 1 0 var(--content-container-spacing);
+    }
+    git-user, git-repo, project {
+        width: calc(100% - calc(2 * var(--project-spacing)));
+        height: unset;
+        flex-grow: 1;
+    }
+    git-user::part(grid-container), git-repo::part(grid-container), project {
+        grid-template-rows: auto auto auto;
+        row-gap: calc(2 * var(--project-spacing));
+    }
+    git-repo, project {
+        overflow: unset;
+    }
+    project div, git-repo::part(repo-description) {
+        height: unset;
+        width: unset;
+        overflow: unset;
+    }
+}

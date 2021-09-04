@@ -1,0 +1,56 @@
+
+#skills on-intersection-set-class {
+    height: unset;
+    margin: auto 0;
+    position: relative;
+}
+
+#skills nav-section-header {
+    position: absolute;
+}
+
+/* progress bar */
+
+progress-bar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    width: calc(100% - (2 * var(--progress-bar-container-spacing)));
+    padding: var(--progress-bar-container-spacing) 0;
+}
+
+@property --bar-completed-percentage {
+    syntax: '<integer>';
+    inherits: true;
+    initial-value: 0;
+}
+
+progress-bar-borderless {
+    display: flex;
+    align-content: center;
+    --bar-completed-percentage: 0;
+    --bar-completed-color: none;
+    --bar-height: 10%;
+    --bar-max-width: var(--progress-bar-max-width);
+    will-change: --bar-completed-percentage;
+    text-transform: uppercase;
+    transition: none;
+}
+
+progress-bar-container.init.ready:not(.done) progress-bar-borderless {
+    transition: --bar-completed-percentage var(--transition-duration-slow);
+}
+
+progress-bar-borderless::part(flex-container) {
+    column-gap: var(--progress-bar-spacing);
+}
+
+progress-bar-borderless::part(bar) {
+    border-bottom: var(--border-dashed);
+}
+
+progress-bar-container:not(.ready) progress-bar-borderless {
+    visibility: hidden;
+}
