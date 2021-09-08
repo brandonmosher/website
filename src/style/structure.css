@@ -174,7 +174,7 @@ padding-section {
     justify-content: center;
     max-width: calc(var(--content-max-width) - (4 * var(--content-container-spacing)));
     width: calc(100% - (4 * var(--content-container-spacing)));
-    height: calc(100% - (2 * var(--content-container-spacing)) - (2 * var(--nav-bar-height)) - var(--nav-bar-reveal-height));
+    height: calc(100% - (2 * var(--content-container-spacing)) - (1.5 * var(--nav-bar-height)) - var(--nav-bar-reveal-height));
     position: relative;
     margin-top: var(--nav-bar-reveal-height);
     padding: var(--content-container-spacing);

@@ -21,8 +21,8 @@ import "Component/on-scroll/on-scroll.js"
 import "Lib/parallax";
 import "Lib/on-scroll"
 
-const resumeUrl = 'https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume-website/resume-website.pdf';
-const resumeJsonUrl = 'https://raw.githubusercontent.com/brandonmosher/resume/main/build/resume-website/resume-website.json';
+const resumeUrl = 'https://raw.githubusercontent.com/brandonmosher/professional/main/build/resume-website/resume-website.pdf';
+const resumeJsonUrl = 'https://raw.githubusercontent.com/brandonmosher/professional/main/build/resume-website/resume-website.json';
 const formSubmitUrl = 'https://lmzel5xwlf.execute-api.us-east-1.amazonaws.com/live';
 
 background: {
@@ -60,23 +60,23 @@ content: {
             </div>
         </on-intersection-set-class>`;
 
-    const makeSkillId = (name) => `progress-bar-${makeId(name)}`;
+    const makeSkillId = (title) => `progress-bar-${makeId(title)}`;
 
-    const skillsHTML = (cventries) => {
-        const skillHTML = ({ name, proficiencyPercentage } = {}) =>
-            `<progress-bar-borderless id="${makeSkillId(name)}" proficiency-percentage="${proficiencyPercentage}"><h4>${name}</h4></progress-bar-borderless>`;
+    const skillsHTML = (skills) => {
+        const skillHTML = ({ title, proficiencyPercentage } = {}) =>
+            `<progress-bar-borderless id="${makeSkillId(title)}" proficiency-percentage="${proficiencyPercentage}"><h4>${title}</h4></progress-bar-borderless>`;
         return `<on-intersection-set-class threshold="0.75" id="intersection-skills" class="content-container"
                 query-selector="progress-bar-container" enter-any-add-class="ready">
                 <progress-bar-container>
-                    ${cventries.reduce((innerHTML, cvskill) => innerHTML + skillHTML(cvskill), '')}
+                    ${skills.reduce((innerHTML, skill) => innerHTML + skillHTML(skill), '')}
                 </progress-bar-container>
             </on-intersection-set-class>`;
     }
-
-    const skillsCSS = (cventries) => {
-        const skillCSS = ({ i, name, proficiencyPercentage } = {}) =>
-            `progress-bar-container.ready #${makeSkillId(name)} {--bar-completed-percentage: ${parseInt(proficiencyPercentage)}; transition-delay: ${0.15 * i}s}`;
-        return cventries.reduce((skillsCSS, cvskill, i) => skillsCSS + skillCSS({ i, ...cvskill }), '');
+    
+    const skillsCSS = (skills) => {
+        const skillCSS = ({ i, title, proficiencyPercentage } = {}) =>
+            `progress-bar-container.ready #${makeSkillId(title)} {--bar-completed-percentage: ${parseInt(proficiencyPercentage)}; transition-delay: ${0.15 * i}s}`;
+        return skills.reduce((skillsCSS, skill, i) => skillsCSS + skillCSS({ i, ...skill }), '');
     }
 
     const projectsHTML = (cventries) => {
@@ -112,19 +112,23 @@ content: {
             experienceInnerHTML + experienceHTML({ ...cventry, cvitems: cventry.cvitems.join(" ") }), '')}
             </vertical-timeline>`;
     }
-
+    
     fetch(resumeJsonUrl)
         .then(response => response.json())
         .then(json => {
+            console.log(json.document.cv.skillsets.cventries);
+            const skills = json.document.cv.skillsets.cventries.reduce((skills, cventry) => {
+                skills.push(...cventry.skills.filter(s=>'proficiencyPercentage' in s)); return skills}, []);
+            skills.sort((a,b) => a.proficiencyPercentage > b.proficiencyPercentage ? -1 : a.proficiencyPercentage < b.proficiencyPercentage ? 1 : 0);
             css: {
                 const style = document.createElement('style');
-                style.innerHTML = skillsCSS(json.document.cv.skills.cventries);
+                style.innerHTML = skillsCSS(skills);
                 document.head.appendChild(style);
             }
 
             html: {
                 document.querySelector('#resume > div').innerHTML += resumeHTML(json.document.cv.summary.cvparagraph);
-                document.querySelector('#skills > div').innerHTML += skillsHTML(json.document.cv.skills.cventries);;
+                document.querySelector('#skills > div').innerHTML += skillsHTML(skills);;
                 document.querySelector('#projects > div').innerHTML += projectsHTML(json.document.cv.projects.cventries);
                 document.querySelector('#experience > div').innerHTML += experiencesHTML(json.document.cv.experience.cventries);
             }

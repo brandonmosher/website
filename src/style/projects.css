@@ -169,7 +169,7 @@ project::after {
     background-image: url('Img/icons8-robot-30.webp');
 }
 
-@media (max-aspect-ratio: 3/4) {
+@media (max-aspect-ratio: 3/2) {
     #projects-container {
         padding-left: var(--content-container-spacing);
         flex-wrap: nowrap;
@@ -177,7 +177,6 @@ project::after {
         overflow-y: auto;
         font-size: unset;
         width: calc(100% - 4*var(--content-container-spacing));
-
     }
     #projects-container::before {
         position: sticky;
