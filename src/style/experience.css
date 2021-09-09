@@ -98,7 +98,7 @@ vertical-timeline-entry hr::before {
     }
     vertical-timeline> :nth-child(odd) vertical-timeline-entry::before {
         left: unset;
-        right: calc(-1 * var(--border-width));
+        right: calc(-1.25 * var(--border-width));
     }
 }
 

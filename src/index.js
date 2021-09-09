@@ -46,7 +46,7 @@ form: {
 }
 
 content: {
-    const makeId = name => name.toLowerCase().replace(/(\+|\(|\))/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')
+    const makeId = title => title.toLowerCase().replace(/(\+|\(|\))/g, '').replace(/,| /g, '-').replace(/-{2,}/g, '-')
 
     const resumeHTML = (cvparagraph) =>
         `<on-intersection-set-class id="resume-container" class="content-container" enter-any-add-class="ready">
@@ -80,12 +80,12 @@ content: {
     }
 
     const projectsHTML = (cventries) => {
-        const projectHTML = ({ url, name, cvparagraph, gitHubRepoName } = {}) => {
+        const projectHTML = ({ url, title, cvparagraph, gitHubRepoName } = {}) => {
             if (gitHubRepoName) {
                 const [repoOwner, repoName] = gitHubRepoName.split('/');
                 return `<git-repo repo-owner="${repoOwner}"" repo-name="${repoName}"></git-repo>`;
             }
-            return `<project id="project-${makeId(name)}"><a href="${url}">${name}</a><div>${cvparagraph}</div></project>`
+            return `<project id="project-${makeId(title)}"><a href="${url}">${title}</a><div>${cvparagraph}</div></project>`
         }
         return `<on-intersection-set-class id="projects-container" class="content-container" query-selector="git-user,git-repo,project" enter-any-add-class="ready">
                     <git-user user-login="brandonmosher"></git-user>

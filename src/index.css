@@ -6,7 +6,7 @@
     --spacing-thick: 5%;
     --padding-section-height: 50%;
     /* sum of all nav-section and padding-section heights */
-    --total-height: 1000%;
+    --total-height: 1050%;
     /* icon size */
     --icon-width: calc(3 * var(--spacing-thin));
     --icon-circle-clip-path: circle(49% at center);
@@ -91,7 +91,7 @@
     /* projects */
     --project-spacing: var(--spacing-thin);
     /* experience */
-    --experience-nav-section-height: 250%;
+    --experience-nav-section-height: 300%;
     --vertical-timeline-border: var(--border-dashed);
     --vertical-timeline-marker-diameter: var(--icon-width);
     --vertical-timeline-marker-radius: calc(var(--vertical-timeline-marker-diameter) / 2);
