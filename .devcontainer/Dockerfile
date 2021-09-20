@@ -1,2 +1,2 @@
-FROM mosherbd/devcontainer-base
-RUN sudo apt-install.sh nodejs npm git
+FROM brandonmosher/devcontainer-node
+RUN sudo apt-install.sh git
